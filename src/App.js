@@ -1,10 +1,21 @@
-// import '../src/components/login/login';
 import './App.css';
-import {Route, Routes} from "react-router-dom";
 
 function App() {
   return (
+   <>
+   <Routers>
 
+    <Route path="/" element={<Dashboard/>} />
+
+    <Route path="/login" element={<Login/>} />
+
+
+    <Route path="/user" element={<AdminUser/>} />
+    
+
+    
+   </Routers>
+   </>
   );
 }
 
