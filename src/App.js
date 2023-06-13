@@ -1,11 +1,21 @@
-
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+   <>
+   <Routers>
+
+    <Route path="/" element={<Dashboard/>} />
+
+    <Route path="/login" element={<Login/>} />
+
+
+    <Route path="/user" element={<AdminUser/>} />
+    
+
+    
+   </Routers>
+   </>
   );
 }
 
