@@ -1,0 +1,41 @@
+//프로필 이미지와 이름과 아이디 구간
+
+#userProfileBox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imgCircle {
+  height: 200px;
+  width: 100%;
+  border-radius: 60%;
+  overflow: hidden;
+  padding: 10px;
+}
+
+#userProfileBox > * {
+  text-align: center;
+  margin-bottom: 10px;
+  border: 1px solid blue;
+}
+
+// 왼쪽 사이드바 및 아코디언 크기 조정
+
+.sideList> * {
+  height: 10vh;
+  width: 270px;
+  border-bottom: none;
+  border-radius: 0;
+}
+
+.sideAccordion {
+  width: 270px;
+}
+
+// 하단 탭 글씨크기 및 우측 정렬
+.custom-accordion-body {
+  font-size: small;
+  text-align: right;
+  color: darkblue;
+}

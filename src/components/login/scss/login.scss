@@ -1,0 +1,19 @@
+body{
+  height : 100vh;
+  background : url('../../../../public/loginBuilding.jpg') no-repeat;
+  background-size : cover;
+}
+
+#loginBox {
+  margin-top: 200px;
+  border-radius: 20px;
+  padding: 30px;
+  background-color: #d3e5ef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.logoSize {
+  width: 130px;
+  height: 100px;
+  margin: auto;
+}
