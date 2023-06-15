@@ -35,10 +35,11 @@ function SideMenu() {
                             권한관리
                         </Accordion.Body>
                     </Accordion.Item>
-                    <Accordion.Item eventKey="0">
+                    <Accordion.Item eventKey="2">
                         <Accordion.Header>기준 정보</Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
                             기본정보
+                            {/*<div style={{textAlign:'right'}}>회사정보</div>*/}
                         </Accordion.Body>
                         <Accordion.Body className="custom-accordion-body">
                             품목관리
@@ -47,7 +48,7 @@ function SideMenu() {
                             창고정보
                         </Accordion.Body>
                     </Accordion.Item>
-                    <Accordion.Item eventKey="1">
+                    <Accordion.Item eventKey="3">
                         <Accordion.Header>구매 관리</Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
                             구매 발주 관리
@@ -56,7 +57,7 @@ function SideMenu() {
                             구매 입고관리
                         </Accordion.Body>
                     </Accordion.Item>
-                    <Accordion.Item eventKey="0">
+                    <Accordion.Item eventKey="4">
                         <Accordion.Header>재고 관리</Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
                             입고관리
@@ -68,7 +69,7 @@ function SideMenu() {
                             재고현황
                         </Accordion.Body>
                     </Accordion.Item>
-                    <Accordion.Item eventKey="1" style={{ borderRadius: '0' }}>
+                    <Accordion.Item eventKey="5" style={{ borderRadius: '0' }}>
                         <Accordion.Header>마이페이지</Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
                             마이페이지 수정
