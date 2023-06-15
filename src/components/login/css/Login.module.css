@@ -1,5 +1,5 @@
-body{
-  height : 100vh;
+.loginBackground{
+  height : 1000vh;
   background : url('../../../../public/loginBuilding.jpg') no-repeat;
   background-size : cover;
 }
@@ -13,7 +13,7 @@ body{
 }
 
 .logoSize {
-  width: 130px;
-  height: 100px;
+  width: 10px;
+  height: 10px;
   margin: auto;
 }

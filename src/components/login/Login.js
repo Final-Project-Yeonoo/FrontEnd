@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Container, Form, Button} from 'react-bootstrap';
-import './scss/login.scss';
+import './css/Login.module.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const Login = () => {
 
     return (
         <>
-            <div>
+            <div className="loginBackground">
                 <Container className="col-sm-8 col-md-6 col-lg-4" id="loginBox">
                     <div className="logoSize">
                         <img src="/logo.png" width="100%" alt="ERP시스템 로고"/>
