@@ -11,7 +11,7 @@ function SideMenu() {
 
     return (
         <>
-                <ListGroup className="col-lg-2" className="sideList" style={{ borderRadius: '0' }}>
+                <ListGroup className="col-lg-2 sideList" style={{ borderRadius: '0' }}>
                     <ListGroup.Item id="userProfileBox">
                         <div className="imgCircle">
                             <img src="/userImg.svg" alt=""/>
