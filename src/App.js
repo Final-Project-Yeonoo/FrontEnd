@@ -16,12 +16,19 @@ import PurchaseItem from "./components/purchase/PurchaseItem";
 import InvenManage from "./components/inventory/InvenManage";
 import InvenCheck from "./components/inventory/InvenCheck";
 import Mypage from "./components/mypage/Mypage";
+import List from "./components/admin/UserList";
+
+
 
 
 function App() {
     return (
         <>
-            <Routes>
+
+       {/* <List /> */}
+        {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
+        <DashBoard />
+            {/* <Routes>
                 <Route path="/login" element={<Login/>}/>
 
                 <Route path="/" element={<DashBoard/>}>
@@ -46,7 +53,7 @@ function App() {
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
                 <Route path="*" element={<div>없는 페이지 입니다.</div>}/>
-            </Routes>
+            </Routes> */}
 
         </>
     )
