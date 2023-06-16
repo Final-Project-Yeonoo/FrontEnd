@@ -1,5 +1,5 @@
 import React from 'react'
-import './css/UserList.css';
+import './css/UserList.module.css';
 import { useMemo } from "react";
 
 import Layouts from "../common/TableLayout";

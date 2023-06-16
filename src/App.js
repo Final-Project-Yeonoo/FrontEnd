@@ -17,7 +17,7 @@ import InvenManage from "./components/inventory/InvenManage";
 import InvenCheck from "./components/inventory/InvenCheck";
 import Mypage from "./components/mypage/Mypage";
 import List from "./components/admin/UserList";
-
+import MyComInfo from './components/admin/MyComInfo';
 
 
 

@@ -9,7 +9,7 @@
 .contentTItle {
     width: 30%;
     height: 10%;
-    border: 1px solid red;
+    border: 1px solid green;
     font-size: 20px;
 }
 .searchBox{
@@ -42,7 +42,7 @@
     width: 10%;
     height: fit-content;
     text-align: center;
-    border: 1px solid orangered;
+    border: 1px solid green;
 }
 .empListHead:last-child {
     width: 30%;
