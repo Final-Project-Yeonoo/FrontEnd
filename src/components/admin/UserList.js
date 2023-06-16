@@ -6,7 +6,7 @@ import Layouts from "../common/TableLayout";
 
 
 
-const SearchUser = () => {
+const UserList = () => {
   
 
 //     //검색된 사원 List column명
@@ -104,4 +104,4 @@ const columns = useMemo(
 
 }
 
-export default SearchUser
+export default UserList
