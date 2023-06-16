@@ -7,7 +7,6 @@ import React from "react";
 import DashBoard from "./components/dashboard/DashBoard";
 import StoreManagement from "./components/masterData/StoreManagement";
 import TradingCompany from "./components/masterData/TradingCompany";
-import ChangeArea from "./components/common/ChangeArea";
 import AdminUser from "./components/admin/AdminUser";
 import SearchUser from "./components/admin/SearchUser";
 import UserList from "./components/admin/UserList";
@@ -23,34 +22,31 @@ function App() {
         <>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
-
+                {/*Header&Side포함 DashBoard에 nestedRoute 적용*/}
                 <Route path="/" element={<DashBoard/>}>
-                    <Route path="admin" element={<div>사용자관리</div>}>
-                        <Route path="user" element={<AdminUser/>}/>
-                        <Route path="search" element={<SearchUser/>}/>
-                        <Route path="list" element={<UserList/>}/>
-                    </Route>
-                    <Route path="masterData" element={<div>기준정보</div>}>
-                        <Route path="info" element={<TradingCompany/>}/>
-                        <Route path="product" element={<ProductManagement/>}/>
-                        <Route path="store" element={<StoreManagement/>}/>
-                    </Route>
-                    <Route path="purchase" element={<div>구매</div>}>
-                        <Route path="order" element={<OrderItem/>}/>
-                        <Route path="buy" element={<PurchaseItem/>}/>
-                    </Route>
-                    <Route path="inventory" element={<div>재고</div>}>
-                        <Route path="manage" element={<InvenManage/>}/>
-                        <Route path="check" element={<InvenCheck/>}/>
-                    </Route>
+                        {/*사용자*/}
+                        <Route path="admin/user" element={<AdminUser/>}/>
+                        <Route path="admin/search" element={<SearchUser/>}/>
+                        <Route path="admin/list" element={<UserList/>}/>
+                        {/*기준 정보*/}
+                        <Route path="masterData/info" element={<TradingCompany/>}/>
+                        <Route path="masterData/product" element={<ProductManagement/>}/>
+                        <Route path="masterData/store" element={<StoreManagement/>}/>
+                        {/*구매*/}
+                        <Route path="purchase/order" element={<OrderItem/>}/>
+                        <Route path="purchase/buy" element={<PurchaseItem/>}/>
+                        {/*재고*/}
+                        <Route path="inventory/manage" element={<InvenManage/>}/>
+                        <Route path="inventory/check" element={<InvenCheck/>}/>
+
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
                 <Route path="*" element={<div>없는 페이지 입니다.</div>}/>
             </Routes>
 
         </>
-    )
-        ;
+    );
+
 }
 
 export default App

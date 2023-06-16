@@ -8,26 +8,24 @@
     display: flex;
     justify-content: space-between;
     /*background-color: orange;*/
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .searchBox {
     background-color: orange;
     padding:10px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.searchSection{
+    /*border: 2px solid red;*/
+    flex-direction: column;
     justify-content: space-around;
 }
 
-.searchSection1{
-    flex-direction: row;
-    /*border: 2px solid red;*/
-    justify-content: space-between;
-}
-
-.searchSection2{
-    flex-direction: row;
-    /*border: 2px solid blue;*/
-}
 
 .tableArea {
     background-color: green;
