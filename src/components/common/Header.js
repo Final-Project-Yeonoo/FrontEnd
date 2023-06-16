@@ -5,15 +5,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import React from "react";
-import './css/Header.css'
+import styles from './css/Header.module.css'
+import {useNavigate} from "react-router-dom";
 
 function Header() {
+
+    let navigate = useNavigate()
+
     return (
+
         <>
-            <div id="headerArea">
+            <div id={styles.headerArea}>
                 <Navbar bg="light" expand="lg">
                     <Container fluid>
-                        <Navbar.Brand href="#">
+                        <Navbar.Brand onClick={() => {navigate('/')}}>
                             <img src="/logo.png" width="270px"
                                  alt="ERP시스템 로고"/>
                         </Navbar.Brand>
@@ -27,7 +32,10 @@ function Header() {
                                 <Nav.Link href="/">Home</Nav.Link>
                                 <Nav.Link href="#action2">Message</Nav.Link>
                                 <NavDropdown title="Setting" id="navbarScrollingDropdown">
-                                    <NavDropdown.Item href="#action3">Dark Mode</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action3" style={{display:"flex"}}>
+                                        <span style={{marginRight:"30px"}} >Dark Mode</span>
+                                        <SwitchExample/>
+                                    </NavDropdown.Item>
                                     <NavDropdown.Item href="#action4">
                                         Change Profile
                                     </NavDropdown.Item>
@@ -56,5 +64,18 @@ function Header() {
         </>
     );
 }
+
+function SwitchExample() {
+    return (
+        <Form>
+            <Form.Check
+                type="switch"
+                id="custom-switch"
+                // label="Check this switch"
+            />
+        </Form>
+    );
+}
+
 
 export default Header;
