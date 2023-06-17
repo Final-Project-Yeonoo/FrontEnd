@@ -25,10 +25,10 @@ function App() {
     return (
         <>
 
-       {/* <List /> */}
+     
         {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
-        <DashBoard />
-            {/* <Routes>
+        {/* <DashBoard /> */}
+            <Routes>
                 <Route path="/login" element={<Login/>}/>
 
                 <Route path="/" element={<DashBoard/>}>
@@ -53,7 +53,7 @@ function App() {
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
                 <Route path="*" element={<div>없는 페이지 입니다.</div>}/>
-            </Routes> */}
+            </Routes>
 
         </>
     )
