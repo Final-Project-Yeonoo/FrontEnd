@@ -3,17 +3,16 @@ import styles from './css/ProductManagement.module.css'
 import Form from "react-bootstrap/Form";
 import {Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
-import {ColorfulButtons, PillsExample, TabsExample} from "../common/UsefulButtons";
+import {ColorfulButtons, TabsExample} from "../common/UsefulButtons";
 import {TableExample} from "../common/UsefulTables";
-import productInputData from "./InputData";
+import {productInputData} from "./InputDataforMaster";
+
 
 
 
 function ProductManagement() {
 
     let [title, setTitle] = useState(productInputData);
-
-    let[tab, setTab] = useState(0);
 
     return (
         <>
@@ -42,7 +41,7 @@ function ProductManagement() {
                                         {/*<InputType/> 원래는 컴포넌트 호출하려고 했으나 자식의 자식으로 props 전달해야하는 불편함 있음*/}
                                         <Form>
                                             <Row>
-                                                <div style={{display: 'flex'}}>
+                                                <div style={{display: 'flex'}} >
                                                     <Col xs="auto">
                                                         <Form.Control readOnly placeholder={title[i].title} style={{marginRight: '10px', width: '150px'}}/>
                                                     </Col>

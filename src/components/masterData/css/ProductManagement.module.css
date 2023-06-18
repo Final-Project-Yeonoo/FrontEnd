@@ -24,9 +24,11 @@
     /*border: 2px solid red;*/
     flex-direction: column;
     justify-content: space-around;
+    width: 50%;
+/*    한 줄에 2개의 form 이 생성됨 */
 }
 
 
 .tableArea {
-    background-color: green;
+    /*background-color: green;*/
 }

@@ -14,6 +14,15 @@ function ColorfulButtons() {
     );
 }
 
+function StoreButtons() {
+    return (
+        <>
+            <Button variant="outline-primary">창고조회</Button>{' '}
+            <Button variant="outline-secondary">초기화</Button>{' '}
+        </>
+    );
+}
+
 function GrayButtons() {
     return (
         <>
@@ -28,23 +37,26 @@ function GrayButtons() {
 
 function PillsExample() {
     return (
-        <Nav variant="pills" defaultActiveKey="/home">
+        <Nav variant="pills" defaultActiveKey="0">
             <Nav.Item>
-                <Nav.Link href="/home">Active</Nav.Link>
+                <Nav.Link eventKey="0">발주확정</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="link-1">Option 2</Nav.Link>
+                <Nav.Link eventKey="1" style={{color:'red'}}>확정취소</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="disabled" disabled>
-                    Disabled
-                </Nav.Link>
+                <Nav.Link eventKey="2">발주서 출력</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="3">발주마감</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="4">프로젝트 코드생성</Nav.Link>
             </Nav.Item>
         </Nav>
     );
 }
 
-// onClick={()=> {setTab(0)}
 function TabsExample() {
     return (
         <Nav variant="tabs" defaultActiveKey="0">
@@ -61,7 +73,32 @@ function TabsExample() {
     );
 }
 
-export default TabsExample;
+function TabsforPurchaseItems() {
+    return (
+        <Nav variant="tabs" defaultActiveKey="0">
+            <Nav.Item>
+                <Nav.Link eventKey="0">구매입고 등록</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="1">구매입고 라벨발행</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="2">구매입고 내역조회</Nav.Link>
+            </Nav.Item>
+        </Nav>
+    );
+}
+
+
+function TabsforStore() {
+    return (
+        <Nav variant="tabs" defaultActiveKey="0">
+            <Nav.Item>
+                <Nav.Link eventKey="0">창고등록</Nav.Link>
+            </Nav.Item>
+        </Nav>
+    );
+}
 
 
 function FillExample() {
@@ -86,5 +123,5 @@ function FillExample() {
 }
 
 
-export {ColorfulButtons, GrayButtons, FillExample, TabsExample, PillsExample}
+export {ColorfulButtons, GrayButtons, FillExample, TabsExample, PillsExample, TabsforStore, TabsforPurchaseItems, StoreButtons}
 
