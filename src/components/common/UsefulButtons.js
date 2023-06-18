@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Nav from 'react-bootstrap/Nav';
+import React from "react";
 
 
 function ColorfulButtons() {
@@ -58,6 +59,7 @@ function PillsExample() {
 }
 
 function TabsExample() {
+
     return (
         <Nav variant="tabs" defaultActiveKey="0">
             <Nav.Item>
@@ -72,6 +74,7 @@ function TabsExample() {
         </Nav>
     );
 }
+
 
 function TabsforPurchaseItems() {
     return (

@@ -6,15 +6,15 @@ let productInputData = [
         content: "자동완성"
     },
     {
-        title: "규격",
-        content: "입력하세요"
-    },
-    {
         title: "품명",
         content: "자동완성"
     },
     {
         title: "품목코드",
+        content: "입력하세요"
+    },
+    {
+        title: "규격",
         content: "입력하세요"
     }
 ]
