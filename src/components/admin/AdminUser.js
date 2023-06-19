@@ -159,7 +159,7 @@ const handleMenuPermissionChange2
 
     try {
       // 사용자 정보 서버 요청
-      const response = await fetch('API_ENDPOINT', {
+      const response = await fetch('api/ynfinal/admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable } from "react-table";
+import '../common/css/TableLayout.module.css'
 
 const Layouts = ({columns, data}) => { //(받아올 정보를 하나로 묶어서 넣어주세요 {}: 객체로! )
     const {getTableProps,  getTableBodyProps, headerGroups, rows, prepareRow } =

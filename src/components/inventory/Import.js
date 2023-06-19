@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
-import TableLayout from "./TableLayout";
+import Modal from "../common/Modal";
+import TableLayout from "../common/TableLayout";
 
 const Import = () => {
   const [showModal, setShowModal] = useState(false);
