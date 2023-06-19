@@ -1,6 +1,6 @@
 import './css/TradingCompany.module.css'
 import React, { useState, useEffect } from "react";
-import TableLayout from "./TableLayout";
+import TableLayout from "../common/TableLayout";
 import Modal from "../common/Modal";
 
 function TradingCompany() {

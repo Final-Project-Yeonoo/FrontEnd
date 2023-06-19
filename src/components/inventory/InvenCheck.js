@@ -1,14 +1,14 @@
-import '../common/css/InvenCheck.module.css'
+import '../inventory/css/InvenCheck.module.css';
 import React, { useState, useEffect } from "react";
-import TableLayout from "./TableLayout";
+import TableLayout from "../common/TableLayout";
 
 function InvenCheck() {
   const [inventoryData, setInventoryData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    fetchInventoryData(); // 컴포넌트가 마운트되었을 때 재고 데이터를 가져옵니다.
-  }, []);
+//   useEffect(() => {
+//     fetchInventoryData(); // 컴포넌트가 마운트되었을 때 재고 데이터를 가져옵니다.
+//   }, []);
 
  
   const handleSearchInputChange = (e) => {
@@ -17,7 +17,7 @@ function InvenCheck() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    fetchInventoryData(); // 검색어로 재고 데이터를 가져옵니다.
+    // fetchInventoryData(); 
   };
 
   const columns = [
@@ -28,9 +28,7 @@ function InvenCheck() {
     { Header: "양품수량", accessor: "양품수량" },
     { Header: "불량수량", accessor: "불량수량" },
     { Header: "재고수량", accessor: "재고수량" },
-    { Header: "창고코드", accessor: "창고코드" },
-    { Header: "LOT번호", accessor: "LOT번호" },
-    { Header: "비고", accessor: "비고" }
+    { Header: "창고코드", accessor: "storehouseCode" }
   ];
 
   const data = [
@@ -45,9 +43,7 @@ function InvenCheck() {
       양품수량: "10",
       불량수량: "정상",
       재고수량: "창고 A",
-      창고코드: "2023-06-18",
-      LOT번호: "2023-06-18",
-      비고: ""
+      storehouseCode: "2023-06-18"  
     }
   ];
 

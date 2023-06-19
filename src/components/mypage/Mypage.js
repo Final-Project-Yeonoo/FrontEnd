@@ -1,4 +1,4 @@
-import "../common/css/MyPage.module.css";
+import "../mypage/css/Mypage.module.css";
 import { useEffect, useState } from "react";
 import React from "react";
 

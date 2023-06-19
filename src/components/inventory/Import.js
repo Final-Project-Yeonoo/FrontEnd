@@ -63,7 +63,10 @@ const Import = () => {
     { Header: "재고상태", accessor: "재고상태" },
     { Header: "창고명", accessor: "창고명" },
     { Header: "입고일자", accessor: "입고일자" },
-    { Header: "등록일자", accessor: "등록일자" }
+    { Header: "등록일자", accessor: "등록일자" },
+    { Header: "발주서번호", accessor: "발주서번호" },
+    { Header: "사원번호", accessor: "사원번호" }
+
   ];
 
   const data = [

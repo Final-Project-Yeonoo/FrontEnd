@@ -1,6 +1,6 @@
 // import React from 'react'
 import { useState } from 'react';
-import styles from '../common/css/AdminUser.module.css';
+import styles from '../admin/css/AdminUser.module.css';
 
 import * as React from 'react';
 import Modal from '../common/Modal';

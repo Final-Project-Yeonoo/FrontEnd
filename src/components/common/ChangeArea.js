@@ -5,7 +5,7 @@ import StoreManagement from "../masterData/StoreManagement";
 import TradingCompany from "../masterData/TradingCompany";
 import Mypage from "../mypage/Mypage";
 import InvenCheck from "../inventory/InvenCheck";
-import InvenManage from "../inventory/InvenManage";
+import Import from "../inventory/Import";
 import PurchaseItem from "../purchase/PurchaseItem";
 import OrderItem from "../purchase/OrderItem";
 import AdminUser from "../admin/AdminUser";
@@ -28,7 +28,7 @@ function ChangeArea(){
                     <Route path="/purchase/order" element={<OrderItem/>} />
                     <Route path="/purchase/buy" element={<PurchaseItem/>} />
 
-                    <Route path="/inventory/manage" element={<InvenManage/>} />
+                    <Route path="/inventory/manage" element={<Import/>} />
                     <Route path="/inventory/check" element={<InvenCheck/>} />
 
                     <Route path="/mypage" element={<Mypage/>} />
