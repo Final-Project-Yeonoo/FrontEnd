@@ -15,11 +15,18 @@ import PurchaseItem from "./components/purchase/PurchaseItem";
 import InvenManage from "./components/inventory/InvenManage";
 import InvenCheck from "./components/inventory/InvenCheck";
 import Mypage from "./components/mypage/Mypage";
+import List from "./components/admin/UserList";
+import MyComInfo from './components/admin/MyComInfo';
+
 
 
 function App() {
     return (
         <>
+
+     
+        {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
+        {/* <DashBoard /> */}
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 {/*Header&Side포함 DashBoard에 nestedRoute 적용*/}

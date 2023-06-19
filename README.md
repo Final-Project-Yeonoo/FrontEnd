@@ -11,6 +11,7 @@ $ npm install @mui/material @emotion/react @emotion/styled
 $ npm install @mui/icons-material
 $ npm install react-router-dom
 
+$ npm install react-table --save
 ## branch 명 작성
 - 폴더명/작성파일명 으로 작성
 

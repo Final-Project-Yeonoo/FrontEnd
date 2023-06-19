@@ -1,12 +1,35 @@
 import './css/SearchUser.module.css'
 
 function SearchUser() {
-    return (
-        <>
-            <h1>사용자 - SearchUser 페이지 입니다</h1>
+   
+   
+    
+        return (    
+<>
+<div className='container'>
+    <div className='contentTitleBox'>
+        <div className='contentTitle'> 
+            {/* //사용자 조회 제목 */}
+            <span>사용자 조회</span>
+        </div>
+    </div>
 
-        </>
-    );
+    <div className='searchBox'>
+         <div className='searchContentsButton'>
+             <input className='searchName'/>
+             <input className='searEmpId'/>
+             <input className='searchDept'/>
+             <button className='searchBtn'>조회</button>
+         </div>       
+     </div>
+    
+    
+    
+    
+    
+    </div>
+</>
+        );
 }
 
-export default SearchUser;
+export default SearchUser

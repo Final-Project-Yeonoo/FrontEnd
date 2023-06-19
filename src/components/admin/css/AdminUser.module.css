@@ -1,0 +1,73 @@
+.usercontainer {
+    width: 65%;
+    height: 50vh;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+  
+  .form {
+    
+    border: 3px solid red;
+    /* width: 300px;
+    height: 300px;
+  */
+  } 
+  .row {
+    border-bottom: 1px solid #000;
+  }
+  
+  
+  .tag {
+    padding-top: 10px;
+    background-color: red;
+    width: 70px;
+    text-align: center;
+    font-size: 12px;
+  }
+  .formGroup {
+    display: flex;
+    
+  }
+  
+  
+  
+  .container {
+    border: 1px solid #000;
+    width: 65%;
+    height: 700px;
+    margin: 0 auto;
+    justify-content: center;
+    
+  }
+  .headers {
+    text-align: center;
+    display: flex;
+    background-color: #EAEBEB;
+    }
+   .header1 {
+      width: 40%;
+    }
+    .header2 {
+      width: 30%;
+    }
+    .header3 {
+      width: 15%;
+    }
+    .header4 {
+      width: 15%;
+    }
+    .content {
+      display: flex;
+      text-align: center;
+      border-bottom: 1px solid #000;
+      
+    }
+    .contentName {
+      background-color: red;
+    }
+    
+    .dataSection {
+      border-right: 1px solid #000;
+    }
+    
+  
