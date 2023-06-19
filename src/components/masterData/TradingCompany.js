@@ -69,15 +69,15 @@ function TradingCompany() {
         }  
     };
   // 구분 선택 옵션
-  const 구분Options = ["옵션1", "옵션2", "옵션3"];
+  const 구분Options = ["구매", "판매"];
   
     const columns = [
       { Header: "구분", accessor: "구분" },
-      { Header: " 거래처코드", accessor: " 거래처코드" },
-      { Header: "거래처명", accessor: "거래처명" },
+      { Header: " 거래처코드", accessor: " trCompCode" },
+      { Header: "거래처명", accessor: "trCompName" },
       { Header: "취급품목", accessor: "취급품목" },
-      { Header: "전화번호", accessor: "전화번호" },
-      { Header: "주소", accessor: "주소" },
+      { Header: "전화번호", accessor: "trCompPhone" },
+      { Header: "주소", accessor: "trAddr" },
       { Header: "비고", accessor: "비고" }
      
     ];
@@ -86,11 +86,11 @@ function TradingCompany() {
       // 테이블에 표시할 데이터 배열, 
       {
           구분: "12345",
-          거래처코드: "입고",
-          거래처명: "품목 A",
+          trCompCode: "입고",
+          trCompName: "품목 A",
           취급품목: "츠",
-          전화번호: "A001",
-          주소: "10",
+          trCompPhone: "A001",
+          trAddr: "10",
           비고: "정상"  
       }
     ];
