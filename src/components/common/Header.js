@@ -29,9 +29,9 @@ function Header() {
                                 style={{maxHeight: '100px'}}
                                 navbarScroll
                             >
-                                <Nav.Link href="/">Home</Nav.Link>
-                                <Nav.Link href="#action2">Message</Nav.Link>
-                                <NavDropdown title="Setting" id="navbarScrollingDropdown">
+                                <Nav.Link href="/"  className="col-lg-3">Home</Nav.Link>
+                                <Nav.Link href="#action2" className="col-lg-4">Message</Nav.Link>
+                                <NavDropdown title="Setting" id="navbarScrollingDropdown" className="col-lg-4">
                                     <NavDropdown.Item href="#action3" style={{display:"flex"}}>
                                         <span style={{marginRight:"30px"}} >Dark Mode</span>
                                         <SwitchExample/>
@@ -44,11 +44,11 @@ function Header() {
                                         Something else here
                                     </NavDropdown.Item>
                                 </NavDropdown>
-                                <Nav.Link href="#" disabled>
+                                <Nav.Link href="#" className="col-lg-4">
                                     Logout
                                 </Nav.Link>
                             </Nav>
-                            <Form className="d-flex">
+                            <Form className="d-flex" style={{marginRight: '40px'}}>
                                 <Form.Control
                                     type="search"
                                     placeholder="Search"

@@ -13,3 +13,6 @@ $ npm install react-router-dom
 
 ## branch 명 작성
 - 폴더명/작성파일명 으로 작성
+
+# Redux : props 없이 state 공유 도와주는 라이브러리 설치 
+$ npm install @reduxjs/toolkit react-redux

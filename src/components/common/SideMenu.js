@@ -25,59 +25,59 @@ function SideMenu() {
             <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="1"  style={{ borderRadius: '0' }} >
                         <Accordion.Header>사용자 관리</Accordion.Header>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/admin/user')}}>
                             채원님이 지정
                         </Accordion.Body>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/admin/search')}}>
                             채원님이 지정
                         </Accordion.Body>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/admin/list')}}>
                             채원님이 지정
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="2">
                         <Accordion.Header>기준 정보</Accordion.Header>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/masterData/info')}}>
                             기본정보
                         </Accordion.Body>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/masterData/product')}}>
                             품목관리
                         </Accordion.Body>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/masterData/store')}}>
                             창고정보
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="3">
                         <Accordion.Header>구매 관리</Accordion.Header>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/purchase/order')}}>
                             구매 발주관리
                         </Accordion.Body>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/purchase/buy')}}>
                             구매 입고관리
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="4">
                         <Accordion.Header>재고 관리</Accordion.Header>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/inventory/manage')}}>
                             입고관리
                         </Accordion.Body>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/inventory/check')}}>
                             재고현황
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="5" style={{ borderRadius: '0' }}>
                         <Accordion.Header>마이페이지</Accordion.Header>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"right"}}
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/mypage')}}>
                             개인정보 수정
                         </Accordion.Body>

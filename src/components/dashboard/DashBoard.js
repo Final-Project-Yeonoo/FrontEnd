@@ -1,17 +1,18 @@
-import './css/DashBoard.module.css';
+import styles from './css/DashBoard.module.css';
 import Header from "../common/Header";
 import SideMenu from "../common/SideMenu";
-import ChangeArea from "../common/ChangeArea";
-import ProductManagement from "../masterData/ProductManagement";
+import {Outlet} from "react-router-dom";
 
-function DashBoard () {
+function DashBoard() {
 
     return (
         <>
             <Header/>
-            <div style={{display: 'flex'}}>
+            <div className={styles.mainStyle}>
                 <SideMenu/>
-                <ChangeArea/>
+                <div className={styles.changeArea}>
+                    <Outlet/>
+                </div>
             </div>
         </>
     );
