@@ -83,9 +83,6 @@ function TabsforPurchaseItems() {
                 <Nav.Link eventKey="0">구매입고 등록</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="1">구매입고 라벨발행</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
                 <Nav.Link eventKey="2">구매입고 내역조회</Nav.Link>
             </Nav.Item>
         </Nav>

@@ -6,8 +6,9 @@ import {Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
 import {TableExample} from "../common/UsefulTables";
 import React, {useState} from "react";
-import {purchaseOrderData} from "./InputDataforPurchase";
+import {purchaseOrderData, tableHeadersPurchase} from "./InputDataforPurchase";
 import {Button} from "react-bootstrap";
+import {tableHeadersProduct} from "../masterData/InputDataforMaster";
 
 
 function OrderItem() {
@@ -54,7 +55,7 @@ function OrderItem() {
                 </section>
                 <Button style={{background:'dimgrey'}}>입고</Button>
                 <section className={styles.tableArea}>
-                    <TableExample/>
+                    <TableExample tableHeaders={tableHeadersPurchase[0]}/>
                 </section>
             </div>
 

@@ -86,4 +86,17 @@ let purchaseItemsData = [
     }
 ]
 
-export {purchaseOrderData, purchaseItemsData}
+let tableHeadersPurchase = [
+    [
+        "발주서번호", "발주일자", "발주서 마감일", "발주서 등록시간", "발주서 수정시간", "거래처 번호", "사원번호", "비고"
+    ]
+    ,
+    [
+        "발주 상세번호", "발주 품목 상세명", "발주 품목가격", "발주 품목수량", "세금 10%", "발주서 번호", "창고번호"
+    ]
+    ,
+    [
+        "입고 코드", "입고 일자", "발주서 번호", "창고번호", "사원번호", "비고"
+    ]
+];
+export {purchaseOrderData, purchaseItemsData, tableHeadersPurchase}

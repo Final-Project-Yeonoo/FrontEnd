@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import {Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
 import {TableExample} from "../common/UsefulTables";
-import {purchaseItemsData} from "./InputDataforPurchase";
+import {purchaseItemsData, tableHeadersPurchase} from "./InputDataforPurchase";
 
 
 
@@ -54,7 +54,7 @@ function PurchaseItem() {
                 </section>
 
                 <section className={styles.tableArea}>
-                    <TableExample/>
+                    <TableExample tableHeaders={tableHeadersPurchase[2]}/>
                 </section>
             </div>
 
