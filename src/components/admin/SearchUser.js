@@ -1,10 +1,22 @@
-import './css/SearchUser.module.css'
+import './css/SearchUser.module.css';
+import {BasicTextFields,BasicSelect, MultipleSelectCheckmarks} from '../common/UsefulComponents'; 
+import { useState } from 'react';
 
 function SearchUser() {
    
-   
+ //부서정보를 받아와서 부서이름을 보여주고 부서 코드를 보내주는 역할
+ const [dept, setDept] = useState([]);
+ fetch('api/', {
+    method: 'POST',
+    headers: requestHeader,
+    body: JSON.stringify()
+ })
+ 
+    const deptName = [
+       
+      ];
     
-        return (    
+return (    
 <>
 <div className='container'>
     <div className='contentTitleBox'>
@@ -16,17 +28,11 @@ function SearchUser() {
 
     <div className='searchBox'>
          <div className='searchContentsButton'>
-             <input className='searchName'/>
-             <input className='searEmpId'/>
-             <input className='searchDept'/>
+            <BasicTextFields className='searchName' placeholder='사원이름' />
+            <MultipleSelectCheckmarks names={deptName} tag='부서명' />
              <button className='searchBtn'>조회</button>
          </div>       
      </div>
-    
-    
-    
-    
-    
     </div>
 </>
         );

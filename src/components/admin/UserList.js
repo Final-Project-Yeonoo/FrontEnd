@@ -41,27 +41,27 @@ const UserList = () => {
 
   const [columns] = useState([
     {
-      accessor: 'name',
+      accessor: 'empName',
       Header: '이름',
     },
     {
-      accessor: 'id',
+      accessor: 'empId',
       Header: '사원ID',
     },
     {
-      accessor: 'dept',
+      accessor: 'deptCode',
       Header: '부서',
     },
     {
-      accessor: 'pos',
+      accessor: 'posCode',
       Header: '직급',
     },
     {
-      accessor: 'num',
+      accessor: 'empExtension',
       Header: '내선번호',
     },
     {
-      accessor: 'phone',
+      accessor: 'empPhone',
       Header: '휴대전화',
     },
     {
@@ -73,12 +73,12 @@ const UserList = () => {
   const [data, setData] = useState([]);
   const exampleData = [
     {
-      name: '고구마',
+      empName: '고구마',
       id: 'EM0001',
-      dept: 'Production',
-      pos: 'Senior Specialist',
-      num: '1023',
-      phone: '010-111-3333',
+      deptCode: 'Production',
+      posCode: 'Senior Specialist',
+      empExtension: '1023',
+      empPhone: '010-111-3333',
       addr: '서울시 강남구',
     }
 
@@ -104,20 +104,20 @@ const UserList = () => {
     setIsModalOpen(false); // 모달 창 닫기
   };
 
-  //사원 업데이트하기
-//   const handleEmployeeUpdate = (updatedEmployee) => {
-//       // 리스트에서 해당 사원의 인덱스를 찾습니다.
-//   const employeeIndex = data.findIndex((employee) => employee.id === updatedEmployee.id);
+  // 사원 업데이트하기
+  // const handleEmployeeUpdate = (updatedEmployee) => {
+  //     // 리스트에서 해당 사원의 인덱스를 찾습니다.
+  // const employeeIndex = data.findIndex((employee) => employee.id === updatedEmployee.id);
   
-//   if (employeeIndex !== -1) {
-//     // 사원의 정보를 업데이트합니다.
-//     const updatedData = [...data];
-//     updatedData[employeeIndex] = updatedEmployee;
-//     setData(updatedData);
-//   }
+  // if (employeeIndex !== -1) {
+  //   // 사원의 정보를 업데이트합니다.
+  //   const updatedData = [...data];
+  //   updatedData[employeeIndex] = updatedEmployee;
+  //   setData(updatedData);
+  // }
   
-//   // 모달 창을 닫습니다.
-//   handleModalClose();  };
+  // // 모달 창 닫기
+  // handleModalClose();  };
 
 
 const handleEmployeeUpdate = async (updatedEmployee) => {

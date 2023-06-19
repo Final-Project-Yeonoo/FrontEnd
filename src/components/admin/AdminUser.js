@@ -30,7 +30,7 @@ function AdminUser() {
     adminMenu: { checka: true, inputa: false },
     masterDataMenu: { checka: true, inputa: false },
     purchaseMenu: { checka: true, inputa: false },
-  inventoryMenu: { checka: true, inputa: false }
+    inventoryMenu: { checka: true, inputa: false }
   
   });
 
@@ -44,24 +44,9 @@ function AdminUser() {
   
 
 
-  // State to manage the modal visibility
   const [modalVisible, setModalVisible] = useState(false);
 
-  // State to store the selected department code
   const [selectedDeptCode, setSelectedDeptCode] = useState('');
-
-
-  // Handler for opening the modal
-  const openModal = () => {
-    setModalVisible(true);
-  };
-
-  // Handler for closing the modal
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
-  // Handler for saving the selected department code from the modal
   const saveDeptCode = (code) => {
     setSelectedDeptCode(code);
     setUserValue((prevUserValue) => ({
@@ -69,6 +54,18 @@ function AdminUser() {
       deptCode: code,
     }));
   };
+
+
+
+//모달창 열고 닫게 만드는 함수 
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
 
 
 
@@ -84,6 +81,27 @@ function AdminUser() {
     empHireDate: '', //사용자 입사일
     empValidate: '' //사용자 유효화
   });
+
+// 검증 데이터를 상태변수에 저장하는 함수
+const saveInputState = ({key, inputVal, flag}) => {
+
+  inputVal !== 'pass' && setUserValue({
+      ...userValue,
+      [key]: inputVal
+  })
+  // 입력한 값을 상태변수에 저장
+  // console.log(e.target.value);
+  setCorrect({
+      ...correct,
+      [key]: flag
+  })
+
+};
+
+
+
+
+
 
 
 
@@ -105,6 +123,7 @@ const handlePermissionChange = (name, checked) => {
   }));
 };
 
+//메뉴별 권한을 주는 체크박스 권환확인 
 const handleMenuPermissionChange2 
 = (category, permission, checked) => {
   setUserValue((prevPermissions) => ({
@@ -153,7 +172,18 @@ const handleMenuPermissionChange2
   // };
 
 
-  // 저장하기 버튼 클릭 이벤트 핸들러
+
+    // 사용자 정보 유효 확인
+    // if (isValid()) {
+    //   fetchSignUpPost();
+    //   alert('사용자 정보를 서버에 전송합니다');
+    // } else {
+    //   alert('입력란과 권한설정을 다시 확인해주세요');
+    // }
+
+  
+
+  // 저장하기 버튼 클릭 이벤트 핸들러 -> fetch로 back으로 정보 보내기 
   const joinButtonClickHandler = async (e) => {
     e.preventDefault();
 
