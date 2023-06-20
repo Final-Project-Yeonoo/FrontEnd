@@ -1,7 +1,7 @@
 import './css/TradingCompany.module.css'
 import React, { useState, useEffect } from "react";
 import TableLayout from "../common/TableLayout";
-import Modal from "../common/Modal";
+import BasicModal from "../common/Modal";
 
 function TradingCompany() {
     const [companyData, setCompanyData] = useState([]);
@@ -117,7 +117,7 @@ function TradingCompany() {
   
         {showModal && (
           <div>
-            <Modal closeModal={handleModalClose}>
+            <BasicModal closeModal={handleModalClose}>
                   <h3>입고 정보 입력</h3>
             <form onSubmit={handleFormSubmit}>
              
@@ -196,7 +196,7 @@ function TradingCompany() {
               <button type="submit">저장</button>
               <button onClick={handleModalClose}>취소</button>
             </form>
-            </Modal>
+            </BasicModal>
           </div>
           
         )}

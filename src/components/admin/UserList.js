@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './css/UserList.module.css';
+import styles from './css/UserList.module.css';
 import Layouts from '../common/TableLayout';
 import Modal from '../common/Modal';
+import BasicModal from '../common/Modal';
 
 const UserList = () => {
   const [searchName, setSearchName] = useState(''); // 이름 검색어 상태
@@ -165,7 +166,10 @@ const handleEmployeeUpdate = async (updatedEmployee) => {
   
   return (
     <>
-      <div className="container">
+    <div className={styles.contentHeadContainer}>
+       <div> 사원 검색 </div>
+    </div>
+      <div className={styles.searchcontainer}>
         <div className="input-container">
           <input
             type="text"
@@ -185,7 +189,7 @@ const handleEmployeeUpdate = async (updatedEmployee) => {
           <button onClick={handleSearch}>검색</button>
         </div>
 
-        <div className="table-container">
+        <div className={styles.tablecontainer}>
           <Layouts columns={columns} 
           data={data}
           onEmployeeClick={handleEmployeeClick} />

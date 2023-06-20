@@ -1,32 +1,37 @@
+
+.contentHeadName {
+  font-size: 25px;
+}
+
 .usercontainer {
     width: 65%;
-    height: 50vh;
+    height: 350px;
     margin: 0 auto;
     margin-top: 100px;
   }
   
   .form {
     
-    border: 3px solid red;
+    /* border: 3px solid red; */
     /* width: 300px;
     height: 300px;
   */
   } 
   .row {
-    border-bottom: 1px solid #000;
+    /* border-bottom: 1px solid #000; */
   }
   
   
   .tag {
     padding-top: 10px;
-    background-color: red;
+    /* background-color: red; */
     width: 70px;
     text-align: center;
     font-size: 12px;
   }
   .formGroup {
     display: flex;
-    
+    margin-top: 10px; 
   }
   
   
@@ -34,7 +39,7 @@
   .container {
     border: 1px solid #000;
     width: 65%;
-    height: 700px;
+    height: fit-content;
     margin: 0 auto;
     justify-content: center;
     
@@ -63,11 +68,13 @@
       
     }
     .contentName {
-      background-color: red;
+      /* background-color: red; */
     }
     
     .dataSection {
       border-right: 1px solid #000;
     }
-    
-  
+    .buttoncontainer {
+      margin-top: 20px;
+     text-align: center;
+    }

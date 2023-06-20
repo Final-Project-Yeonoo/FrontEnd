@@ -57,7 +57,7 @@ export default function BasicModal({ onClose, children }) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -77,3 +77,34 @@ export default function BasicModal({ onClose, children }) {
   );
 }
 
+// import React from "react";
+// import styles from "./css/Modal.module.css";
+
+// const BasicModal = (props) => {
+//   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
+//   const { open, close, header } = props;
+
+//   return (
+//     // 모달이 열릴때 openModal 클래스가 생성된다.
+//     <div className={open ? "openModal modal" : "modal"}>
+//       {open ? (
+//         <section>
+//           <header>
+//             {header}
+//             <button className={styles.close} onClick={close}>
+//               &times;
+//             </button>
+//           </header>
+//           <main>{props.children}</main>
+//           <footer>
+//             <button className={styles.close} onClick={close}>
+//               close
+//             </button>
+//           </footer>
+//         </section>
+//       ) : null}
+//     </div>
+//   );
+// };
+
+// export default BasicModal;
