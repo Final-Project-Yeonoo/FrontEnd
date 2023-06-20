@@ -4,6 +4,17 @@ import Nav from 'react-bootstrap/Nav';
 import React from "react";
 
 
+function ColorfulOrderButtons() {
+    return (
+        <>
+            <Button variant="outline-primary">발주확정</Button>{' '}
+            <Button variant="outline-danger">확정취소</Button>{' '}
+            <Button variant="outline-success">발주마감</Button>{' '}
+            <Button variant="outline-secondary">발주서출력</Button>{' '}
+        </>
+    );
+}
+
 function ColorfulButtons() {
     return (
         <>
@@ -15,10 +26,22 @@ function ColorfulButtons() {
     );
 }
 
+function PurcahseButtons() {
+    return (
+        <>
+            <Button variant="outline-success">입고확정</Button>{' '}
+            <Button variant="outline-danger">확정취소</Button>{' '}
+        </>
+    );
+}
+
 function StoreButtons() {
     return (
         <>
-            <Button variant="outline-primary">창고조회</Button>{' '}
+            <Button variant="outline-primary" onClick={()=>{
+                // 1. 창고조회 버튼을 클릭하면
+                // 2. 표아래에 데이터를 뿌려준다.
+            }}>창고조회</Button>{' '}
             <Button variant="outline-secondary">초기화</Button>{' '}
         </>
     );
@@ -82,8 +105,15 @@ function TabsforPurchaseItems() {
             <Nav.Item>
                 <Nav.Link eventKey="0">구매입고 등록</Nav.Link>
             </Nav.Item>
+        </Nav>
+    );
+}
+
+function TabsforOrderItems() {
+    return (
+        <Nav variant="tabs" defaultActiveKey="0">
             <Nav.Item>
-                <Nav.Link eventKey="2">구매입고 내역조회</Nav.Link>
+                <Nav.Link eventKey="0">발주 테이블</Nav.Link>
             </Nav.Item>
         </Nav>
     );
@@ -101,27 +131,7 @@ function TabsforStore() {
 }
 
 
-function FillExample() {
-    return (
-        <Nav fill variant="tabs" defaultActiveKey="/home">
-            <Nav.Item>
-                <Nav.Link href="/home">Active</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link eventKey="link-1">Loooonger NavLink</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link eventKey="link-2">Link</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link eventKey="disabled" disabled>
-                    Disabled
-                </Nav.Link>
-            </Nav.Item>
-        </Nav>
-    );
-}
 
 
-export {ColorfulButtons, GrayButtons, FillExample, TabsExample, PillsExample, TabsforStore, TabsforPurchaseItems, StoreButtons}
+export {ColorfulButtons, GrayButtons, TabsExample, PillsExample, TabsforStore, TabsforPurchaseItems, StoreButtons, TabsforOrderItems, PurcahseButtons, ColorfulOrderButtons}
 

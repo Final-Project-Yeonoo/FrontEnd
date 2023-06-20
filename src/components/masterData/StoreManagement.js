@@ -1,19 +1,18 @@
-import './css/StoreManagement.module.css'
+
 import React, {useState} from "react";
-import styles from "./css/ProductManagement.module.css";
-import {StoreButtons, TabsforStore} from "../common/UsefulButtons";
+import styles from './css/StoreManagement.module.css'
+import {ColorfulButtons, StoreButtons, TabsforStore} from "../common/UsefulButtons";
 import Form from "react-bootstrap/Form";
 import {Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
 import {TableExample} from "../common/UsefulTables";
 import {productInputData, storeInputData, tableHeadersProduct} from "./InputDataforMaster";
+import {tableHeadersPurchase} from "../purchase/InputDataforPurchase";
 
 
 function StoreManagement() {
 
     let [title, setTitle] = useState(storeInputData);
-
-    const headers4 = tableHeadersProduct[3];
 
     return (
         <>
@@ -23,7 +22,7 @@ function StoreManagement() {
                         <TabsforStore/>
                     </div>
                     <div className={styles.navRight}>
-                        <StoreButtons/>
+                        <ColorfulButtons/>
                     </div>
                 </section>
 
@@ -32,14 +31,15 @@ function StoreManagement() {
                         title.map((a, i) => {
                                 return (
                                     <>
+
                                     {a.title === '창고구분' ? (
-                                        <Form style={{marginBottom: '10px'}}>
+                                        <Form style={{marginBottom: '10px'}} className={styles.searchSection}>
                                             <Row>
                                                 <Col xs="auto">
                                                     <div style={{display: 'flex'}}>
                                                         <Form.Control readOnly placeholder={title[i].title}
-                                                                      style={{marginRight: '10px', width: '150px'}}/>
-                                                        <Form.Select aria-label="Default select example">
+                                                                      style={{marginRight: '20px', width: '150px', marginLeft:"15px"}}/>
+                                                        <Form.Select aria-label="Default select example" style={{ width: '246px'}}>
                                                             <option>창고를 선택하세요</option>
                                                             <option value="1">제품창고</option>
                                                             <option value="2">반제품창고</option>
@@ -82,7 +82,14 @@ function StoreManagement() {
                 </section>
 
                 <section className={styles.tableArea}>
-                    <TableExample tableHeaders={headers4}/>
+                    <div className={styles.divStyle}>창고</div>
+                    <TableExample tableHeaders={tableHeadersProduct[3]}/>
+                </section>
+                <section className={styles.tableArea}>
+                    <div className={styles.divStyle}>구역(Area)</div>
+                    <TableExample tableHeaders={tableHeadersProduct[4]}/>
+                    <div className={styles.divStyle}>렉(Rack)</div>
+                    <TableExample tableHeaders={tableHeadersProduct[5]}/>
                 </section>
             </div>
         </>

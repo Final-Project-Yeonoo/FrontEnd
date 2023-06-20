@@ -13,12 +13,13 @@ function ProductManagement() {
 
     return (
         <>
-            <div className={styles.searchTabs}>
+
+            <div className={styles.navRight}>
                 <ColorfulButtons/>
             </div>
 
             <section className={styles.navLeft}>
-                <TabforPurchase/>
+                <TabforProduct/>
             </section>
 
         </>
@@ -26,7 +27,7 @@ function ProductManagement() {
 }
 
 // 탭
-function TabforPurchase() {
+function TabforProduct() {
 
     let [tab, setTab] = useState(0)
 
@@ -59,10 +60,6 @@ function TabforPurchase() {
 // 탭(0, 1, 2)선택시 나오는 오렌지표와 테이블
 function TabContent({tab}) {
 
-    const headers1 = tableHeadersProduct[0];
-    const headers2 = tableHeadersProduct[1];
-    const headers3 = tableHeadersProduct[2];
-
     const handleOrangeInputChange = (i, value) => {
         const updatedInputData = [...orangeInputData]; // orangeInputData 배열을 복사하여 새로운 배열 생성
         updatedInputData[updatedInputData.length - 1].title = value; // 마지막 객체의 title 값을 업데이트
@@ -73,7 +70,7 @@ function TabContent({tab}) {
     if (tab === 0) {
         orangeInputData = productInputData; // 원자재 박스에는 productInputData를 그대로 할당
     } else if (tab === 1) {
-        orangeInputData = productInputData.slice(0, - 1);
+        orangeInputData = productInputData.slice(0, -1);
         // 제품 박스에는 productInputData의 마지막 object를 제거하여 할당
     } else if (tab === 2) {
         orangeInputData = [...productInputData];
@@ -84,36 +81,35 @@ function TabContent({tab}) {
         <div>
             {tab === 0 && (
                 <div>
-                    원자재 박스
-                    <section className={styles.searchBox} style={{ marginBottom: '30px' }}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={() => {}} />
+                    <section className={styles.searchBox} style={{marginBottom: '30px'}}>
+                        <OrangeInput title={orangeInputData} handleTitleChange={() => {
+                        }}/>
                     </section>
                     <section className={styles.tableArea}>
-                        <TableExample tableHeaders={headers1}/>
+                        <TableExample tableHeaders={tableHeadersProduct[0]}/>
                     </section>
                 </div>
             )}
 
             {tab === 1 && (
                 <div>
-                    반제품 박스
-                    <section className={styles.searchBox} style={{ marginBottom: '30px' }}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={() => {}} />
+                    <section className={styles.searchBox} style={{marginBottom: '30px'}}>
+                        <OrangeInput title={orangeInputData} handleTitleChange={() => {
+                        }}/>
                     </section>
                     <section className={styles.tableArea}>
-                        <TableExample tableHeaders={headers2}/>
-                    </section>c
+                        <TableExample tableHeaders={tableHeadersProduct[1]}/>
+                    </section>
                 </div>
             )}
 
             {tab === 2 && (
                 <div>
-                    제품 박스
-                    <section className={styles.searchBox} style={{ marginBottom: '30px' }}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={handleOrangeInputChange} />
+                    <section className={styles.searchBox} style={{marginBottom: '30px'}}>
+                        <OrangeInput title={orangeInputData} handleTitleChange={handleOrangeInputChange}/>
                     </section>
                     <section className={styles.tableArea}>
-                        <TableExample tableHeaders={headers3}/>
+                        <TableExample tableHeaders={tableHeadersProduct[2]}/>
                     </section>
                 </div>
             )}
@@ -121,8 +117,11 @@ function TabContent({tab}) {
     );
 }
 
+
 // 오렌지 표의 형식과 정의
-function OrangeInput({ title, handleTitleChange }) {
+function OrangeInput({
+                         title, handleTitleChange
+                     }) {
 
     return (
 
