@@ -27,15 +27,11 @@ function SideMenu() {
                         <Accordion.Header>사용자 관리</Accordion.Header>
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/admin/user')}}>
-                            채원님이 지정
-                        </Accordion.Body>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
-                                        onClick={() => {navigate('/admin/search')}}>
-                            채원님이 지정
+                            사용자 등록
                         </Accordion.Body>
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/admin/list')}}>
-                            채원님이 지정
+                            사용자 정보수정
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="2">
@@ -80,6 +76,10 @@ function SideMenu() {
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/mypage')}}>
                             개인정보 수정
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/admin/search')}}>
+                            사용자 조회
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
