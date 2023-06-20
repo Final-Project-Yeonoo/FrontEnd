@@ -2,7 +2,7 @@
 import styles from './css/OrderItem.module.css';
 import {ColorfulButtons, ColorfulOrderButtons, TabsforOrderItems} from "../common/UsefulButtons";
 import Form from "react-bootstrap/Form";
-import {FormGroup, Input, Label, Row} from "reactstrap";
+import {Input, Label, Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
 import {TableExample} from "../common/UsefulTables";
 import React, {useState} from "react";
@@ -93,65 +93,5 @@ function OrderItem() {
     );
 }
 
-
-function TabContent2({tab}) {
-
-    const handleOrangeInputChange = (i, value) => {
-        const updatedInputData = [...orangeInputData]; // orangeInputData 배열을 복사하여 새로운 배열 생성
-        updatedInputData[updatedInputData.length - 1].title = value; // 마지막 객체의 title 값을 업데이트
-        orangeInputData = updatedInputData;
-    };
-
-    let orangeInputData;
-    if (tab === 0) {
-        orangeInputData = productInputData; // 원자재 박스에는 productInputData를 그대로 할당
-    } else if (tab === 1) {
-        orangeInputData = productInputData.slice(0, -1);
-        // 제품 박스에는 productInputData의 마지막 object를 제거하여 할당
-    } else if (tab === 2) {
-        orangeInputData = [...productInputData];
-        orangeInputData[orangeInputData.length - 1].title = "규격";
-    }
-
-    return (
-        <div>
-            {tab === 0 && (
-                <div>
-                    <section className={styles.searchBox} style={{marginBottom: '30px'}}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={() => {
-                        }}/>
-                    </section>
-                    <section className={styles.tableArea}>
-                        <TableExample tableHeaders={tableHeadersProduct[0]}/>
-                    </section>
-                </div>
-            )}
-
-            {tab === 1 && (
-                <div>
-                    <section className={styles.searchBox} style={{marginBottom: '30px'}}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={() => {
-                        }}/>
-                    </section>
-                    <section className={styles.tableArea}>
-                        <TableExample tableHeaders={tableHeadersProduct[1]}/>
-                    </section>
-                    c
-                </div>
-            )}
-
-            {tab === 2 && (
-                <div>
-                    <section className={styles.searchBox} style={{marginBottom: '30px'}}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={handleOrangeInputChange}/>
-                    </section>
-                    <section className={styles.tableArea}>
-                        <TableExample tableHeaders={tableHeadersProduct[2]}/>
-                    </section>
-                </div>
-            )}
-        </div>
-    );
-}
 
 export default OrderItem;
