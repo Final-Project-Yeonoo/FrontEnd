@@ -81,6 +81,10 @@ function SideMenu() {
                                         onClick={() => {navigate('/admin/search')}}>
                             사용자 조회
                         </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun')}}>
+                            유근 테스트
+                        </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
             </div>
