@@ -4,6 +4,11 @@ body {
  
   
   .parent-container {
-    width: 76vw;
-    overflow: hidden;
+    overflow: scroll;
+        width: 76vw;
+        overflow: auto;
+        height: 80vh;
+        white-space: nowrap;
+    
   }
+
