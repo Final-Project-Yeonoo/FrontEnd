@@ -22,4 +22,8 @@ $ npm install @reduxjs/toolkit react-redux
 # axios 설치
 $ npm install axios
 
+# 유근님 제공 표
 $ npm install react-tabulator
+
+# 추가 설치 
+$ npm install luxos
