@@ -1,29 +1,38 @@
-import './css/TradingCompany.module.css'
+import styles from './css/TradingCompany.module.css'
 import React, { useState, useEffect } from "react";
 import TableLayout from "../common/TableLayout";
 import BasicModal from "../common/Modal";
+import {API_BASE_URL, TRADING} from "../../config/host-cofig";
 
 function TradingCompany() {
-    const [companyData, setCompanyData] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [formData, setFormData] = useState({
-      구분: "",
-      거래처코드: "",
-      거래처명: "",
-      취급품목: "",
-      전화번호: "",
-      주소: "",
-      비고: ""
+
+  const API_TRC_URL = API_BASE_URL + TRADING;
+    const [companyData, setCompanyData] = useState({
+      trCompCode: "",
+      trCompName: "",
+      trCompPhone: "",
+      trAddr: "",
+      trEtc: ""
     });
+    const [showModal, setShowModal] = useState(false);
+    const [formData, setFormData] = useState([{
+      trCompCode: "",
+      trCompName: "",
+      trCompPhone: "",
+      trAddr: "",
+      trEtc: ""
+    }]);
     useEffect(() => {
       fetchCompanyData(); // 컴포넌트가 마운트되었을 때 거래처 데이터를 가져옵니다.
     }, []);
   
     const fetchCompanyData = async () => {
      
-        const response = await fetch("/api/ynfinal/trcomp"); // 백엔드의 거래처 데이터를 가져오는 API 엔드포인트로 요청합니다.
-        const data = await response.json(); // 응답 데이터를 JSON 형식으로 변환합니다.
-        setCompanyData(data); // 거래처 데이터를 상태에 설정합니다.
+        const response = await fetch(`${API_TRC_URL}`); // 백엔드의 거래처 데이터를 가져오는 API 엔드포인트로 요청합니다.
+        const formData = await response.json(); // 응답 데이터를 JSON 형식으로 변환합니다.
+        console.log(formData);
+        const newformData = Object.values(formData);
+        setCompanyData(newformData); // 거래처 데이터를 상태에 설정합니다.
      
     };
   // 검색어 입력값 처리 로직 어떻게 짜죠??? 
@@ -55,7 +64,7 @@ function TradingCompany() {
     const handleFormSubmit = async (e) => {
       e.preventDefault();
     
-        const response = await fetch("/api/companies", {
+        const response = await fetch(`${API_TRC_URL}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -72,13 +81,12 @@ function TradingCompany() {
   const 구분Options = ["구매", "판매"];
   
     const columns = [
-      { Header: "구분", accessor: "구분" },
-      { Header: " 거래처코드", accessor: " trCompCode" },
+      
+      { Header: " 거래처코드", accessor: "trCompCode" },
       { Header: "거래처명", accessor: "trCompName" },
-      { Header: "취급품목", accessor: "취급품목" },
       { Header: "전화번호", accessor: "trCompPhone" },
       { Header: "주소", accessor: "trAddr" },
-      { Header: "비고", accessor: "비고" }
+      { Header: "비고", accessor: "trEtc" }
      
     ];
   
@@ -88,33 +96,51 @@ function TradingCompany() {
           구분: "12345",
           trCompCode: "입고",
           trCompName: "품목 A",
-          취급품목: "츠",
           trCompPhone: "A001",
           trAddr: "10",
-          비고: "정상"  
-      }
+          trEtc: "정상"  
+      },
+      {
+        구분: "12345",
+        trCompCode: "입고",
+        trCompName: "품목 A",
+        trCompPhone: "A001",
+        trAddr: "10",
+        trEtc: "정상"  
+    },
+    {
+      구분: "12345",
+      trCompCode: "입고",
+      trCompName: "품목 A",
+      trCompPhone: "A001",
+      trAddr: "10",
+      trEtc: "정상"  
+  }
     ];
-  
+    
+
     return (
-      <div>
+      <>
+      <div className={styles.container}>
+      <div className={styles.headerContainer}>
         <h2>거래처 관리</h2>
-  
-        
-  
-        <form onSubmit={handleSearchSubmit}>
+        <form className={styles.form} onSubmit={handleSearchSubmit}>
           <input
+            className={styles.input}
             type="text"
             placeholder="거래처명 검색"
             // value={searchTerm}
             onChange={handleSearchInputChange}
           />
-          <button type="submit">검색</button>
+          <button className={styles.button} type="submit">검색</button>
+          <button className={styles.newbutton} 
+              type="button" 
+              onClick={handleNewRegistration}>신규등록</button>
         </form>
   
-        <button onClick={handleNewRegistration}>신규등록</button>
-  
-        <TableLayout columns={columns} data={companyData} />
-  
+      </div>
+        <TableLayout columns={columns} data={formData} />
+     
         {showModal && (
           <div>
             <BasicModal closeModal={handleModalClose}>
@@ -200,7 +226,11 @@ function TradingCompany() {
           </div>
           
         )}
+
+
+
       </div>
+      </>
     );
   }
   

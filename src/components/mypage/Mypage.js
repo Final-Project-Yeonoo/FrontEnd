@@ -38,8 +38,8 @@ function Mypage({ employeeId }) {
     // console.log(newPassword, newAddr, newPhoneNumber);
 
     try {
-      await fetch(`/api/employees/${employeeId}`, {
-        method: "PUT",
+      await fetch(`http://localhost:8888/ynfinal/employee/mypage`, {
+        method: "PATCH",
         body: JSON.stringify({password: newPassword, phoneNumber: newPhoneNumber, address: newAddr}),
         headers: {
           "Content-Type": "application/json"
