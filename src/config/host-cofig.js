@@ -4,7 +4,7 @@ const clientHostName = window.location.hostname;
 let backEndHostName; //백엔드 서버 호스트 이름
 
 // if(clientHostName === 'localhost') {
-//     backEndHostName = 'http://localhost:/';
+//     backEndHostName = 'http://localhost:8888/';
 // }else if(clientHostName === '.com'){
 //     backEndHostName = 'http://';
 // }
@@ -12,7 +12,16 @@ let backEndHostName; //백엔드 서버 호스트 이름
 
 
 export const API_BASE_URL = backEndHostName;
-export const company ='api/ynfinal/comp';
-export const trading ='api/ynfinal/trcomp';
-export const mypage ='api/ynfinal/mypage';
-export const department ='api/ynfinal/department';
+export const company ='ynfinal/comp';
+export const trading ='ynfinal/trcomp';
+export const mypage ='ynfinal/mypage';
+export const department ='ynfinal/department';
+export const adminpage ='ynfinal/admin';
+export const raw ='ynfinal/rawitem';
+export const half ='ynfinal/halfitem';
+export const finished ='ynfinal/finisheditem';
+export const store ='ynfinal/store';
+export const purchase ='ynfinal/itemorder';
+export const imports ='ynfinal/inputproduct';
+export const inventory ='ynfinal/stock';
+export const orderdetail ='ynfinal/orderdetail';

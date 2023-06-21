@@ -3,6 +3,7 @@ import styles from './css/UserList.module.css';
 import Layouts from '../common/TableLayout';
 import Modal from '../common/Modal';
 import BasicModal from '../common/Modal';
+import {Button} from 'reactstrap';
 
 const UserList = () => {
   const [searchName, setSearchName] = useState(''); // 이름 검색어 상태
@@ -167,17 +168,21 @@ const handleEmployeeUpdate = async (updatedEmployee) => {
   return (
     <>
     <div className={styles.contentHeadContainer}>
-       <div> 사원 검색 </div>
-    </div>
+       <div className={styles.contentHeadName}> 
+        사원 검색 
+       </div>
+    
       <div className={styles.searchcontainer}>
-        <div className="input-container">
+        <div className={styles.inputcontainer}>
           <input
+            className={styles.inputTag}
             type="text"
             value={searchName}
             onChange={(e) => setSearchName(e.target.value)}
             placeholder="이름을 입력하세요"
           />
           <select
+          className={styles.selectTag}
             value={searchDept}
             onChange={(e) => setSearchDept(e.target.value)}
           >
@@ -186,15 +191,18 @@ const handleEmployeeUpdate = async (updatedEmployee) => {
               <option key={dept} value={dept}>{dept}</option>
             ))}
           </select>
-          <button onClick={handleSearch}>검색</button>
+          <Button className={styles.Button} onClick={handleSearch}>검색</Button>
+          {/* <button className={styles.buttonTag} onClick={handleSearch}>검색</button> */}
         </div>
-
+      </div>
+    </div>
+      
         <div className={styles.tablecontainer}>
           <Layouts columns={columns} 
           data={data}
           onEmployeeClick={handleEmployeeClick} />
         </div>
-      </div>
+    
 
       {/* 모달 */}
       {isModalOpen && (
@@ -240,6 +248,8 @@ const handleEmployeeUpdate = async (updatedEmployee) => {
           )}
         </Modal>
       )}
+
+
     </>
   );
 };

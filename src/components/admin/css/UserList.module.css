@@ -48,3 +48,24 @@
     width: 30%;
 
 }
+.contentHeadContainer {
+    display: flex;
+    justify-content: space-between;
+    
+}
+.inputcontainer {
+    height: 30px;
+    width: 100%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: flex;
+}
+.inputTag {
+    margin-right: 5px;
+}
+.selectTag {
+    margin-right: 5px;
+}
+.Button{
+    font-size: 5px;
+}
