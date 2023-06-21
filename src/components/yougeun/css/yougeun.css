@@ -1,0 +1,9 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+ 
+  
+  .parent-container {
+    width: 76vw;
+    overflow: hidden;
+  }
