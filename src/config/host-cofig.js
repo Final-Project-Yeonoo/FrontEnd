@@ -3,25 +3,29 @@ const clientHostName = window.location.hostname;
 
 let backEndHostName; //백엔드 서버 호스트 이름
 
-// if(clientHostName === 'localhost') {
-//     backEndHostName = 'http://localhost:8888/';
-// }else if(clientHostName === '.com'){
-//     backEndHostName = 'http://';
-// }
+
+if(clientHostName === 'localhost') {
+    backEndHostName = 'http://localhost:8888/';
+}else if(clientHostName === '.com'){
+    backEndHostName = 'http://';
+}
 
 
 
 export const API_BASE_URL = backEndHostName;
-export const company ='ynfinal/comp';
-export const trading ='ynfinal/trcomp';
-export const mypage ='ynfinal/mypage';
-export const department ='ynfinal/department';
-export const adminpage ='ynfinal/admin';
-export const raw ='ynfinal/rawitem';
-export const half ='ynfinal/halfitem';
-export const finished ='ynfinal/finisheditem';
-export const store ='ynfinal/store';
-export const purchase ='ynfinal/itemorder';
-export const imports ='ynfinal/inputproduct';
-export const inventory ='ynfinal/stock';
-export const orderdetail ='ynfinal/orderdetail';
+export const COMPANY ='ynfinal/comp';
+//회사사원전체조회
+export const FINDALL ='ynfinal/employee';
+export const TRADING ='ynfinal/trcomp';
+// 마이페이지 조회
+// export const mypage ='ynfinal/employee/mypage';
+export const DEPARTMENT ='ynfinal/department';
+export const ADMINPAGE ='ynfinal/admin';
+export const RAW ='ynfinal/rawitem';
+export const HALF ='ynfinal/halfitem';
+export const FINISHED ='ynfinal/finisheditem';
+export const STORE ='ynfinal/store';
+export const PUCHASE ='ynfinal/itemorder';
+export const IMPORTS ='ynfinal/inputproduct';
+export const INVENTORY ='ynfinal/stock';
+export const ORDERDETAIL ='ynfinal/orderdetail';
