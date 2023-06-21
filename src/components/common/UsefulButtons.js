@@ -15,7 +15,7 @@ function ColorfulOrderButtons() {
     );
 }
 
-function ColorfulButtons() {
+function ColorfulButtons({handleSaveClick}) {
     return (
         <>
             <Button variant="outline-primary">조회</Button>{' '}

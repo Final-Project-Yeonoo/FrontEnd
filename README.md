@@ -18,3 +18,8 @@ $ npm install react-table --save
 
 # Redux : props 없이 state 공유 도와주는 라이브러리 설치 
 $ npm install @reduxjs/toolkit react-redux
+
+# axios 설치
+$ npm install axios
+
+$ npm install react-tabulator

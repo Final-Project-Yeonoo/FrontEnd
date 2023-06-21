@@ -58,26 +58,39 @@ let tableHeadersProduct = [
     ]
     ,
     [
-        "렉코드", "렉명칭", "셀코드","셀명칭","비고"
+        "렉코드", "렉명칭", "셀코드", "셀명칭", "비고"
     ]
 ];
 
+
+        // selectedOpt: '일반창고',
+        // inputData: {
+        //     itemCode: '31234',
+        //     name: '반자재',
+        //     amount: '10'
+        // }
+
 const tableCells = [
-    [
-        {itemCode: '31234'},
-        {name: '반자재'},
-        {amount: '10'},
-    ],
-    [
-        {itemCode: '31234'},
-        {name: '반자재'},
-        {amount: '10'},
-    ],
-    [
-        {itemCode: '31234'},
-        {name: '반자재'},
-        {amount: '10'},
-    ],
+        [
+            { itemCode: '강아지' },
+            { name: '반자재' },
+            { amount: '강아지' },
+            { reg: '멍멍이' },
+            { no: '원자재' },
+            { aaa: '원자재' },
+            { bbb: '원자재' },
+            { ccc: '원자재' }
+        ],
+        [
+            { itemCode: '멍멍' },
+            { name: 'ㅇㅇ' },
+            { amount: '강아지' },
+            { reg: '멍멍이' },
+            { no: '원자재' },
+            { aaa: '원자재' },
+            { bbb: '원자재' },
+            { ccc: '원자재' }
+        ],
 
 ];
 
