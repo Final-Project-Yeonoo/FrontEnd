@@ -9,8 +9,8 @@ function Mypage({ employeeId }) {
     deptName: "HR",
     posName: "Manager",
     empExtension: "123",
-    password: "111",
-    phoneNumber: "010-111-222",
+    empPassword: "111",
+    empPhone: "010-111-222",
     empAddress: "서울시 강남구"
   });
   const [newPassword, setNewPassword] = useState("");
@@ -40,7 +40,7 @@ function Mypage({ employeeId }) {
     try {
       await fetch(`http://localhost:8888/ynfinal/employee/mypage`, {
         method: "PATCH",
-        body: JSON.stringify({password: newPassword, phoneNumber: newPhoneNumber, address: newAddr}),
+        body: JSON.stringify({empId: employeeInfo.empId, empPassword: newPassword, empPhone: newPhoneNumber, empAddress: newAddr}),
         headers: {
           "Content-Type": "application/json"
         }
@@ -80,14 +80,14 @@ function Mypage({ employeeId }) {
       <div className={styles.profilesection}>
         <p className={styles.profilelabel}>비밀번호:</p>
         <input type='text'
-        value={newPassword ||employeeInfo.password}
+        value={newPassword ||employeeInfo.empPassword}
         onChange={(e) => setNewPassword(e.target.value)}
         className="profile-input"/>{}
       </div>
       <div className={styles.profilesection}>
         <p className={styles.profilelabel}>휴대전화번호:</p>
         <input type='text'
-         value={newPhoneNumber || employeeInfo.phoneNumber}
+         value={newPhoneNumber || employeeInfo.empPhone}
          onChange={(e) => setNewPhoneNumber(e.target.value)}
          className="profile-input"/>
       </div>
