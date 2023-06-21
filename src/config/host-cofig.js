@@ -12,16 +12,16 @@ let backEndHostName; //백엔드 서버 호스트 이름
 
 
 export const API_BASE_URL = backEndHostName;
-export const company ='api/ynfinal/comp';
-export const trading ='api/ynfinal/trcomp';
-export const mypage ='api/ynfinal/mypage';
-export const department ='api/ynfinal/department';
-export const adminpage ='api/ynfinal/admin';
-export const raw ='api/ynfinal/rawitem';
-export const half ='api/ynfinal/halfitem';
-export const finished ='api/ynfinal/finisheditem';
-export const store ='api/ynfinal/store';
-export const purchase ='api/ynfinal/itemorder';
-export const imports ='api/ynfinal/inputproduct';
-export const inventory ='api/ynfinal/stock';
-export const orderdetail ='api/ynfinal/orderdetail';
+export const company ='ynfinal/comp';
+export const trading ='ynfinal/trcomp';
+export const mypage ='ynfinal/mypage';
+export const department ='ynfinal/department';
+export const adminpage ='ynfinal/admin';
+export const raw ='ynfinal/rawitem';
+export const half ='ynfinal/halfitem';
+export const finished ='ynfinal/finisheditem';
+export const store ='ynfinal/store';
+export const purchase ='ynfinal/itemorder';
+export const imports ='ynfinal/inputproduct';
+export const inventory ='ynfinal/stock';
+export const orderdetail ='ynfinal/orderdetail';
