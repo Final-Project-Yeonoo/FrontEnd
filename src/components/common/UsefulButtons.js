@@ -15,11 +15,11 @@ function ColorfulOrderButtons() {
     );
 }
 
-function ColorfulButtons() {
+function ColorfulButtons({handleSaveClick}) {
     return (
         <>
             <Button variant="outline-primary">조회</Button>{' '}
-            <Button variant="outline-success">저장</Button>{' '}
+            <Button variant="outline-success" onClick={handleSaveClick}>저장</Button>{' '}
             <Button variant="outline-danger">삭제</Button>{' '}
             <Button variant="outline-secondary">초기화</Button>{' '}
         </>
