@@ -7,8 +7,9 @@ import Col from "react-bootstrap/Form";
 import {TableExample} from "../common/UsefulTables";
 import React, {useState} from "react";
 import {purchaseOrderData, tableHeadersPurchase} from "./InputDataforPurchase";
-import {Button} from "react-bootstrap";
-import {productInputData, tableHeadersProduct} from "../masterData/InputDataforMaster";
+import {Button, Container} from "react-bootstrap";
+import {productInputData, tableCells, tableHeadersProduct} from "../masterData/InputDataforMaster";
+import Table from "react-bootstrap/Table";
 
 
 function OrderItem() {
@@ -23,8 +24,16 @@ function OrderItem() {
                         <TabsforOrderItems/>
                     </div>
                     <div className={styles.navLeft}>
-                        <ColorfulOrderButtons/>
-                        <ColorfulButtons/>
+                        {/*<ColorfulOrderButtons/>*/}
+                        {/*<ColorfulButtons/>*/}
+                        <Button variant="outline-primary">발주확정</Button>{' '}
+                        <Button variant="outline-danger">확정취소</Button>{' '}
+                        <Button variant="outline-success">발주마감</Button>{' '}
+                        <Button variant="outline-secondary">발주서출력</Button>{' '}
+                        <Button variant="outline-primary">조회</Button>{' '}
+                        <Button variant="outline-success">저장</Button>{' '}
+                        <Button variant="outline-danger">삭제</Button>{' '}
+                        <Button variant="outline-secondary">초기화</Button>{' '}
                     </div>
                 </section>
 
@@ -81,11 +90,65 @@ function OrderItem() {
 
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>구매발주</div>
-                    <TableExample tableHeaders={tableHeadersPurchase[0]}/>
+                    {/*<TableExample tableHeaders={tableHeadersPurchase[0]}/>*/}
+                    <div style={{marginTop: "30px"}}>
+                        <Container>
+                            <Table responsive>
+                                <thead>
+                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
+                                    <th>#</th>
+                                    {tableHeadersPurchase[0].map((heading, index) => (
+                                        <th key={index}>{heading}</th>
+                                    ))}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {/*<tr>*/}
+                                {tableCells.map((row, rowIndex) => (
+                                    <tr key={rowIndex}>
+                                        <td>{rowIndex + 1}</td>
+                                        {row.map((cell, cellIndex) => (
+                                            <td key={cellIndex}>
+                                                {Object.values(cell)[0]}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </Table>
+                        </Container>
+                    </div>
                 </section>
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>세부항목</div>
-                    <TableExample tableHeaders={tableHeadersPurchase[1]}/>
+                    {/*<TableExample tableHeaders={tableHeadersPurchase[1]}/>*/}
+                    <div style={{marginTop: "30px"}}>
+                        <Container>
+                            <Table responsive>
+                                <thead>
+                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
+                                    <th>#</th>
+                                    {tableHeadersPurchase[1].map((heading, index) => (
+                                        <th key={index}>{heading}</th>
+                                    ))}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {/*<tr>*/}
+                                {tableCells.map((row, rowIndex) => (
+                                    <tr key={rowIndex}>
+                                        <td>{rowIndex + 1}</td>
+                                        {row.map((cell, cellIndex) => (
+                                            <td key={cellIndex}>
+                                                {Object.values(cell)[0]}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </Table>
+                        </Container>
+                    </div>
                 </section>
             </div>
 

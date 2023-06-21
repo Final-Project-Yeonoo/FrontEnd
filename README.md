@@ -20,4 +20,6 @@ $ npm install react-table --save
 $ npm install @reduxjs/toolkit react-redux
 
 # axios 설치
-$ npm install axios 
+$ npm install axios
+
+$ npm install react-tabulator

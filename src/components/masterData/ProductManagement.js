@@ -7,19 +7,45 @@ import {ColorfulButtons} from "../common/UsefulButtons";
 import {TableExample} from "../common/UsefulTables";
 import {productInputData, storeInputData, tableHeadersProduct} from "./InputDataforMaster";
 import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
 
 
 function ProductManagement() {
+
+    let [tab, setTab] = useState(0)
 
     return (
         <>
 
             <div className={styles.navRight}>
-                <ColorfulButtons/>
+                {/*<ColorfulButtons/>*/}
+                <Button variant="outline-primary">조회</Button>{' '}
+                <Button variant="outline-success">저장</Button>{' '}
+                <Button variant="outline-danger">삭제</Button>{' '}
+                <Button variant="outline-secondary">초기화</Button>{' '}
             </div>
 
             <section className={styles.navLeft}>
-                <TabforProduct/>
+                {/*<TabforProduct/>*/}
+                <Nav variant="tabs" defaultActiveKey="0">
+                    <Nav.Item>
+                        <Nav.Link eventKey="0" onClick={() => {
+                            setTab(0)
+                        }}>원자재</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="1" onClick={() => {
+                            setTab(1)
+                        }}>반제품</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="2" onClick={() => {
+                            setTab(2)
+                        }}>제품</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+
+                <TabContent tab={tab}/>
             </section>
 
         </>
@@ -27,35 +53,35 @@ function ProductManagement() {
 }
 
 // 탭
-function TabforProduct() {
-
-    let [tab, setTab] = useState(0)
-
-    return (
-        <>
-            <Nav variant="tabs" defaultActiveKey="0">
-                <Nav.Item>
-                    <Nav.Link eventKey="0" onClick={() => {
-                        setTab(0)
-                    }}>원자재</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="1" onClick={() => {
-                        setTab(1)
-                    }}>반제품</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="2" onClick={() => {
-                        setTab(2)
-                    }}>제품</Nav.Link>
-                </Nav.Item>
-            </Nav>
-
-            <TabContent tab={tab}/>
-        </>
-    )
-        ;
-}
+// function TabforProduct() {
+//
+//     let [tab, setTab] = useState(0)
+//
+//     return (
+//         <>
+//             <Nav variant="tabs" defaultActiveKey="0">
+//                 <Nav.Item>
+//                     <Nav.Link eventKey="0" onClick={() => {
+//                         setTab(0)
+//                     }}>원자재</Nav.Link>
+//                 </Nav.Item>
+//                 <Nav.Item>
+//                     <Nav.Link eventKey="1" onClick={() => {
+//                         setTab(1)
+//                     }}>반제품</Nav.Link>
+//                 </Nav.Item>
+//                 <Nav.Item>
+//                     <Nav.Link eventKey="2" onClick={() => {
+//                         setTab(2)
+//                     }}>제품</Nav.Link>
+//                 </Nav.Item>
+//             </Nav>
+//
+//             <TabContent tab={tab}/>
+//         </>
+//     )
+//         ;
+// }
 
 // 탭(0, 1, 2)선택시 나오는 오렌지표와 테이블
 function TabContent({tab}) {
