@@ -85,6 +85,10 @@ function SideMenu() {
                                         onClick={() => {navigate('/yougeun')}}>
                             유근 테스트
                         </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun2')}}>
+                            유근 테스트2
+                        </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
             </div>
