@@ -9,7 +9,6 @@ import Button from "react-bootstrap/Button";
 import ProductManagementRawTable from "./ProductManagementRawTable";
 import ProductManagementHalfTable from "./ProductManagementHalfTable";
 import ProductManagementFullTable from "./ProductManagementFullTable";
-import axios from "axios";
 
 
 function ProductManagement() {
@@ -19,21 +18,15 @@ function ProductManagement() {
     return (
         <>
 
-            <div className={styles.navRight}>
-                {/*<ColorfulButtons/>*/}
-                <Button variant="outline-primary" onClick={()=>{}}>조회</Button>{' '}
-                <Button variant="outline-success" onClick={() => {
-                    axios.post('http://localhost:8888/ynfinal/rawitem', { params: {  } })
-                        .then((response) => {
-                            console.log('성공함', response.data);
-                        })
-                        .catch(() => {
-                            console.log('실패함');
-                        });
-                }}>저장</Button>{' '}
-                <Button variant="outline-danger" onClick={()=>{}}>삭제</Button>{' '}
-                <Button variant="outline-secondary" onClick={()=>{}}>초기화</Button>{' '}
-            </div>
+            {/*<div className={styles.navRight}>*/}
+            {/*    /!*<ColorfulButtons/>*!/*/}
+            {/*    <Button variant="outline-primary" onClick={() => {*/}
+            {/*    }}>조회</Button>{' '}*/}
+            {/*    <Button variant="outline-success">저장</Button>{' '}*/}
+            {/*    <Button variant="outline-danger" onClick={() => {*/}
+            {/*    }}>삭제</Button>{' '}*/}
+            {/*    <Button variant="outline-secondary">초기화</Button>{' '}*/}
+            {/*</div>*/}
 
             <section className={styles.navLeft}>
                 {/*<TabforProduct/>*/}
@@ -127,13 +120,23 @@ function TabContent({tab}) {
 
 
 // 오렌지 표의 형식과 정의
-function OrangeInput({
-                         title, handleTitleChange
-                     }) {
+function OrangeInput({title}) {
+
+    const [inputValues, setInputValues] = useState(title.map(() => '')); // 추가: 입력된 값들을 저장하는 상태 변수
+
+    const handleInputChange = (index, value) => {
+        const newInputValues = [...inputValues];
+        newInputValues[index] = value;
+        setInputValues(newInputValues);
+    };
+
+    const handleReset = () => {
+        setInputValues(title.map(() => '')); // 초기화 버튼 클릭 시 모든 값들을 ''로 초기화
+    };
 
     return (
-
-        title.map((item, i) => {
+        <>
+            {title.map((item, i) => {
                 return (
 
                     <div key={i} className={styles.searchSection}>
@@ -145,9 +148,11 @@ function OrangeInput({
                                                       style={{marginRight: '10px', width: '150px'}}/>
                                     </Col>
                                     <Col xs="auto">
-                                        <Form.Control className="mb-2" id="inlineFormInput"
+                                        <Form.Control className="mb-2"
+                                                      id="inlineFormInput"
                                                       placeholder={title[i].content}
-                                                      onChange={(e) => handleTitleChange(i, e.target.value)}
+                                                      value={inputValues[i]} // 입력된 값으로 설정
+                                                      onChange={(e) => handleInputChange(i, e.target.value)} // 입력 값 변경 시 상태 업데이트
                                         />
                                     </Col>
                                 </div>
@@ -155,12 +160,22 @@ function OrangeInput({
                         </Form>
                     </div>
 
-                )
-            }
-        )
+                );
+            })}
+            <div className={styles.navRight}>
+                {/*<ColorfulButtons/>*/}
+                <Button variant="outline-primary" onClick={() => {
+                }}>조회</Button>{' '}
+                <Button variant="outline-success">저장</Button>{' '}
+                <Button variant="outline-danger" onClick={() => {
+                }}>삭제</Button>{' '}
+                <Button variant="outline-secondary" onClick={handleReset}>초기화</Button>{' '}
+            </div>
+            {/*<Button onClick={handleReset}>초기화</Button> /!* 초기화 버튼 추가 *!/*/}
+        </>
     );
-}
 
+}
 
 export default ProductManagement;
 
