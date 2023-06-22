@@ -4,12 +4,13 @@ import {ColorfulButtons, ColorfulOrderButtons, TabsforOrderItems} from "../commo
 import Form from "react-bootstrap/Form";
 import {Input, Label, Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
-import {TableExample} from "../common/UsefulTables";
 import React, {useState} from "react";
 import {purchaseOrderData, tableHeadersPurchase} from "./InputDataforPurchase";
 import {Button, Container} from "react-bootstrap";
 import {productInputData, tableCells, tableHeadersProduct} from "../masterData/InputDataforMaster";
 import Table from "react-bootstrap/Table";
+import OrderItemTable from "./OrderItemTable";
+import OrderItemDetailTable from "./OrderItemDetailTable";
 
 
 function OrderItem() {
@@ -48,12 +49,12 @@ function OrderItem() {
                                                     <Col xs="auto">
                                                         <div style={{display: 'flex'}}>
                                                             <Form.Control readOnly placeholder={title[i].title}
-                                                                          style={{width: '150px', marginLeft:"15px"}}/>
+                                                                          style={{width: '150px', marginLeft:"18px"}}/>
                                                             <Label for="searchDate"> </Label>
                                                             <Input id="searchDate"
                                                                    name="searchDate"
                                                                    type='date'
-                                                                   style={{marginLeft:"20px", width: '246px'}}/>
+                                                                   style={{marginLeft:"20px", width: '282px'}}/>
                                                         </div>
                                                     </Col>
                                                 </Row>
@@ -93,29 +94,7 @@ function OrderItem() {
                     {/*<TableExample tableHeaders={tableHeadersPurchase[0]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
-                            <Table responsive>
-                                <thead>
-                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
-                                    <th>#</th>
-                                    {tableHeadersPurchase[0].map((heading, index) => (
-                                        <th key={index}>{heading}</th>
-                                    ))}
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {/*<tr>*/}
-                                {tableCells.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        <td>{rowIndex + 1}</td>
-                                        {row.map((cell, cellIndex) => (
-                                            <td key={cellIndex}>
-                                                {Object.values(cell)[0]}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </Table>
+                            <OrderItemTable/>
                         </Container>
                     </div>
                 </section>
@@ -124,29 +103,7 @@ function OrderItem() {
                     {/*<TableExample tableHeaders={tableHeadersPurchase[1]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
-                            <Table responsive>
-                                <thead>
-                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
-                                    <th>#</th>
-                                    {tableHeadersPurchase[1].map((heading, index) => (
-                                        <th key={index}>{heading}</th>
-                                    ))}
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {/*<tr>*/}
-                                {tableCells.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        <td>{rowIndex + 1}</td>
-                                        {row.map((cell, cellIndex) => (
-                                            <td key={cellIndex}>
-                                                {Object.values(cell)[0]}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </Table>
+                          <OrderItemDetailTable/>
                         </Container>
                     </div>
                 </section>

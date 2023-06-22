@@ -9,6 +9,9 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import {Container} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import StoreManagementTable from "./StoreManagementTable";
+import StoreManagementAreaTable from "./StoreManagementAreaTable";
+import StoreManagementRackTable from "./StoreManagementRackTable";
 
 
 function StoreManagement() {
@@ -17,7 +20,6 @@ function StoreManagement() {
 
     const [selectedValue, setSelectedValue] = useState("");
     const [inputValues, setInputValues] = useState([]);
-    const SELECT_COLUMN_INDEX = 0;
 
     const handleInputChange = (event, index) => {
         const updatedValues = [...inputValues];
@@ -25,11 +27,6 @@ function StoreManagement() {
         setInputValues(updatedValues);
     };
 
-    const handleSaveButtonClick = () => {
-        const updatedValues = [...inputValues];
-        updatedValues[SELECT_COLUMN_INDEX] = selectedValue;
-        setInputValues(updatedValues);
-    };
 
     return (
         <>
@@ -40,7 +37,7 @@ function StoreManagement() {
                     </div>
                     <div className={styles.navRight}>
                         <Button variant="outline-primary">조회</Button>{' '}
-                        <Button variant="outline-success" onClick={handleSaveButtonClick}>저장</Button>{' '}
+                        <Button variant="outline-success">저장</Button>{' '}
                         <Button variant="outline-danger">삭제</Button>{' '}
                         <Button variant="outline-secondary">초기화</Button>{' '}
                     </div>
@@ -61,10 +58,10 @@ function StoreManagement() {
                                                                           style={{
                                                                               marginRight: '20px',
                                                                               width: '150px',
-                                                                              marginLeft: "15px"
+                                                                              marginLeft: "18px"
                                                                           }}/>
                                                             <Form.Select aria-label="Default select example"
-                                                                         style={{width: '246px'}}
+                                                                         style={{width: '280px'}}
                                                                          onChange={(event) => setSelectedValue(event.target.value)}>
                                                                 <option>창고를 선택하세요</option>
                                                                 <option value="1">제품창고</option>
@@ -125,29 +122,7 @@ function StoreManagement() {
                     {/*<TableExample tableHeaders={tableHeadersProduct[3]} />*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
-                            <Table responsive>
-                                <thead>
-                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
-                                    <th>#</th>
-                                    {tableHeadersProduct[3].map((heading, index) => (
-                                        <th key={index}>{heading}</th>
-                                    ))}
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {/*<tr>*/}
-                                {tableCells.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        <td>{rowIndex + 1}</td>
-                                        {row.map((cell, cellIndex) => (
-                                            <td key={cellIndex}>
-                                                {cellIndex === SELECT_COLUMN_INDEX ? selectedValue : inputValues[cellIndex]}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </Table>
+                            <StoreManagementTable/>
                         </Container>
                     </div>
                 </section>
@@ -156,58 +131,14 @@ function StoreManagement() {
                     {/*<TableExample tableHeaders={tableHeadersProduct[4]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
-                            <Table responsive>
-                                <thead>
-                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
-                                    <th>#</th>
-                                    {tableHeadersProduct[4].map((heading, index) => (
-                                        <th key={index}>{heading}</th>
-                                    ))}
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {/*<tr>*/}
-                                {tableCells.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        <td>{rowIndex + 1}</td>
-                                        {row.map((cell, cellIndex) => (
-                                            <td key={cellIndex}>
-                                                {cellIndex === SELECT_COLUMN_INDEX ? selectedValue : inputValues[cellIndex]}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </Table>
+                            <StoreManagementAreaTable/>
                         </Container>
                     </div>
                     <div className={styles.divStyle}>렉(Rack)</div>
                     {/*<TableExample tableHeaders={tableHeadersProduct[5]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
-                            <Table responsive>
-                                <thead>
-                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
-                                    <th>#</th>
-                                    {tableHeadersProduct[5].map((heading, index) => (
-                                        <th key={index}>{heading}</th>
-                                    ))}
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {/*<tr>*/}
-                                {tableCells.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        <td>{rowIndex + 1}</td>
-                                        {row.map((cell, cellIndex) => (
-                                            <td key={cellIndex}>
-                                                {Object.values(cell)[0]}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </Table>
+                            <StoreManagementRackTable/>
                         </Container>
                     </div>
                 </section>

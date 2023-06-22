@@ -1,5 +1,5 @@
 import React, { useRef, useImperativeHandle, forwardRef, useState } from "react";
-import "./css/yougeun.css";
+import "../yougeun/css/yougeun.css";
 import { useEffect } from "react";
 
 import { Navigate, useNavigate } from 'react-router-dom'
@@ -129,7 +129,7 @@ const options = {
 
 
 
-const Yougeun = forwardRef((props, ref) => {
+const ProductManagementTable = forwardRef((props, ref) => {
     const navigate = useNavigate();
   const tabulatorRef = useRef(ref);
   const [data, setData] = useState([]);
@@ -182,8 +182,6 @@ const Yougeun = forwardRef((props, ref) => {
 
   };
 
-
-  
   useImperativeHandle(ref, () => ({
     table: tabulatorRef.current.table,
   }));
@@ -196,9 +194,7 @@ const Yougeun = forwardRef((props, ref) => {
   };
 
   return (
-
     <div className="parent-container">
-         <button onClick={handleSaveData}>데이터 저장</button>
       <ReactTabulator
         ref={(el) => {
           tabulatorRef.current = el;
@@ -211,9 +207,9 @@ const Yougeun = forwardRef((props, ref) => {
         options={options}
         rowFormatter={rowFormatter}
       />
-     
+      <button onClick={handleSaveData}>데이터 저장</button>
     </div>
   );
 });
 
-export default Yougeun;
+export default ProductManagementTable;

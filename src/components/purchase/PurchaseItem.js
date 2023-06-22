@@ -1,15 +1,16 @@
 import React, {useState} from "react";
 import styles from './css/PurchaseItem.module.css';
-import {ColorfulButtons, PurcahseButtons, TabsforPurchaseItems} from "../common/UsefulButtons";
+import {TabsforPurchaseItems} from "../common/UsefulButtons";
 import Form from "react-bootstrap/Form";
 import {Input, Label, Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
-import {TableExample} from "../common/UsefulTables";
 import {purchaseItemsData, tableHeadersPurchase} from "./InputDataforPurchase";
 import Button from "react-bootstrap/Button";
 import {Container} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import {tableCells} from "../masterData/InputDataforMaster";
+import PurchaseItemTable from "./PurchaseItemTable";
+
 
 
 function PurchaseItem() {
@@ -46,12 +47,12 @@ function PurchaseItem() {
                                                         <Col xs="auto">
                                                             <div style={{display: 'flex'}}>
                                                                 <Form.Control readOnly placeholder={title[i].title}
-                                                                              style={{width: '150px', marginLeft: "15px"}}/>
+                                                                              style={{width: '150px', marginLeft: "18px"}}/>
                                                                 <Label for="searchDate"> </Label>
                                                                 <Input id="searchDate"
                                                                        name="searchDate"
                                                                        type='date'
-                                                                       style={{marginLeft: "20px", width: '246px'}}/>
+                                                                       style={{marginLeft: "20px", width: '280px'}}/>
                                                             </div>
                                                         </Col>
                                                     </Row>
@@ -67,10 +68,10 @@ function PurchaseItem() {
                                                                               style={{
                                                                                   marginRight: '20px',
                                                                                   width: '150px',
-                                                                                  marginLeft: "15px"
+                                                                                  marginLeft: "18px"
                                                                               }}/>
                                                                 <Form.Select aria-label="Default select example"
-                                                                             style={{width: '246px'}}>
+                                                                             style={{width: '280px'}}>
                                                                     <option>선택하세요</option>
                                                                     {a.title === '수불타입' ? (
                                                                             <>
@@ -129,29 +130,7 @@ function PurchaseItem() {
                     {/*<TableExample tableHeaders={tableHeadersPurchase[2]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
-                            <Table responsive>
-                                <thead>
-                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
-                                    <th>#</th>
-                                    {tableHeadersPurchase[2].map((heading, index) => (
-                                        <th key={index}>{heading}</th>
-                                    ))}
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {/*<tr>*/}
-                                {tableCells.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        <td>{rowIndex + 1}</td>
-                                        {row.map((cell, cellIndex) => (
-                                            <td key={cellIndex}>
-                                                {Object.values(cell)[0]}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </Table>
+                            <PurchaseItemTable/>
                         </Container>
                     </div>
                 </section>
@@ -160,34 +139,11 @@ function PurchaseItem() {
                     {/*<TableExample tableHeaders={tableHeadersPurchase[3]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
-                            <Table responsive>
-                                <thead>
-                                <tr style={{textAlign: 'center', fontSize: 'small'}}>
-                                    <th>#</th>
-                                    {tableHeadersPurchase[3].map((heading, index) => (
-                                        <th key={index}>{heading}</th>
-                                    ))}
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {/*<tr>*/}
-                                {tableCells.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        <td>{rowIndex + 1}</td>
-                                        {row.map((cell, cellIndex) => (
-                                            <td key={cellIndex}>
-                                                {Object.values(cell)[0]}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </Table>
+                            <PurchaseItemTable/>
                         </Container>
                     </div>
                 </section>
             </div>
-
         </>
     );
 }
