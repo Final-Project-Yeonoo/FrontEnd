@@ -1,262 +1,262 @@
-import React, { useState, useEffect } from 'react';
-import styles from './css/UserList.module.css';
-import Layouts from '../common/TableLayout';
-import Modal from '../common/Modal';
-import BasicModal from '../common/Modal';
-import {Button} from 'reactstrap';
+// import React, { useRef, useImperativeHandle, forwardRef, useState } from "react";
+// // import "./css/yougeun.css";
+// import { DateTime } from 'luxon'
+// import { useEffect } from "react";
+
+// import { Navigate, useNavigate } from 'react-router-dom'
+// import DateEditor from "react-tabulator/lib/editors/DateEditor";
+// import MultiValueFormatter from "react-tabulator/lib/formatters/MultiValueFormatter";
+// // import MultiSelectEditor from "react-tabulator/lib/editors/MultiSelectEditor";
+
+// import "react-tabulator/lib/styles.css"; // default theme
+// import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
+
+// import { ReactTabulator, reactFormatter } from "react-tabulator";
+
+
+
+// const editableColumns = [
+//   {
+//     title: "이름",
+//     field: "empName",
+//     width: 150,
+//     editor: "input",
+//   //   headerFilter: "input"
+//   },
+//   {
+//       title: "사원ID",
+//       field: "empId",
+//       width: 150,
+//       editor: "input",
+//     //   headerFilter: "input"
+//     },
+//   {
+//     title: "부서코드",
+//     field: "deptCode",
+//     hozAlign: "left",
+//     editor: "input"
+//   },
+//   {
+//     title: "직급코드",
+//     field: "posCode",
+//     editor: "input"
+//   },
+//   {
+//     title: "내선번호",
+//     field: "empExtension",
+//     editor: "input"
+//   },
+//   {
+//     title: "휴대전화",
+//     field: "empPhone",
+//     editor: "input"
+//   },
+//   {
+//     title: "주소",
+//     field: "addr",
+//     editor: "input"
+//   }
+// ];
+// const options = {
+//   // height: 150,
+//   layout:"fitData",
+//   movableRows: true,
+//   movableColumns: true,
+//   autoResize: false // 자동 리사이징 비활성화
+// };
+
+
+
+
+
+
+// const UserList = forwardRef((props, ref) => {
+//   const navigate = useNavigate();
+//   const tabulatorRef = useRef(ref);
+//   const [data, setData] = useState([]);
+
+
+// useEffect(() => {
+    
+//   const fetchData = async () => {
+//     try {
+      
+//       const response = await fetch('http://localhost:8888/ynfinal/employee');
+//       const data1 = await response.json();
+//       console.log('받은 데이터:', data1);
+//       const newData = Object.values(data1); // 받은 데이터를 배열 형태로 변환합니다.
+//       setData(newData); // 데이터 상태를 업데이트합니다.
+
+//       // 데이터에 대한 추가 처리를 수행할 수 있습니다.
+//     } catch (error) {
+//       console.error('요청 중 에러 발생:', error);
+//       // 요청 중에 발생한 에러를 처리할 수 있습니다.
+//     }
+//   };
+//   fetchData();
+// }, []); 
+
+
+
+
+// useImperativeHandle(ref, () => ({
+//   table: tabulatorRef.current.table,
+// }));
+
+// const rowFormatter = (row) => {
+//   const rowEl = row.getElement();
+//   rowEl.style.height = "50px";
+//   rowEl.style.overflow = "hidden";
+//   return rowEl;
+// };
+
+
+
+// return(
+// <>
+
+// <div className="parent-container">
+// <ReactTabulator
+//         ref={(el) => {
+//           tabulatorRef.current = el;
+//           if (ref) {
+//             ref.current = el;
+//           }
+//         }}
+//         columns={editableColumns}
+//         data={data}
+//         options={options}
+//         rowFormatter={rowFormatter}
+//       />
+
+// </div>
+
+
+// </>
+
+
+// );
+
+
+// });
+
+// export default UserList;
+
+
+
+
+import React from 'react'
+import Box from '@mui/material/Box';
+import { DataGrid } from '@mui/x-data-grid';
+
 
 const UserList = () => {
-  const [searchName, setSearchName] = useState(''); // 이름 검색어 상태
-  const [searchDept, setSearchDept] = useState(''); // 부서 검색어 상태
-  const [departments, setDepartments] = useState([]); // 부서 목록 상태
-  const [selectedEmployee, setSelectedEmployee] = useState(null); // 선택된 사원의 정보
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 창 열림 여부
 
 
-  // 서버에서 부서 목록을 가져오는 함수
-  const fetchDepartments = async () => {
-    try {
-      // 서버로 API 요청을 보내서 부서 목록을 가져옴
-      const response = await fetch('/api/departments');
-      const data = await response.json();
-
-      // 가져온 부서 목록을 departments 상태로 설정
-      setDepartments(data);
-    } catch (error) {
-      console.error('Error fetching departments:', error);
-    }
-  };
-
-  // 서버에서 사원 데이터를 가져오는 함수
-  const fetchEmployees = async () => {
-    try {
-      // 서버로 API 요청을 보내서 해당 부서의 사원 데이터를 가져옴
-      const response = await fetch(`/api/employees?dept=${searchDept}&name=${searchName}`);
-      const data = await response.json();
-
-      // 가져온 데이터를 data 상태로 설정
-      setData(data);
-    } catch (error) {
-      console.error('Error fetching employee data:', error);
-    }
-  };
-
-  const [columns] = useState([
+   const customPagination = () => null;
+  
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 90 },
     {
-      accessor: 'empName',
-      Header: '이름',
+      field: 'empName',
+      headerName: '사원이름',
+      width: 150,
+      editable: true,
     },
     {
-      accessor: 'empId',
-      Header: '사원ID',
+      field: 'lastName',
+      headerName: 'Last name',
+      width: 150,
+      editable: true,
     },
     {
-      accessor: 'deptCode',
-      Header: '부서',
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 110,
+      editable: true,
     },
     {
-      accessor: 'posCode',
-      Header: '직급',
+      field: 'fullName',
+      headerName: 'Full name',
+      description: 'This column has a value getter and is not sortable.',
+      sortable: false,
+      width: 160,
+      valueGetter: (params) =>
+        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
     {
-      accessor: 'empExtension',
-      Header: '내선번호',
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 110,
+      editable: true,
     },
     {
-      accessor: 'empPhone',
-      Header: '휴대전화',
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 110,
+      editable: true,
     },
     {
-      accessor: 'addr',
-      Header: '주소',
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 110,
+      editable: true,
     },
-  ]);
-
-  const [data, setData] = useState([]);
-  const exampleData = [
     {
-      empName: '고구마',
-      id: 'EM0001',
-      deptCode: 'Production',
-      posCode: 'Senior Specialist',
-      empExtension: '1023',
-      empPhone: '010-111-3333',
-      addr: '서울시 강남구',
-    }
-
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 110,
+      editable: true,
+    },
   ];
-
-  useEffect(() => {
-    // 페이지가 처음 로드될 때 초기 데이터와 부서 목록을 가져오기 위해 fetchEmployees와 fetchDepartments 함수를 호출
-    fetchEmployees();
-    fetchDepartments();
-    setData(exampleData);
-  }, []); // 빈 배열을 전달하여 페이지 로드 시에만 실행되도록 설정
-
-  // 검색 버튼 클릭 시 호출되는 함수
-  const handleSearch = () => {
-    fetchEmployees();
-  };
-  const handleEmployeeClick = (employee) => {
-    setSelectedEmployee(employee);
-    setIsModalOpen(true); // 모달 창 열기
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false); // 모달 창 닫기
-  };
-
-  // 사원 업데이트하기
-  // const handleEmployeeUpdate = (updatedEmployee) => {
-  //     // 리스트에서 해당 사원의 인덱스를 찾습니다.
-  // const employeeIndex = data.findIndex((employee) => employee.id === updatedEmployee.id);
   
-  // if (employeeIndex !== -1) {
-  //   // 사원의 정보를 업데이트합니다.
-  //   const updatedData = [...data];
-  //   updatedData[employeeIndex] = updatedEmployee;
-  //   setData(updatedData);
-  // }
+  const rows = [
+    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  ];
   
-  // // 모달 창 닫기
-  // handleModalClose();  };
 
-
-const handleEmployeeUpdate = async (updatedEmployee) => {
-   
-    // 리스트에서 해당 사원의 인덱스를 찾습니다.
-   const employeeIndex = data.findIndex((employee) => employee.id === updatedEmployee.id);
-   
-    if (employeeIndex !== -1) {
-      // 사원의 정보를 업데이트합니다.
-      const updatedData = [...data];
-      updatedData[employeeIndex] = updatedEmployee;
-      setData(updatedData);
-    }
-    
-    
-     try {
-       const response = await fetch(`/api/employees/${updatedEmployee.id}`, {
-         method: 'PUT',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify(updatedEmployee),
-       });
-   
-       if (response.ok) {
-         // 데이터가 성공적으로 업데이트되면 상태를 업데이트합니다.
-         const updatedData = data.map((employee) =>
-           employee.id === updatedEmployee.id ? updatedEmployee : employee
-         );
-         setData(updatedData);
-         handleModalClose();
-       } else {
-         console.error('Error updating employee data:', response.status);
-       }
-     } catch (error) {
-       console.error('Error updating employee data:', error);
-     }
-     handleModalClose();
-   };
- 
-
-
-
-
-  
-  return (
+    return (
     <>
-    <div className={styles.contentHeadContainer}>
-       <div className={styles.contentHeadName}> 
-        사원 검색 
-       </div>
-    
-      <div className={styles.searchcontainer}>
-        <div className={styles.inputcontainer}>
-          <input
-            className={styles.inputTag}
-            type="text"
-            value={searchName}
-            onChange={(e) => setSearchName(e.target.value)}
-            placeholder="이름을 입력하세요"
-          />
-          <select
-          className={styles.selectTag}
-            value={searchDept}
-            onChange={(e) => setSearchDept(e.target.value)}
-          >
-            <option value="">전체 부서</option>
-            {departments.map((dept) => (
-              <option key={dept} value={dept}>{dept}</option>
-            ))}
-          </select>
-          <Button className={styles.Button} onClick={handleSearch}>검색</Button>
-          {/* <button className={styles.buttonTag} onClick={handleSearch}>검색</button> */}
-        </div>
-      </div>
-    </div>
-      
-        <div className={styles.tablecontainer}>
-          <Layouts columns={columns} 
-          data={data}
-          onEmployeeClick={handleEmployeeClick} />
-        </div>
-    
+      <Box sx={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          checkboxSelection
+          disableRowSelectionOnClick
+          component {{
 
-      {/* 모달 */}
-      {isModalOpen && (
-        <Modal onClose={handleModalClose}>
-          {/* 사원 정보 */}
-          {selectedEmployee && (
-            <div>
-              <h2>{selectedEmployee.name}</h2>
-              <span>ID: </span>
-              <input type="text" value={selectedEmployee.id}
-                onChange={(e) => setSelectedEmployee((prevEmployee) => ({...prevEmployee,
-                                 id: e.target.value, }))}/>
-              <span>부서:</span>
-              <input type="text" value={selectedEmployee.dept}
-                onChange={(e) => setSelectedEmployee((prevEmployee) => ({...prevEmployee,
-                                 dept: e.target.value, }))}/>
-        
-              <span>직급:</span>
-              <input type="text" value={selectedEmployee.pos}
-                onChange={(e) => setSelectedEmployee((prevEmployee) => ({...prevEmployee,
-                                 pos: e.target.value, }))}/>
-        
-              <span>내선번호:</span>
-              <input type="text" value={selectedEmployee.num}
-                onChange={(e) => setSelectedEmployee((prevEmployee) => ({...prevEmployee,
-                                 num: e.target.value, }))}/>
-
-              <span>휴대전화:</span>
-              <input type="text" value={selectedEmployee.phone}
-                onChange={(e) => setSelectedEmployee((prevEmployee) => ({...prevEmployee,
-                                 phone: e.target.value, }))}/>
-
-              <span>주소:</span>
-              <input type="text" value={selectedEmployee.addr}
-                onChange={(e) => setSelectedEmployee((prevEmployee) => ({...prevEmployee,
-                                 addr: e.target.value, }))}/>
-
-              {/* 수정 버튼 */}
-              <button onClick={() => handleEmployeeUpdate(selectedEmployee)}>
-                수정
-              </button>
-            </div>
-          )}
-        </Modal>
-      )}
-
-
+          }}
+        />
+      </Box>
     </>
   );
-};
+}
 
-export default UserList;
-
-
-
-
-
+export default UserList
