@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../admin/css/AdminUser.module.css';
 import * as React from 'react';
 import BasicModal from '../common/Modal';
@@ -7,9 +7,13 @@ import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
 import { Checkbox, Divider } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Layouts from '../common/TableLayout';
-
+import {API_BASE_URL, DEPARTMENT} from '../../config/host-cofig';
 
 function AdminUser() {
+
+  const API_DEPT_URL = API_BASE_URL + DEPARTMENT ; 
+
+
   const label = { inputProps: { "aria-label": "Switch demo" } };
   //상태변수로 회원가입 입력값 관리 , 실시간으로 userValue에 저장하는 방법을 사용
 
@@ -41,11 +45,15 @@ function AdminUser() {
   // inventoryMenu: { checka: true, inputa: false }
   // });
 
-  // State to manage the modal visibility
+ 
   const [modalVisible, setModalVisible] = useState(false);
-
-  // State to store the selected department code
-  const [selectedDept, setSelectedDept] = useState("");
+  const [deptData, setDeptData] = useState([
+    { deptCode: "", deptName: "" },
+    // 추가적인 부서 데이터 아이템들...
+  ]);
+ 
+  const [selectedDeptName, setSelectedDeptName] = useState('');
+  const [selectedDeptCode, setSelectedDeptCode] = useState('');
 
   const openModal = () => {
     setModalVisible(true);
@@ -80,17 +88,17 @@ function AdminUser() {
     }
   ];
 
-  const data = [
-    // 부서 데이터 예시 (실제 데이터로 변경해야 함)
-    { deptCode: "001", deptName: "부서1" },
-    { deptCode: "002", deptName: "부서2" },
-    { deptCode: "003", deptName: "부서3" }
+//부서 데이터 불러오기 
+
+
+
+
+
+  const Data = [
+    { deptCode: "", deptName: "" },
+    
   ];
-  const handleDeptSelection = (deptName) => {
-   console.log(deptName);
-    // setSelectedDept(deptName);
-    closeModal(); // 부서 선택 후 모달 닫기
-  };
+
   // 검증완료 체크에 대한 상태변수 관리
   const [correct, setCorrect] = useState({
     empName: "", //사용자이름
@@ -195,28 +203,57 @@ function AdminUser() {
       };
 
       // 사용자 정보 서버 요청
-      const response = await fetch("API_ENDPOINT", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userValue)
-      });
+      // const response = await fetch("API_ENDPOINT", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify(userValue)
+      // });
 
-      const data = await response.json();
-      console.log(data); // 서버로부터 받은 응답 확인
+      // const data = await response.json();
+      // console.log(data); // 서버로부터 받은 응답 확인
 
-      // 성공적으로 등록되었을 때 처리
-      if (response.ok) {
-        alert("사용자가 등록되었습니다");
-      } else {
-        alert("등록에 실패했습니다");
-      }
+      // // 성공적으로 등록되었을 때 처리
+      // if (response.ok) {
+      //   alert("사용자가 등록되었습니다");
+      // } else {
+      //   alert("등록에 실패했습니다");
+      // }
     } catch (error) {
       alert("서버와의 통신이 원활하지 않습니다");
       console.error(error);
+   }
+ };
+
+// 데이터를 백엔드 API로부터 가져오는 로직
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      // Send a GET request to the backend API to fetch department data
+      const response = await fetch('http://localhost:8888/ynfinal/department');
+      const jsonData = await response.json();
+
+      // Update the data state with the fetched department data
+      setDeptData(jsonData);
+    } catch (error) {
+      console.error('Error fetching department data:', error);
     }
   };
+
+
+  fetchData();
+}, []);
+
+
+// 부서코드 가져오기(부서이름도 같이 가져올 수 있음)
+  const handleCellClick = (row) => {
+    console.log('main에서 보는 선택된 행의 값 deptCode:', row.original.deptCode);
+    setSelectedDeptName(row.original.deptName)
+    closeModal();
+  };
+
+
 
   return (
     <>
@@ -271,6 +308,7 @@ function AdminUser() {
                 <Input
                   id="empPassword"
                   name="empPassword"
+                  type='password'
                   placeholder="비밀번호"
                   onChange={(e) =>
                     setUserValue({ ...userValue, empPassword: e.target.value })
@@ -284,21 +322,23 @@ function AdminUser() {
             <Col md={4}>
             <FormGroup className={styles.formGroup}>
   <div className={styles.tag}>
-    <Label for="deptCode">부서코드</Label>
+    <Label for="deptCode">부서명</Label>
   </div>
   <Input
     id="deptCode"
     name="deptCode"
     placeholder="클릭해서 부서명을 설정하세요"
-    value={selectedDept}
+    value={selectedDeptName}
     onClick={openModal}
-    onChange={(e) => setSelectedDept(e.target.value)}
+    onChange={(e) => setUserValue({ ...userValue, deptCode: e.target.value })
+  }
   />
   <BasicModal open={modalVisible} onClose={closeModal}>
     <div>
       <h2>부서 선택</h2>
       <main>
-        <Layouts columns={columns} data={data} onDeptSelect={handleDeptSelection}  />
+        <Layouts columns={columns} data={deptData} onClick={handleCellClick} 
+         />
       </main>
     </div>
   </BasicModal>

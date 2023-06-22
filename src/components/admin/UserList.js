@@ -145,18 +145,21 @@
 
 
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-
+import styles from './css/UserList.module.css';
+import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
 
 const UserList = () => {
+  const [data, setData] = useState([]);
 
+  const API_USERLIST_URL = API_BASE_URL + FINDALL;
 
    const CustomPagination = () => null;
   
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+  
     {
       field: 'empName',
       headerName: '사원이름',
@@ -164,97 +167,151 @@ const UserList = () => {
       editable: true,
     },
     {
-      field: 'lastName',
-      headerName: 'Last name',
+      field: 'empId',
+      headerName: '사원ID',
+      width: 150,
+      editable: true,
+    },
+  
+    {
+      field: 'empPassword',
+      headerName: '비밀번호',
+      type:'Password',
       width: 150,
       editable: true,
     },
     {
-      field: 'age',
-      headerName: 'Age',
+      field: 'empExtension',
+      headerName: '내선번호',
       type: 'number',
       width: 110,
       editable: true,
     },
     {
-      field: 'fullName',
-      headerName: 'Full name',
+      field: 'deptName',
+      headerName: '부서',
+      type: 'number',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'posName',
+      headerName: '직급',
+      type: 'number',
+      width: 110,
+      editable: true,
+    },
+
+    {
+      field: 'empHiredDate',
+      headerName: '채용날짜',
+      type: 'Date',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'empPhone',
+      headerName: '휴대전화',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+      // valueGetter: (params) =>
+      //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
+      field: 'empAddress',
+      headerName: '주소',
+      
+      width: 110,
+      editable: true,
+    },
+    
+    {
+      field: 'empValidate',
+      headerName: '계정활성화',
+      type: 'boolean',
+      width: 110,
+      editable: false,
+    },
+    {
+      field: 'userAuth',
+      headerName: '사용자관리입력권한',
+      type: 'boolean',
+      width: 110,
+      // editable: (params) =>
+      // `${params.row.empValidate.value || 'true'}`
+    },
+    {
+      field: 'infoAuth',
+      headerName: '기준정보입력권한',
+      type: 'boolean',
       width: 110,
       editable: true,
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
+      field: 'salesAuth',
+      headerName: '영업메뉴입력권한',
+      type: 'boolean',
       width: 110,
       editable: true,
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
+      field: 'purchaseAuth',
+      headerName: '구매메뉴입력권한',
+      type: 'boolean',
       width: 110,
       editable: true,
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
+      field: 'inventoryAuth',
+      headerName: '재고메뉴입력권한',
+      type: 'boolean',
       width: 110,
       editable: true,
-    },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
-      editable: true,
-    },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
-      editable: true,
-    },
+    }
   ];
-  
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Send a GET request to the API endpoint
+        const response = await fetch(API_USERLIST_URL);
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        // Parse the response data as JSON
+        const jsonData = await response.json();
+        console.log("데이터형식 : ", jsonData );
+        // Update the component's state with the fetched data
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, []);
+
+
 
     return (
     <>
+    <div className={styles.container}>
       <Box sx={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={rows}
+          rows={data}
           columns={columns}
           checkboxSelection
           disableRowSelectionOnClick
+          getRowId={(row) => row.empId}
           components={{
             Pagination: CustomPagination,
           }}
         />
       </Box>
+    </div>  
     </>
   );
 }
