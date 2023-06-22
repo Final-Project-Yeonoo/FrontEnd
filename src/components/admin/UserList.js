@@ -153,7 +153,7 @@ import { DataGrid } from '@mui/x-data-grid';
 const UserList = () => {
 
 
-   const customPagination = () => null;
+   const CustomPagination = () => null;
   
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -250,8 +250,8 @@ const UserList = () => {
           columns={columns}
           checkboxSelection
           disableRowSelectionOnClick
-          component {{
-
+          components={{
+            Pagination: CustomPagination,
           }}
         />
       </Box>
