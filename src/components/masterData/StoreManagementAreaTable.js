@@ -191,7 +191,6 @@ const StoreManagementAreaTable = forwardRef((props, ref) => {
 
     return (
         <div className="parent-container">
-            <button onClick={handleSaveData}>데이터 저장</button>
             <ReactTabulator
                 ref={(el) => {
                     tabulatorRef.current = el;
@@ -204,6 +203,7 @@ const StoreManagementAreaTable = forwardRef((props, ref) => {
                 options={options}
                 rowFormatter={rowFormatter}
             />
+            <button onClick={handleSaveData}>데이터 저장</button>
         </div>
     );
 });

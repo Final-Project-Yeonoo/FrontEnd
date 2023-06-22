@@ -124,7 +124,7 @@ const [modalOpen, setModalOpen] = useState(false);
         components={{
             Pagination: CustomPagination,
           }}
-      
+
       />
 
 <Modal open={modalOpen} onClose={handleCloseModal}>
