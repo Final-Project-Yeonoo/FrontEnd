@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import ProductManagementRawTable from "./ProductManagementRawTable";
 import ProductManagementHalfTable from "./ProductManagementHalfTable";
 import ProductManagementFullTable from "./ProductManagementFullTable";
+import axios from "axios";
 
 
 function ProductManagement() {
@@ -133,6 +134,39 @@ function OrangeInput({title}) {
     const handleReset = () => {
         setInputValues(title.map(() => '')); // 초기화 버튼 클릭 시 모든 값들을 ''로 초기화
     };
+    // 이 형식 그대로 사용할것...!
+    const handleSubmit = () => {
+        // Prepare the data to send to the server
+
+        const data = title.map((item, i) => {
+            if (item.title === "ITEM 코드") {
+                return {rawName: inputValues[i],};
+            } else if (item.title === "원자재 개수") {
+                return {rawCount: parseInt(inputValues[i])};
+            } else if (item.title === "원자재 가격") {
+                return {rawPrice: parseInt(inputValues[i]),};
+            }
+            // return null; // 해당되는 조건이 없는 경우 null 반환
+            }); // 생성된 JSON 데이터 출력 console.log(data);
+
+            console.log(data)
+        const mergedObject = data.reduce((result, currentObject) => {
+            return {...result, ...currentObject};
+
+        },{})
+        console.log(mergedObject)
+
+        axios.post('http://localhost:8888/ynfinal/rawitem', mergedObject)
+            .then(response => {
+                // Handle the response if needed
+                console.log(response.mergedObject);
+            })
+            .catch(error => {
+                // Handle errors if any
+                console.error(error);
+            });
+    };
+
 
     return (
         <>
@@ -163,15 +197,13 @@ function OrangeInput({title}) {
                 );
             })}
             <div className={styles.navRight}>
-                {/*<ColorfulButtons/>*/}
                 <Button variant="outline-primary" onClick={() => {
                 }}>조회</Button>{' '}
-                <Button variant="outline-success">저장</Button>{' '}
+                <Button variant="outline-success" onClick={handleSubmit}>저장</Button>{' '}
                 <Button variant="outline-danger" onClick={() => {
                 }}>삭제</Button>{' '}
                 <Button variant="outline-secondary" onClick={handleReset}>초기화</Button>{' '}
             </div>
-            {/*<Button onClick={handleReset}>초기화</Button> /!* 초기화 버튼 추가 *!/*/}
         </>
     );
 
