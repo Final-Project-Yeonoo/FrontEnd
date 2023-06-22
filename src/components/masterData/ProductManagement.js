@@ -7,7 +7,7 @@ import {productInputData} from "./InputDataforMaster";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import ProductManagementRawTable from "./ProductManagementRawTable";
-import ProductManagementHalfTable from "./ProductManagementHalfTable";
+import ProductManagementHalfTable from "./ProductManagementhalfTable";
 import ProductManagementFullTable from "./ProductManagementFullTable";
 import axios from "axios";
 

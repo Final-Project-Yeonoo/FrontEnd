@@ -18,7 +18,7 @@ import Mypage from "./components/mypage/Mypage";
 import List from "./components/admin/UserList";
 import MyComInfo from './components/admin/MyComInfo';
 import Yougeun from './components/yougeun/yougeun';
-import Yougeun1 from './components/yougeun/Yougeun1';
+import StoreYougeun from './components/yougeun/StoreYougeun';
 
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
                         <Route path="inventory/manage" element={<InvenManage/>}/>
                         <Route path="inventory/check" element={<InvenCheck/>}/>
                         <Route path="yougeun" element={<Yougeun/>}/>
-                        <Route path="yougeun2" element={<Yougeun1/>}/>
+                        <Route path="yougeun2" element={<StoreYougeun/>}/>
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
                 <Route path="*" element={<div>없는 페이지 입니다.</div>}/>
