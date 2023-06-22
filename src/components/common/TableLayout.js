@@ -2,15 +2,13 @@ import React from 'react';
 import { useTable } from "react-table";
 import '../common/css/TableLayout.module.css'
 
-const Layouts = ({columns, data, onDeptSelect, onClick}) => { //(받아올 정보를 하나로 묶어서 넣어주세요 {}: 객체로! )
+const Layouts = ({columns, data, onClick}) => { //(받아올 정보를 하나로 묶어서 넣어주세요 {}: 객체로! )
     
   // console.log(data[0].deptCode);
   const {getTableProps,  getTableBodyProps, headerGroups, rows, prepareRow } =
         useTable({columns, data});
-    const handleDeptSelection = (deptName) => {
-          onDeptSelect(deptName); // 선택된 부서명을 MainPage 컴포넌트로 전달
-        };
-        const handleCellClick = (cellValue, row) => {
+
+  const handleCellClick = (cellValue, row) => {
           console.log(cellValue);
           onClick(row);
         };

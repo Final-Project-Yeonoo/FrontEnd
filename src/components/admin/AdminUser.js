@@ -38,12 +38,6 @@ function AdminUser() {
     inventoryMenu: { checka: true, inputa: false }
   });
 
-  // const [menuPermissions, setMenuPermissions] = useState({
-  //   adminMenu: { checka: true, inputa: false },
-  //   masterDataMenu: { checka: true, inputa: false },
-  //   purchaseMenu: { checka: true, inputa: false },
-  // inventoryMenu: { checka: true, inputa: false }
-  // });
 
  
   const [modalVisible, setModalVisible] = useState(false);
@@ -53,7 +47,6 @@ function AdminUser() {
   ]);
  
   const [selectedDeptName, setSelectedDeptName] = useState('');
-  const [selectedDeptCode, setSelectedDeptCode] = useState('');
 
   const openModal = () => {
     setModalVisible(true);
@@ -62,20 +55,7 @@ function AdminUser() {
   const closeModal = () => {
     setModalVisible(false);
   };
-  // const handleDeptSelection = () => {
-    
-  //   // setSelectedDept(e.target.deptName);
-  //   closeModal(); // 부서 선택 후 모달 닫기
-  // };
-  // // Handler for saving the selected department code from the modal
-  // const saveDeptCode = (code) => {
-  //   setSelectedDeptCode(code);
-  //   setUserValue((prevUserValue) => ({
-  //     ...prevUserValue,
-  //     deptCode: code
-  //   }));
-  // };
-
+ 
   const columns = [
     // 테이블의 열 정의
     {
@@ -88,16 +68,27 @@ function AdminUser() {
     }
   ];
 
-//부서 데이터 불러오기 
+// 부서 데이터를 백엔드 API로부터 가져오는 로직
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      // Send a GET request to the backend API to fetch department data
+      const response = await fetch(API_DEPT_URL);
+      const jsonData = await response.json();
+
+      // Update the data state with the fetched department data
+      setDeptData(jsonData);
+    } catch (error) {
+      console.error('Error fetching department data:', error);
+    }
+  };
+
+
+  fetchData();
+}, []);
 
 
 
-
-
-  const Data = [
-    { deptCode: "", deptName: "" },
-    
-  ];
 
   // 검증완료 체크에 대한 상태변수 관리
   const [correct, setCorrect] = useState({
@@ -112,7 +103,7 @@ function AdminUser() {
     empValidate: "" //사용자 유효화
   });
 
-  //   입력칸과 권한설정이 모두 검증에 통과했는지 여부 검사
+  // 입력칸과 권한설정이 모두 검증에 통과했는지 여부 검사
   const isValid = () => {
     for (const key in correct) {
       const flag = correct[key];
@@ -140,119 +131,83 @@ function AdminUser() {
     }));
   };
 
-  // 저장하기 버튼 클릭 이벤트 핸들러
-  // const joinButtonClickHandler = e => {
-  //   e.preventDefault();
+  const addUser = async (e) => {
 
-  //   // 사용자 정보 서버 요청
-  //   if (isValid()) {
-  //     fetchSignUpPost();
-  //     alert('사용자 정보를 서버에 전송합니다');
-  //   } else {
-  //     alert('입력란과 권한설정을 다시 확인해주세요');
-  //   }
+    try {
+       
+      
+      //t/f enum으로 바꾸기
+     const convertBooleanToEnum = (value) => {
+        return value ? "Y" : "N";
+      };
+    
+      setUserValue({...userValue, 
+              empValidate: convertBooleanToEnum(userValue.empValidate),
+              adminMenu : {checka: convertBooleanToEnum(userValue.adminMenu.checka),
+                          inputa: convertBooleanToEnum(userValue.adminMenu.inputa)},
+              masterDataMenu: {checka: convertBooleanToEnum(userValue.masterDataMenu.checka),
+                              inputa: convertBooleanToEnum(userValue.masterDataMenu.inputa)},
+              purchaseMenu: {checka: convertBooleanToEnum(userValue.purchaseMenu.checka),
+                            inputa: convertBooleanToEnum(userValue.purchaseMenu.inputa)},
+              inventoryMenu: {checka: convertBooleanToEnum(userValue.inventoryMenu.checka),
+                              inputa: convertBooleanToEnum(userValue.inventoryMenu.inputa)}  })
+          //enum으로 보내기 위해 t/f 바꿔서 담기
+          
+             
+          // 사용자 정보 서버 전달 요청
+          const response = await fetch(API_DEPT_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userValue)
+          });
+    
+          const data = await response.json();
+          console.log(data); // 서버로부터 받은 응답 확인
+    
+          // 성공적으로 등록되었을 때 처리
+          if (response.ok) {
+            alert("사용자가 등록되었습니다");
+          } else {
+            alert("등록에 실패했습니다");
+          }
+        } catch (error) {
+          alert("서버와의 통신이 원활하지 않습니다");
+          console.error(error);
+       }
+       console.log('addUser 호출 전 로그 찍기',userValue);
 
-  // };
-
-  //   사용자 등록 서버로 보내기
-  // const fetchSignUpPost = async () => {
-  //   const res = await fetch(API_BASE_URL, {
-  //     method: 'POST',
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     },
-  //     body: JSON.stringify(userValue)
-  //   });
-
-  //   if (res.status === 200) {
-  //     alert('사용자가 등록되었습니다');
-  //   } else {
-  //     alert('서버와의 통신이 원활하지 않습니다');
-  //   }
-  // };
-  //t/f enum으로 바꾸기
-  const convertBooleanToEnum = (value) => {
-    return value ? "Y" : "N";
   };
+
+  console.log('밖에서 하는 확인! ', userValue);
 
   // 저장하기 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = async (e) => {
     e.preventDefault();
-
-    try {
-      //enum으로 보내기 위해 t/f 바꿔서 담기
-      const convertedUserValue = {
-        ...userValue,
-        empValidate: convertBooleanToEnum(userValue.empValidate),
-        adminMenu: {
-          checka: convertBooleanToEnum(userValue.adminMenu.checka),
-          inputa: convertBooleanToEnum(userValue.adminMenu.inputa)
-        },
-        masterDataMenu: {
-          checka: convertBooleanToEnum(userValue.masterDataMenu.checka),
-          inputa: convertBooleanToEnum(userValue.masterDataMenu.inputa)
-        },
-        purchaseMenu: {
-          checka: convertBooleanToEnum(userValue.purchaseMenu.checka),
-          inputa: convertBooleanToEnum(userValue.purchaseMenu.inputa)
-        },
-        inventoryMenu: {
-          checka: convertBooleanToEnum(userValue.inventoryMenu.checka),
-          inputa: convertBooleanToEnum(userValue.inventoryMenu.inputa)
-        }
-      };
-
-      // 사용자 정보 서버 요청
-      // const response = await fetch("API_ENDPOINT", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify(userValue)
-      // });
-
-      // const data = await response.json();
-      // console.log(data); // 서버로부터 받은 응답 확인
-
-      // // 성공적으로 등록되었을 때 처리
-      // if (response.ok) {
-      //   alert("사용자가 등록되었습니다");
-      // } else {
-      //   alert("등록에 실패했습니다");
-      // }
-    } catch (error) {
-      alert("서버와의 통신이 원활하지 않습니다");
-      console.error(error);
-   }
- };
-
-// 데이터를 백엔드 API로부터 가져오는 로직
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      // Send a GET request to the backend API to fetch department data
-      const response = await fetch('http://localhost:8888/ynfinal/department');
-      const jsonData = await response.json();
-
-      // Update the data state with the fetched department data
-      setDeptData(jsonData);
-    } catch (error) {
-      console.error('Error fetching department data:', error);
-    }
+ // 회원가입 서버 요청
+//  if(isValid()){
+  addUser();
+//   alert('회원가입정보를 서버에 전송합니다');
+// }  else {
+//   alert ('입력란을 다시 확인해주세요');
+// }
+   
   };
 
 
-  fetchData();
-}, []);
 
 
 // 부서코드 가져오기(부서이름도 같이 가져올 수 있음)
   const handleCellClick = (row) => {
     console.log('main에서 보는 선택된 행의 값 deptCode:', row.original.deptCode);
     setSelectedDeptName(row.original.deptName)
+    setUserValue({...userValue, deptCode: row.original.deptCode})
+   
     closeModal();
   };
-
+// 값입력 확인 log 
+ console.log(userValue);
 
 
   return (
@@ -344,24 +299,7 @@ useEffect(() => {
   </BasicModal>
 </FormGroup>
 
-              {/* <FormGroup className={styles.formGroup}>
-  <div className={styles.tag}> <Label for="deptCode">
-        부서코드
-        </Label></div>
-    <Input
-      id="deptCode"
-      name="deptCode"
-      placeholder="Apartment, studio, or floor"
-      onClick ={openModal}
-      onChange={(e) => setUserValue({ ...userValue, deptCode: e.target.value })}
-    />
-    <BasicModal open={modalVisible} onClose={closeModal}>
-    <div>
-          <h2>부서코드 입력</h2>
-          <p>부서코드를 입력합니다</p>
-        </div>
-      </BasicModal>
-  </FormGroup> */}
+
             </Col>
             <Col md={4}>
               <FormGroup className={styles.formGroup}>
@@ -438,13 +376,11 @@ useEffect(() => {
               </FormGroup>
             </Col>
           </Row>
-          
-
-          {/* Render the modal component */}
-          {/* {modalVisible && (
-        <BasicModal onClose={closeModal} saveDeptCode={saveDeptCode} />
-      )} */}
         </Form>
+
+
+
+        {/* 권한관리 메뉴  */}
       </div>
 
       <div className={styles.container}>
