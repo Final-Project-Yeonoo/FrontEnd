@@ -1,7 +1,7 @@
 import styles from './css/TradingCompany.module.css'
 import React, { useState, useEffect } from "react";
 import TableLayout from "../common/TableLayout";
-import BasicModal from "../common/Modal";
+import Modal from "../common/Modal";
 import {API_BASE_URL, TRADING} from "../../config/host-cofig";
 
 function TradingCompany() {
@@ -14,7 +14,7 @@ function TradingCompany() {
       trAddr: "",
       trEtc: ""
     });
-    const [showModal, setShowModal] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState([{
       trCompCode: "",
       trCompName: "",
@@ -45,12 +45,11 @@ function TradingCompany() {
       
     };
   
-    const handleNewRegistration = () => {
-      setShowModal(true); // 모달창을 열도록 상태 변경
+    const openModal = () => {
+      setModalOpen(true);
     };
-  
-    const handleModalClose = () => {
-      setShowModal(false); // 모달창을 닫도록 상태 변경
+    const closeModal = () => {
+      setModalOpen(false);
     };
   
     const handleInputChange = (e) => {
@@ -59,24 +58,45 @@ function TradingCompany() {
         ...prevFormData,
         [name]: value
       }));
+      
     };
   
-    const handleFormSubmit = async (e) => {
-      e.preventDefault();
-    
-        const response = await fetch(`${API_TRC_URL}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(formData) // 폼 데이터를 JSON 형식으로 변환하여 전송합니다.
-        });
-        if (response.ok) {
-          // 성공적으로 저장된 경우 어떻게 보여줄지? 
-        } else {
-          // 저장 실패 시 어떻게 처리 할지? 
-        }  
+    // const handleFormSubmit = async (e) => {
+    //   e.preventDefault();
+        
+    //     const response = await fetch(`${API_TRC_URL}`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json"
+    //       },
+    //       body: JSON.stringify(formData) // 폼 데이터를 JSON 형식으로 변환하여 전송합니다.
+    //     });
+    //     if (response.ok) {
+    //       // 성공적으로 저장된 경우 어떻게 보여줄지? 
+    //     } else {
+    //       // 저장 실패 시 어떻게 처리 할지? 
+    //     }  
+    //     setModalOpen(false);
+    // };
+
+    const handleFormSubmit = (e) => {
+      // e.preventDefault();
+        
+        // const response = await fetch(`${API_TRC_URL}`, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   },
+        //   body: JSON.stringify(formData) // 폼 데이터를 JSON 형식으로 변환하여 전송합니다.
+        // });
+        // if (response.ok) {
+        //   // 성공적으로 저장된 경우 어떻게 보여줄지? 
+        // } else {
+        //   // 저장 실패 시 어떻게 처리 할지? 
+        // }  
+        setModalOpen(false);
     };
+
   // 구분 선택 옵션
   const 구분Options = ["구매", "판매"];
   
@@ -135,17 +155,23 @@ function TradingCompany() {
           <button className={styles.button} type="submit">검색</button>
           <button className={styles.newbutton} 
               type="button" 
-              onClick={handleNewRegistration}>신규등록</button>
+              onClick={openModal}>신규등록</button>
         </form>
   
       </div>
         <TableLayout columns={columns} data={formData} />
      
-        {showModal && (
-          <div>
-            <BasicModal closeModal={handleModalClose}>
-                  <h3>입고 정보 입력</h3>
-            <form onSubmit={handleFormSubmit}>
+        {/* {showModal && ( */}
+        
+             <Modal
+        open={modalOpen}
+        close={closeModal}
+        header="거래처 등록"
+        onSave={handleFormSubmit}
+        mode="receive"
+      >
+                
+           <form onSubmit={handleFormSubmit}>
              
               <label>
                 구분:
@@ -215,21 +241,17 @@ function TradingCompany() {
                   value={formData.비고}
                   onChange={handleInputChange}
                 />
-              </label>
+              </label> 
              
   
               
-              <button type="submit">저장</button>
-              <button onClick={handleModalClose}>취소</button>
-            </form>
-            </BasicModal>
+              <button type="submit" onClick={handleFormSubmit}>저장</button>
+              
+            </form> 
+            </Modal>
           </div>
           
-        )}
-
-
-
-      </div>
+    
       </>
     );
   }
