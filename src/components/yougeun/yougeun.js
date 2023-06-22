@@ -1,17 +1,13 @@
 import React, { useRef, useImperativeHandle, forwardRef, useState } from "react";
 import "./css/yougeun.css";
-import { DateTime } from 'luxon'
 import { useEffect } from "react";
 
 import { Navigate, useNavigate } from 'react-router-dom'
-import DateEditor from "react-tabulator/lib/editors/DateEditor";
-import MultiValueFormatter from "react-tabulator/lib/formatters/MultiValueFormatter";
-// import MultiSelectEditor from "react-tabulator/lib/editors/MultiSelectEditor";
 
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 
-import { ReactTabulator, reactFormatter } from "react-tabulator";
+import { ReactTabulator} from "react-tabulator";
 
 // 나머지 코드는 이전과 동일
 let data = [
