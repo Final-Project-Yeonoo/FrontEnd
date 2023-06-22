@@ -109,7 +109,7 @@ function StoreManagement() {
                     }
                 </section>
                 <button onClick={() => {
-                    axios.get('https://codingapple1.github.io/shop/data2.json').then((결과) => {
+                    axios.get('http://localhost:8888/ynfinal/rawitem').then((결과) => {
                         console.log('성공함', 결과.data)
                     })
                         .catch(() => {

@@ -80,7 +80,7 @@ const Yougeun1 = () => {
         components={{
             Pagination: CustomPagination,
           }}
-      
+
       />
     </div>
   );

@@ -3,11 +3,13 @@ import styles from './css/ProductManagement.module.css'
 import Form from "react-bootstrap/Form";
 import {Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
-import {TableExample} from "../common/UsefulTables";
-import {productInputData, tableHeadersProduct} from "./InputDataforMaster";
+import {productInputData} from "./InputDataforMaster";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
-import ProductManagementTable from "./ProductManagementTable";
+import ProductManagementRawTable from "./ProductManagementRawTable";
+import ProductManagementHalfTable from "./ProductManagementHalfTable";
+import ProductManagementFullTable from "./ProductManagementFullTable";
+import axios from "axios";
 
 
 function ProductManagement() {
@@ -19,10 +21,18 @@ function ProductManagement() {
 
             <div className={styles.navRight}>
                 {/*<ColorfulButtons/>*/}
-                <Button variant="outline-primary">조회</Button>{' '}
-                <Button variant="outline-success">저장</Button>{' '}
-                <Button variant="outline-danger">삭제</Button>{' '}
-                <Button variant="outline-secondary">초기화</Button>{' '}
+                <Button variant="outline-primary" onClick={()=>{}}>조회</Button>{' '}
+                <Button variant="outline-success" onClick={() => {
+                    axios.post('http://localhost:8888/ynfinal/rawitem', { params: {  } })
+                        .then((response) => {
+                            console.log('성공함', response.data);
+                        })
+                        .catch(() => {
+                            console.log('실패함');
+                        });
+                }}>저장</Button>{' '}
+                <Button variant="outline-danger" onClick={()=>{}}>삭제</Button>{' '}
+                <Button variant="outline-secondary" onClick={()=>{}}>초기화</Button>{' '}
             </div>
 
             <section className={styles.navLeft}>
@@ -82,7 +92,7 @@ function TabContent({tab}) {
                     </section>
                     <section className={styles.tableArea}>
                         {/*<TableExample tableHeaders={tableHeadersProduct[0]}/>*/}
-                        <ProductManagementTable/>
+                        <ProductManagementRawTable/>
                     </section>
                 </div>
             )}
@@ -95,7 +105,7 @@ function TabContent({tab}) {
                     </section>
                     <section className={styles.tableArea}>
                         {/*<TableExample tableHeaders={tableHeadersProduct[1]}/>*/}
-                        <ProductManagementTable/>
+                        <ProductManagementHalfTable/>
                     </section>
                 </div>
             )}
@@ -107,7 +117,7 @@ function TabContent({tab}) {
                     </section>
                     <section className={styles.tableArea}>
                         {/*<TableExample tableHeaders={tableHeadersProduct[2]}/>*/}
-                        <ProductManagementTable/>
+                        <ProductManagementFullTable/>
                     </section>
                 </div>
             )}
