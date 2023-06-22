@@ -7,7 +7,16 @@ const Yougeun1 = () => {
 
 
   const [rows, setRows] = useState([]);
+  const handleValueChange = (id, field, value) => {
+    const updatedRows = rows.map((row) => {
+      if (row.id === id) {
+        return { ...row, [field]: value };
+      }
+      return row;
+    });
 
+    setRows(updatedRows);
+  };
   const fetchGridData = async () => {
     try {
       const response = await fetch('http://localhost:8888/ynfinal/trcomp');
@@ -27,11 +36,39 @@ const Yougeun1 = () => {
   }, []);
 
   const columns = [
-    { field: 'trCompCode', headerName: 'Company Code', width: 150 },
-    { field: 'trCompName', headerName: 'Company Name', width: 150 },
-    { field: 'trCompPhone', headerName: 'Company Phone', width: 150 },
-    { field: 'trBuy', headerName: 'Buy', width: 100 },
-    { field: 'trSell', headerName: 'Sell', width: 100 },
+    { field: 'trCompCode', headerName: 'Company Code', width: 150,  },
+    { field: 'trCompName', headerName: 'Company Name', width: 150, editable: true },
+    { field: 'trCompPhone', headerName: 'Company Phone', width: 150, editable: true },
+    {
+        field: 'trBuy',
+        headerName: 'Buy',
+        width: 100,
+        editable: true,
+        renderCell: (params) => (
+          <select
+            value={params.value}
+            onChange={(e) => handleValueChange(params.id, params.field, e.target.value)}
+          >
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+        ),
+      },
+      {
+        field: 'trSell',
+        headerName: 'Sell',
+        width: 100,
+        editable: true,
+        renderCell: (params) => (
+          <select
+            value={params.value}
+            onChange={(e) => handleValueChange(params.id, params.field, e.target.value)}
+          >
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+        ),
+      },
     { field: 'trStartDate', headerName: 'Start Date', width: 150 },
     { field: 'trAddr', headerName: 'Address', width: 200 },
     { field: 'storehouseName', headerName: 'Storehouse', width: 150 },
