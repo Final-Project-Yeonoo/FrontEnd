@@ -27,9 +27,10 @@ const ProductManagementRawTable = () => {
     }, []);
 
     const columns = [
-        { field: 'rawName', headerName: '원자재', width: 150 },
-        { field: 'rawCount', headerName: 'Company Name', width: 150 },
-        { field: 'rawPrice', headerName: 'Company Phone', width: 150 },
+        { field: 'rawName', headerName: '원자재명', width: 150 },
+        { field: 'rawCount', headerName: '원자재 개수', width: 150 },
+        { field: 'rawPrice', headerName: '원자재 가격', width: 150 },
+        // { field: 'rawType', headerName: '유형', width: 150 },
     ];
 
     return (
