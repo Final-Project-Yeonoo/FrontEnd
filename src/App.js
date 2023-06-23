@@ -19,35 +19,37 @@ import List from "./components/admin/UserList";
 import MyComInfo from './components/admin/MyComInfo';
 import Yougeun from './components/yougeun/yougeun';
 import Yougeun1 from './components/yougeun/Yougeun1';
+import Message from "./components/common/Message";
 
 
 function App() {
     return (
         <>
 
-     
-        {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
-        {/* <DashBoard /> */}
+
+            {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
+            {/* <DashBoard /> */}
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 {/*Header&Side포함 DashBoard에 nestedRoute 적용*/}
                 <Route path="/" element={<DashBoard/>}>
-                        {/*사용자*/}
-                        <Route path="admin/user" element={<AdminUser/>}/>
-                        <Route path="admin/search" element={<SearchUser/>}/>
-                        <Route path="admin/list" element={<UserList/>}/>
-                        {/*기준 정보*/}
-                        <Route path="masterData/info" element={<TradingCompany/>}/>
-                        <Route path="masterData/product" element={<ProductManagement/>}/>
-                        <Route path="masterData/store" element={<StoreManagement/>}/>
-                        {/*구매*/}
-                        <Route path="purchase/order" element={<OrderItem/>}/>
-                        <Route path="purchase/buy" element={<PurchaseItem/>}/>
-                        {/*재고*/}
-                        <Route path="inventory/manage" element={<InvenManage/>}/>
-                        <Route path="inventory/check" element={<InvenCheck/>}/>
-                        <Route path="yougeun" element={<Yougeun/>}/>
-                        <Route path="yougeun2" element={<Yougeun1/>}/>
+                    {/*사용자*/}
+                    <Route path="admin/user" element={<AdminUser/>}/>
+                    <Route path="admin/search" element={<SearchUser/>}/>
+                    <Route path="admin/list" element={<UserList/>}/>
+                    {/*기준 정보*/}
+                    <Route path="masterData/info" element={<TradingCompany/>}/>
+                    <Route path="masterData/product" element={<ProductManagement/>}/>
+                    <Route path="masterData/store" element={<StoreManagement/>}/>
+                    {/*구매*/}
+                    <Route path="purchase/order" element={<OrderItem/>}/>
+                    <Route path="purchase/buy" element={<PurchaseItem/>}/>
+                    {/*재고*/}
+                    <Route path="inventory/manage" element={<InvenManage/>}/>
+                    <Route path="inventory/check" element={<InvenCheck/>}/>
+                    <Route path="yougeun" element={<Yougeun/>}/>
+                    <Route path="yougeun2" element={<Yougeun1/>}/>
+                    <Route path="message" element={<Message/>}/>
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
                 <Route path="*" element={<div>없는 페이지 입니다.</div>}/>
