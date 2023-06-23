@@ -1,32 +1,63 @@
 import React, { useState, useEffect } from "react";
-import {  Container, Row, Col, Form } from "reactstrap";
+import { Container, Row, Col, Form } from "reactstrap";
 import { Button, TextField } from "@material-ui/core";
-import Modal from "@material-ui/core/Modal"; // @material-ui/core 패키지에서 Modal 컴포넌트를 가져옵니다.
+import Modal from "@material-ui/core/Modal";
+import Box from "@mui/material/Box";
+import {
+  DataGrid,
+  GridColDef,
+  GridValueGetterParams,
+  GridSelectionModelChangeParams,
+} from "@mui/x-data-grid";
 
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+
+
 
 function StoreYougeun() {
 
-    const [selectedRowIds, setSelectedRowIds] = useState([]);
 
-    const handleSelectionModelChange = (newSelectionModel) => {
-        setSelectedRowIds(newSelectionModel);
-        console.log('선택된 모델 변경:', newSelectionModel);
-        // 추가로 수행해야 할 작업들을 여기에 추가합니다.
-      };
+  const [selectionModel, setSelectionModel] = useState([])
+  const [selectedRows, setSelectedRows] = React.useState([]);
+  const apiRef = React.useRef(null);
+  
 
+  const onRowsSelectionHandler = (ids) => {
+    const selectedRowsData = ids.map((id) => responseData.find((row) => row.id === id));
+  
+  
+    console.log(selectedRowsData);
+     setSelectionModel(selectedRowsData);
+    
+  };
+
+
+  const handleCellChange = (params) => {
+    const { id, field, value } = params;
+    
+    // 변경된 셀의 데이터를 업데이트
+    setResponseData((prevData) => {
+      const updatedData = { ...prevData };
+      updatedData[id][field] = value;
+      return updatedData;
+    });
+  };
 
     const handleAdd = (event) => {
         event.preventDefault();
-        
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day}`;
         // Create a new row object with the form values
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
           storehouseType: formData.input1,
-          storehouseCode: formData.input2,
+          storehouseAddr: formData.input2,
           storehouseName: formData.input3,
-          
+          storehouseEtc: formData.input4,
+          storehouseStartDate : formattedDate,  
         };
       
         
@@ -46,6 +77,7 @@ function StoreYougeun() {
 
     useEffect(() => {
       sendGetRequest();
+
     }, []);
   
 
@@ -63,7 +95,7 @@ function StoreYougeun() {
           const response = await fetch("http://localhost:8888/ynfinal/store");
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
-            id: item.storehouseCode, // storehouseCode 값을 id로 사용
+            id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
             ...item,
             storehouseType: storehouseTypeTranslations[item.storehouseType] || item.storehouseType,
           }));
@@ -105,31 +137,114 @@ function StoreYougeun() {
   };
   
 
+  const handleSave = () => {
+
+    const storehouseTypeMapping = {
+      '반제품': 'HALF',
+      '원자재': 'RAW',
+      '불량': 'ERROR',
+      '제품': 'FINISHED',
+    };
+  
+
+    const data = apiRef.current?.getRowModels(); // 데이터 가져오기
+    const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
+    dataArray.forEach((row) => {
+      row.storehouseType = storehouseTypeMapping[row.storehouseType] || 'FINISHED';
+    });
+
+
+    console.log(dataArray); 
+    const jsonData = JSON.stringify(dataArray);
+    console.log(jsonData);
+
+    // if(true) return;
+  
+    // storehouseType 값을 역매핑하여 변경
+    
+
+    console.log(JSON.stringify(responseData));
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonData,
+    };
+  
+    fetch('http://localhost:8888/ynfinal/store', requestOptions)
+      .then((response) => {
+        // 응답 처리
+        if (response.ok) {
+          alert('저장이 완료되었습니다.');
+          console.log('POST 요청이 성공했습니다.');
+          sendGetRequest();
+
+        } else {
+          console.log('POST 요청이 실패했습니다.');
+        }
+      })
+      .catch((error) => {
+        console.error('POST 요청 중 오류가 발생했습니다.', error);
+      });
+
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // 저장 버튼 클릭 시 처리할 로직 작성
+   
     console.log("저장 버튼이 클릭되었습니다.");
     console.log(formData);
     // axios 또는 다른 HTTP 클라이언트를 사용하여 서버로 데이터 전송 등의 로직 추가
   };
 
   const handleDelete = () => {
-    console.log(selectedRowIds + '-----------');
-    // Filter out the selected rows from the responseData array
-    const updatedData = responseData.filter((row) => {
-        if (selectedRowIds.includes(row.id)) {
-            console.log(row.id);
-            return true;
-        }
-        return false;
-    });
-  
-    // Perform any additional delete logic here (e.g., sending a request to a server)
-  
-    // Update the state with the updated data and reset the selectedRowIds
-    setResponseData(updatedData);
-    console.log(updatedData);
-    setSelectedRowIds([]);
+    if(selectionModel.length<1) {
+      alert("삭제할 행이 없습니다.");
+      return;
+    }
+
+    console.log(selectionModel);
+    const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
+
+    
+
+    if (shouldDelete) {
+
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectionModel),
+      };
+    
+      fetch('http://localhost:8888/ynfinal/store', requestOptions)
+        .then((response) => {
+          // 응답 처리
+          if (response.ok) {
+            alert(selectionModel.length + '행이 삭제되었습니다.');
+            console.log('DELETE 요청이 성공했습니다.');
+            
+            sendGetRequest();
+            window.location.reload();
+
+          } else {
+            console.log('DELETE 요청이 실패했습니다.');
+            window.location.reload();
+
+          }
+        })
+        .catch((error) => {
+          console.error('DELETE 요청 중 오류가 발생했습니다.', error);
+          window.location.reload();
+
+        });
+    } else {
+      console.log('삭제를 취소했습니다.');
+    }
+    
     
   };
 
@@ -183,12 +298,14 @@ function StoreYougeun() {
 
 
   const columns = [
-   { field: 'id', headerName: 'ID', width: 90 },
+   { field: 'id', headerName: 'ID', width: 90,
+  },
     {
       field: 'storehouseCode',
       headerName: '창고코드',
       width: 150,
-      editable: true,
+      cellClassName: 'grayCell',
+      editable: false
     },
     {
       field: 'storehouseName',
@@ -201,61 +318,47 @@ function StoreYougeun() {
         headerName: "창고구분",
         width: 110,
         editable: true,
-        renderCell: (params) => {
-          const handleStorehouseTypeChange = (event) => {
-            const updatedData = responseData.map((item) => {
-              if (item.id === params.id) {
-                return {
-                  ...item,
-                  storehouseType: event.target.value,
-                };
-              }
-              return item;
-            });
-            setResponseData(updatedData);
-          };
-  
-          return (
-            <select
-              value={params.value}
-              onChange={handleStorehouseTypeChange}
-              style={{ width: "100%" }}
-            >
-              <option value="제품">제품</option>
-              <option value="반제품">반제품</option>
-              <option value="원자재">원자재</option>
-              <option value="불량">불량</option>
-            </select>
-          );
-        },
+        type: 'singleSelect',
+        valueOptions: ['제품', '반제품', '원자재', '불량'],
       },
     {
       field: 'storehouseStartDate',
       headerName: '등록일시',
-      description: 'This column has a value getter and is not sortable.',
       sortable: false,
+      cellClassName: 'grayCell',
       width: 160,
     },
     {
         field: 'storehouseAddr',
         headerName: '창고 주소',
-        description: 'This column has a value getter and is not sortable.',
+        editable: true,
+        sortable: false,
+        width: 160,
+      },
+      {
+        field: 'storehouseEtc',
+        headerName: '비고',
+        editable: true,
         sortable: false,
         width: 160,
       },
   ];
   
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+  const styles = {
+    grayCell: {
+      backgroundColor: 'gray',
+      color: 'white',
+    },
+  };
+  
+  const processRowUpdate = (newRow) => {
+    const updatedRow = { ...newRow, isNew: false };
+    setResponseData(responseData.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    return updatedRow;
+  };
+
+
+
   return (
     <>
       <div>
@@ -277,7 +380,7 @@ function StoreYougeun() {
             />
             <TextField
                 id="standard-search"
-                label="창고코드"
+                label="창고주소"
                 type="search"
                 value={formData.input2}
                 variant="standard"
@@ -312,10 +415,10 @@ function StoreYougeun() {
             <Button color="primary" onClick={handleAdd} variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
               행 추가
             </Button>{" "}
-            <Button color="primary" variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
+            <Button color="primary" variant="contained" onClick={sendGetRequest} style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
               조회
             </Button>{" "}
-            <Button color="primary" variant="contained" type="submit" style={{ marginLeft: '10px' }}>
+            <Button color="primary" variant="contained" onClick={handleSave} style={{ marginLeft: '10px' }}>
               저장
             </Button>{" "}
             <Button color="secondary" variant="contained" onClick={handleDelete} style={{ marginLeft: '10px' }}>
@@ -358,19 +461,27 @@ function StoreYougeun() {
         {responseData !== null && (
   <Box sx={{ height: 600, width: '100%' }}>
     <DataGrid
-      rows={responseData}
-      columns={columns}
-      getRowId={(row) => row.id}
-      pagination={false}
-      checkboxSelection
-      disableRowSelectionOnClick
-      
-      selectionModel={selectedRowIds}
-        onSelectionModelChange={handleSelectionModelChange}
-    />
-  </Box>
+            apiRef={apiRef}
+            rows={responseData}
+            columns={columns}
+            checkboxSelection
+            disableSelectionOnClick
+            disableRowSelectionOnClick 
+            onRowSelectionModelChange={(ids) => onRowsSelectionHandler(ids)}
+            processRowUpdate={processRowUpdate}
+          />
+</Box>
 )}
-
+    <pre style={{ fontSize: 10 }}>
+        {JSON.stringify(selectionModel, null, 4)}
+      </pre>
+      {/* 스타일을 적용할 CSS 스타일시트 */}
+      <style>{`
+        .grayCell {
+          background-color: gray;
+          color: white;
+        }
+      `}</style>
     </>
   );
 }

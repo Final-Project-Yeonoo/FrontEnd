@@ -19,6 +19,7 @@ import List from "./components/admin/UserList";
 import MyComInfo from './components/admin/MyComInfo';
 import Yougeun from './components/yougeun/yougeun';
 import StoreYougeun from './components/yougeun/StoreYougeun';
+import Yougeun2 from './components/yougeun/Yougeun2';
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
                         {/*재고*/}
                         <Route path="inventory/manage" element={<InvenManage/>}/>
                         <Route path="inventory/check" element={<InvenCheck/>}/>
-                        <Route path="yougeun" element={<Yougeun/>}/>
+                        <Route path="yougeun" element={<Yougeun2/>}/>
                         <Route path="yougeun2" element={<StoreYougeun/>}/>
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
