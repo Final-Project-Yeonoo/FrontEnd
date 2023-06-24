@@ -25,7 +25,7 @@ const Login = () => {
         <>
             <div className={styles.backGround}>
                 <Container className="col-sm-8 col-md-6 col-lg-4">
-                    <Form className={`${styles.loginBox} mt-5`} onSubmit={handleSubmit} >
+                    <Form className={styles.loginBox} onSubmit={handleSubmit} >
                         <div className= {styles.imgContainer} >
                             <img src="/logo.png" alt="ERP시스템 로고"  className={styles.imgSize}/>
                         </div>
