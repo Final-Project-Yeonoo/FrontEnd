@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 견적서 등록
+function RegisterEstimate() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default RegisterEstimate;

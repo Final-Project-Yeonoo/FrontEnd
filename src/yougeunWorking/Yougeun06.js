@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 구매 발주
+function PlacePurchaseOrder() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default PlacePurchaseOrder;

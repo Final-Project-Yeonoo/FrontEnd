@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 구매입고등록
+function RegisterPurchaseReceipt() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default RegisterPurchaseReceipt;

@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 실적등록
+function RegisterPerformance() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default RegisterPerformance;

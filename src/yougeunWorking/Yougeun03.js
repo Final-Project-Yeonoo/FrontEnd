@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 수주서 관리
+function ManageSalesOrder() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default ManageSalesOrder;

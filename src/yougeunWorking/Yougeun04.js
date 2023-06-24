@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 작업 지시
+function CreateWorkOrder() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default CreateWorkOrder;

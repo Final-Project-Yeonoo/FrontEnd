@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 납품등록
+function RegisterDelivery() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default RegisterDelivery;

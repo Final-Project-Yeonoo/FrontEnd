@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 자재 소요 분석
+function AnalyzeMaterialRequirement() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default AnalyzeMaterialRequirement;

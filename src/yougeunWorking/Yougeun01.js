@@ -9,11 +9,12 @@ import {
   GridValueGetterParams,
   GridSelectionModelChangeParams,
 } from "@mui/x-data-grid";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
-
-
-function StoreYougeun() {
+// 프로젝트 등록
+function RegisterProject() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -24,21 +25,13 @@ function StoreYougeun() {
 
 
   const handleFilter = () => {
-    const { storehouseType, storehouseAddr, storehouseName, storehouseEtc } = formData;
+    const { projectName, storehouseAddr, storehouseName, storehouseEtc } = formData;
   
     const filteredData = originalRows.filter((row) => {
-      if (storehouseType && row.storehouseType !== storehouseType) {
+      if (projectName && !row.projectName.includes(projectName)) {
         return false;
       }
-      if (storehouseAddr && row.storehouseAddr && !row.storehouseAddr.toLowerCase().includes(storehouseAddr.toLowerCase())) {
-        return false;
-      }
-      if (storehouseName && !row.storehouseName.toLowerCase().includes(storehouseName.toLowerCase())) {
-        return false;
-      }
-      if (storehouseEtc && row.storehouseEtc && !row.storehouseEtc.includes(storehouseEtc)) {
-        return false;
-      }
+
       return true;
     });
   
@@ -61,8 +54,13 @@ function StoreYougeun() {
     
     // 변경된 셀의 데이터를 업데이트
     setResponseData((prevData) => {
-      const updatedData = { ...prevData };
-      updatedData[id][field] = value;
+      const updatedData = [...prevData];
+      const rowToUpdate = updatedData.find((row) => row.id === id);
+  
+      if (rowToUpdate && field === "projectDate") {
+        rowToUpdate.projectDate = value;
+      }
+  
       return updatedData;
     });
   };
@@ -78,7 +76,7 @@ function StoreYougeun() {
         // Create a new row object with the form values
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
-          storehouseType: formData.storehouseType,
+          projectName: formData.projectName,
           storehouseAddr: formData.storehouseAddr,
           storehouseName: formData.storehouseName,
           storehouseEtc: formData.storehouseEtc,
@@ -91,7 +89,7 @@ function StoreYougeun() {
       
         // Reset the form inputs
         setFormData({
-          storehouseType: "",
+          projectName: "",
           storehouseAddr: "",
           storehouseName: "",
           storehouseEtc: "",
@@ -117,12 +115,12 @@ function StoreYougeun() {
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/store");
+          const response = await fetch("http://localhost:8888/ynfinal/project");
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
             ...item,
-            storehouseType: storehouseTypeTranslations[item.storehouseType] || item.storehouseType,
+            projectName: storehouseTypeTranslations[item.projectName] || item.projectName,
           }));
           console.log(processedData);
           setResponseData(processedData);
@@ -134,14 +132,7 @@ function StoreYougeun() {
 
 
   const [formData, setFormData] = useState({
-    storehouseType: "",
-    storehouseAddr: "",
-    storehouseName: "",
-    storehouseEtc: "",
-    input5: "",
-    input6: "",
-    input7: "",
-    input8: "",
+    projectName: "",
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -175,9 +166,9 @@ function StoreYougeun() {
 
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
-    dataArray.forEach((row) => {
-      row.storehouseType = storehouseTypeMapping[row.storehouseType] || 'FINISHED';
-    });
+    // dataArray.forEach((row) => {
+    //   row.projectName = storehouseTypeMapping[row.projectName] || 'FINISHED';
+    // });
 
 
     console.log(dataArray); 
@@ -186,7 +177,7 @@ function StoreYougeun() {
 
     // if(true) return;
   
-    // storehouseType 값을 역매핑하여 변경
+    // projectName 값을 역매핑하여 변경
     
 
     console.log(JSON.stringify(responseData));
@@ -198,7 +189,7 @@ function StoreYougeun() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/store', requestOptions)
+    fetch('http://localhost:8888/ynfinal/project', requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -246,7 +237,7 @@ function StoreYougeun() {
         body: JSON.stringify(selectionModel),
       };
     
-      fetch('http://localhost:8888/ynfinal/store', requestOptions)
+      fetch('http://localhost:8888/ynfinal/project', requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {
@@ -278,14 +269,7 @@ function StoreYougeun() {
     // 초기화 버튼 클릭 시 처리할 로직 작성
     console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
-      storehouseType: "",
-      storehouseAddr: "",
-      storehouseName: "",
-      storehouseEtc: "",
-      input5: "",
-      input6: "",
-      input7: "",
-      input8: "",
+      projectName: "",
     });
     // 기타 초기화 작업 추가
     sendGetRequest();
@@ -295,7 +279,7 @@ function StoreYougeun() {
   const handleOptionClick = (selectedOption) => {
     setFormData((prevData) => ({
       ...prevData,
-      storehouseType: selectedOption.label,
+      projectName: selectedOption.label,
     }));
     setIsModalOpen(false);
   };
@@ -329,42 +313,59 @@ function StoreYougeun() {
    { field: 'id', headerName: 'ID', width: 90,
   },
     {
-      field: 'storehouseCode',
-      headerName: '창고코드',
+      field: 'projectCode',
+      headerName: '프로젝트코드',
       width: 150,
       cellClassName: 'grayCell',
       editable: false
     },
     {
-      field: 'storehouseName',
-      headerName: '창고명',
+      field: 'projectName',
+      headerName: '프로젝트명',
       width: 150,
       editable: true,
     },
     {
-        field: "storehouseType",
-        headerName: "창고구분",
-        width: 110,
-        editable: true,
-        type: 'singleSelect',
-        valueOptions: ['제품', '반제품', '원자재', '불량'],
+      field: 'projectDate',
+      headerName: '프로젝트일시',
+      width: 150,
+      editable: true,
+      // type : 'dateTime',
+      
+      renderCell: (params) => (
+        <div>{params.value}</div>
+      ),
+      renderEditCell: (params) => {
+        const dateValue = params.value instanceof Date && !isNaN(params.value) ? params.value : new Date();
+      
+        return (
+          <DatePicker
+            selected={dateValue}
+            onChange={(date) => handleCellChange({ id: params.id, field: 'projectDate', value: date })}
+            //dateFormat="yyyy-MM-dd"
+            // 필요한 다른 속성 및 동작 추가
+          />
+        );
       },
+    },
     {
-      field: 'storehouseStartDate',
-      headerName: '등록일시',
+      field: 'empId',
+      headerName: '등록자아이디',
       sortable: false,
+      editable: false,
       cellClassName: 'grayCell',
       width: 160,
     },
     {
-        field: 'storehouseAddr',
-        headerName: '창고 주소',
-        editable: true,
+        field: 'empName',
+        headerName: '등록이름',
+        editable: false,
         sortable: false,
+        cellClassName: 'grayCell',
         width: 160,
       },
       {
-        field: 'storehouseEtc',
+        field: 'projectEtc',
         headerName: '비고',
         editable: true,
         sortable: false,
@@ -398,46 +399,14 @@ function StoreYougeun() {
             <TextField
                 required
                 id="standard-required"
-                label="창고구분"
-                value={formData.storehouseType}
+                label="프로젝트명"
+                value={formData.projectName}
                 variant="standard"
-                name="storehouseType"
+                name="projectName"
                 onChange={handleChange}
-                style={{ width: '43%' }}
-                onClick={handleOpenModal} 
+                style={{ width: '100%' }} 
             />
-            <TextField
-                id="standard-search"
-                label="창고주소"
-                type="search"
-                value={formData.storehouseAddr}
-                variant="standard"
-                name="storehouseAddr"
-                onChange={handleChange}
-                style={{ width: '43%' }}
-            />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-            <TextField
-                id="standard-search"
-                label="창고명"
-                type="search"
-                variant="standard"
-                value={formData.storehouseName}
-                name="storehouseName"
-                onChange={handleChange}
-                style={{ width: '43%' }}
-            />
-            <TextField
-                id="standard-search"
-                label="비고"
-                type="search"
-                variant="standard"
-                value={formData.storehouseEtc}
-                name="storehouseEtc"
-                onChange={handleChange}
-                style={{ width: '43%' }}
-            />
+           
             </div>
             <div style={{marginBottom:'20px',  display: 'flex', padding:'10px',  justifyContent: 'flex-end'}}>
             <Button color="primary" onClick={handleAdd} variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
@@ -461,31 +430,7 @@ function StoreYougeun() {
         </Form>
       </div>
      {/* Modal */}
-     <Modal open={isModalOpen} onClose={handleCloseModal}>
-  <div style={modalStyle}>
-    <div style={modalContentStyle}>
-      <h3>창고 구분:</h3>
-      {modalOptions.map((option) => (
-        <div
-          key={option.id}
-          onClick={() => handleOptionClick(option)}
-          style={{
-            padding: "10px",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-            cursor: "pointer",
-            margin: "10px 0",
-          }}
-        >
-          {option.label}
-        </div>
-      ))}
-      <Button variant="contained" onClick={handleCloseModal} style={{ marginTop: "10px" }}>
-        돌아가기
-      </Button>
-    </div>
-  </div>
-</Modal>
+     
         {responseData !== null && (
   <Box sx={{ height: 600, width: '100%' }}>
     <DataGrid
@@ -514,4 +459,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default RegisterProject;

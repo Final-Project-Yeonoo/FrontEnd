@@ -12,8 +12,8 @@ import {
 
 
 
-
-function StoreYougeun() {
+// 반품등록
+function RegisterReturn() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
@@ -514,4 +514,4 @@ function StoreYougeun() {
   );
 }
 
-export default StoreYougeun;
+export default RegisterReturn;
