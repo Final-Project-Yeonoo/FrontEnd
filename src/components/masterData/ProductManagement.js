@@ -19,18 +19,7 @@ function ProductManagement() {
     return (
         <>
 
-            {/*<div className={styles.navRight}>*/}
-            {/*    /!*<ColorfulButtons/>*!/*/}
-            {/*    <Button variant="outline-primary" onClick={() => {*/}
-            {/*    }}>조회</Button>{' '}*/}
-            {/*    <Button variant="outline-success">저장</Button>{' '}*/}
-            {/*    <Button variant="outline-danger" onClick={() => {*/}
-            {/*    }}>삭제</Button>{' '}*/}
-            {/*    <Button variant="outline-secondary">초기화</Button>{' '}*/}
-            {/*</div>*/}
-
             <section className={styles.navLeft}>
-                {/*<TabforProduct/>*/}
                 <Nav variant="tabs" defaultActiveKey="0">
                     <Nav.Item>
                         <Nav.Link eventKey="0" onClick={() => {
@@ -50,27 +39,23 @@ function ProductManagement() {
                 </Nav>
 
                 <TabContent tab={tab}/>
+
             </section>
 
         </>
     );
 }
 
-// 탭(0, 1, 2)선택시 나오는 오렌지표와 테이블
+
 function TabContent({tab}) {
 
-    const handleOrangeInputChange = (i, value) => {
-        const updatedInputData = [...orangeInputData]; // orangeInputData 배열을 복사하여 새로운 배열 생성
-        updatedInputData[updatedInputData.length - 1].title = value; // 마지막 객체의 title 값을 업데이트
-        orangeInputData = updatedInputData;
-    };
 
     let orangeInputData;
     if (tab === 0) {
-        orangeInputData = productInputData; // 원자재 박스에는 productInputData를 그대로 할당
+        orangeInputData = [...productInputData];
     } else if (tab === 1) {
-        orangeInputData = productInputData.slice(0, -1);
-        // 제품 박스에는 productInputData의 마지막 object를 제거하여 할당
+        orangeInputData = [...productInputData];
+        orangeInputData[orangeInputData.length - 1].title = "비고";
     } else if (tab === 2) {
         orangeInputData = [...productInputData];
         orangeInputData[orangeInputData.length - 1].title = "규격";
@@ -81,11 +66,9 @@ function TabContent({tab}) {
             {tab === 0 && (
                 <div>
                     <section className={styles.searchBox} style={{marginBottom: '30px'}}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={() => {
-                        }}/>
+                        <OrangeInput title={orangeInputData}/>
                     </section>
                     <section className={styles.tableArea}>
-                        {/*<TableExample tableHeaders={tableHeadersProduct[0]}/>*/}
                         <ProductManagementRawTable/>
                     </section>
                 </div>
@@ -94,11 +77,9 @@ function TabContent({tab}) {
             {tab === 1 && (
                 <div>
                     <section className={styles.searchBox} style={{marginBottom: '30px'}}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={() => {
-                        }}/>
+                        <OrangeInput title={orangeInputData}/>
                     </section>
                     <section className={styles.tableArea}>
-                        {/*<TableExample tableHeaders={tableHeadersProduct[1]}/>*/}
                         <ProductManagementHalfTable/>
                     </section>
                 </div>
@@ -107,10 +88,9 @@ function TabContent({tab}) {
             {tab === 2 && (
                 <div>
                     <section className={styles.searchBox} style={{marginBottom: '30px'}}>
-                        <OrangeInput title={orangeInputData} handleTitleChange={handleOrangeInputChange}/>
+                        <OrangeInput title={orangeInputData}/>
                     </section>
                     <section className={styles.tableArea}>
-                        {/*<TableExample tableHeaders={tableHeadersProduct[2]}/>*/}
                         <ProductManagementFullTable/>
                     </section>
                 </div>
@@ -123,7 +103,7 @@ function TabContent({tab}) {
 // 오렌지 표의 형식과 정의
 function OrangeInput({title}) {
 
-    const [inputValues, setInputValues] = useState(title.map(() => '')); // 추가: 입력된 값들을 저장하는 상태 변수
+    const [inputValues, setInputValues] = useState(title.map(() => ''));
 
     const handleInputChange = (index, value) => {
         const newInputValues = [...inputValues];
@@ -131,12 +111,12 @@ function OrangeInput({title}) {
         setInputValues(newInputValues);
     };
 
+    // 초기화 버튼 클릭 시 모든 값들을 ''로 초기화
     const handleReset = () => {
-        setInputValues(title.map(() => '')); // 초기화 버튼 클릭 시 모든 값들을 ''로 초기화
+        setInputValues(title.map(() => ''));
     };
-    // 이 형식 그대로 사용할것...!
+
     const handleSubmit = () => {
-        // Prepare the data to send to the server
 
         const data = title.map((item, i) => {
             if (item.title === "ITEM 코드") {
@@ -146,14 +126,13 @@ function OrangeInput({title}) {
             } else if (item.title === "원자재 가격") {
                 return {rawPrice: parseInt(inputValues[i]),};
             }
-            // return null; // 해당되는 조건이 없는 경우 null 반환
-            }); // 생성된 JSON 데이터 출력 console.log(data);
+        }); // 생성된 JSON 데이터 출력 console.log(data);
 
-            console.log(data)
+        console.log(data)
         const mergedObject = data.reduce((result, currentObject) => {
             return {...result, ...currentObject};
 
-        },{})
+        }, {})
         console.log(mergedObject)
 
         axios.post('http://localhost:8888/ynfinal/rawitem', mergedObject)
@@ -198,11 +177,11 @@ function OrangeInput({title}) {
             })}
             <div className={styles.navRight}>
                 <Button variant="outline-primary" onClick={() => {
-                }}>조회</Button>{' '}
-                <Button variant="outline-success" onClick={handleSubmit}>저장</Button>{' '}
+                }}>조회</Button>
+                <Button variant="outline-success" onClick={handleSubmit}>저장</Button>
                 <Button variant="outline-danger" onClick={() => {
-                }}>삭제</Button>{' '}
-                <Button variant="outline-secondary" onClick={handleReset}>초기화</Button>{' '}
+                }}>삭제</Button>
+                <Button variant="outline-secondary" onClick={handleReset}>초기화</Button>
             </div>
         </>
     );

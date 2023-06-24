@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Container, Form, Button} from 'react-bootstrap';
-import './css/Login.module.css';
+import styles from './css/Login.module.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,15 +13,16 @@ const Login = () => {
 
     return (
         <>
-            <div className="loginBackground">
-                <Container className="col-sm-8 col-md-6 col-lg-4" id="loginBox">
-                    <div className="logoSize">
-                        <img src="/logo.png" width="100%" alt="ERP시스템 로고"/>
-                    </div>
-                    <Form onSubmit={handleSubmit}>
+            <div className={styles.backGround}>
+                <Container className="col-sm-8 col-md-6 col-lg-4">
+                    <Form className={`${styles.loginBox} mt-5`} onSubmit={handleSubmit} >
+                        <div className= {styles.imgContainer} >
+                            <img src="/logo.png" alt="ERP시스템 로고"  className={styles.imgSize}/>
+                        </div>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label></Form.Label>
                             <Form.Control
+                                style={{marginLeft:'0'}}
                                 type="text"
                                 placeholder="Company Code"
                                 value={email}
@@ -31,6 +32,7 @@ const Login = () => {
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label></Form.Label>
                             <Form.Control
+                                style={{marginLeft:'0'}}
                                 type="text"
                                 placeholder="아이디를 입력하세요"
                                 value={email}
@@ -41,6 +43,7 @@ const Login = () => {
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label></Form.Label>
                             <Form.Control
+                                style={{marginLeft:'0'}}
                                 type="password"
                                 placeholder="비밀번호를 입력하세요"
                                 value={password}

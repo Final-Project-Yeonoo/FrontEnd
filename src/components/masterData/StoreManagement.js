@@ -108,15 +108,6 @@ function StoreManagement() {
                         )
                     }
                 </section>
-                <button onClick={() => {
-                    axios.get('http://localhost:8888/ynfinal/rawitem').then((결과) => {
-                        console.log('성공함', 결과.data)
-                    })
-                        .catch(() => {
-                            console.log('실패함')
-                        })
-                }}> 백 데이터 받는 버튼
-                </button>
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>창고</div>
                     {/*<TableExample tableHeaders={tableHeadersProduct[3]} />*/}
