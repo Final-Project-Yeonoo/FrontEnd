@@ -1,6 +1,8 @@
 .container{
-  width: 100%;
+  width: 70%;
   height: 100%;
+  margin: 0 auto;
+  margin-top: 100px;
 }
 .contentTitleBox{
   width: 100%;
@@ -29,4 +31,10 @@
   justify-content: right;
   /* background: aqua; */
   height: fit-content;
+}
+.contentHeadName {
+  font-size: 25px;
+}
+.MuiDataGrid-columnHeaders {
+  /* text-align: center; */
 }

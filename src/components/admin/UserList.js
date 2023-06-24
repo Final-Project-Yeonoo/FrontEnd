@@ -150,13 +150,12 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import styles from './css/UserList.module.css';
 import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
+import {Button} from 'reactstrap';
 
 const UserList = () => {
   const [data, setData] = useState([]);
 
   const API_USERLIST_URL = API_BASE_URL + FINDALL;
-
-   const CustomPagination = () => null;
   
   const columns = [
   
@@ -169,36 +168,25 @@ const UserList = () => {
     {
       field: 'empId',
       headerName: '사원ID',
-      width: 150,
-      editable: true,
-    },
-  
-    {
-      field: 'empPassword',
-      headerName: '비밀번호',
-      type:'Password',
-      width: 150,
+      width: 130,
       editable: true,
     },
     {
       field: 'empExtension',
       headerName: '내선번호',
-      type: 'number',
-      width: 110,
+      width: 130,
       editable: true,
     },
     {
       field: 'deptName',
       headerName: '부서',
-      type: 'number',
-      width: 110,
+      width: 160,
       editable: true,
     },
     {
       field: 'posName',
       headerName: '직급',
-      type: 'number',
-      width: 110,
+      width: 160,
       editable: true,
     },
 
@@ -206,7 +194,7 @@ const UserList = () => {
       field: 'empHiredDate',
       headerName: '채용날짜',
       type: 'Date',
-      width: 110,
+      width: 120,
       editable: true,
     },
     {
@@ -214,15 +202,21 @@ const UserList = () => {
       headerName: '휴대전화',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 160,
+      width: 170,
       // valueGetter: (params) =>
       //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
     {
       field: 'empAddress',
       headerName: '주소',
-      
-      width: 110,
+      width: 200,
+      editable: true,
+    },
+    {
+      field: 'empPassword',
+      headerName: '비밀번호',
+      type:'password',
+      width: 150,
       editable: true,
     },
     
@@ -230,14 +224,15 @@ const UserList = () => {
       field: 'empValidate',
       headerName: '계정활성화',
       type: 'boolean',
-      width: 110,
-      editable: false,
+      width: 100,
+      editable: true,
     },
     {
       field: 'userAuth',
       headerName: '사용자관리입력권한',
       type: 'boolean',
       width: 110,
+      editable: true,
       // editable: (params) =>
       // `${params.row.empValidate.value || 'true'}`
     },
@@ -298,17 +293,29 @@ const UserList = () => {
 
     return (
     <>
+    <div className={styles.contentHeadcontainer}>
+      <div className={styles.contentHeadName}>
+        <span>사용자 정보 수정 </span>
+      </div>
+    </div>
+
+
+
     <div className={styles.container}>
-      <Box sx={{ height: 400, width: '100%' }}>
+      <div className={styles.buttonContainer}> 
+      <Button color="success" outline >
+            수정
+      </Button>
+      </div>
+      <Box sx={{ height: 600, width: '100%' }}>
         <DataGrid
           rows={data}
           columns={columns}
           checkboxSelection
           disableRowSelectionOnClick
           getRowId={(row) => row.empId}
-          components={{
-            Pagination: CustomPagination,
-          }}
+          hideFooter={true}
+       
         />
       </Box>
     </div>  

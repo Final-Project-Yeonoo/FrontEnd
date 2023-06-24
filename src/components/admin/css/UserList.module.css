@@ -1,6 +1,8 @@
 .container{
-    width: 100%;
+    width: 70%;
     height: 100%;
+    margin: 0 auto;
+    margin-top: 100px;
 }
 .contentTitleBox{
     width: 100%;
@@ -69,3 +71,11 @@
 .Button{
     font-size: 5px;
 }
+.contentHeadName {
+    font-size: 25px;
+  }
+  /* 수정버튼 위치 만드는 css */
+  .buttonContainer {
+    text-align: right;
+    margin-bottom: 10px;
+  }
