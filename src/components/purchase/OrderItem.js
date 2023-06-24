@@ -87,7 +87,7 @@ function OrderItem() {
                     }
                 </section>
 
-                <Button style={{background: 'dimgray', width: '100%', marginBottom:"20px"}}>입고</Button>
+                <Button className={styles.sendPurchaseButton}>입고</Button>
 
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>구매발주</div>

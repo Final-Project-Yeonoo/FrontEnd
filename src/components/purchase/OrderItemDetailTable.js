@@ -27,14 +27,14 @@ const OrderItemDetailTable = () => {
     }, []);
 
     const columns = [
-        { field: 'trCompCode', headerName: '구매발주 상세', width: 150 },
-        { field: 'trCompName', headerName: 'Company Name', width: 150 },
-        { field: 'trCompPhone', headerName: 'Company Phone', width: 150 },
-        { field: 'trBuy', headerName: 'Buy', width: 100 },
-        { field: 'trSell', headerName: 'Sell', width: 100 },
-        { field: 'trStartDate', headerName: 'Start Date', width: 150 },
-        { field: 'trAddr', headerName: 'Address', width: 200 },
-        { field: 'storehouseName', headerName: 'Storehouse', width: 150 },
+        { field: 'itemOrderDetailCode', headerName: '발주 상세번호', width: 150 },
+        { field: 'itemOrderDetailName', headerName: '발주 품목상세명', width: 150 },
+        { field: 'itemOrderNetPrice', headerName: '가격', width: 150 },
+        { field: 'itemOrderDetailCount', headerName: '수량', width: 100 },
+        { field: 'taxCode', headerName: '세금10%', width: 100 },
+        { field: 'itemOrderCode', headerName: '발주서 번호', width: 150 },
+        { field: 'storehouseCode', headerName: '창고 번호', width: 200 },
+        { field: 'comment', headerName: '비고', width: 150 },
     ];
 
     return (

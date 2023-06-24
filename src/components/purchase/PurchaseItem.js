@@ -127,7 +127,6 @@ function PurchaseItem() {
 
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>구매입고</div>
-                    {/*<TableExample tableHeaders={tableHeadersPurchase[2]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
                             <PurchaseItemTable/>
@@ -136,7 +135,6 @@ function PurchaseItem() {
                 </section>
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>세부항목</div>
-                    {/*<TableExample tableHeaders={tableHeadersPurchase[3]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
                             <PurchaseItemTable/>

@@ -27,10 +27,16 @@ const ProductManagementRawTable = () => {
     }, []);
 
     const columns = [
+        { field: 'rawCode', headerName: '원자재코드', width: 150 },
         { field: 'rawName', headerName: '원자재명', width: 150 },
-        { field: 'rawCount', headerName: '원자재 개수', width: 150 },
+        { field: 'rawCount', headerName: '원자재 수량', width: 150 },
         { field: 'rawPrice', headerName: '원자재 가격', width: 150 },
-        // { field: 'rawType', headerName: '유형', width: 150 },
+        { field: 'rawType', headerName: '유형', width: 150 },
+        { field: 'rawRegDate', headerName: '원자재 등록일', width: 150 },
+        { field: 'rawRegUpdate', headerName: '원자재 수정일', width: 150 },
+        { field: 'rawPrice', headerName: '원자재 금액', width: 150 },
+        { field: 'storehouseCode', headerName: '창고 번호', width: 150 },
+        { field: 'empNo', headerName: '사원 번호', width: 150 },
     ];
 
     return (

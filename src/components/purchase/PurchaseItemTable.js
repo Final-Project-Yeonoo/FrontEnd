@@ -27,18 +27,21 @@ const PurchaseItemTable = () => {
     }, []);
 
     const columns = [
-        { field: 'trCompCode', headerName: '구매입고', width: 150 },
-        { field: 'trCompName', headerName: 'Company Name', width: 150 },
-        { field: 'trCompPhone', headerName: 'Company Phone', width: 150 },
-        { field: 'trBuy', headerName: 'Buy', width: 100 },
-        { field: 'trSell', headerName: 'Sell', width: 100 },
-        { field: 'trStartDate', headerName: 'Start Date', width: 150 },
-        { field: 'trAddr', headerName: 'Address', width: 200 },
-        { field: 'storehouseName', headerName: 'Storehouse', width: 150 },
+        { field: 'inputProductCode', headerName: "입고번호", width: 150 },
+        { field: 'trCompName', headerName: "입고유형", width: 150 },
+        { field: 'inputProductDate', headerName: "입고일자", width: 150 },
+        { field: 'projectCode', headerName: "프로젝트 코드", width: 100 },
+        { field: 'projectName', headerName: "프로젝트명", width: 100 },
+        { field: 'payMode', headerName: "무상여부", width: 150 },
+        { field: 'payType', headerName: "수불타입", width: 200 },
+        { field: 'itemOrderCode', headerName: "발주번호", width: 150 },
+        { field: 'companyCode', headerName: "거래처코드", width: 150 },
+        { field: 'companyName', headerName: "거래처명", width: 150 },
+        { field: 'comment', headerName: "비고", width: 150 },
     ];
 
     return (
-        <div style={{ height: 800, width: '100%' }}>
+        <div style={{ height: 500, width: '100%' }}>
             <DataGrid rows={rows} columns={columns} getRowId={(row) => row.id}
                       components={{
                           Pagination: CustomPagination,
