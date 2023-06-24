@@ -7,11 +7,12 @@ import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
 import { Checkbox, Divider } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Layouts from '../common/TableLayout';
-import {API_BASE_URL, DEPARTMENT} from '../../config/host-cofig';
+import {API_BASE_URL, DEPARTMENT, POSITION} from '../../config/host-cofig';
 
 function AdminUser() {
 
   const API_DEPT_URL = API_BASE_URL + DEPARTMENT ; 
+  const API_POS_URL = API_BASE_URL + POSITION ; 
 
 
   const label = { inputProps: { "aria-label": "Switch demo" } };
@@ -41,12 +42,20 @@ function AdminUser() {
 
  
   const [modalVisible, setModalVisible] = useState(false);
-  const [deptData, setDeptData] = useState([
+ const [deptData, setDeptData] = useState([
     { deptCode: "", deptName: "" },
-    // 추가적인 부서 데이터 아이템들...
+    
+  ]);
+ 
+
+   const [modalPosVisible, setModalPosVisible] = useState(false);
+  const [posData, setPosData] = useState([
+    { posCode: "", posName: "" },
+    
   ]);
  
   const [selectedDeptName, setSelectedDeptName] = useState('');
+  const [selectedPosName, setSelectedPosName] = useState('');
 
   const openModal = () => {
     setModalVisible(true);
@@ -55,6 +64,13 @@ function AdminUser() {
   const closeModal = () => {
     setModalVisible(false);
   };
+
+  const posModalOpen = () => {
+    setModalPosVisible(true);
+  }
+  const posModalClose =() => {
+    setModalPosVisible(false);
+  }
  
   const columns = [
     // 테이블의 열 정의
@@ -65,6 +81,17 @@ function AdminUser() {
     {
       Header: "부서명",
       accessor: "deptName"
+    }
+  ];
+  const columnsPos = [
+    // 테이블의 열 정의
+    {
+      Header: "직급 코드",
+      accessor: "posCode"
+    },
+    {
+      Header: "직급명",
+      accessor: "posName"
     }
   ];
 
@@ -83,9 +110,26 @@ useEffect(() => {
     }
   };
 
+   const fetchPOSData = async () => {
+    try {
+      // Send a GET request to the backend API to fetch department data
+      const response = await fetch(API_POS_URL);
+      const jsonData = await response.json();
+
+      // Update the data state with the fetched department data
+      setPosData(jsonData);
+    } catch (error) {
+      console.error('Error fetching department data:', error);
+    }
+  };
+
+  fetchPOSData();
 
   fetchData();
+
 }, []);
+
+
 
 
 
@@ -180,7 +224,7 @@ useEffect(() => {
 
   };
 
-  console.log('밖에서 하는 확인! ', userValue);
+  console.log('밖에서 하는 확인! ', posData);
 
   // 저장하기 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = async (e) => {
@@ -199,7 +243,7 @@ useEffect(() => {
 
 
 // 부서코드 가져오기(부서이름도 같이 가져올 수 있음)
-  const handleCellClick = (row) => {
+  const handleDeptCellClick = (row) => {
     console.log('main에서 보는 선택된 행의 값 deptCode:', row.original.deptCode);
     setSelectedDeptName(row.original.deptName)
     setUserValue({...userValue, deptCode: row.original.deptCode})
@@ -209,6 +253,14 @@ useEffect(() => {
 // 값입력 확인 log 
  console.log(userValue);
 
+ const handlePosCellClick = (row) => {
+  console.log('main에서 보는 선택된 행의 값posCode:', row.original.posCode);
+  setSelectedPosName(row.original.posName)
+  setUserValue({...userValue, posCode: row.original.posCode})
+ 
+  posModalClose();
+};
+console.log(userValue);
 
   return (
     <>
@@ -292,7 +344,7 @@ useEffect(() => {
     <div>
       <h2>부서 선택</h2>
       <main>
-        <Layouts columns={columns} data={deptData} onClick={handleCellClick} 
+        <Layouts columns={columns} data={deptData} onClick={handleDeptCellClick} 
          />
       </main>
     </div>
@@ -303,11 +355,27 @@ useEffect(() => {
             </Col>
             <Col md={4}>
               <FormGroup className={styles.formGroup}>
-                <div className={styles.tag}>
+              <div className={styles.tag}>
                   {" "}
                   <Label for="posCode">직급명</Label>
-                </div>
-                <Input id="posCode" name="posCode" />
+              </div>
+                <Input
+                  id="posCode"
+                  name="posCode"
+                  placeholder="클릭해서 직급명을 설정하세요"
+                  value={selectedPosName}
+                  onClick={posModalOpen}
+                  onChange={(e) => setUserValue({ ...userValue, posCode: e.target.value })}/>
+
+                <BasicModal open={modalPosVisible} onClose={posModalClose}>
+              <div>
+                <h2>직급 선택</h2>
+            <main>
+              <Layouts columns={columnsPos} data={posData} onClick={handlePosCellClick} />
+            </main>
+            </div>
+               </BasicModal>
+
               </FormGroup>
             </Col>
             <Col md={4}>
@@ -377,7 +445,6 @@ useEffect(() => {
             </Col>
           </Row>
         </Form>
-
 
 
         {/* 권한관리 메뉴  */}

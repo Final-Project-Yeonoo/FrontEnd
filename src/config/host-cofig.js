@@ -17,6 +17,7 @@ export const COMPANY ='ynfinal/comp';
 //회사사원전체조회
 export const FINDALL ='ynfinal/employee';
 export const TRADING ='ynfinal/trcomp';
+export const POSITION = 'ynfinal/position';
 // 마이페이지 조회
 // export const mypage ='ynfinal/employee/mypage';
 export const DEPARTMENT ='ynfinal/department';
