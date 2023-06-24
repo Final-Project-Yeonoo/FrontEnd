@@ -18,8 +18,33 @@ function StoreYougeun() {
 
   const [selectionModel, setSelectionModel] = useState([])
   const [selectedRows, setSelectedRows] = React.useState([]);
+  const [originalRows, setOriginalRows] = React.useState([]);
   const apiRef = React.useRef(null);
   
+
+
+  const handleFilter = () => {
+    const { storehouseType, storehouseAddr, storehouseName, storehouseEtc } = formData;
+  
+    const filteredData = originalRows.filter((row) => {
+      if (storehouseType && row.storehouseType !== storehouseType) {
+        return false;
+      }
+      if (storehouseAddr && row.storehouseAddr && !row.storehouseAddr.toLowerCase().includes(storehouseAddr.toLowerCase())) {
+        return false;
+      }
+      if (storehouseName && !row.storehouseName.toLowerCase().includes(storehouseName.toLowerCase())) {
+        return false;
+      }
+      if (storehouseEtc && row.storehouseEtc && !row.storehouseEtc.includes(storehouseEtc)) {
+        return false;
+      }
+      return true;
+    });
+  
+    // 필터링된 결과를 상태 변수에 저장합니다.
+    setResponseData(filteredData);
+  };
 
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = ids.map((id) => responseData.find((row) => row.id === id));
@@ -53,10 +78,10 @@ function StoreYougeun() {
         // Create a new row object with the form values
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
-          storehouseType: formData.input1,
-          storehouseAddr: formData.input2,
-          storehouseName: formData.input3,
-          storehouseEtc: formData.input4,
+          storehouseType: formData.storehouseType,
+          storehouseAddr: formData.storehouseAddr,
+          storehouseName: formData.storehouseName,
+          storehouseEtc: formData.storehouseEtc,
           storehouseStartDate : formattedDate,  
         };
       
@@ -66,10 +91,10 @@ function StoreYougeun() {
       
         // Reset the form inputs
         setFormData({
-          input1: "",
-          input2: "",
-          input3: "",
-          input4: "",
+          storehouseType: "",
+          storehouseAddr: "",
+          storehouseName: "",
+          storehouseEtc: "",
         });
       };
 
@@ -101,6 +126,7 @@ function StoreYougeun() {
           }));
           console.log(processedData);
           setResponseData(processedData);
+          setOriginalRows(processedData);
         } catch (error) {
           console.error("Error:", error);
         }
@@ -108,10 +134,10 @@ function StoreYougeun() {
 
 
   const [formData, setFormData] = useState({
-    input1: "",
-    input2: "",
-    input3: "",
-    input4: "",
+    storehouseType: "",
+    storehouseAddr: "",
+    storehouseName: "",
+    storehouseEtc: "",
     input5: "",
     input6: "",
     input7: "",
@@ -252,22 +278,24 @@ function StoreYougeun() {
     // 초기화 버튼 클릭 시 처리할 로직 작성
     console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
-      input1: "",
-      input2: "",
-      input3: "",
-      input4: "",
+      storehouseType: "",
+      storehouseAddr: "",
+      storehouseName: "",
+      storehouseEtc: "",
       input5: "",
       input6: "",
       input7: "",
       input8: "",
     });
     // 기타 초기화 작업 추가
+    sendGetRequest();
+    
   };
 
   const handleOptionClick = (selectedOption) => {
     setFormData((prevData) => ({
       ...prevData,
-      input1: selectedOption.label,
+      storehouseType: selectedOption.label,
     }));
     setIsModalOpen(false);
   };
@@ -371,9 +399,9 @@ function StoreYougeun() {
                 required
                 id="standard-required"
                 label="창고구분"
-                value={formData.input1}
+                value={formData.storehouseType}
                 variant="standard"
-                name="input1"
+                name="storehouseType"
                 onChange={handleChange}
                 style={{ width: '43%' }}
                 onClick={handleOpenModal} 
@@ -382,9 +410,9 @@ function StoreYougeun() {
                 id="standard-search"
                 label="창고주소"
                 type="search"
-                value={formData.input2}
+                value={formData.storehouseAddr}
                 variant="standard"
-                name="input2"
+                name="storehouseAddr"
                 onChange={handleChange}
                 style={{ width: '43%' }}
             />
@@ -395,8 +423,8 @@ function StoreYougeun() {
                 label="창고명"
                 type="search"
                 variant="standard"
-                value={formData.input3}
-                name="input3"
+                value={formData.storehouseName}
+                name="storehouseName"
                 onChange={handleChange}
                 style={{ width: '43%' }}
             />
@@ -405,8 +433,8 @@ function StoreYougeun() {
                 label="비고"
                 type="search"
                 variant="standard"
-                value={formData.input4}
-                name="input4"
+                value={formData.storehouseEtc}
+                name="storehouseEtc"
                 onChange={handleChange}
                 style={{ width: '43%' }}
             />
@@ -415,7 +443,7 @@ function StoreYougeun() {
             <Button color="primary" onClick={handleAdd} variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
               행 추가
             </Button>{" "}
-            <Button color="primary" variant="contained" onClick={sendGetRequest} style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
+            <Button color="primary" variant="contained" onClick={handleFilter} style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
               조회
             </Button>{" "}
             <Button color="primary" variant="contained" onClick={handleSave} style={{ marginLeft: '10px' }}>
