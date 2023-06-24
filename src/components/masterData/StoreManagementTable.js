@@ -27,12 +27,14 @@ const StoreManagementTable = () => {
     }, []);
 
     const columns = [
-        { field: 'rawCode', headerName: '창고', width: 150 },
-        { field: 'rawName', headerName: 'Company Name', width: 150 },
-        { field: 'rawCount', headerName: 'Company Phone', width: 150 },
-        { field: 'rawRegDate', headerName: 'Buy', width: 100 },
-        { field: 'rawRegUpdate', headerName: 'Sell', width: 100 },
-        { field: 'rawPrice', headerName: 'Start Date', width: 150 },
+        { field: 'storehouseType', headerName: '창고타입', width: 150 },
+        { field: 'storehouseCode', headerName: '창고코드', width: 150 },
+        { field: 'storehouseName', headerName: '창고명', width: 150 },
+        { field: 'storehouseStartDate', headerName: '창고 등록일', width: 150 },
+        { field: 'storehouseAddr', headerName: '창고 주소', width: 150 },
+        { field: 'empNo', headerName: '사원 번호', width: 150 },
+        { field: 'comment', headerName: '비고', width: 150 },
+
     ];
 
     return (
