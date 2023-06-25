@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "reactstrap";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, FormControl, InputLabel, Select, MenuItem  } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Box from "@mui/material/Box";
 import {
@@ -12,31 +12,42 @@ import {
 
 
 
+
 // 견적서 등록
 function RegisterEstimate() {
 
 
   const [selectionModel, setSelectionModel] = useState([])
-  const [selectedRows, setSelectedRows] = React.useState([]);
   const [originalRows, setOriginalRows] = React.useState([]);
   const apiRef = React.useRef(null);
-  
+  const [empList, setEmpList] = useState([]);
+  const [projectList, setProjectList] = useState([]);
+  const [trCompList, setTrCompList] = useState([]);
 
+ 
+  
 
   const handleFilter = () => {
-    const { storehouseType, storehouseAddr, storehouseName, storehouseEtc } = formData;
+    const { estimateDate, estimateOrderType, estimatePayment, estimateEtc } = formData;
   
+    
     const filteredData = originalRows.filter((row) => {
-      if (storehouseType && row.storehouseType !== storehouseType) {
+      if(estimateDate){
+      const nextDay = new Date(estimateDate);
+      nextDay.setDate(nextDay.getDate() - 1);
+      const formattedRowEstimateDate = new Date(row.estimateDate).toISOString().split('T')[0];
+      const formattedEstimateDate = nextDay.toISOString().split('T')[0];
+      if (formattedEstimateDate && formattedRowEstimateDate !== formattedEstimateDate) {
         return false;
       }
-      if (storehouseAddr && row.storehouseAddr && !row.storehouseAddr.toLowerCase().includes(storehouseAddr.toLowerCase())) {
+      }
+      if (estimateOrderType && row.estimateOrderType && !row.estimateOrderType.toLowerCase().includes(estimateOrderType.toLowerCase())) {
         return false;
       }
-      if (storehouseName && !row.storehouseName.toLowerCase().includes(storehouseName.toLowerCase())) {
+      if (estimatePayment && !row.estimatePayment.toLowerCase().includes(estimatePayment.toLowerCase())) {
         return false;
       }
-      if (storehouseEtc && row.storehouseEtc && !row.storehouseEtc.includes(storehouseEtc)) {
+      if (estimateEtc && row.estimateEtc && !row.estimateEtc.includes(estimateEtc)) {
         return false;
       }
       return true;
@@ -48,24 +59,16 @@ function RegisterEstimate() {
 
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = ids.map((id) => responseData.find((row) => row.id === id));
-  
+    
   
     console.log(selectedRowsData);
      setSelectionModel(selectedRowsData);
     
   };
 
-
-  const handleCellChange = (params) => {
-    const { id, field, value } = params;
-    
-    // 변경된 셀의 데이터를 업데이트
-    setResponseData((prevData) => {
-      const updatedData = { ...prevData };
-      updatedData[id][field] = value;
-      return updatedData;
-    });
-  };
+    const orderAdd = () => {
+      console.log('ㅎㅇㅎㅇ');
+    }
 
     const handleAdd = (event) => {
         event.preventDefault();
@@ -78,11 +81,11 @@ function RegisterEstimate() {
         // Create a new row object with the form values
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
-          storehouseType: formData.storehouseType,
-          storehouseAddr: formData.storehouseAddr,
-          storehouseName: formData.storehouseName,
-          storehouseEtc: formData.storehouseEtc,
-          storehouseStartDate : formattedDate,  
+          estimateDate: new Date(formData.estimateDate),
+          estimateOrderType: formData.estimateOrderType,
+          estimatePayment: formData.estimatePayment,
+          estimateEtc: formData.estimateEtc,
+          // storehouseStartDate : formattedDate,  
         };
       
         
@@ -91,10 +94,10 @@ function RegisterEstimate() {
       
         // Reset the form inputs
         setFormData({
-          storehouseType: "",
-          storehouseAddr: "",
-          storehouseName: "",
-          storehouseEtc: "",
+          estimateDate: "",
+          estimateOrderType: "",
+          estimatePayment: "",
+          estimateEtc: "",
         });
       };
 
@@ -102,27 +105,69 @@ function RegisterEstimate() {
 
     useEffect(() => {
       sendGetRequest();
-
+      fetchEmployeeList();
+      fetchTrCompanyList();
+      fetchProjectList();
     }, []);
   
+    const fetchTrCompanyList = () => {
+      // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
+      // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
+      fetch('http://localhost:8888/ynfinal/trcomp')
+        .then((response) => response.json())
+        .then((data) => {
+          // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
-    const storehouseTypeTranslations = {
-        HALF: '반제품',
-        RAW: '원자재',
-        ERROR: '불량',
-        FINISHED: '제품',
-        // 더 많은 영어-한글 변환 매핑을 추가할 수 있습니다.
-      };
+          setTrCompList(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch employee list:', error);
+        });
+    };
+    const fetchProjectList = () => {
+      // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
+      // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
+      fetch('http://localhost:8888/ynfinal/project')
+        .then((response) => response.json())
+        .then((data) => {
+          // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
+          setProjectList(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch employee list:', error);
+        });
+    };
+
+    const fetchEmployeeList = () => {
+      // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
+      // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
+      fetch('http://localhost:8888/ynfinal/employee')
+        .then((response) => response.json())
+        .then((data) => {
+          // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
+
+          setEmpList(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch employee list:', error);
+        });
+    };
+   
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/store");
+          const response = await fetch("http://localhost:8888/ynfinal/estimate");
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
             ...item,
-            storehouseType: storehouseTypeTranslations[item.storehouseType] || item.storehouseType,
+            estimateDate: new Date(item.estimateDate),
+            projectRegDate: new Date(item.projectRegDate),
+            projectUpdateDate: new Date(item.projectUpdateDate),
           }));
           console.log(processedData);
           setResponseData(processedData);
@@ -134,10 +179,10 @@ function RegisterEstimate() {
 
 
   const [formData, setFormData] = useState({
-    storehouseType: "",
-    storehouseAddr: "",
-    storehouseName: "",
-    storehouseEtc: "",
+    estimateDate: "",
+    estimateOrderType: "",
+    estimatePayment: "",
+    estimateEtc: "",
     input5: "",
     input6: "",
     input7: "",
@@ -165,29 +210,14 @@ function RegisterEstimate() {
 
   const handleSave = () => {
 
-    const storehouseTypeMapping = {
-      '반제품': 'HALF',
-      '원자재': 'RAW',
-      '불량': 'ERROR',
-      '제품': 'FINISHED',
-    };
-  
+    
 
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
-    dataArray.forEach((row) => {
-      row.storehouseType = storehouseTypeMapping[row.storehouseType] || 'FINISHED';
-    });
-
-
-    console.log(dataArray); 
-    const jsonData = JSON.stringify(dataArray);
-    console.log(jsonData);
-
-    // if(true) return;
-  
-    // storehouseType 값을 역매핑하여 변경
     
+    const jsonData = JSON.stringify(dataArray);
+
+
 
     console.log(JSON.stringify(responseData));
     const requestOptions = {
@@ -198,7 +228,7 @@ function RegisterEstimate() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/store', requestOptions)
+    fetch('http://localhost:8888/ynfinal/estimate', requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -246,7 +276,7 @@ function RegisterEstimate() {
         body: JSON.stringify(selectionModel),
       };
     
-      fetch('http://localhost:8888/ynfinal/store', requestOptions)
+      fetch('http://localhost:8888/ynfinal/estimate', requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {
@@ -278,10 +308,10 @@ function RegisterEstimate() {
     // 초기화 버튼 클릭 시 처리할 로직 작성
     console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
-      storehouseType: "",
-      storehouseAddr: "",
-      storehouseName: "",
-      storehouseEtc: "",
+      estimateDate: "",
+      estimateOrderType: "",
+      estimatePayment: "",
+      estimateEtc: "",
       input5: "",
       input6: "",
       input7: "",
@@ -295,17 +325,15 @@ function RegisterEstimate() {
   const handleOptionClick = (selectedOption) => {
     setFormData((prevData) => ({
       ...prevData,
-      storehouseType: selectedOption.label,
+      estimateOrderType: selectedOption.label,
     }));
     setIsModalOpen(false);
   };
   
 
   const modalOptions = [
-    { id: 1, label: "제품" },
-    { id: 2, label: "반제품" },
-    { id: 3, label: "원자재" },
-    { id: 4, label: "불량" },
+    { id: 1, label: "OEM" },
+    { id: 2, label: "자체생산" },
   ];
 
 
@@ -325,51 +353,132 @@ function RegisterEstimate() {
   };
 
 
+
   const columns = [
    { field: 'id', headerName: 'ID', width: 90,
   },
     {
-      field: 'storehouseCode',
-      headerName: '창고코드',
+      field: 'estimateCode',
+      headerName: '견적서코드',
       width: 150,
       cellClassName: 'grayCell',
       editable: false
     },
     {
-      field: 'storehouseName',
-      headerName: '창고명',
+      field: 'estimateDate',
+      headerName: '견적날짜',
       width: 150,
       editable: true,
+      type: 'date',
     },
     {
-        field: "storehouseType",
-        headerName: "창고구분",
+        field: "estimateOrderType",
+        headerName: "수주유형",
         width: 110,
         editable: true,
         type: 'singleSelect',
-        valueOptions: ['제품', '반제품', '원자재', '불량'],
+        valueOptions: ['OEM', '자체생산'],
       },
     {
-      field: 'storehouseStartDate',
-      headerName: '등록일시',
+      field: 'estimatePayment',
+      headerName: '결재조건',
       sortable: false,
-      cellClassName: 'grayCell',
-      width: 160,
+      editable: true,
+      type: 'singleSelect',
+      valueOptions: ['카드', '현금'],
+      width: 110,
     },
     {
-        field: 'storehouseAddr',
-        headerName: '창고 주소',
-        editable: true,
-        sortable: false,
-        width: 160,
-      },
-      {
-        field: 'storehouseEtc',
+        field: 'estimateEtc',
         headerName: '비고',
         editable: true,
         sortable: false,
         width: 160,
       },
+      {
+        field: 'projectRegDate',
+        headerName: '등록날짜',
+        editable: false,
+        sortable: false,
+        cellClassName: 'grayCell',
+        width: 160,
+        type: 'date',
+      },
+      {
+        field: 'projectUpdateDate',
+        headerName: '수정날짜',
+        editable: false,
+        sortable: false,
+        width: 160,
+        cellClassName: 'grayCell',
+        type: 'date',
+      },
+      {
+        field: 'empId',
+        headerName: '견적담당자',
+        // editable: true,
+        sortable: false,
+        cellClassName: 'blueCell',
+        width: 160,
+        editable: true,
+        type: 'singleSelect',
+        valueOptions: empList.map((emp) => ({
+          value: emp.empId,
+          label: emp.empId,
+        })), 
+      },
+      {
+        field: 'empName',
+        headerName: '견적담당자명',
+        cellClassName: 'grayCell',
+        editable: false,
+        sortable: false,
+        width: 160,
+      
+      },
+      {
+        field: 'projectCode',
+        headerName: '프로젝트코드',
+        editable: true,
+        sortable: false,
+        cellClassName: 'blueCell',
+        type: 'singleSelect',
+        valueOptions: projectList.map((project) => ({
+          value: project.projectCode,
+          label: project.projectCode,
+        })), 
+        width: 160,
+      },
+      {
+        field: 'projectName',
+        headerName: '프로젝트명',
+        cellClassName: 'grayCell',
+        editable: false,
+        sortable: false,
+        width: 160,
+      },
+      {
+        field: 'trCompCode',
+        headerName: '거래처코드',
+        editable: true,
+        sortable: false,
+        width: 160,
+        cellClassName: 'blueCell',
+        type: 'singleSelect',
+        valueOptions: trCompList.map((tr) => ({
+          value: tr.trCompCode,
+          label: tr.trCompCode,
+        })), 
+      },
+      {
+        field: 'trCompName',
+        headerName: '거래처명',
+        editable: false,
+        cellClassName: 'grayCell',
+        sortable: false,
+        width: 160,
+      },
+      
   ];
   
   const styles = {
@@ -381,7 +490,23 @@ function RegisterEstimate() {
   
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
-    setResponseData(responseData.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    const updatedData = responseData.map((row) => {
+      if (row.id === newRow.id) {
+        const selectedEmp = empList.find((emp) => emp.empId === newRow.empId);
+        const selectedProject = projectList.find((project) => project.projectCode === newRow.projectCode);
+        const selectedTrComp = trCompList.find((trComp) => trComp.trCompCode === newRow.trCompCode);
+    
+        return {
+          ...updatedRow,
+          empName: selectedEmp ? selectedEmp.empName : '',
+          projectName: selectedProject ? selectedProject.projectName : '',
+          trCompName: selectedTrComp ? selectedTrComp.trCompName : '',
+        };
+      }
+      return row;
+    });
+  
+    setResponseData(updatedData);
     return updatedRow;
   };
 
@@ -393,53 +518,63 @@ function RegisterEstimate() {
         <Form onSubmit={handleSubmit}>
 
        
-
+        
           <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
+              <div>수주유형</div>
             <TextField
                 required
                 id="standard-required"
-                label="창고구분"
-                value={formData.storehouseType}
+                // label="수주유형"
+                value={formData.estimateOrderType}
                 variant="standard"
-                name="storehouseType"
+                name="estimateOrderType"
                 onChange={handleChange}
-                style={{ width: '43%' }}
+                style={{ width: '30%' }}
                 onClick={handleOpenModal} 
             />
+            <div>견적날짜</div>
             <TextField
                 id="standard-search"
-                label="창고주소"
-                type="search"
-                value={formData.storehouseAddr}
+                type="date"
+                
+                value={formData.estimateDate}
                 variant="standard"
-                name="storehouseAddr"
+                
+                name="estimateDate"
                 onChange={handleChange}
-                style={{ width: '43%' }}
+                style={{ width: '30%' }}
             />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
+            <div>결재조건</div>
+            <Select
+              labelId="estimatePayment-label"
+              id="estimatePayment"
+              value={formData.estimatePayment}
+              name="estimatePayment"
+              onChange={handleChange}
+              style={{ width: '30%' }}
+            >
+              <MenuItem value="카드">카드</MenuItem>
+              <MenuItem value="현금">현금</MenuItem>
+              
+            </Select>
+            <div>비고사항</div>
             <TextField
                 id="standard-search"
-                label="창고명"
+                // label="비고"
                 type="search"
                 variant="standard"
-                value={formData.storehouseName}
-                name="storehouseName"
+                value={formData.estimateEtc}
+                name="estimateEtc"
                 onChange={handleChange}
-                style={{ width: '43%' }}
-            />
-            <TextField
-                id="standard-search"
-                label="비고"
-                type="search"
-                variant="standard"
-                value={formData.storehouseEtc}
-                name="storehouseEtc"
-                onChange={handleChange}
-                style={{ width: '43%' }}
+                style={{ width: '30%' }}
             />
             </div>
             <div style={{marginBottom:'20px',  display: 'flex', padding:'10px',  justifyContent: 'flex-end'}}>
+            <Button color="primary" onClick={orderAdd} variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
+              수주등록
+            </Button>{" "}
             <Button color="primary" onClick={handleAdd} variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
               행 추가
             </Button>{" "}
@@ -464,7 +599,7 @@ function RegisterEstimate() {
      <Modal open={isModalOpen} onClose={handleCloseModal}>
   <div style={modalStyle}>
     <div style={modalContentStyle}>
-      <h3>창고 구분:</h3>
+      <h3>수주 유형:</h3>
       {modalOptions.map((option) => (
         <div
           key={option.id}
@@ -487,7 +622,7 @@ function RegisterEstimate() {
   </div>
 </Modal>
         {responseData !== null && (
-  <Box sx={{ height: 600, width: '100%' }}>
+  <Box sx={{ height: '80vh', width: '100%' }}>
     <DataGrid
             apiRef={apiRef}
             rows={responseData}
@@ -506,7 +641,12 @@ function RegisterEstimate() {
       {/* 스타일을 적용할 CSS 스타일시트 */}
       <style>{`
         .grayCell {
-          background-color: gray;
+          background-color: #676767;
+          color: white;
+        }
+
+        .blueCell{
+          background-color: #0072e8;
           color: white;
         }
       `}</style>

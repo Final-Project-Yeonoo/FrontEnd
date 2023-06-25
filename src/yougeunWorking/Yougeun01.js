@@ -21,7 +21,7 @@ function RegisterProject() {
   const [selectedRows, setSelectedRows] = React.useState([]);
   const [originalRows, setOriginalRows] = React.useState([]);
   const apiRef = React.useRef(null);
-  
+  const [data, setData] = useState([]);
 
 
   const handleFilter = () => {
@@ -50,51 +50,45 @@ function RegisterProject() {
 
 
   const handleCellChange = (params) => {
-    const { id, field, value } = params;
-    
-    // 변경된 셀의 데이터를 업데이트
-    setResponseData((prevData) => {
-      const updatedData = [...prevData];
-      const rowToUpdate = updatedData.find((row) => row.id === id);
-  
-      if (rowToUpdate && field === "projectDate") {
-        rowToUpdate.projectDate = value;
+    const updatedData = data.map((row) => {
+      if (row.id === params.id) {
+        return { ...row, [params.field]: params.value };
       }
-  
-      return updatedData;
+      return row;
     });
+    setData(updatedData);
+    setResponseData([updatedData]);
   };
 
-    const handleAdd = (event) => {
-        event.preventDefault();
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-
-        const formattedDate = `${year}-${month}-${day}`;
-        // Create a new row object with the form values
-        const newRow = {
-          id: responseData.length + 1, // Generate a unique ID for the new row
-          projectName: formData.projectName,
-          storehouseAddr: formData.storehouseAddr,
-          storehouseName: formData.storehouseName,
-          storehouseEtc: formData.storehouseEtc,
-          storehouseStartDate : formattedDate,  
-        };
-      
-        
-        // Add the new row to the responseData array
-        setResponseData([...responseData, newRow]);
-      
-        // Reset the form inputs
-        setFormData({
-          projectName: "",
-          storehouseAddr: "",
-          storehouseName: "",
-          storehouseEtc: "",
-        });
-      };
+  const handleAdd = (event) => {
+    event.preventDefault();
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+  
+    const formattedDate = `${year}-${month}-${day}`;
+    // Create a new row object with the form values
+    const newRow = {
+      id: responseData.length + 1, // Generate a unique ID for the new row
+      projectName: formData.projectName,
+      storehouseAddr: formData.storehouseAddr,
+      storehouseName: formData.storehouseName,
+      storehouseEtc: formData.storehouseEtc,
+      storehouseStartDate: formattedDate,
+    };
+  
+    // Add the new row to the responseData array
+    setResponseData([...responseData, newRow]);
+  
+    // Reset the form inputs
+    setFormData({
+      projectName: "",
+      storehouseAddr: "",
+      storehouseName: "",
+      storehouseEtc: "",
+    });
+  };
 
     const [responseData, setResponseData] = useState([]);
 
@@ -120,6 +114,7 @@ function RegisterProject() {
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
             ...item,
+            projectDate: new Date(item.projectDate),
             projectName: storehouseTypeTranslations[item.projectName] || item.projectName,
           }));
           console.log(processedData);
@@ -325,29 +320,14 @@ function RegisterProject() {
       width: 150,
       editable: true,
     },
-    {
-      field: 'projectDate',
-      headerName: '프로젝트일시',
-      width: 150,
-      editable: true,
-      // type : 'dateTime',
-      
-      renderCell: (params) => (
-        <div>{params.value}</div>
-      ),
-      renderEditCell: (params) => {
-        const dateValue = params.value instanceof Date && !isNaN(params.value) ? params.value : new Date();
-      
-        return (
-          <DatePicker
-            selected={dateValue}
-            onChange={(date) => handleCellChange({ id: params.id, field: 'projectDate', value: date })}
-            //dateFormat="yyyy-MM-dd"
-            // 필요한 다른 속성 및 동작 추가
-          />
-        );
-      },
-    },
+    
+  {
+    field: 'projectDate',
+    headerName: '프로젝트일시',
+    width: 150,
+    editable: true,
+    type: 'date',
+  },
     {
       field: 'empId',
       headerName: '등록자아이디',
@@ -372,6 +352,8 @@ function RegisterProject() {
         width: 160,
       },
   ];
+  
+
   
   const styles = {
     grayCell: {
@@ -442,9 +424,14 @@ function RegisterProject() {
             disableRowSelectionOnClick 
             onRowSelectionModelChange={(ids) => onRowsSelectionHandler(ids)}
             processRowUpdate={processRowUpdate}
+            onCellEditCommit={handleCellChange}
           />
-</Box>
+          
+  </Box>
+
+
 )}
+
     <pre style={{ fontSize: 10 }}>
         {JSON.stringify(selectionModel, null, 4)}
       </pre>

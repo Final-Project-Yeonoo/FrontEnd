@@ -34,4 +34,5 @@ $ npm install @mui/styled-engine-sc styled-components
 
 
 
-$ npm install react-datepicker
+
+npm install @mui/x-date-pickers
