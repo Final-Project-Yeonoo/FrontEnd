@@ -1,14 +1,12 @@
 
 import styles from './css/OrderItem.module.css';
-import {ColorfulButtons, ColorfulOrderButtons, TabsforOrderItems} from "../common/UsefulButtons";
+import {TabsforOrderItems} from "../common/UsefulButtons";
 import Form from "react-bootstrap/Form";
 import {Input, Label, Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
 import React, {useState} from "react";
-import {purchaseOrderData, tableHeadersPurchase} from "./InputDataforPurchase";
+import {purchaseOrderData} from "./InputDataforPurchase";
 import {Button, Container} from "react-bootstrap";
-import {productInputData, tableCells, tableHeadersProduct} from "../masterData/InputDataforMaster";
-import Table from "react-bootstrap/Table";
 import OrderItemTable from "./OrderItemTable";
 import OrderItemDetailTable from "./OrderItemDetailTable";
 import axios from "axios";
