@@ -77,18 +77,6 @@ useEffect(() => {
 
   console.log(comValue);
 
-  // const headersName = headers.map(function (header) {
-  //   return (
-  //     <>
-  //     <div className={styles.wrapper}>
-  //       <div className={styles.empListHead}> {header} </div>
-  //       <input onChange={(e)=>{cName(e.target.value)}} />
-  //     </div>
-  //       <Divider />
-  //      </>
-  //   );
-  // });
-
   const headersName = headers.map(function (header, index) {
     const value = comValue[0][classNames[index]] || ""; // 정보가 없는 경우 빈칸
     return (

@@ -51,45 +51,87 @@ function TradingCompany() {
       fetchData();
     }, []);
   
-  
-  
     const columns = [
-      
-      { Header: " 거래처코드", accessor: "trCompCode" },
-      { Header: "거래처명", accessor: "trCompName" },
-      { Header: "전화번호", accessor: "trCompPhone" },
-      { Header: "주소", accessor: "trAddr" },
-      { Header: "비고", accessor: "trEtc" }
-     
-    ];
-    console.log(companyData);
-    const data = [
-      // 테이블에 표시할 데이터 배열, 
-      {
-          구분: "12345",
-          trCompCode: "입고",
-          trCompName: "품목 A",
-          trCompPhone: "A001",
-          trAddr: "10",
-          trEtc: "정상"  
-      },
-      {
-        구분: "12345",
-        trCompCode: "입고",
-        trCompName: "품목 A",
-        trCompPhone: "A001",
-        trAddr: "10",
-        trEtc: "정상"  
+    {
+      field: 'trCompCode',
+      headerName: '거래처코드',
+      width: 150,
+      editable: true,
     },
     {
-      구분: "12345",
-      trCompCode: "입고",
-      trCompName: "품목 A",
-      trCompPhone: "A001",
-      trAddr: "10",
-      trEtc: "정상"  
-  }
-    ];
+      field: 'trCompName',
+      headerName: '거래처명',
+      width: 130,
+      editable: true,
+    },
+    {
+      field: 'trCompPhone',
+      headerName: '전화번호',
+      width: 180,
+      editable: true,
+    },
+    {
+      field: 'trAddr',
+      headerName: '거래처주소',
+      width: 160,
+      editable: true,
+    },
+    {
+      field: 'trEtc',
+      headerName: '비고',
+      width: 180,
+      editable: true,
+    },
+    {
+      field : 'trRegDate',
+      headerName : '거래처 등록일',
+      width : '150',
+      editable: false
+
+    },
+    {
+      field : 'trStartDate',
+      headerName : '거래 시작일',
+      width : '150',
+      editable: true
+
+    }
+  ];
+    
+  
+    
+  
+
+     
+   
+    console.log(companyData);
+  //   const data = [
+  //     // 테이블에 표시할 데이터 배열, 
+  //     {
+  //         구분: "12345",
+  //         trCompCode: "입고",
+  //         trCompName: "품목 A",
+  //         trCompPhone: "A001",
+  //         trAddr: "10",
+  //         trEtc: "정상"  
+  //     },
+  //     {
+  //       구분: "12345",
+  //       trCompCode: "입고",
+  //       trCompName: "품목 A",
+  //       trCompPhone: "A001",
+  //       trAddr: "10",
+  //       trEtc: "정상"  
+  //   },
+  //   {
+  //     구분: "12345",
+  //     trCompCode: "입고",
+  //     trCompName: "품목 A",
+  //     trCompPhone: "A001",
+  //     trAddr: "10",
+  //     trEtc: "정상"  
+  // }
+  //   ];
     
 
     return (
