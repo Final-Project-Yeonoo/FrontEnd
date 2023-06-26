@@ -4,7 +4,7 @@ import {Routes, Route, Link, useNavigate, Outlet, Router} from 'react-router-dom
 import Login from "./components/login/Login";
 import ProductManagement from "./components/masterData/ProductManagement";
 import React from "react";
-import DashBoard from "./components/dashboard/DashBoard";
+import {DashBoard, TabBar, TabItem} from "./components/dashboard/DashBoard";
 import StoreManagement from "./components/masterData/StoreManagement";
 import TradingCompany from "./components/masterData/TradingCompany";
 import AdminUser from "./components/admin/AdminUser";
@@ -15,8 +15,6 @@ import PurchaseItem from "./components/purchase/PurchaseItem";
 import InvenManage from "./components/inventory/InvenManage";
 import InvenCheck from "./components/inventory/InvenCheck";
 import Mypage from "./components/mypage/Mypage";
-import List from "./components/admin/UserList";
-import MyComInfo from './components/admin/MyComInfo';
 import Yougeun from './components/yougeun/yougeun';
 import Yougeun1 from './components/yougeun/Yougeun1';
 import Message from "./components/common/Message";

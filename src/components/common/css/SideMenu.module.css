@@ -22,3 +22,15 @@
   border: 2px solid black;
   margin: 5px;
 }
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #000;
+}

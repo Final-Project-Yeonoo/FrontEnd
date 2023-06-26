@@ -5,6 +5,14 @@ let productInputData = [
 
     },
     {
+        title: "품명",
+        content: "입력하세요"
+    },
+    {
+        title: "품목코드",
+        content: "입력하세요"
+    },
+    {
         title: "수량",
         content: "입력하세요"
     },
@@ -15,7 +23,7 @@ let productInputData = [
     {
         title: "유형",
         content: "입력하세요"
-    }
+    },
 ]
 
 let storeInputData = [

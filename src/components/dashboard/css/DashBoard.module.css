@@ -1,17 +1,23 @@
 #loginBox {
-    color:red;
+    /*color:red;*/
 }
 
 .mainStyle {
     display: flex;
-    /*background-color: orange;*/
+    /*background-color: green;*/
 
 }
 
 .changeArea {
     width: 85%;
-    /*background-color: yellow;*/
-    /*border: 2px solid red;*/
+    /*background-color: blue;*/
+    border: 2px solid red;
     height: 100vh;
-    padding: 50px;
+    padding: 30px;
+}
+
+.topNav {
+    border: 2px solid blue;
+    height: 50px;
+    margin-bottom: 20px;
 }
