@@ -10,7 +10,7 @@ const OrderItemTable = () => {
 
     const fetchGridData = async () => {
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/trcomp');
+            const response = await fetch('http://localhost:8888/ynfinal/itemorder');
             const data = await response.json();
 
             // Generate unique IDs for the rows based on their index

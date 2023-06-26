@@ -10,7 +10,7 @@ const StoreManagementTable = () => {
 
     const fetchGridData = async () => {
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/rawitem');
+            const response = await fetch('http://localhost:8888/ynfinal/store');
             const data = await response.json();
 
             // Generate unique IDs for the rows based on their index
