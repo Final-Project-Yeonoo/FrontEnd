@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-const StoreManagementTable = () => {
+const ProductManagementRawTable = () => {
     const CustomPagination = () => null;
 
 
@@ -27,12 +27,9 @@ const StoreManagementTable = () => {
     }, []);
 
     const columns = [
-        { field: 'rawCode', headerName: '창고', width: 150 },
-        { field: 'rawName', headerName: 'Company Name', width: 150 },
-        { field: 'rawCount', headerName: 'Company Phone', width: 150 },
-        { field: 'rawRegDate', headerName: 'Buy', width: 100 },
-        { field: 'rawRegUpdate', headerName: 'Sell', width: 100 },
-        { field: 'rawPrice', headerName: 'Start Date', width: 150 },
+        { field: 'rawName', headerName: '원자재', width: 150 },
+        { field: 'rawCount', headerName: 'Company Name', width: 150 },
+        { field: 'rawPrice', headerName: 'Company Phone', width: 150 },
     ];
 
     return (
@@ -46,4 +43,5 @@ const StoreManagementTable = () => {
         </div>
     );
 };
-export default StoreManagementTable;
+export default ProductManagementRawTable;
+
