@@ -5,11 +5,11 @@ let productInputData = [
 
     },
     {
-        title: "원자재 개수",
+        title: "수량",
         content: "입력하세요"
     },
     {
-        title: "원자재 가격",
+        title: "금액",
         content: "입력하세요"
     },
     {

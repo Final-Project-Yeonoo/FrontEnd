@@ -27,15 +27,15 @@ const ProductManagementFullTable = () => {
     }, []);
 
     const columns = [
-        { field: 'finishedCode', headerName: '완제품 코드', width: 150 },
-        { field: 'finishedName', headerName: '완제품 이름', width: 150 },
-        { field: 'finishedCount', headerName: '완제품 수량', width: 150 },
-        { field: 'finishedPrice', headerName: '완제품 금액', width: 150 },
+        { field: 'finishedCode', headerName: '제품 코드', width: 150 },
+        { field: 'finishedName', headerName: '제품 이름', width: 150 },
+        { field: 'finishedCount', headerName: '수량', width: 150 },
+        { field: 'finishedPrice', headerName: '금액', width: 150 },
+        { field: 'finishedSize', headerName: '규격', width: 150 },
         { field: 'storehouseCode', headerName: '창고 번호', width: 150 },
         { field: 'empNo', headerName: '사원 번호', width: 150 },
-        { field: 'finishedSize', headerName: '규격', width: 150 },
-        { field: 'finishedRegDate', headerName: '완제품 등록일', width: 150 },
-        { field: 'finishedRegUpdate', headerName: '완제품 수정일', width: 150 },
+        { field: 'finishedRegDate', headerName: '제품 등록일', width: 150 },
+        { field: 'finishedRegUpdate', headerName: '제품 수정일', width: 150 },
 
     ];
 

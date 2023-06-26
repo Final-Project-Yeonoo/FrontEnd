@@ -30,11 +30,11 @@ const ProductManagementHalfTable = () => {
         { field: 'halfCode', headerName: '반제품 코드', width: 150 },
         { field: 'halfName', headerName: '반제품 이름', width: 150 },
         { field: 'halfCount', headerName: '수량', width: 150 },
-        { field: 'halfRegDate', headerName: ' 반제품 등록일', width: 150 },
-        { field: 'halfRegUpdate', headerName: ' 반제품 수정일', width: 150 },
-        { field: 'halfPrice', headerName: '반제품 금액', width: 150 },
+        { field: 'halfPrice', headerName: '금액', width: 150 },
         { field: 'storehouseCode', headerName: '창고 번호', width: 150 },
         { field: 'empNo', headerName: '사원 번호', width: 150 },
+        { field: 'halfRegDate', headerName: ' 반제품 등록일', width: 150 },
+        { field: 'halfRegUpdate', headerName: ' 반제품 수정일', width: 150 },
         { field: 'comment', headerName: '비고', width: 150 },
     ];
 
