@@ -35,6 +35,7 @@ function App() {
                         {/*사용자*/}
                         <Route path="admin/user" element={<AdminUser/>}/>
                         <Route path="admin/search" element={<SearchUser/>}/>
+                        <Route path="admin/mycom" element={<MyComInfo />} />
                         <Route path="admin/list" element={<UserList/>}/>
                         {/*기준 정보*/}
                         <Route path="masterData/info" element={<TradingCompany/>}/>

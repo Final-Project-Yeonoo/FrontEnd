@@ -4,7 +4,7 @@
 }
 
 .usercontainer {
-    width: 65%;
+    width: 80%;
     height: 350px;
     margin: 0 auto;
     margin-top: 100px;
@@ -38,7 +38,7 @@
   
   .container {
     border: 1px solid #000;
-    width: 65%;
+    width: 80%;
     height: fit-content;
     margin: 0 auto;
     justify-content: center;

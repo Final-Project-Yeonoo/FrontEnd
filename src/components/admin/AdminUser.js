@@ -174,10 +174,14 @@ useEffect(() => {
       }
     }));
   };
+  const convertBooleanToEnum = (value) => {
+    return value ? "Y" : "N";
+    
+  }; 
 
   const addUser = async (e) => {
 
-    try {
+    // try {
        
       
       //t/f enum으로 바꾸기
@@ -198,29 +202,7 @@ useEffect(() => {
           //enum으로 보내기 위해 t/f 바꿔서 담기
           
              
-          // 사용자 정보 서버 전달 요청
-          const response = await fetch(API_DEPT_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(userValue)
-          });
-    
-          const data = await response.json();
-          console.log(data); // 서버로부터 받은 응답 확인
-    
-          // 성공적으로 등록되었을 때 처리
-          if (response.ok) {
-            alert("사용자가 등록되었습니다");
-          } else {
-            alert("등록에 실패했습니다");
-          }
-        } catch (error) {
-          alert("서버와의 통신이 원활하지 않습니다");
-          console.error(error);
-       }
-       console.log('addUser 호출 전 로그 찍기',userValue);
+       
 
   };
 
@@ -229,13 +211,45 @@ useEffect(() => {
   // 저장하기 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = async (e) => {
     e.preventDefault();
- // 회원가입 서버 요청
-//  if(isValid()){
-  addUser();
-//   alert('회원가입정보를 서버에 전송합니다');
-// }  else {
-//   alert ('입력란을 다시 확인해주세요');
-// }
+
+//     try{
+
+//     }
+
+//     addUser();
+//  // 회원가입 서버 요청
+// //  if(isValid()){
+// //   alert('회원가입정보를 서버에 전송합니다');
+// // }  else {
+// //   alert ('입력란을 다시 확인해주세요');
+// // }
+
+       // 사용자 정보 서버 전달 요청
+       const response = await fetch(API_DEPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userValue)
+      });
+
+      const data = await response.json();
+      console.log(data); // 서버로부터 받은 응답 확인
+
+      // 성공적으로 등록되었을 때 처리
+      if (response.ok) {
+        alert("사용자가 등록되었습니다");
+      } else {
+        alert("등록에 실패했습니다");
+      }
+  //   } catch (error) {
+  //     alert("서버와의 통신이 원활하지 않습니다");
+  //     console.error(error);
+  //  }
+   console.log('addUser 호출 전 로그 찍기',userValue);
+
+
+
    
   };
 
@@ -260,7 +274,14 @@ useEffect(() => {
  
   posModalClose();
 };
+
 console.log(userValue);
+
+
+
+
+
+
 
   return (
     <>
@@ -652,7 +673,7 @@ console.log(userValue);
         </div>
       </div>
       <div className={styles.buttoncontainer}>
-        <Button className={styles.Button} onClick={joinButtonClickHandler}>Sign in</Button>
+        <Button color="primary"outline  className={styles.Button} onClick={joinButtonClickHandler}>저장</Button>
       </div>
     </>
   );
