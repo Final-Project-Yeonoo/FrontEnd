@@ -33,12 +33,16 @@ function SideMenu() {
                                         onClick={() => {navigate('/admin/list')}}>
                             사용자 정보수정
                         </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('admin/mycom')}}>
+                            회사정보 입력
+                        </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="2">
                         <Accordion.Header>기준 정보</Accordion.Header>
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/masterData/info')}}>
-                            기본정보
+                            거래처정보
                         </Accordion.Body>
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/masterData/product')}}>

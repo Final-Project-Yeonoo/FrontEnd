@@ -63,54 +63,6 @@ function Mypage({ employeeId }) {
 
   return (
     <>
-    {/* <div className={styles.profilecontainer}>
-      <h2 className={styles.profileheading}>사원 정보</h2>
-      <div className={styles.profilesection}>
-        <p className={styles.profilelabel}>사원 ID:</p>
-        <p>{employeeInfo.empId}</p>
-      </div>
-      <div className={styles.profilesection}>
-        <p className={styles.profilelabel}>이름:</p>
-        <p>{employeeInfo.empName}</p>
-      </div>
-      <div className={styles.profilesection}>
-        <p className={styles.profilelabel}>부서:</p>
-        <p>{employeeInfo.deptName}</p>
-      </div>
-      <div className={styles.profilesection}>
-        <p className={styles.profilelabel}>직급:</p>
-        <p>{employeeInfo.posName}</p>
-      </div>
-      <div className={styles.profilesection}>
-        <p className={styles.profilelabel}>내선번호:</p>
-        <p>{employeeInfo.empExtension}</p>
-      </div>
-      <div className={styles.profilesection}>
-        <p className={styles.profilelabel}>비밀번호:</p>
-        <input type='text'
-        value={newPassword ||employeeInfo.empPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-        className="profile-input"/>{}
-      </div>
-      <div className={styles.profilesection}>
-        <p className={styles.profilelabel}>휴대전화번호:</p>
-        <input type='text'
-         value={newPhoneNumber || employeeInfo.empPhone}
-         onChange={(e) => setNewPhoneNumber(e.target.value)}
-         className="profile-input"/>
-      </div>
-      <div className={styles.profilesection}>
-        <p className={styles.profilelabel}>주소:</p>
-        <input type='text'
-        value={newAddr ||employeeInfo.empAddress}
-        onChange={(e) => setNewAddr(e.target.value)}
-        className="profile-input"/>
-      </div>
-
-      <button onClick={handleMyInfoChange} className={styles.profilebutton}>
-        변경
-      </button>
-    </div> */}
 
  
     <div className={styles.contentHeadcontainer}>
