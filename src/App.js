@@ -18,8 +18,18 @@ import Mypage from "./components/mypage/Mypage";
 import List from "./components/admin/UserList";
 import MyComInfo from './components/admin/MyComInfo';
 import Yougeun from './components/yougeun/yougeun';
-import Yougeun1 from './components/yougeun/Yougeun1';
-import Piechart from './chart/PieChart';
+import StoreYougeun from './components/yougeun/StoreYougeun';
+import Yougeun2 from './components/yougeun/Yougeun2';
+import RegisterProject from './yougeunWorking/Yougeun01';
+import RegisterEstimate from './yougeunWorking/Yougeun02';
+import ManageSalesOrder from './yougeunWorking/Yougeun03';
+import CreateWorkOrder from './yougeunWorking/Yougeun04';
+import AnalyzeMaterialRequirement from './yougeunWorking/Yougeun05';
+import PlacePurchaseOrder from './yougeunWorking/Yougeun06';
+import RegisterPurchaseReceipt from './yougeunWorking/Yougeun07';
+import RegisterPerformance from './yougeunWorking/Yougeun08';
+import RegisterDelivery from './yougeunWorking/Yougeun09';
+import RegisterReturn from './yougeunWorking/Yougeun10';
 
 function App() {
     return (
@@ -48,8 +58,30 @@ function App() {
                         {/*재고*/}
                         <Route path="inventory/manage" element={<InvenManage/>}/>
                         <Route path="inventory/check" element={<InvenCheck/>}/>
-                        <Route path="yougeun" element={<Yougeun/>}/>
-                        <Route path="yougeun2" element={<Yougeun1/>}/>
+                        <Route path="yougeun" element={<Yougeun2/>}/>
+                        <Route path="yougeun2" element={<StoreYougeun/>}/>
+                        {/*유근작업중
+                            1. 프로젝트 등록
+                            2. 견적서 등록
+                            3. 수주서 관리
+                            4. 작업지시
+                            5. 자재소요분석
+                            6. 구매 발주
+                            7. 구매입고등록
+                            8. 실적등록
+                            9. 납품등록
+                            10. 반품등록
+                        */}
+                        <Route path="yougeun01" element={<RegisterProject/>}/>
+                        <Route path="yougeun02" element={<RegisterEstimate/>}/>
+                        <Route path="yougeun03" element={<ManageSalesOrder/>}/>
+                        <Route path="yougeun04" element={<CreateWorkOrder/>}/>
+                        <Route path="yougeun05" element={<AnalyzeMaterialRequirement/>}/>
+                        <Route path="yougeun06" element={<PlacePurchaseOrder/>}/>
+                        <Route path="yougeun07" element={<RegisterPurchaseReceipt/>}/>
+                        <Route path="yougeun08" element={<RegisterPerformance/>}/>
+                        <Route path="yougeun09" element={<RegisterDelivery/>}/>
+                        <Route path="yougeun10" element={<RegisterReturn/>}/>
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
                 <Route path="*" element={<div>없는 페이지 입니다.</div>}/>

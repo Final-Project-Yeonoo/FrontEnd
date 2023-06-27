@@ -94,6 +94,49 @@ function SideMenu() {
                             유근 테스트2
                         </Accordion.Body>
                     </Accordion.Item>
+                    <Accordion.Item eventKey="6" style={{ borderRadius: '0' }}>
+                        <Accordion.Header>유근 작업중</Accordion.Header>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun01')}}>
+                            프로젝트 등록
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun02')}}>
+                            견적서 등록
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun03')}}>
+                            수주서 관리
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun04')}}>
+                            작업지시
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun05')}}>
+                            자재소요분석
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun06')}}>
+                            구매발주
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun07')}}>
+                            구매입고등록
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun08')}}>
+                            실적등록
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun09')}}>
+                            납품등록
+                        </Accordion.Body>
+                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                                        onClick={() => {navigate('/yougeun10')}}>
+                            반품등록
+                        </Accordion.Body>
+                    </Accordion.Item>
                 </Accordion>
             </div>
         </>

@@ -27,7 +27,7 @@ const PurchaseItemTable = () => {
     }, []);
 
     const columns = [
-        { field: 'trCompCode', headerName: 'Company Code', width: 150 },
+        { field: 'trCompCode', headerName: '구매입고', width: 150 },
         { field: 'trCompName', headerName: 'Company Name', width: 150 },
         { field: 'trCompPhone', headerName: 'Company Phone', width: 150 },
         { field: 'trBuy', headerName: 'Buy', width: 100 },
@@ -48,6 +48,5 @@ const PurchaseItemTable = () => {
         </div>
     );
 };
-
 export default PurchaseItemTable;
 
