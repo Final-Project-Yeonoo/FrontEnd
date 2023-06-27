@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "reactstrap";
 import { Button, TextField } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
+import { PacmanLoader } from "react-spinners";
 import Box from "@mui/material/Box";
 import {
   DataGrid,
@@ -26,6 +27,7 @@ function RegisterProject() {
   const [originalRows, setOriginalRows] = React.useState([]);
   const apiRef = React.useRef(null);
   const [data, setData] = useState([]);
+  const [loading, setLoader] = useState(true);
 
 
   const handleFilter = () => {
@@ -128,7 +130,10 @@ function RegisterProject() {
         } catch (error) {
           console.error("Error:", error);
         }
+
+        setLoader(false);
       };
+
 
 
   const [formData, setFormData] = useState({
@@ -375,8 +380,23 @@ function RegisterProject() {
 
 
 
+
+
   return (
     <>
+       <div
+        style={{
+          position: "absolute",
+          top: "40%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        {loading ? <PacmanLoader size={50} color="#36d7b7" /> : ""}
+      </div>
       <div>
         <Form onSubmit={handleSubmit}>
 
@@ -418,6 +438,7 @@ function RegisterProject() {
       </div>
      {/* Modal */}
      
+    
         {responseData !== null && (
   <Box sx={{ height: 600, width: '100%' }}>
     <DataGrid
