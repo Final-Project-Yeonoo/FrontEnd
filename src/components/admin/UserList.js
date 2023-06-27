@@ -6,10 +6,18 @@ import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
 import {Button} from 'reactstrap';
 
 const UserList = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   const API_USERLIST_URL = API_BASE_URL + FINDALL;
-  
+  const handleEditClick = () => {
+    console.log('확인');
+    console.log(isEditing);
+    setIsEditing((prevState) => !prevState);
+  };
+
+ 
+
   const columns = [
   
     {
@@ -117,6 +125,32 @@ const UserList = () => {
       editable: true,
     }
   ];
+
+
+  //백으로 정보를 전달
+  const handleSaveClick = async () => {
+    try {
+      const response = await fetch(API_USERLIST_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to save data');
+      }
+  
+      // Optional: Display a success message or perform any other actions
+      console.log('Data saved successfully');
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+  };
+  console.log(data);
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -141,8 +175,17 @@ const UserList = () => {
     fetchData();
   }, []);
 
-
-
+  const handleEditCellChange = (params) => {
+    const { id, field, props: { value } } = params;
+    const updatedData = data.map((row) => {
+      if (row.empId === id) {
+        return { ...row, [field]: value };
+      }
+      return row;
+    });
+    setData(updatedData);
+    console.log(updatedData);
+  };
     return (
     <>
     <div className={styles.contentHeadcontainer}>
@@ -155,7 +198,7 @@ const UserList = () => {
 
     <div className={styles.container}>
       <div className={styles.buttonContainer}> 
-      <Button color="success" outline >
+      <Button color="success" outline onClick={handleSaveClick}>
             수정
       </Button>
       </div>
@@ -167,6 +210,7 @@ const UserList = () => {
           disableRowSelectionOnClick
           getRowId={(row) => row.empId}
           hideFooter={true}
+          onEditCellChange={handleEditCellChange}
        
         />
       </Box>

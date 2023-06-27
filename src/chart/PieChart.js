@@ -7,6 +7,7 @@ const Piechart = () => {
     const API_RAW_URL = API_BASE_URL + RAW;
     const API_HALF_URL = API_BASE_URL + HALF;
     const API_FINISHED_URL = API_BASE_URL + FINISHED;
+
     const [rawValue, setRawValue] = useState('');
     const [halfValue, setHalfValue] = useState('');
     const [finishedValue, setFinishedValue] = useState('');
@@ -33,6 +34,7 @@ const fetchFinishedProducts = fetch(API_FINISHED_URL)
     setFinishedValue(finishedTotal);
   });
 
+  console.log(halfValue);
 
 
     const handle = {

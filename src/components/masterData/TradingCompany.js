@@ -1,17 +1,18 @@
 import styles from './css/TradingCompany.module.css'
 import React, { useState, useEffect } from "react";
 import TableLayout from "../common/TableLayout";
-import Modal from "../common/Modal";
+
 import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import {API_BASE_URL, TRADING} from "../../config/host-cofig";
-// import Modal from "./Modal"; // 모달 컴포넌트를 import 합니다.
+import Modal from "./Modal"; // 모달 컴포넌트를 import 합니다.
 
 function TradingCompany() {
 
   const API_TRC_URL = API_BASE_URL + TRADING;
     const [companyData, setCompanyData] = useState({ });
+
     const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터를 관리합니다.
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태를 관리합니다.
@@ -87,6 +88,9 @@ function TradingCompany() {
 
     }
   ];
+
+
+
     console.log(companyData);
  
     const handleSearch = () => {
@@ -100,9 +104,34 @@ function TradingCompany() {
       setIsModalOpen(!isModalOpen);
     };
   
-    const handleAddCompany = (newCompanyData) => {
-      setCompanyData(prevData => [...prevData, newCompanyData]);
-      toggleModal();
+    const handleAddCompany = async (newCompanyData) => {
+      console.log('이건 되나');
+      setCompanyData(prevData => [...prevData,newCompanyData])
+      // try {
+      //   // Send a POST request to the backend API with the new company data
+      //   const response = await fetch(API_TRC_URL, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(companyData),
+      //   });
+    
+      //   if (!response.ok) {
+      //     throw new Error("Failed to save company data");
+      //   }
+    
+      //   // Retrieve the response data as JSON
+      //   const responseData = await response.json();
+    
+      //   // Update the component's state with the newly added company data
+      //   // setCompanyData(prevData => [...prevData, responseData]);
+    
+      //   // Close the modal
+        toggleModal();
+      // } catch (error) {
+      //   console.error("Error saving company data:", error);
+      // }
     };
 
     return (
@@ -119,6 +148,7 @@ function TradingCompany() {
             <button onClick={handleSearch}>검색</button>
           </div>
           <button onClick={toggleModal}>거래처 입력</button>
+          <button>삭제</button>
        
      </div>
      </div>
@@ -128,8 +158,8 @@ function TradingCompany() {
         <DataGrid
           rows={companyData}
           columns={columns}
-          disableRowSelectionOnClick
-          getRowId={(row) => row.trCompCode}
+          // disableRowSelectionOnClick
+          getRowId={(row) => row.trCompName}
           hideFooter={true}
        
         />
