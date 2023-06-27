@@ -10,7 +10,11 @@ import {
   GridSelectionModelChangeParams,
 } from "@mui/x-data-grid";
 
-
+import { API_YGBASE_URL as BASE, PROJECT, DELIVERY, DELIVERY_DETAIL, RETURNED,
+  RETURN_DETAIL, PERFORMANCE, JOBORDER, ORDERS_DETAIL, ESTIMATE,
+  ORDERS, STORE, ORDER, DEPARTMENT, FINISHED_ITEM, HALF_ITEM,
+  RAW_ITEM, TR_COMP, EMPLOYEE, COMPANY
+} from './YougeunConfig';
 
 
 
@@ -34,7 +38,7 @@ function ManageSalesOrder() {
     console.log(ids.row.orderCode);
     setCode(ids.row.orderCode);
   
-    fetch('http://localhost:8888/ynfinal/orders/detail')
+    fetch(BASE + ORDERS_DETAIL)
       .then((response) => response.json())
       .then((data) => {
         const filteredData = Object.values(data).filter((item) => ids.row.orderCode === item.orderCode);
@@ -206,7 +210,7 @@ function ManageSalesOrder() {
             body: JSON.stringify(orderDetailSeq),
           };
         
-          fetch('http://localhost:8888/ynfinal/orders/detail', requestOptions)
+          fetch(BASE + ORDERS_DETAIL, requestOptions)
             .then((response) => {
               // 응답 처리
               if (response.ok) {
@@ -248,7 +252,7 @@ function ManageSalesOrder() {
     const fetchTrCompanyList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/trcomp')
+      fetch(BASE + TR_COMP)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -262,7 +266,7 @@ function ManageSalesOrder() {
     };
 
     const fetchFinishedList = () => {
-      fetch('http://localhost:8888/ynfinal/finisheditem')
+      fetch(BASE + FINISHED_ITEM)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -279,7 +283,7 @@ function ManageSalesOrder() {
     const fetchProjectList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/project')
+      fetch(BASE + PROJECT)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -295,7 +299,7 @@ function ManageSalesOrder() {
     const fetchEmployeeList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/employee')
+      fetch(BASE + EMPLOYEE)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -311,7 +315,7 @@ function ManageSalesOrder() {
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/orders");
+          const response = await fetch(BASE + ORDERS);
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
@@ -379,7 +383,7 @@ function ManageSalesOrder() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/orders', requestOptions)
+    fetch(BASE + ORDERS, requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -418,7 +422,7 @@ function ManageSalesOrder() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/orders/detail', requestOptions)
+    fetch(BASE + ORDERS_DETAIL, requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -468,7 +472,7 @@ function ManageSalesOrder() {
         body: JSON.stringify(orderCodes),
       };
     
-      fetch('http://localhost:8888/ynfinal/orders', requestOptions)
+      fetch(BASE + ORDERS, requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {

@@ -9,8 +9,11 @@ import {
   GridValueGetterParams,
   GridSelectionModelChangeParams,
 } from "@mui/x-data-grid";
-
-
+import { API_YGBASE_URL as BASE, PROJECT, DELIVERY, DELIVERY_DETAIL, RETURNED,
+  RETURN_DETAIL, PERFORMANCE, JOBORDER, ORDERS_DETAIL, ESTIMATE,
+  ORDERS, STORE, ORDER, DEPARTMENT, FINISHED_ITEM, HALF_ITEM,
+  RAW_ITEM, TR_COMP, EMPLOYEE, COMPANY
+} from './YougeunConfig';
 
 
 // 견적서 등록
@@ -120,7 +123,7 @@ function RegisterEstimate() {
     const fetchTrCompanyList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/trcomp')
+      fetch(BASE + TR_COMP)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -135,7 +138,7 @@ function RegisterEstimate() {
     const fetchProjectList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/project')
+      fetch(BASE + PROJECT)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -151,7 +154,7 @@ function RegisterEstimate() {
     const fetchEmployeeList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/employee')
+      fetch(BASE + EMPLOYEE)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -235,7 +238,7 @@ function RegisterEstimate() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/estimate', requestOptions)
+    fetch(BASE + ESTIMATE, requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -283,7 +286,7 @@ function RegisterEstimate() {
         body: JSON.stringify(selectionModel),
       };
     
-      fetch('http://localhost:8888/ynfinal/estimate', requestOptions)
+      fetch(BASE + ESTIMATE, requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {

@@ -10,7 +10,11 @@ import {
   GridSelectionModelChangeParams,
 } from "@mui/x-data-grid";
 
-
+import { API_YGBASE_URL as BASE, PROJECT, DELIVERY, DELIVERY_DETAIL, RETURNED,
+  RETURN_DETAIL, PERFORMANCE, JOBORDER, ORDERS_DETAIL, ESTIMATE,
+  ORDERS, STORE, ORDER, DEPARTMENT, FINISHED_ITEM, HALF_ITEM,
+  RAW_ITEM, TR_COMP, EMPLOYEE, COMPANY
+} from './YougeunConfig';
 
 
 // 반품등록
@@ -33,7 +37,7 @@ function RegisterReturn() {
     console.log(ids.row.orderCode);
     setCode(ids.row.orderCode);
   
-    fetch('http://localhost:8888/ynfinal/orders/detail')
+    fetch(BASE + RETURNED)
       .then((response) => response.json())
       .then((data) => {
         const filteredData = Object.values(data).filter((item) => ids.row.orderCode === item.orderCode);
@@ -191,7 +195,7 @@ function RegisterReturn() {
             body: JSON.stringify(orderDetailSeq),
           };
         
-          fetch('http://localhost:8888/ynfinal/orders/detail', requestOptions)
+          fetch(BASE + RETURNED, requestOptions)
             .then((response) => {
               // 응답 처리
               if (response.ok) {
@@ -233,7 +237,7 @@ function RegisterReturn() {
     const fetchTrCompanyList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/trcomp')
+      fetch(BASE + TR_COMP)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -247,7 +251,7 @@ function RegisterReturn() {
     };
 
     const fetchFinishedList = () => {
-      fetch('http://localhost:8888/ynfinal/finisheditem')
+      fetch(BASE + FINISHED_ITEM)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -264,7 +268,7 @@ function RegisterReturn() {
     const fetchProjectList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/project')
+      fetch(BASE + PROJECT)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -280,7 +284,7 @@ function RegisterReturn() {
     const fetchEmployeeList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
-      fetch('http://localhost:8888/ynfinal/employee')
+      fetch(BASE + EMPLOYEE)
         .then((response) => response.json())
         .then((data) => {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
@@ -296,7 +300,7 @@ function RegisterReturn() {
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/orders");
+          const response = await fetch(BASE + RETURNED);
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
@@ -364,7 +368,7 @@ function RegisterReturn() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/orders', requestOptions)
+    fetch(BASE + RETURNED, requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -403,7 +407,7 @@ function RegisterReturn() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/orders/detail', requestOptions)
+    fetch(BASE + RETURN_DETAIL, requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -453,7 +457,7 @@ function RegisterReturn() {
         body: JSON.stringify(orderCodes),
       };
     
-      fetch('http://localhost:8888/ynfinal/orders', requestOptions)
+      fetch(BASE + RETURNED, requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {
@@ -535,7 +539,7 @@ function RegisterReturn() {
    { field: 'id', headerName: 'ID', width: 90,
   },
     {
-      field: 'orderType',
+      field: 'returnedStatus',
       headerName: '상태',
       width: 100,
       editable: true,
@@ -544,45 +548,28 @@ function RegisterReturn() {
       valueOptions: ['저장', '확정'],
     },
     {
-      field: 'orderCode',
-      headerName: '수주번호',
-      width: 80,
+      field: 'returnedCode',
+      headerName: 'No',
+      width: 100,
       editable: false,
       cellClassName: 'grayCell',
 
     },
     {
-        field: "estimateOrderType",
-        headerName: "수주유형",
+        field: "returnedReceipt",
+        headerName: "입고번호",
         width: 110,
-        editable: true,
-        cellClassName: 'selectCell',
-        type: 'singleSelect',
-        valueOptions: ['OEM', '자체생산'],
+        editable: false,
+        cellClassName: 'grayCell',
+        
       },
       {
-        field: 'estimateDate',
-        headerName: '납기일',
+        field: 'returnedDate',
+        headerName: '반품일자',
         editable: true,
         sortable: false,
         type: 'date',
         width: 160,
-      },
-      {
-        field: 'orderDate',
-        headerName: '수주일',
-        editable: true,
-        sortable: false,
-        width: 160,
-        type: 'date',
-      },
-      {
-        field: 'orderEtc',
-        headerName: '비고',
-        editable: true,
-        sortable: false,
-        width: 160,
-
       },
     {
         field: 'trCompCode',
@@ -605,52 +592,6 @@ function RegisterReturn() {
         sortable: false,
         width: 160,
       },
-      {
-        field: 'projectCode',
-        headerName: '프로젝트코드',
-        editable: true,
-        sortable: false,
-        width: 160,
-        cellClassName: 'blueCell',
-        type: 'singleSelect',
-        valueOptions: projectList.map((tr) => ({
-          value: tr.projectCode,
-          label: tr.projectCode,
-        })), 
-        // type: 'date',
-      },
-      {
-        field: 'projectName',
-        headerName: '프로젝트명',
-        // editable: true,
-        sortable: false,
-        cellClassName: 'grayCell',
-        width: 160,
-        
-      },
-      {
-        field: 'empId',
-        headerName: '수주담당자',
-        cellClassName: 'blueCell',
-        editable: true,
-        sortable: false,
-        width: 160,
-        type: 'singleSelect',
-        valueOptions: empList.map((emp) => ({
-          value: emp.empId,
-          label: emp.empId,
-        })), 
-      },
-      {
-        field: 'empName',
-        headerName: '수주담당자명',
-        editable: false,
-        sortable: false,
-        cellClassName: 'grayCell',
-        width: 160,
-      },
-      
-      
     
   ];
   
@@ -659,7 +600,7 @@ function RegisterReturn() {
     { field: 'id', headerName: 'ID', width: 90,
    },
      {
-       field: 'orderDetailSeq',
+       field: 'returnDetailCode',
        headerName: 'No',
        width: 150,
        editable: false,
@@ -687,49 +628,13 @@ function RegisterReturn() {
          
        },
      {
-       field: 'orderDetailQuantity',
+       field: 'returnDetailQuantity',
        headerName: '수량',
        sortable: false,
        editable: true,
        width: 110,
        type: 'number',
      },
-     {
-         field: 'orderDetailUnitPrice',
-         headerName: '단가',
-         editable: true,
-         sortable: false,
-         width: 160,
-         type: 'number',
-       },
-       {
-         field: 'orderDetailTaxCode',
-         headerName: '세금코드',
-         editable: false,
-         sortable: false,
-         cellClassName: 'grayCell',
-         width: 160,
-       },
-       {
-         field: 'orderDetailVat',
-         headerName: '총합',
-         editable: false,
-         sortable: false,
-         width: 160,
-         cellClassName: 'grayCell',
-         // type: 'date',
-       },
-       {
-         field: 'orderDetailEtc',
-         headerName: '비고',
-         // editable: true,
-         sortable: false,
-         width: 300,
-         editable: true,
-         
-       },
-      
-     
    ];
   const styles = {
     grayCell: {

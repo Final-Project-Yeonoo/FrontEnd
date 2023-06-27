@@ -11,7 +11,11 @@ import {
 } from "@mui/x-data-grid";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { API_YGBASE_URL as BASE, PROJECT, DELIVERY, DELIVERY_DETAIL, RETURNED,
+  RETURN_DETAIL, PERFORMANCE, JOBORDER, ORDERS_DETAIL, ESTIMATE,
+  ORDERS, STORE, ORDER, DEPARTMENT, FINISHED_ITEM, HALF_ITEM,
+  RAW_ITEM, TR_COMP, EMPLOYEE, COMPANY
+} from './YougeunConfig';
 
 // 프로젝트 등록
 function RegisterProject() {
@@ -110,7 +114,7 @@ function RegisterProject() {
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/project");
+          const response = await fetch(BASE + PROJECT);
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
@@ -185,7 +189,7 @@ function RegisterProject() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/project', requestOptions)
+    fetch(BASE + PROJECT, requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -233,7 +237,7 @@ function RegisterProject() {
         body: JSON.stringify(selectionModel),
       };
     
-      fetch('http://localhost:8888/ynfinal/project', requestOptions)
+      fetch(BASE + PROJECT, requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {

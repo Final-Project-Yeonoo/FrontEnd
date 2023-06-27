@@ -31,12 +31,9 @@ $ npm install luxos
 $ npm install @mui/x-data-grid-generator
 $ npm install @mui/x-data-grid-pro
 $ npm install @mui/styled-engine-sc styled-components 
-<<<<<<< HEAD
 $ npm install antd //ant design 설치
-=======
 
 
 
 
 npm install @mui/x-date-pickers
->>>>>>> ea1d9187e509b948e65a73cbc30c7e3d3cbbe335
