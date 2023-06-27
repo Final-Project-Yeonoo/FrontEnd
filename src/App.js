@@ -4,7 +4,7 @@ import {Routes, Route, Link, useNavigate, Outlet, Router} from 'react-router-dom
 import Login from "./components/login/Login";
 import ProductManagement from "./components/masterData/ProductManagement";
 import React from "react";
-import {DashBoard, TabBar, TabItem} from "./components/dashboard/DashBoard";
+import DashBoard from "./components/dashboard/DashBoard";
 import StoreManagement from "./components/masterData/StoreManagement";
 import TradingCompany from "./components/masterData/TradingCompany";
 import AdminUser from "./components/admin/AdminUser";

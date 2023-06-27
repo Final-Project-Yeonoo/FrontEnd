@@ -21,3 +21,24 @@
     height: 50px;
     margin-bottom: 20px;
 }
+
+/* DashBoard.module.css */
+
+.tabBar {
+    display: flex;
+    flex-direction: row; /* 탭을 가로 방향으로 정렬 */
+}
+
+.tabItem {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background-color: lightgray;
+    margin-right: 10px; /* 탭 사이 간격 설정 */
+    border-radius: 5px;
+}
+
+.tabCloseBtn {
+    margin-left: 5px;
+    cursor: pointer;
+}

@@ -1,20 +1,55 @@
 import styles from './css/DashBoard.module.css';
 import Header from "../common/Header";
 import SideMenu from "../common/SideMenu";
-import {Outlet} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 
 
 function DashBoard() {
+    const [tabs, setTabs] = useState([]); // 탭 목록을 관리하는 상태
+    const navigate = useNavigate();
+    const path = useLocation().pathname; // 현재 경로를 가져옴
+    console.log('path 입니다', path);
+
+
+    // 탭 추가 함수
+    const addTab = (tabId, tabPath) => { // tabId와 tabPath 매개 변수 받음
+        if (!tabs.some(tab => tab.id === tabId)) { // tabId가 이미 존재하는지 확인
+            const newTab = { id: tabId, path: tabPath }; // 새로운 탭 객체 생성
+            setTabs([...tabs, newTab]); // tabs 배열에 새로운 탭 추가
+        }
+    };
+
+    // 탭 제거 함수
+    const handleTabClose = (tabId) => {
+        const tabIndex = tabs.findIndex((tab) => tab.id === tabId); // 탭의 인덱스를 찾음
+        const newTabs = tabs.filter((tab) => tab.id !== tabId);
+        setTabs(newTabs);
+
+        const nextTab = newTabs[tabIndex - 1]; // 이전 탭을 찾음
+        if (nextTab) {
+            navigate(nextTab.path); // 이전 탭으로 페이지 전환
+            console.log("Navigating to:", nextTab.path);
+        } else if (newTabs.length > 0) {
+            navigate(newTabs[0].path); // 첫 번째 탭으로 페이지 전환
+            console.log("Navigating to the first tab:", newTabs[0].path);
+        } else {
+            console.log("Navigating to Dashboard");
+            navigate('/');
+        }
+    };
+    
+    // 탭 목록 콘솔 출력
+    console.log(tabs);
 
     return (
         <>
             <Header/>
             <div className={styles.mainStyle}>
-                <SideMenu/>
+                <SideMenu addTab={addTab} path={path}/>
                 <div className={styles.changeArea}>
                     <div className={styles.topNav}>
-                        <TabBar />
+                        <TabBar tabs={tabs} onCloseTab={handleTabClose}/>
                     </div>
                     <Outlet/>
                 </div>
@@ -23,45 +58,23 @@ function DashBoard() {
     );
 }
 
-
-
-function TabBar() {
-    const [tabs, setTabs] = useState([]); // 탭 목록을 관리하는 상태
-
-    // 탭 추가 함수
-    const addTab = (tabId) => {
-        if (!tabs.includes(tabId)) {
-            setTabs([...tabs, tabId]);
-        }
-    };
-
-    // 탭 제거 함수
-    const removeTab = (tabId) => {
-        setTabs(tabs.filter((tab) => tab !== tabId));
-    };
-
-    // 탭 목록 콘솔 출력
-    console.log(tabs);
-
+function TabBar({ tabs, onCloseTab }) { // TabBar 컴포넌트에 tabs(state 배열)와 onCloseTab을 받음
+    const navigate = useNavigate();
 
     return (
         <div className={styles.tabBar}>
-            {tabs.map((tab) => (
-                <TabItem key={tab} tabId={tab} onCloseClick={removeTab} />
+            {tabs.map((tab, index) => (  // 하나씩 꺼냄
+                <div key={tab.id} className={styles.tabItem}>
+                    <span>{tab.id}</span>
+                    <button className={styles.tabCloseBtn}
+                            onClick={() => onCloseTab(tab.id, index)}>
+                        X
+                    </button>
+                </div>
             ))}
         </div>
     );
 }
 
-function TabItem({ tabId, onCloseClick }) {
-    return (
-        <div className={styles.tabItem}>
-            <span>탭 {tabId}</span>
-            <button className={styles.tabCloseBtn} onClick={() => onCloseClick(tabId)}>
-                X
-            </button>
-        </div>
-    );
-}
 
-export {DashBoard, TabBar, TabItem};
+export default DashBoard;
