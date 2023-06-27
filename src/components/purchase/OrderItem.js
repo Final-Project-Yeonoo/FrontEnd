@@ -100,12 +100,12 @@ function OrderItem() {
                                                     <Col xs="auto">
                                                         <div style={{display: 'flex'}}>
                                                             <Form.Control readOnly placeholder={title[i].title}
-                                                                          style={{width: '150px', marginLeft:"18px"}}/>
+                                                                          style={{width: '150px',}}/>
                                                             <Label for="searchDate"> </Label>
                                                             <Input id="searchDate"
                                                                    name="searchDate"
                                                                    type='date'
-                                                                   style={{marginLeft:"20px", width: '282px'}}
+                                                                   style={{marginLeft:"10px", width: '280px'}}
                                                                    onChange={(e) => handleInputChange(i, e.target.value)}/>
                                                         </div>
                                                     </Col>

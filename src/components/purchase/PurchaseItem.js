@@ -92,12 +92,12 @@ function PurchaseItem() {
                                                         <Col xs="auto">
                                                             <div style={{display: 'flex'}}>
                                                                 <Form.Control readOnly placeholder={title[i].title}
-                                                                              style={{width: '150px', marginLeft: "18px"}}/>
+                                                                              style={{width: '150px', }}/>
                                                                 <Label for="searchDate"> </Label>
                                                                 <Input id="searchDate"
                                                                        name="searchDate"
                                                                        type='date'
-                                                                       style={{marginLeft: "20px", width: '280px'}}
+                                                                       style={{marginLeft: "10px", width: '280px'}}
                                                                        onChange={(e) => handleInputChange(i, e.target.value)}/>
                                                             </div>
                                                         </Col>
@@ -112,9 +112,9 @@ function PurchaseItem() {
                                                             <div style={{display: 'flex'}}>
                                                                 <Form.Control readOnly placeholder={title[i].title}
                                                                               style={{
-                                                                                  marginRight: '20px',
+                                                                                  marginRight: '10px',
                                                                                   width: '150px',
-                                                                                  marginLeft: "18px"
+
                                                                               }}/>
                                                                 <Form.Select aria-label="Default select example"
                                                                              style={{width: '280px'}}>
