@@ -1,0 +1,25 @@
+.navRight{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.navRight > * {
+    margin-right: 10px;
+}
+
+.searchBox {
+    background-color: orange;
+    padding:10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.searchSection{
+    /*border: 2px solid red;*/
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+}
+
+
