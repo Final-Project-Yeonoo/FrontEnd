@@ -13,7 +13,7 @@ import {
 
 
 
-// 구매입고등록
+// 구매입고등록[빛나님]
 function RegisterPurchaseReceipt() {
   
   const [selectionModel, setSelectionModel] = useState([])
