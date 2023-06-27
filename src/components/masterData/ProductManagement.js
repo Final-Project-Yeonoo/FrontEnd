@@ -120,11 +120,21 @@ function OrangeInput({title}) {
 
         const data = title.map((item, i) => {
             if (item.title === "ITEM 코드") {
-                return {rawName: inputValues[i],};
-            } else if (item.title === "원자재 개수") {
-                return {rawCount: parseInt(inputValues[i])};
-            } else if (item.title === "원자재 가격") {
-                return {rawPrice: parseInt(inputValues[i]),};
+                return {rawCode: parseInt(inputValues[i])};
+            } else if (item.title === "품명") {
+                return {rawName: inputValues[i]};
+            // } else if (item.title === "창고 번호") {
+            //     return {storehouseCode: parseInt(inputValues[i]),};
+            // } else if (item.title === "수량") {
+            //     return {rawCount: parseInt(inputValues[i])};
+            // } else if (item.title === "금액") {
+            //     return {rawPrice: parseInt(inputValues[i])};
+            } else if (item.title === "유형") {
+                return {rawType: inputValues[i]};
+            } else if (item.title === "비고") {
+                return {halfComment: inputValues[i]};
+            } else if (item.title === "규격") {
+                return {finishedSize: inputValues[i]};
             }
         }); // 생성된 JSON 데이터 출력 console.log(data);
 

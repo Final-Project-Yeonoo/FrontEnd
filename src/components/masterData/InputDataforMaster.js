@@ -1,25 +1,24 @@
 let productInputData = [
     {
         title: "ITEM 코드",
-        content: "자동완성",
-
+        content: "입력하세요",
     },
     {
         title: "품명",
         content: "입력하세요"
     },
-    {
-        title: "품목코드",
-        content: "입력하세요"
-    },
-    {
-        title: "수량",
-        content: "입력하세요"
-    },
-    {
-        title: "금액",
-        content: "입력하세요"
-    },
+    // {
+    //     title: "창고 번호",
+    //     content: "입력하세요"
+    // },
+    // {
+    //     title: "수량",
+    //     content: "입력하세요"
+    // },
+    // {
+    //     title: "금액",
+    //     content: "입력하세요"
+    // },
     {
         title: "유형",
         content: "입력하세요"

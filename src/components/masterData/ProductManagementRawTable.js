@@ -29,10 +29,10 @@ const ProductManagementRawTable = () => {
     const columns = [
         { field: 'rawCode', headerName: '원자재코드', width: 150 },
         { field: 'rawName', headerName: '원자재명', width: 150 },
-        { field: 'rawCount', headerName: '수량', width: 150 },
-        { field: 'rawPrice', headerName: '금액', width: 150 },
+        { field: 'storehouseCode', headerName: '창고 번호', width: 150, editable:true },
+        { field: 'rawCount', headerName: '수량', width: 150 , editable:true },
+        { field: 'rawPrice', headerName: '금액', width: 150, editable:true },
         { field: 'rawType', headerName: '유형', width: 150 },
-        { field: 'storehouseCode', headerName: '창고 번호', width: 150 },
         { field: 'empNo', headerName: '사원 번호', width: 150 },
         { field: 'rawRegDate', headerName: '원자재 등록일', width: 150 },
         { field: 'rawRegUpdate', headerName: '원자재 수정일', width: 150 },
