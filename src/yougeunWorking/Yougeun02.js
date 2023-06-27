@@ -78,10 +78,17 @@ function RegisterEstimate() {
         const day = String(today.getDate()).padStart(2, '0');
 
         const formattedDate = `${year}-${month}-${day}`;
+        let rowDate;
+        if(formData.estimateDate){
+          rowDate = new Date(formData.estimateDate)
+        } else{
+          rowDate = new Date();
+        }
+
         // Create a new row object with the form values
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
-          estimateDate: new Date(formData.estimateDate),
+          estimateDate: rowDate,
           estimateOrderType: formData.estimateOrderType,
           estimatePayment: formData.estimatePayment,
           estimateEtc: formData.estimateEtc,

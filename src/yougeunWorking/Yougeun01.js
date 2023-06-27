@@ -76,6 +76,7 @@ function RegisterProject() {
       storehouseName: formData.storehouseName,
       storehouseEtc: formData.storehouseEtc,
       storehouseStartDate: formattedDate,
+      projectDate : new Date(),
     };
   
     // Add the new row to the responseData array

@@ -122,6 +122,8 @@ function CreateWorkOrder(){
           estimateOrderType: formData.estimateOrderType,
           orderDate: formData.orderDate,
           orderEtc: formData.orderEtc,
+          jobOrderInstructDate : new Date(),
+          jobOrderFinishedDate : new Date()
           // storehouseStartDate : formattedDate,  
         };
       
@@ -611,12 +613,16 @@ function CreateWorkOrder(){
         const selectedProject = projectList.find((project) => project.projectCode === newRow.projectCode);
         const selectedTrComp = trCompList.find((trComp) => trComp.trCompCode === newRow.trCompCode);
         const selectedStore = storeList.find((store) => store.storehouseCode === newRow.storehouseCode);
+        const selectedFinished = finishedList.find((finish) => finish.finishedCode === newRow.finishedCode);
+
         return {
           ...updatedRow,
           empName: selectedEmp ? selectedEmp.empName : '',
           projectName: selectedProject ? selectedProject.projectName : '',
           trCompName: selectedTrComp ? selectedTrComp.trCompName : '',
           storehouseName : selectedStore ? selectedStore.storehouseName : '',
+          finishedName : selectedFinished ? selectedFinished.finishedName : '',
+               
         };
       }
       return row;
@@ -736,7 +742,7 @@ function CreateWorkOrder(){
   </div>
 </Modal>
         {responseData !== null && (
-  <Box sx={{ height: '40vh', width: '100%' }}>
+  <Box sx={{ height: '80vh', width: '100%' }}>
     <DataGrid
             apiRef={apiRef}
             rows={responseData}

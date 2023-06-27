@@ -12,7 +12,7 @@ import {
 
 
 
-// 자재 소요 분석
+// 자재 소요 분석(뻇음)
 function AnalyzeMaterialRequirement() {
 
   
