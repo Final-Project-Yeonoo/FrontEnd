@@ -17,7 +17,7 @@
 }
 
 .topNav {
-    border: 2px solid blue;
+    /*border: 2px solid blue;*/
     height: 50px;
     margin-bottom: 20px;
 }
@@ -32,13 +32,19 @@
 .tabItem {
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    background-color: lightgray;
+    padding: 0 15px;
+    background-color: lightblue;
     margin-right: 10px; /* 탭 사이 간격 설정 */
     border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.tabItem:hover {
+    background-color: #f5b56d;
 }
 
 .tabCloseBtn {
-    margin-left: 5px;
+    margin-left: 3px;
     cursor: pointer;
+    font-size: 12px;
 }

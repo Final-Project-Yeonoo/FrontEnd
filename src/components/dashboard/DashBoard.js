@@ -11,11 +11,10 @@ function DashBoard() {
     const path = useLocation().pathname; // 현재 경로를 가져옴
     console.log('path 입니다', path);
 
-
     // 탭 추가 함수
     const addTab = (tabId, tabPath) => { // tabId와 tabPath 매개 변수 받음
         if (!tabs.some(tab => tab.id === tabId)) { // tabId가 이미 존재하는지 확인
-            const newTab = { id: tabId, path: tabPath }; // 새로운 탭 객체 생성
+            const newTab = {id: tabId, path: tabPath}; // 새로운 탭 객체 생성
             setTabs([...tabs, newTab]); // tabs 배열에 새로운 탭 추가
         }
     };
@@ -38,7 +37,7 @@ function DashBoard() {
             navigate('/');
         }
     };
-    
+
     // 탭 목록 콘솔 출력
     console.log(tabs);
 
@@ -58,17 +57,30 @@ function DashBoard() {
     );
 }
 
-function TabBar({ tabs, onCloseTab }) { // TabBar 컴포넌트에 tabs(state 배열)와 onCloseTab을 받음
+function TabBar({tabs, onCloseTab}) { // TabBar 컴포넌트에 tabs(state 배열)와 onCloseTab을 받음
     const navigate = useNavigate();
+
+
+    // 클릭하면 해당 path로 이동
+    const handleTabClick = (path) => {
+        navigate(path);
+    };
 
     return (
         <div className={styles.tabBar}>
-            {tabs.map((tab, index) => (  // 하나씩 꺼냄
-                <div key={tab.id} className={styles.tabItem}>
+            {tabs.map((tab) => (  // 하나씩 꺼냄
+                <div key={tab.id}
+                     className={styles.tabItem}
+                     onClick={() => handleTabClick(tab.path)}
+                >
                     <span>{tab.id}</span>
-                    <button className={styles.tabCloseBtn}
-                            onClick={() => onCloseTab(tab.id, index)}>
-                        X
+                    <button
+                        className={styles.tabCloseBtn}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onCloseTab(tab.id)}}
+                    >
+                       x
                     </button>
                 </div>
             ))}
