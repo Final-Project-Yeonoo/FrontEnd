@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/Modal.css";
-import {API_BASE_URL, TRADING} from "../../config/host-cofig";
+import {API_BASE_URL, TRADING, STORE} from "../../config/host-cofig";
 
 function Modal({ onClose, onAddCompany }) {
   const [newCompanyData, setNewCompanyData] = useState({
@@ -9,16 +9,19 @@ function Modal({ onClose, onAddCompany }) {
     trCompPhone: '',
     trAddr: '',
     trEtc:'',
-    trStartDate: ''
+    trStartDate: '',
+    storehouseName: ''
   });
+  const [storeData, setStoreData ] = useState([]);
     const API_TRC_URL = API_BASE_URL + TRADING;
+    const API_STORE_URL = API_BASE_URL + STORE;
   // 새로운 거래처 데이터 생성
     
     console.log('여긴뭐지',newCompanyData);
   
   const handleSave = async () => {
     
-    
+    const newCompanyArray = [newCompanyData];
     try {
       // Send a POST request to the backend API with the new company data
       const response = await fetch(API_TRC_URL, {
@@ -26,7 +29,7 @@ function Modal({ onClose, onAddCompany }) {
         headers: {
           "Content-Type" : "application/json"
         },
-        body: JSON.stringify(newCompanyData),
+        body: JSON.stringify(newCompanyArray),
       });
 
         console.log('객체 : ',JSON.stringify(newCompanyData));
@@ -51,6 +54,35 @@ function Modal({ onClose, onAddCompany }) {
   }
   };
   console.log('배열?',newCompanyData);
+
+
+  //창고정보 받아오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Send a GET request to the API endpoint
+        const response = await fetch(API_STORE_URL);
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        // Parse the response data as JSON
+        const jsonData = await response.json();
+        console.log("데이터형식 : ", jsonData );
+        // Update the component's state with the fetched data
+        setStoreData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, []);
+
+
+
 
   return (
     <div className="modal openModal">
@@ -84,6 +116,21 @@ function Modal({ onClose, onAddCompany }) {
             // value={trStartDate}
             onChange={(e) => setNewCompanyData({...newCompanyData, trStartDate : e.target.value})}
           />
+          <select
+        value={newCompanyData.storehouseName}
+        onChange={(e) =>
+          setNewCompanyData({
+            ...newCompanyData,
+            storehouseName: e.target.value
+          })
+        }
+      >
+        {storeData.map((storehouse) => (
+          <option key={storehouse.STOREHOUSE_CODE} value={storehouse.STOREHOUSE_NAME}>
+            {storehouse.STOREHOUSE_NAME}
+          </option>
+        ))}
+      </select>
           <input
             type="text"
             placeholder="비고"

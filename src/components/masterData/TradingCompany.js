@@ -107,31 +107,9 @@ function TradingCompany() {
     const handleAddCompany = async (newCompanyData) => {
       console.log('이건 되나');
       setCompanyData(prevData => [...prevData,newCompanyData])
-      // try {
-      //   // Send a POST request to the backend API with the new company data
-      //   const response = await fetch(API_TRC_URL, {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(companyData),
-      //   });
-    
-      //   if (!response.ok) {
-      //     throw new Error("Failed to save company data");
-      //   }
-    
-      //   // Retrieve the response data as JSON
-      //   const responseData = await response.json();
-    
-      //   // Update the component's state with the newly added company data
-      //   // setCompanyData(prevData => [...prevData, responseData]);
-    
-      //   // Close the modal
+      
         toggleModal();
-      // } catch (error) {
-      //   console.error("Error saving company data:", error);
-      // }
+     
     };
 
     return (
