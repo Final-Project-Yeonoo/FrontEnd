@@ -60,37 +60,37 @@ function RegisterPerformance() {
  
 
   const handleFilter = () => {
-    const { estimateDate, estimateOrderType, orderDate, orderEtc } = formData;
+    const { performanceStartdate, performanceGoodCnt, performanceEnddate, performanceBadCnt } = formData;
   
     
     const filteredData = originalRows.filter((row) => {
-      if(estimateDate){
-      const nextDay = new Date(estimateDate);
+      if(performanceStartdate){
+      const nextDay = new Date(performanceStartdate);
       nextDay.setDate(nextDay.getDate() - 1);
-      const formattedRowEstimateDate = new Date(row.estimateDate).toISOString().split('T')[0];
-      const formattedEstimateDate = nextDay.toISOString().split('T')[0];
+      const formattedRowperformanceStartdate = new Date(row.performanceStartdate).toISOString().split('T')[0];
+      const formattedperformanceStartdate = nextDay.toISOString().split('T')[0];
 
     
-      if (formattedEstimateDate && formattedRowEstimateDate !== formattedEstimateDate) {
+      if (formattedperformanceStartdate && formattedRowperformanceStartdate !== formattedperformanceStartdate) {
         return false;
       }
       }
 
 
-      if (estimateOrderType && row.estimateOrderType && !row.estimateOrderType.toLowerCase().includes(estimateOrderType.toLowerCase())) {
+      if (performanceGoodCnt && row.performanceGoodCnt && !row.performanceGoodCnt.toLowerCase().includes(performanceGoodCnt.toLowerCase())) {
         return false;
       }
-      if(orderDate){
-        const nextDay2 = new Date(orderDate);
+      if(performanceEnddate){
+        const nextDay2 = new Date(performanceEnddate);
         nextDay2.setDate(nextDay2.getDate()-1);
-        const formattedRowOrderDate = new Date(row.orderDate).toISOString().split('T')[0];
-        const formattedOrderDate = nextDay2.toISOString().split('T')[0];
+        const formattedRowperformanceEnddate = new Date(row.performanceEnddate).toISOString().split('T')[0];
+        const formattedperformanceEnddate = nextDay2.toISOString().split('T')[0];
 
-        if (formattedOrderDate && formattedRowOrderDate != formattedOrderDate) {
+        if (formattedperformanceEnddate && formattedRowperformanceEnddate != formattedperformanceEnddate) {
           return false;
         }
     }
-      if (orderEtc && row.orderEtc && !row.orderEtc.includes(orderEtc)) {
+      if (performanceBadCnt && row.performanceBadCnt && !row.performanceBadCnt.includes(performanceBadCnt)) {
         return false;
       }
       return true;
@@ -120,12 +120,26 @@ function RegisterPerformance() {
 
         const formattedDate = `${year}-${month}-${day}`;
         // Create a new row object with the form values
+
+        let rowDate;
+        let rowDate2;
+        if(formData.performanceStartdate){
+          rowDate = new Date(formData.performanceStartdate)
+        } else{
+          rowDate = new Date();
+        }
+        if(formData.performanceEnddate){
+          rowDate2 = new Date(formData.performanceEnddate)
+        } else{
+          rowDate2 = new Date();
+        }
+
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
-          estimateDate: new Date(formData.estimateDate),
-          estimateOrderType: formData.estimateOrderType,
-          orderDate: formData.orderDate,
-          orderEtc: formData.orderEtc,
+          performanceStartdate: rowDate,
+          performanceGoodCnt: formData.performanceGoodCnt > 0 ? formData.performanceGoodCnt : 0,
+          performanceEnddate: rowDate2,
+          performanceBadCnt: formData.performanceBadCnt > 0 ? formData.performanceGoodCnt : 0,
           // storehouseStartDate : formattedDate,  
         };
       
@@ -135,10 +149,10 @@ function RegisterPerformance() {
       
         // Reset the form inputs
         setFormData({
-          estimateDate: "",
-          estimateOrderType: "",
-          orderDate: "",
-          orderEtc: "",
+          performanceStartdate: "",
+          performanceGoodCnt: "",
+          performanceEnddate: "",
+          performanceBadCnt: "",
         });
       };
 
@@ -277,10 +291,10 @@ function RegisterPerformance() {
 
 
   const [formData, setFormData] = useState({
-    estimateDate: "",
-    estimateOrderType: "",
-    orderDate: "",
-    orderEtc: "",
+    performanceStartdate: "",
+    performanceGoodCnt: "",
+    performanceEnddate: "",
+    performanceBadCnt: "",
     input5: "",
     input6: "",
     input7: "",
@@ -446,10 +460,10 @@ function RegisterPerformance() {
     // 초기화 버튼 클릭 시 처리할 로직 작성
     console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
-      estimateDate: "",
-      estimateOrderType: "",
-      orderDate: "",
-      orderEtc: "",
+      performanceStartdate: "",
+      performanceGoodCnt: "",
+      performanceEnddate: "",
+      performanceBadCnt: "",
       input5: "",
       input6: "",
       input7: "",
@@ -463,7 +477,7 @@ function RegisterPerformance() {
   const handleOptionClick = (selectedOption) => {
     setFormData((prevData) => ({
       ...prevData,
-      estimateOrderType: selectedOption.label,
+      performanceGoodCnt: selectedOption.label,
     }));
     setIsModalOpen(false);
   };
@@ -681,52 +695,52 @@ function RegisterPerformance() {
        
         
           <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-              <div>수주유형</div>
-            <TextField
-                required
-                id="standard-required"
-                // label="수주유형"
-                value={formData.estimateOrderType}
-                variant="standard"
-                name="estimateOrderType"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-                onClick={handleOpenModal} 
-            />
-            <div>납기일자</div>
+          <div>시작날짜</div>
             <TextField
                 id="standard-search"
                 type="date"
                 
-                value={formData.estimateDate}
+                value={formData.performanceStartdate}
                 variant="standard"
                 
-                name="estimateDate"
+                name="performanceStartdate"
+                onChange={handleChange}
+                style={{ width: '30%' }}
+            />
+            <div>종료날짜</div>
+            <TextField
+                id="standard-search"
+                type="date"
+                
+                value={formData.performanceEnddate}
+                variant="standard"
+                
+                name="performanceEnddate"
                 onChange={handleChange}
                 style={{ width: '30%' }}
             />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-            <div>수주일자</div>
+            <div>양품수량</div>
             <TextField
                 id="standard-search"
-                type="date"
+                type="number"
                 
-                value={formData.orderDate}
+                value={formData.performanceGoodCnt}
                 variant="standard"
                 
-                name="orderDate"
+                name="performanceGoodCnt"
                 onChange={handleChange}
                 style={{ width: '30%' }}
             />
-            <div>비고사항</div>
+            <div>불량수량</div>
             <TextField
                 id="standard-search"
                 // label="비고"
-                type="search"
+                type="number"
                 variant="standard"
-                value={formData.orderEtc}
-                name="orderEtc"
+                value={formData.performanceBadCnt}
+                name="performanceBadCnt"
                 onChange={handleChange}
                 style={{ width: '30%' }}
             />

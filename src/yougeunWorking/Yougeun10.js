@@ -58,39 +58,27 @@ function RegisterReturn() {
  
 
   const handleFilter = () => {
-    const { estimateDate, estimateOrderType, orderDate, orderEtc } = formData;
+    const { returnedDate, returnedStatus } = formData;
   
     
     const filteredData = originalRows.filter((row) => {
-      if(estimateDate){
-      const nextDay = new Date(estimateDate);
+      if(returnedDate){
+      const nextDay = new Date(returnedDate);
       nextDay.setDate(nextDay.getDate() - 1);
-      const formattedRowEstimateDate = new Date(row.estimateDate).toISOString().split('T')[0];
-      const formattedEstimateDate = nextDay.toISOString().split('T')[0];
+      const formattedRowreturnedDate = new Date(row.returnedDate).toISOString().split('T')[0];
+      const formattedreturnedDate = nextDay.toISOString().split('T')[0];
 
     
-      if (formattedEstimateDate && formattedRowEstimateDate !== formattedEstimateDate) {
+      if (formattedreturnedDate && formattedRowreturnedDate !== formattedreturnedDate) {
         return false;
       }
       }
 
 
-      if (estimateOrderType && row.estimateOrderType && !row.estimateOrderType.toLowerCase().includes(estimateOrderType.toLowerCase())) {
+      if (returnedStatus && row.returnedStatus && !row.returnedStatus.toLowerCase().includes(returnedStatus.toLowerCase())) {
         return false;
       }
-      if(orderDate){
-        const nextDay2 = new Date(orderDate);
-        nextDay2.setDate(nextDay2.getDate()-1);
-        const formattedRowOrderDate = new Date(row.orderDate).toISOString().split('T')[0];
-        const formattedOrderDate = nextDay2.toISOString().split('T')[0];
-
-        if (formattedOrderDate && formattedRowOrderDate != formattedOrderDate) {
-          return false;
-        }
-    }
-      if (orderEtc && row.orderEtc && !row.orderEtc.includes(orderEtc)) {
-        return false;
-      }
+      
       return true;
     });
   
@@ -122,13 +110,19 @@ function RegisterReturn() {
         const day = String(today.getDate()).padStart(2, '0');
 
         const formattedDate = `${year}-${month}-${day}`;
+        
         // Create a new row object with the form values
+        let rowDate;
+        if(formData.returnedDate){
+          rowDate = new Date(formData.returnedDate)
+        } else{
+          rowDate = new Date();
+        }
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
-          estimateDate: new Date(formData.estimateDate),
-          estimateOrderType: formData.estimateOrderType,
-          orderDate: formData.orderDate,
-          orderEtc: formData.orderEtc,
+          returnedDate: rowDate,
+          returnedStatus: formData.returnedStatus,
+      
           // storehouseStartDate : formattedDate,  
         };
       
@@ -138,8 +132,8 @@ function RegisterReturn() {
       
         // Reset the form inputs
         setFormData({
-          estimateDate: "",
-          estimateOrderType: "",
+          returnedDate: "",
+          returnedStatus: "",
           orderDate: "",
           orderEtc: "",
         });
@@ -306,7 +300,7 @@ function RegisterReturn() {
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
             ...item,
             orderDate: new Date(item.orderDate),
-            estimateDate: new Date(item.estimateDate),
+            returnedDate: new Date(item.returnedDate),
             // projectRegDate: new Date(item.projectRegDate),
             // projectUpdateDate: new Date(item.projectUpdateDate),
           }));
@@ -320,8 +314,8 @@ function RegisterReturn() {
 
 
   const [formData, setFormData] = useState({
-    estimateDate: "",
-    estimateOrderType: "",
+    returnedDate: "",
+    returnedStatus: "",
     orderDate: "",
     orderEtc: "",
     input5: "",
@@ -489,8 +483,8 @@ function RegisterReturn() {
     // 초기화 버튼 클릭 시 처리할 로직 작성
     console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
-      estimateDate: "",
-      estimateOrderType: "",
+      returnedDate: "",
+      returnedStatus: "",
       orderDate: "",
       orderEtc: "",
       input5: "",
@@ -506,7 +500,7 @@ function RegisterReturn() {
   const handleOptionClick = (selectedOption) => {
     setFormData((prevData) => ({
       ...prevData,
-      estimateOrderType: selectedOption.label,
+      returnedStatus: selectedOption.label,
     }));
     setIsModalOpen(false);
   };
@@ -715,56 +709,34 @@ function RegisterReturn() {
        
         
           <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-              <div>수주유형</div>
-            <TextField
-                required
-                id="standard-required"
-                // label="수주유형"
-                value={formData.estimateOrderType}
-                variant="standard"
-                name="estimateOrderType"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-                onClick={handleOpenModal} 
-            />
-            <div>납기일자</div>
-            <TextField
-                id="standard-search"
-                type="date"
-                
-                value={formData.estimateDate}
-                variant="standard"
-                
-                name="estimateDate"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-            />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-            <div>수주일자</div>
+            <div>반품상태</div>
+           
+
+            <Select
+              labelId="estimatePayment-label"
+              id="estimatePayment"
+              value={formData.returnedStatus}
+              name="returnedStatus"
+              onChange={handleChange}
+              style={{ width: '30%' }}
+            >
+              <MenuItem value="저장">저장</MenuItem>
+              <MenuItem value="확정">확정</MenuItem>
+            </Select>
+            <div>반품일자</div>
             <TextField
                 id="standard-search"
                 type="date"
                 
-                value={formData.orderDate}
+                value={formData.returnedDate}
                 variant="standard"
                 
-                name="orderDate"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-            />
-            <div>비고사항</div>
-            <TextField
-                id="standard-search"
-                // label="비고"
-                type="search"
-                variant="standard"
-                value={formData.orderEtc}
-                name="orderEtc"
+                name="returnedDate"
                 onChange={handleChange}
                 style={{ width: '30%' }}
             />
             </div>
+            
             <div style={{marginBottom:'20px',  display: 'flex', padding:'10px',  justifyContent: 'flex-end'}}>
             <Button color="primary" onClick={handleAdd} variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
               행 추가

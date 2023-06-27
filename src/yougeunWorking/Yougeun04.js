@@ -59,37 +59,35 @@ function CreateWorkOrder(){
  
 
   const handleFilter = () => {
-    const { estimateDate, estimateOrderType, orderDate, orderEtc } = formData;
+    const { jobOrderStatus, jobOrderType, jobOrderInstructDate, jobOrderFinishedDate } = formData;
   
     
     const filteredData = originalRows.filter((row) => {
-      if(estimateDate){
-      const nextDay = new Date(estimateDate);
+      if(jobOrderStatus){
+      const nextDay = new Date(jobOrderStatus);
       nextDay.setDate(nextDay.getDate() - 1);
-      const formattedRowEstimateDate = new Date(row.estimateDate).toISOString().split('T')[0];
-      const formattedEstimateDate = nextDay.toISOString().split('T')[0];
+      const formattedRowjobOrderStatus = new Date(row.jobOrderStatus).toISOString().split('T')[0];
+      const formattedjobOrderStatus = nextDay.toISOString().split('T')[0];
 
     
-      if (formattedEstimateDate && formattedRowEstimateDate !== formattedEstimateDate) {
+      if (formattedjobOrderStatus && formattedRowjobOrderStatus !== formattedjobOrderStatus) {
         return false;
       }
       }
-
-
-      if (estimateOrderType && row.estimateOrderType && !row.estimateOrderType.toLowerCase().includes(estimateOrderType.toLowerCase())) {
+      if (jobOrderType && row.jobOrderType && !row.jobOrderType.toLowerCase().includes(jobOrderType.toLowerCase())) {
         return false;
       }
-      if(orderDate){
-        const nextDay2 = new Date(orderDate);
+      if(jobOrderInstructDate){
+        const nextDay2 = new Date(jobOrderInstructDate);
         nextDay2.setDate(nextDay2.getDate()-1);
-        const formattedRowOrderDate = new Date(row.orderDate).toISOString().split('T')[0];
-        const formattedOrderDate = nextDay2.toISOString().split('T')[0];
+        const formattedRowjobOrderInstructDate = new Date(row.jobOrderInstructDate).toISOString().split('T')[0];
+        const formattedjobOrderInstructDate = nextDay2.toISOString().split('T')[0];
 
-        if (formattedOrderDate && formattedRowOrderDate != formattedOrderDate) {
+        if (formattedjobOrderInstructDate && formattedRowjobOrderInstructDate != formattedjobOrderInstructDate) {
           return false;
         }
     }
-      if (orderEtc && row.orderEtc && !row.orderEtc.includes(orderEtc)) {
+      if (jobOrderFinishedDate && row.jobOrderFinishedDate && !row.jobOrderFinishedDate.includes(jobOrderFinishedDate)) {
         return false;
       }
       return true;
@@ -119,14 +117,28 @@ function CreateWorkOrder(){
 
         const formattedDate = `${year}-${month}-${day}`;
         // Create a new row object with the form values
+
+        let rowDate;
+        let rowDate2;
+        if(formData.jobOrderInstructDate){
+          rowDate = new Date(formData.jobOrderInstructDate)
+        } else{
+          rowDate = new Date();
+        }
+        if(formData.jobOrderFinishedDate){
+          rowDate2 = new Date(formData.jobOrderFinishedDate)
+        } else{
+          rowDate2 = new Date();
+        }
+
+
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
-          estimateDate: new Date(formData.estimateDate),
-          estimateOrderType: formData.estimateOrderType,
-          orderDate: formData.orderDate,
-          orderEtc: formData.orderEtc,
-          jobOrderInstructDate : new Date(),
-          jobOrderFinishedDate : new Date()
+          jobOrderStatus: formData.jobOrderStatus,
+          jobOrderType: formData.jobOrderType,
+          jobOrderInstructDate: rowDate,
+          jobOrderFinishedDate: rowDate2 ,
+
           // storehouseStartDate : formattedDate,  
         };
       
@@ -136,10 +148,10 @@ function CreateWorkOrder(){
       
         // Reset the form inputs
         setFormData({
-          estimateDate: "",
-          estimateOrderType: "",
-          orderDate: "",
-          orderEtc: "",
+          jobOrderStatus: "",
+          jobOrderType: "",
+          jobOrderInstructDate: "",
+          jobOrderFinishedDate: "",
         });
       };
 
@@ -260,10 +272,10 @@ function CreateWorkOrder(){
 
 
   const [formData, setFormData] = useState({
-    estimateDate: "",
-    estimateOrderType: "",
-    orderDate: "",
-    orderEtc: "",
+    jobOrderStatus: "",
+    jobOrderType: "",
+    jobOrderInstructDate: "",
+    jobOrderFinishedDate: "",
     input5: "",
     input6: "",
     input7: "",
@@ -429,10 +441,10 @@ function CreateWorkOrder(){
     // 초기화 버튼 클릭 시 처리할 로직 작성
     console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
-      estimateDate: "",
-      estimateOrderType: "",
-      orderDate: "",
-      orderEtc: "",
+      jobOrderStatus: "",
+      jobOrderType: "",
+      jobOrderInstructDate: "",
+      jobOrderFinishedDate: "",
       input5: "",
       input6: "",
       input7: "",
@@ -446,15 +458,15 @@ function CreateWorkOrder(){
   const handleOptionClick = (selectedOption) => {
     setFormData((prevData) => ({
       ...prevData,
-      estimateOrderType: selectedOption.label,
+      jobOrderType: selectedOption.label,
     }));
     setIsModalOpen(false);
   };
   
 
   const modalOptions = [
-    { id: 1, label: "OEM" },
-    { id: 2, label: "자체생산" },
+    { id: 1, label: "저장" },
+    { id: 2, label: "확정" },
   ];
 
 
@@ -647,52 +659,56 @@ function CreateWorkOrder(){
        
         
           <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-              <div>수주유형</div>
-            <TextField
-                required
-                id="standard-required"
-                // label="수주유형"
-                value={formData.estimateOrderType}
-                variant="standard"
-                name="estimateOrderType"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-                onClick={handleOpenModal} 
-            />
-            <div>납기일자</div>
-            <TextField
-                id="standard-search"
-                type="date"
-                
-                value={formData.estimateDate}
-                variant="standard"
-                
-                name="estimateDate"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-            />
+              <div>작업상태</div>
+           
+
+            <Select
+              labelId="estimatePayment-label"
+              id="estimatePayment"
+              value={formData.jobOrderStatus}
+              name="jobOrderStatus"
+              onChange={handleChange}
+              style={{ width: '30%' }}
+            >
+              <MenuItem value="저장">저장</MenuItem>
+              <MenuItem value="확정">확정</MenuItem>
+ 
+            </Select>
+            <div>작업유형</div>
+            <Select
+              labelId="estimatePayment-label"
+              id="estimatePayment"
+              value={formData.jobOrderType}
+              name="jobOrderType"
+              onChange={handleChange}
+              style={{ width: '30%' }}
+            >
+              <MenuItem value="일반">일반</MenuItem>
+ 
+            </Select>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-            <div>수주일자</div>
+            <div>지시일자</div>
             <TextField
                 id="standard-search"
                 type="date"
                 
-                value={formData.orderDate}
+                value={formData.jobOrderInstructDate}
                 variant="standard"
                 
-                name="orderDate"
+                name="jobOrderInstructDate"
                 onChange={handleChange}
                 style={{ width: '30%' }}
             />
-            <div>비고사항</div>
+            <div>완료일자</div>
             <TextField
                 id="standard-search"
-                // label="비고"
-                type="search"
+                type="date"
+                
+                value={formData.jobOrderFinishedDate}
                 variant="standard"
-                value={formData.orderEtc}
-                name="orderEtc"
+                
+                name="jobOrderFinishedDate"
                 onChange={handleChange}
                 style={{ width: '30%' }}
             />
@@ -722,7 +738,7 @@ function CreateWorkOrder(){
      <Modal open={isModalOpen} onClose={handleCloseModal}>
   <div style={modalStyle}>
     <div style={modalContentStyle}>
-      <h3>수주 유형:</h3>
+      <h3>문서 상태:</h3>
       {modalOptions.map((option) => (
         <div
           key={option.id}

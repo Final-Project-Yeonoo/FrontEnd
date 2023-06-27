@@ -58,37 +58,18 @@ function RegisterDelivery(){
  
 
   const handleFilter = () => {
-    const { estimateDate, estimateOrderType, orderDate, orderEtc } = formData;
+    const {  deliveryStatus, deliveryCharge } = formData;
   
     
     const filteredData = originalRows.filter((row) => {
-      if(estimateDate){
-      const nextDay = new Date(estimateDate);
-      nextDay.setDate(nextDay.getDate() - 1);
-      const formattedRowEstimateDate = new Date(row.estimateDate).toISOString().split('T')[0];
-      const formattedEstimateDate = nextDay.toISOString().split('T')[0];
+     
 
-    
-      if (formattedEstimateDate && formattedRowEstimateDate !== formattedEstimateDate) {
+
+      if (deliveryStatus && row.deliveryStatus && !row.deliveryStatus.toLowerCase().includes(deliveryStatus.toLowerCase())) {
         return false;
       }
-      }
-
-
-      if (estimateOrderType && row.estimateOrderType && !row.estimateOrderType.toLowerCase().includes(estimateOrderType.toLowerCase())) {
-        return false;
-      }
-      if(orderDate){
-        const nextDay2 = new Date(orderDate);
-        nextDay2.setDate(nextDay2.getDate()-1);
-        const formattedRowOrderDate = new Date(row.orderDate).toISOString().split('T')[0];
-        const formattedOrderDate = nextDay2.toISOString().split('T')[0];
-
-        if (formattedOrderDate && formattedRowOrderDate != formattedOrderDate) {
-          return false;
-        }
-    }
-      if (orderEtc && row.orderEtc && !row.orderEtc.includes(orderEtc)) {
+     
+      if (deliveryCharge && row.deliveryCharge && !row.deliveryCharge.includes(deliveryCharge)) {
         return false;
       }
       return true;
@@ -126,9 +107,13 @@ function RegisterDelivery(){
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
           estimateDate: new Date(formData.estimateDate),
-          estimateOrderType: formData.estimateOrderType,
+          deliveryStatus: formData.deliveryStatus,
           orderDate: formData.orderDate,
-          orderEtc: formData.orderEtc,
+          deliveryCharge: formData.deliveryCharge,
+          deliveryDate : new Date(),
+          deliveryRegDate: new Date(),  
+          deliveryModifyDate: new Date(),
+
           // storehouseStartDate : formattedDate,  
         };
       
@@ -139,9 +124,9 @@ function RegisterDelivery(){
         // Reset the form inputs
         setFormData({
           estimateDate: "",
-          estimateOrderType: "",
+          deliveryStatus: "",
           orderDate: "",
-          orderEtc: "",
+          deliveryCharge: "",
         });
       };
 
@@ -323,9 +308,9 @@ function RegisterDelivery(){
 
   const [formData, setFormData] = useState({
     estimateDate: "",
-    estimateOrderType: "",
+    deliveryStatus: "",
     orderDate: "",
-    orderEtc: "",
+    deliveryCharge: "",
     input5: "",
     input6: "",
     input7: "",
@@ -492,9 +477,9 @@ function RegisterDelivery(){
     console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
       estimateDate: "",
-      estimateOrderType: "",
+      deliveryStatus: "",
       orderDate: "",
-      orderEtc: "",
+      deliveryCharge: "",
       input5: "",
       input6: "",
       input7: "",
@@ -508,7 +493,7 @@ function RegisterDelivery(){
   const handleOptionClick = (selectedOption) => {
     setFormData((prevData) => ({
       ...prevData,
-      estimateOrderType: selectedOption.label,
+      deliveryStatus: selectedOption.label,
     }));
     setIsModalOpen(false);
   };
@@ -785,56 +770,36 @@ function RegisterDelivery(){
        
         
           <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-              <div>수주유형</div>
-            <TextField
-                required
-                id="standard-required"
-                // label="수주유형"
-                value={formData.estimateOrderType}
-                variant="standard"
-                name="estimateOrderType"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-                onClick={handleOpenModal} 
-            />
-            <div>납기일자</div>
-            <TextField
-                id="standard-search"
-                type="date"
-                
-                value={formData.estimateDate}
-                variant="standard"
-                
-                name="estimateDate"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-            />
+          <div>납품상태</div>
+           
+
+           <Select
+             labelId="estimatePayment-label"
+             id="estimatePayment"
+             value={formData.deliveryStatus}
+             name="deliveryStatus"
+             onChange={handleChange}
+             style={{ width: '30%' }}
+           >
+             <MenuItem value="저장">저장</MenuItem>
+             <MenuItem value="확정">확정</MenuItem>
+
+           </Select>
+           <div>무상여부</div>
+           <Select
+             labelId="estimatePayment-label"
+             id="estimatePayment"
+             value={formData.deliveryCharge}
+             name="deliveryCharge"
+             onChange={handleChange}
+             style={{ width: '30%' }}
+           >
+             <MenuItem value="무상">무상</MenuItem>
+             <MenuItem value="유상">유상</MenuItem>
+
+           </Select>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-            <div>수주일자</div>
-            <TextField
-                id="standard-search"
-                type="date"
-                
-                value={formData.orderDate}
-                variant="standard"
-                
-                name="orderDate"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-            />
-            <div>비고사항</div>
-            <TextField
-                id="standard-search"
-                // label="비고"
-                type="search"
-                variant="standard"
-                value={formData.orderEtc}
-                name="orderEtc"
-                onChange={handleChange}
-                style={{ width: '30%' }}
-            />
-            </div>
+  
             <div style={{marginBottom:'20px',  display: 'flex', padding:'10px',  justifyContent: 'flex-end'}}>
             <Button color="primary" onClick={handleAdd} variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
               행 추가
