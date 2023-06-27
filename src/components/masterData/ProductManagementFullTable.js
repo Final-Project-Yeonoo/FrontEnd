@@ -123,6 +123,8 @@ const ProductManagementFullTable = () => {
 
     const [rows, setRows] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
+    const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
+    const [deleteRowId, setDeleteRowId] = useState(null);
 
     const fetchGridData = async () => {
         try {
@@ -157,20 +159,67 @@ const ProductManagementFullTable = () => {
     const handleSelectionModelChange = (selection) => {
         setSelectedRows(selection);
         console.log(selection); // 선택한 행 출력
+
+        if (selection.length > 0) {
+            // 선택된 행이 있는 경우에만 삭제 알림 창을 엽니다.
+            setIsDeleteAlertOpen(true);
+            // 선택된 행 중 첫 번째 행의 id를 설정합니다.
+            setDeleteRowId(selection[0]);
+        } else {
+            setIsDeleteAlertOpen(false);
+            setDeleteRowId(null);
+        }
+    };
+
+    const handleDeleteConfirm = async () => {
+        try {
+            console.log('Deleting row with id:', deleteRowId);
+
+            // 서버로 삭제 요청을 보내는 코드
+            const response = await fetch(
+                `http://localhost:8888/ynfinal/finisheditem/${deleteRowId}`,
+                {
+                    method: 'DELETE',
+                    // 필요한 헤더 등을 추가합니다.
+                }
+            );
+            const data = await response.json();
+            console.log('Delete response:', data);
+            setIsDeleteAlertOpen(false);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleDeleteCancel = () => {
+        // 삭제 취소 시 알림 창을 닫습니다.
+        setIsDeleteAlertOpen(false);
     };
 
     return (
         <div style={{height: 500, width: '100%'}}>
-            <DataGrid rows={rows} columns={columns} getRowId={(row) => row.id}
-                      components={{
-                          Pagination: CustomPagination,
-                      }}
-                      checkboxSelection={true}
-                      selectionModel={selectedRows}
-                      onSelectionModelChange={handleSelectionModelChange}
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                getRowId={(row) => row.id}
+                components={{
+                    Pagination: CustomPagination,
+                }}
+                checkboxSelection={true}
+                selectionModel={selectedRows}
+                onSelectionModelChange={handleSelectionModelChange}
             />
+            {isDeleteAlertOpen && (
+                <div className="delete-alert">
+                    <div className="delete-alert-message">삭제하시겠습니까?</div>
+                    <div className="delete-alert-buttons">
+                        <button onClick={handleDeleteConfirm}>확인</button>
+                        <button onClick={handleDeleteCancel}>취소</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
-};
+}
 export {OrangeInputforFull, ProductManagementFullTable}
 
