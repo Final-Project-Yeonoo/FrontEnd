@@ -15,25 +15,48 @@ import {
 
 
 // 작업 지시
-function CreateWorkOrder() {
+function CreateWorkOrder(){
 
 
-    
+  
   const [selectionModel, setSelectionModel] = useState([])
+  const [selectionModel2, setSelectionModel2] = useState([])
   const [originalRows, setOriginalRows] = React.useState([]);
   const apiRef = React.useRef(null);
+  const apiRef2 = React.useRef(null);
   const [empList, setEmpList] = useState([]);
   const [projectList, setProjectList] = useState([]);
   const [trCompList, setTrCompList] = useState([]);
+  const [storeList, setStoreList] = useState([]);
+  const [code, setCode] = useState([]);
+  const [finishedList, setFinishedList] = useState([]);
 
-  const handleCellClick = (params) => {
-    // 셀 클릭 이벤트 처리 로직 작성
-    console.log('셀 클릭:', params);
-  };
+  const handleRowClick = (ids) => {
+    console.log(ids.row.orderCode);
+    setCode(ids.row.orderCode);
   
+    fetch('http://localhost:8888/ynfinal/joborder/detail')
+      .then((response) => response.json())
+      .then((data) => {
+        const filteredData = Object.values(data).filter((item) => ids.row.orderCode === item.orderCode);
+  
+        const processedData = filteredData.map((item, index) => ({
+          id: index + 1,
+          ...item,
+        }));
+  
+        setResponseData2(processedData);
+        console.log(processedData);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch employee list:', error);
+      });
+  };
+
+ 
 
   const handleFilter = () => {
-    const { estimateDate, estimateOrderType, estimatePayment, estimateEtc } = formData;
+    const { estimateDate, estimateOrderType, orderDate, orderEtc } = formData;
   
     
     const filteredData = originalRows.filter((row) => {
@@ -42,17 +65,28 @@ function CreateWorkOrder() {
       nextDay.setDate(nextDay.getDate() - 1);
       const formattedRowEstimateDate = new Date(row.estimateDate).toISOString().split('T')[0];
       const formattedEstimateDate = nextDay.toISOString().split('T')[0];
+
+    
       if (formattedEstimateDate && formattedRowEstimateDate !== formattedEstimateDate) {
         return false;
       }
       }
+
+
       if (estimateOrderType && row.estimateOrderType && !row.estimateOrderType.toLowerCase().includes(estimateOrderType.toLowerCase())) {
         return false;
       }
-      if (estimatePayment && !row.estimatePayment.toLowerCase().includes(estimatePayment.toLowerCase())) {
-        return false;
-      }
-      if (estimateEtc && row.estimateEtc && !row.estimateEtc.includes(estimateEtc)) {
+      if(orderDate){
+        const nextDay2 = new Date(orderDate);
+        nextDay2.setDate(nextDay2.getDate()-1);
+        const formattedRowOrderDate = new Date(row.orderDate).toISOString().split('T')[0];
+        const formattedOrderDate = nextDay2.toISOString().split('T')[0];
+
+        if (formattedOrderDate && formattedRowOrderDate != formattedOrderDate) {
+          return false;
+        }
+    }
+      if (orderEtc && row.orderEtc && !row.orderEtc.includes(orderEtc)) {
         return false;
       }
       return true;
@@ -63,13 +97,13 @@ function CreateWorkOrder() {
   };
 
   const onRowsSelectionHandler = (ids) => {
-    const selectedRowsData = ids.map((id) => responseData.find((row) => row.id === id));
+    const selectedRowsData = responseData.filter((row) => ids.includes(row.id));
     
-  
     console.log(selectedRowsData);
-     setSelectionModel(selectedRowsData);
-    
+    setSelectionModel(selectedRowsData);
   };
+
+
 
 
 
@@ -86,8 +120,8 @@ function CreateWorkOrder() {
           id: responseData.length + 1, // Generate a unique ID for the new row
           estimateDate: new Date(formData.estimateDate),
           estimateOrderType: formData.estimateOrderType,
-          estimatePayment: formData.estimatePayment,
-          estimateEtc: formData.estimateEtc,
+          orderDate: formData.orderDate,
+          orderEtc: formData.orderEtc,
           // storehouseStartDate : formattedDate,  
         };
       
@@ -99,19 +133,41 @@ function CreateWorkOrder() {
         setFormData({
           estimateDate: "",
           estimateOrderType: "",
-          estimatePayment: "",
-          estimateEtc: "",
+          orderDate: "",
+          orderEtc: "",
         });
       };
 
+
+      
     const [responseData, setResponseData] = useState([]);
+    const [responseData2, setResponseData2] = useState([]);
+
 
     useEffect(() => {
       sendGetRequest();
       fetchEmployeeList();
       fetchTrCompanyList();
       fetchProjectList();
+      fetchFinishedList();
+      fetchStorehouseList();
     }, []);
+
+    const fetchStorehouseList = () => {
+      // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
+      // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
+      fetch('http://localhost:8888/ynfinal/store')
+        .then((response) => response.json())
+        .then((data) => {
+          // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
+
+          setStoreList(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch employee list:', error);
+        });
+    };
   
     const fetchTrCompanyList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
@@ -128,6 +184,22 @@ function CreateWorkOrder() {
           console.error('Failed to fetch employee list:', error);
         });
     };
+
+    const fetchFinishedList = () => {
+      fetch('http://localhost:8888/ynfinal/finisheditem')
+        .then((response) => response.json())
+        .then((data) => {
+          // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
+
+          setFinishedList(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch employee list:', error);
+        });
+
+    }
+
     const fetchProjectList = () => {
       // 견적담당자 목록을 가져오는 API 요청을 수행합니다.
       // 예를 들어, '/api/employees' 엔드포인트로 GET 요청을 보내고 견적담당자 목록을 받아온다고 가정합니다.
@@ -163,14 +235,15 @@ function CreateWorkOrder() {
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/estimate");
+          const response = await fetch("http://localhost:8888/ynfinal/joborder");
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
             ...item,
-            estimateDate: new Date(item.estimateDate),
-            projectRegDate: new Date(item.projectRegDate),
-            projectUpdateDate: new Date(item.projectUpdateDate),
+            jobOrderInstructDate: new Date(item.jobOrderInstructDate),
+            jobOrderFinishedDate: new Date(item.jobOrderFinishedDate)
+            // projectRegDate: new Date(item.projectRegDate),
+            // projectUpdateDate: new Date(item.projectUpdateDate),
           }));
           console.log(processedData);
           setResponseData(processedData);
@@ -184,8 +257,8 @@ function CreateWorkOrder() {
   const [formData, setFormData] = useState({
     estimateDate: "",
     estimateOrderType: "",
-    estimatePayment: "",
-    estimateEtc: "",
+    orderDate: "",
+    orderEtc: "",
     input5: "",
     input6: "",
     input7: "",
@@ -214,15 +287,14 @@ function CreateWorkOrder() {
   const handleSave = () => {
 
     
-
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
     
     const jsonData = JSON.stringify(dataArray);
-
-
-
+    console.log('수정버튼 !!');
     console.log(JSON.stringify(responseData));
+    console.log(jsonData);
+
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -231,13 +303,53 @@ function CreateWorkOrder() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/estimate', requestOptions)
+    fetch('http://localhost:8888/ynfinal/joborder', requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
           alert('저장이 완료되었습니다.');
           console.log('POST 요청이 성공했습니다.');
           sendGetRequest();
+          window.location.reload();
+
+        } else {
+          console.log('POST 요청이 실패했습니다.');
+        }
+      })
+      .catch((error) => {
+        console.error('POST 요청 중 오류가 발생했습니다.', error);
+      });
+
+  }
+
+
+  const handleSave2 = () => {
+
+    
+    const data = apiRef2.current?.getRowModels(); // 데이터 가져오기
+    const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
+    
+    const jsonData = JSON.stringify(dataArray);
+    console.log('수정버튼 !!');
+    console.log(JSON.stringify(responseData2));
+    console.log(jsonData);
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonData,
+    };
+  
+    fetch('http://localhost:8888/ynfinal/joborder/detail', requestOptions)
+      .then((response) => {
+        // 응답 처리
+        if (response.ok) {
+          alert('저장이 완료되었습니다.');
+          console.log('POST 요청이 성공했습니다.');
+          sendGetRequest();
+          window.location.reload();
 
         } else {
           console.log('POST 요청이 실패했습니다.');
@@ -263,7 +375,8 @@ function CreateWorkOrder() {
       alert("삭제할 행이 없습니다.");
       return;
     }
-
+    const orderCodes = selectionModel.map((selectedRow) => selectedRow.orderCode);
+      console.log(orderCodes);
     console.log(selectionModel);
     const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
 
@@ -276,10 +389,10 @@ function CreateWorkOrder() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(selectionModel),
+        body: JSON.stringify(orderCodes),
       };
     
-      fetch('http://localhost:8888/ynfinal/estimate', requestOptions)
+      fetch('http://localhost:8888/ynfinal/joborder', requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {
@@ -313,8 +426,8 @@ function CreateWorkOrder() {
     setFormData({
       estimateDate: "",
       estimateOrderType: "",
-      estimatePayment: "",
-      estimateEtc: "",
+      orderDate: "",
+      orderEtc: "",
       input5: "",
       input6: "",
       input7: "",
@@ -361,127 +474,126 @@ function CreateWorkOrder() {
    { field: 'id', headerName: 'ID', width: 90,
   },
     {
-      field: 'estimateCode',
-      headerName: '견적서코드',
-      width: 150,
+      field: 'jobOrderCode',
+      headerName: '지시번호',
+      width: 100,
+      editable: false,
       cellClassName: 'grayCell',
-      editable: false
+      // type: 'singleSelect',
+      // cellClassName: 'selectCell',
+      // valueOptions: ['저장', '확정'],
     },
     {
-      field: 'estimateDate',
-      headerName: '견적날짜',
-      width: 150,
+      field: 'jobOrderStatus',
+      headerName: '상태',
+      width: 100,
       editable: true,
-      type: 'date',
+      cellClassName: 'selectCell',
+       type: 'singleSelect',
+      valueOptions: ['확정', '취소'],
+
     },
     {
-        field: "estimateOrderType",
-        headerName: "수주유형",
+        field: "jobOrderType",
+        headerName: "유형",
         width: 110,
         editable: true,
+        cellClassName: 'selectCell',
         type: 'singleSelect',
-        valueOptions: ['OEM', '자체생산'],
+        valueOptions: ['일반'],
       },
-    {
-      field: 'estimatePayment',
-      headerName: '결재조건',
-      sortable: false,
-      editable: true,
-      type: 'singleSelect',
-      valueOptions: ['카드', '현금'],
-      width: 110,
-    },
-    {
-        field: 'estimateEtc',
-        headerName: '비고',
+      {
+        field: 'jobOrderInstructDate',
+        headerName: '지시일',
+        editable: true,
+        sortable: false,
+        type: 'date',
+        width: 160,
+      },
+      {
+        field: 'jobOrderFinishedDate',
+        headerName: '완료일',
         editable: true,
         sortable: false,
         width: 160,
-      },
-      {
-        field: 'projectRegDate',
-        headerName: '등록날짜',
-        editable: false,
-        sortable: false,
-        cellClassName: 'grayCell',
-        width: 160,
         type: 'date',
       },
       {
-        field: 'projectUpdateDate',
-        headerName: '수정날짜',
-        editable: false,
-        sortable: false,
-        width: 160,
-        cellClassName: 'grayCell',
-        type: 'date',
-      },
-      {
-        field: 'empId',
-        headerName: '견적담당자',
-        // editable: true,
-        sortable: false,
+        field: 'finishedCode',
+        headerName: '아이템코드',
+        width: 150,
+        editable: true,
         cellClassName: 'blueCell',
-        width: 160,
-        editable: true,
         type: 'singleSelect',
-        valueOptions: empList.map((emp) => ({
-          value: emp.empId,
-          label: emp.empId,
-        })), 
+         valueOptions: finishedList.map((finished) => ({
+           value: finished.finishedCode,
+           label: finished.finishedCode,
+         })), 
+  
       },
       {
-        field: 'empName',
-        headerName: '견적담당자명',
-        cellClassName: 'grayCell',
+        field: "finishedName",
+        headerName: "품명",
+        width:210,
         editable: false,
+        cellClassName: 'grayCell',
+        
+      },
+      {
+        field: 'jobOrderQuantity',
+        headerName: '수량',
+        editable: true,
+        type: 'number', 
         sortable: false,
         width: 160,
-      
       },
       {
         field: 'projectCode',
         headerName: '프로젝트코드',
         editable: true,
         sortable: false,
+        width: 160,
         cellClassName: 'blueCell',
         type: 'singleSelect',
-        valueOptions: projectList.map((project) => ({
-          value: project.projectCode,
-          label: project.projectCode,
+        valueOptions: projectList.map((tr) => ({
+          value: tr.projectCode,
+          label: tr.projectCode,
         })), 
-        width: 160,
+        // type: 'date',
       },
       {
         field: 'projectName',
         headerName: '프로젝트명',
-        cellClassName: 'grayCell',
-        editable: false,
+        // editable: true,
         sortable: false,
+        cellClassName: 'grayCell',
         width: 160,
+        
       },
       {
-        field: 'trCompCode',
-        headerName: '거래처코드',
+        field: 'storehouseCode',
+        headerName: '창고',
+        cellClassName: 'blueCell',
         editable: true,
         sortable: false,
         width: 160,
-        cellClassName: 'blueCell',
         type: 'singleSelect',
-        valueOptions: trCompList.map((tr) => ({
-          value: tr.trCompCode,
-          label: tr.trCompCode,
+        valueOptions: storeList.map((store) => ({
+          value: store.storehouseCode,
+          label: store.storehouseCode,
         })), 
       },
       {
-        field: 'trCompName',
-        headerName: '거래처명',
+        field: 'storehouseName',
+        headerName: '창고명',
         editable: false,
-        cellClassName: 'grayCell',
         sortable: false,
+        cellClassName: 'grayCell',
         width: 160,
       },
       
+      
+    
   ];
   
   const styles = {
@@ -498,12 +610,13 @@ function CreateWorkOrder() {
         const selectedEmp = empList.find((emp) => emp.empId === newRow.empId);
         const selectedProject = projectList.find((project) => project.projectCode === newRow.projectCode);
         const selectedTrComp = trCompList.find((trComp) => trComp.trCompCode === newRow.trCompCode);
-    
+        const selectedStore = storeList.find((store) => store.storehouseCode === newRow.storehouseCode);
         return {
           ...updatedRow,
           empName: selectedEmp ? selectedEmp.empName : '',
           projectName: selectedProject ? selectedProject.projectName : '',
           trCompName: selectedTrComp ? selectedTrComp.trCompName : '',
+          storehouseName : selectedStore ? selectedStore.storehouseName : '',
         };
       }
       return row;
@@ -514,6 +627,8 @@ function CreateWorkOrder() {
   };
 
 
+
+  
 
   return (
     <>
@@ -535,7 +650,7 @@ function CreateWorkOrder() {
                 style={{ width: '30%' }}
                 onClick={handleOpenModal} 
             />
-            <div>견적날짜</div>
+            <div>납기일자</div>
             <TextField
                 id="standard-search"
                 type="date"
@@ -549,27 +664,26 @@ function CreateWorkOrder() {
             />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-            <div>결재조건</div>
-            <Select
-              labelId="estimatePayment-label"
-              id="estimatePayment"
-              value={formData.estimatePayment}
-              name="estimatePayment"
-              onChange={handleChange}
-              style={{ width: '30%' }}
-            >
-              <MenuItem value="카드">카드</MenuItem>
-              <MenuItem value="현금">현금</MenuItem>
-              
-            </Select>
+            <div>수주일자</div>
+            <TextField
+                id="standard-search"
+                type="date"
+                
+                value={formData.orderDate}
+                variant="standard"
+                
+                name="orderDate"
+                onChange={handleChange}
+                style={{ width: '30%' }}
+            />
             <div>비고사항</div>
             <TextField
                 id="standard-search"
                 // label="비고"
                 type="search"
                 variant="standard"
-                value={formData.estimateEtc}
-                name="estimateEtc"
+                value={formData.orderEtc}
+                name="orderEtc"
                 onChange={handleChange}
                 style={{ width: '30%' }}
             />
@@ -622,7 +736,7 @@ function CreateWorkOrder() {
   </div>
 </Modal>
         {responseData !== null && (
-  <Box sx={{ height: '80vh', width: '100%' }}>
+  <Box sx={{ height: '40vh', width: '100%' }}>
     <DataGrid
             apiRef={apiRef}
             rows={responseData}
@@ -630,24 +744,32 @@ function CreateWorkOrder() {
             checkboxSelection
             disableSelectionOnClick
             disableRowSelectionOnClick 
+            onRowClick={handleRowClick} // 행 클릭 이벤트 처리 함수를 전달합니다.
             onRowSelectionModelChange={(ids) => onRowsSelectionHandler(ids)}
             processRowUpdate={processRowUpdate}
           />
 </Box>
 )}
+
+
     <pre style={{ fontSize: 10 }}>
         {JSON.stringify(selectionModel, null, 4)}
       </pre>
       {/* 스타일을 적용할 CSS 스타일시트 */}
       <style>{`
         .grayCell {
-          background-color: #676767;
+          background-color: #0E2954;
           color: white;
         }
 
         .blueCell{
-          background-color: #0072e8;
+          background-color: #7895B2;
           color: white;
+        }
+
+        .selectCell {
+          background-color: #FFEEBB;
+          
         }
       `}</style>
     </>
