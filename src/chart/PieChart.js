@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { ResponsivePie } from '@nivo/pie';
 import {API_BASE_URL, RAW, HALF, FINISHED} from '../config/host-cofig';
+import styles from './PieChart.module.css';
 
 const Piechart = () => {
     const API_RAW_URL = API_BASE_URL + RAW;
@@ -45,10 +46,11 @@ const fetchFinishedProducts = fetch(API_FINISHED_URL)
     };
 
 
-
+// chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
 
     return (
-        // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
+        <div className={styles.piechartContainer}> 
+        <p className={styles.piechartHead}>재고현황</p>    
         <div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
             <ResponsivePie
                 /**
@@ -159,7 +161,9 @@ const fetchFinishedProducts = fetch(API_FINISHED_URL)
                 ]}
             />
         </div>
+    </div> 
     );
+    
 };
 
 export default Piechart;

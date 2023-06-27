@@ -11,10 +11,6 @@ function DashBoard() {
             <div className={styles.mainStyle}>
                 <SideMenu/>
                 <div className={styles.changeArea}>
-                    <div className={styles.piechartContainer}>
-                    <p className={styles.piechartHead}>재고현황</p>    
-                    <Piechart />
-                    </div>
                 <Outlet/>
                 </div>
             </div>

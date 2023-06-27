@@ -19,7 +19,7 @@ import List from "./components/admin/UserList";
 import MyComInfo from './components/admin/MyComInfo';
 import Yougeun from './components/yougeun/yougeun';
 import Yougeun1 from './components/yougeun/Yougeun1';
-
+import Piechart from './chart/PieChart';
 
 function App() {
     return (
@@ -31,7 +31,8 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 {/*Header&Side포함 DashBoard에 nestedRoute 적용*/}
-                <Route path="/" element={<DashBoard/>}>
+                <Route path="/" element={<DashBoard/> }>
+                        <Route path='/' element={<Piechart/>} />
                         {/*사용자*/}
                         <Route path="admin/user" element={<AdminUser/>}/>
                         <Route path="admin/search" element={<SearchUser/>}/>
