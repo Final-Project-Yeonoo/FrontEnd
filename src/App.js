@@ -36,8 +36,7 @@ import MyComInfo from "./components/admin/MyComInfo";
 function App() {
     return (
         <>
-
-
+            
             {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
             {/* <DashBoard /> */}
             <Routes>

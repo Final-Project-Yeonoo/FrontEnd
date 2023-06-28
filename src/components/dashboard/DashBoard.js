@@ -3,7 +3,8 @@ import Header from "../common/Header";
 import SideMenu from "../common/SideMenu";
 import Piechart from '../../chart/PieChart';
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import { isLogin } from '../../yougeunWorking/login-util';
 
 
 function DashBoard() {
@@ -11,6 +12,16 @@ function DashBoard() {
     const navigate = useNavigate();
     const path = useLocation().pathname; // 현재 경로를 가져옴
     console.log('path 입니다', path);
+
+
+    // 로그인 여부 확인하기
+    useEffect(() => {
+       console.log(isLogin());
+        if(!isLogin()) navigate('/login');
+
+    }, [])
+
+
 
     // 탭 추가 함수
     const addTab = (tabId, tabPath) => { // tabId와 tabPath 매개 변수 받음

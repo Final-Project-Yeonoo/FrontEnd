@@ -30,12 +30,13 @@ function SideMenu({addTab}) {
                         <div id={styles.imgCircle}>
                             <img src="/userImg.svg" alt=""/>
                         </div>
-                        <span id={styles.userName}>관리자님</span>
-                        <span id={styles.userId}>admin1234</span>
+                        <span id={styles.userName}>{localStorage.getItem("EMP_NAME")}님</span>
+                        <span id={styles.userId}>{localStorage.getItem("EMP_ID")}</span>
                     </ListGroup.Item>
                 </ListGroup>
-
+               
                 <Accordion defaultActiveKey="0">
+                {localStorage.getItem("USER_AUTH")==="Y" ? 
                     <Accordion.Item eventKey="1" style={{borderRadius: '0'}}>
                         <Accordion.Header>사용자 관리</Accordion.Header>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
@@ -61,6 +62,9 @@ function SideMenu({addTab}) {
                             회사정보 입력
                         </Accordion.Body>
                     </Accordion.Item>
+                        : ''
+                }
+                {localStorage.getItem("INFO_AUTH")==="Y" ? 
                     <Accordion.Item eventKey="2">
                         <Accordion.Header>기준 정보</Accordion.Header>
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
@@ -91,6 +95,9 @@ function SideMenu({addTab}) {
                             창고정보
                         </Accordion.Body>
                     </Accordion.Item>
+                            :   ''
+                     }
+                    {localStorage.getItem("PURCHASE_AUTH")==="Y" ? 
                     <Accordion.Item eventKey="3">
                         <Accordion.Header>구매 관리</Accordion.Header>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
@@ -106,6 +113,10 @@ function SideMenu({addTab}) {
                             구매 입고관리
                         </Accordion.Body>
                     </Accordion.Item>
+                         :   ''
+                        }
+
+                    {localStorage.getItem("INVENTORY_AUTH")==="Y" ? 
                     <Accordion.Item eventKey="4">
                         <Accordion.Header>재고 관리</Accordion.Header>
                         {/*<Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}*/}
@@ -121,6 +132,8 @@ function SideMenu({addTab}) {
                             재고현황
                         </Accordion.Body>
                     </Accordion.Item>
+                     :   ''
+                    }
                     <Accordion.Item eventKey="5" style={{borderRadius: '0'}}>
                         <Accordion.Header>마이페이지</Accordion.Header>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
