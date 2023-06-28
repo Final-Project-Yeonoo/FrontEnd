@@ -146,17 +146,18 @@ function TradingCompany() {
       <div className={styles.container}>
       <div className={styles.headerContainer}>
         <h2>거래처 관리</h2>
-        <div>
+        <div className={styles.rightContainer}>
+        <div className={styles.searchContainer}>
             <input
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
             />
-            <button onClick={handleSearch}>검색</button>
+            <Button outline color="secondary" onClick={handleSearch}>검색</Button>
           </div>
-          <button onClick={toggleModal}>거래처 입력</button>
-          <button  onClick={remove}>삭제</button>
-       
+          <Button outline color="success" onClick={toggleModal} className={styles.insertTag} >거래처 입력</Button>
+          <Button outline color="danger"  onClick={remove}>삭제</Button>
+       </div>
      </div>
      </div>
      <div className={styles.usercontainer}>

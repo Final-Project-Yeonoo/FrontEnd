@@ -2,12 +2,12 @@ const clientHostName = window.location.hostname;
 
 let backEndHostName; // 백엔드 서버 호스트 이름
 
-if (clientHostName === 'localhost') {
-  backEndHostName = 'http://localhost:8888';
-} else if (clientHostName === 'vanila.com') {
-  backEndHostName = 'https://api.vanila.co.kr';
-}
-
+// if (clientHostName === 'localhost') {
+//   backEndHostName = 'http://localhost:8888';
+// } else if (clientHostName === 'vanila.com') {
+//   backEndHostName = 'https://api.vanila.co.kr';
+// }
+backEndHostName ='http://13.124.224.231';
 
 /*
 import { API_YGBASE_URL as PROJECT, DELIVERY, DELIVERY_DETAIL, RETURNED,

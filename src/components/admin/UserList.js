@@ -161,7 +161,7 @@ const UserList = () => {
 
  //백으로 정보를 전달
  const handleSaveClick = async () => {
-  // const arrayData = [selectedRow]
+  const arrayData = [selectedRow]
   // try {
   //   const response = await fetch(API_USERLIST_URL, {
   //     method: 'POST',
@@ -176,13 +176,13 @@ const UserList = () => {
 
 
     const response = await fetch(API_USERLIST_URL, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(selectedRow),
+      body: JSON.stringify(arrayData),
     });
-    console.log('선택정보 수정확인',selectedRow);
+    console.log('선택정보 수정확인',arrayData);
 
     if (!response.ok) {
       throw new Error('Failed to save data');
