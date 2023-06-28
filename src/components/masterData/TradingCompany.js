@@ -112,6 +112,35 @@ function TradingCompany() {
      
     };
 
+    //row 선택해서 지우기 
+    const [selectedRow, setSelectedRow] = useState(null); // 선택된 row의 정보를 관리합니다.
+    const handleRowClick = (params) => {
+      // 클릭한 row의 정보를 가져옵니다.
+      const selectedRowData = params.row;
+      // 필요한 처리를 수행합니다.
+      console.log("선택된 row의 정보:", selectedRowData);
+      setSelectedRow(selectedRowData);
+    };
+
+    const remove = async () => {
+      console.log('확인',selectedRow);
+        const ArraySelectedRow = [selectedRow.trCompCode]
+        try {
+          const response = await fetch(API_TRC_URL, {
+        method: "DELETE",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(ArraySelectedRow),
+      });
+      console.log('1111', ArraySelectedRow);
+      if (!response.ok) {
+        throw new Error("Failed to save company data");
+      } }catch (error) {
+        console.error("Error saving company data:", error);
+      }
+    };
+
     return (
       <>
       <div className={styles.container}>
@@ -126,7 +155,7 @@ function TradingCompany() {
             <button onClick={handleSearch}>검색</button>
           </div>
           <button onClick={toggleModal}>거래처 입력</button>
-          <button>삭제</button>
+          <button  onClick={remove}>삭제</button>
        
      </div>
      </div>
@@ -137,6 +166,7 @@ function TradingCompany() {
           rows={companyData}
           columns={columns}
           // disableRowSelectionOnClick
+          onRowClick={handleRowClick}
           getRowId={(row) => row.trCompName}
           hideFooter={true}
        

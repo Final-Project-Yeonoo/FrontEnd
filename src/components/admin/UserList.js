@@ -10,12 +10,7 @@ const UserList = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   const API_USERLIST_URL = API_BASE_URL + FINDALL;
-  const handleEditClick = () => {
-    console.log('확인');
-    console.log(isEditing);
-    setIsEditing((prevState) => !prevState);
-  };
-
+ 
  
 
   const columns = [
@@ -64,6 +59,7 @@ const UserList = () => {
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       width: 170,
+      editable: true,
   
     },
     {
@@ -127,29 +123,7 @@ const UserList = () => {
   ];
 
 
-  //백으로 정보를 전달
-  const handleSaveClick = async () => {
-    const arrayData = [data]
-    try {
-      const response = await fetch(API_USERLIST_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(arrayData),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to save data');
-      }
-  
-      // Optional: Display a success message or perform any other actions
-      console.log('Data saved successfully');
-    } catch (error) {
-      console.error('Error saving data:', error);
-    }
-  };
-  console.log(data);
+ 
 
 
   useEffect(() => {
@@ -176,17 +150,60 @@ const UserList = () => {
     fetchData();
   }, []);
 
-  const handleEditCellChange = (params) => {
-    const { id, field, props: { value } } = params;
-    const updatedData = data.map((row) => {
-      if (row.empId === id) {
-        return { ...row, [field]: value };
-      }
-      return row;
-    });
-    setData(updatedData);
-    console.log(updatedData);
+  const [selectedRow, setSelectedRow] = useState(null); // 선택된 row의 정보를 관리합니다.
+  const handleRowClick = (params) => {
+    // 클릭한 row의 정보를 가져옵니다.
+    const selectedRowData = params.row;
+    // 필요한 처리를 수행합니다.
+    console.log("선택된 row의 정보:", selectedRowData);
+    setSelectedRow(selectedRowData);
   };
+
+ //백으로 정보를 전달
+ const handleSaveClick = async () => {
+  // const arrayData = [selectedRow]
+  // try {
+  //   const response = await fetch(API_USERLIST_URL, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(selectedRow),
+  //   });
+  try {
+    // 선택된 row의 값을 수정합니다.
+
+
+
+    const response = await fetch(API_USERLIST_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(selectedRow),
+    });
+    console.log('선택정보 수정확인',selectedRow);
+
+    if (!response.ok) {
+      throw new Error('Failed to save data');
+    }
+
+    // Optional: Display a success message or perform any other actions
+    console.log('Data saved successfully');
+  } catch (error) {
+    console.error('Error saving data:', error);
+  }
+};
+
+
+ 
+
+
+
+
+
+
+
     return (
     <>
     <div className={styles.contentHeadcontainer}>
@@ -207,12 +224,11 @@ const UserList = () => {
         <DataGrid
           rows={data}
           columns={columns}
-          checkboxSelection
-          disableRowSelectionOnClick
+          // checkboxSelection
+          // disableRowSelectionOnClick
+          onRowClick={handleRowClick}
           getRowId={(row) => row.empId}
           hideFooter={true}
-          onEditCellChange={handleEditCellChange}
-       
         />
       </Box>
     </div>  
