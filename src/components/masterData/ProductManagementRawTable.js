@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import axios from "axios";
 import Form from "react-bootstrap/Form";
@@ -153,7 +153,12 @@ const ProductManagementRawTable = () => {
         setSelectedRow(selectedRowData);
     };
 
+    //체크 박스 선택
+
+
     // 수정 버튼
+    // const gridRef = useRef(null);
+
     const handleModifyClick = async () => {
         const arrayData = selectedRow
         try {
@@ -202,7 +207,7 @@ const ProductManagementRawTable = () => {
         <div style={{height: 800, width: '100%'}}>
             <div style={{marginBottom: '1rem'}}>
                 <div style={{marginBottom: '20px'}}>
-                    <Button variant="primary" onClick={handleModifyClick} style={{marginRight:'10px'}}>수정 저장</Button>
+                    <Button variant="primary" onClick={handleModifyClick} style={{marginRight: '10px'}}>수정 저장</Button>
                     <Button variant="danger" onClick={handleDeleteClick}>삭제</Button>
                 </div>
                 <DataGrid

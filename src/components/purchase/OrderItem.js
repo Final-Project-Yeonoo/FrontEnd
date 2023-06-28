@@ -1,4 +1,3 @@
-
 import styles from './css/OrderItem.module.css';
 import {TabsforOrderItems} from "../common/UsefulButtons";
 import Form from "react-bootstrap/Form";
@@ -14,61 +13,45 @@ import axios from "axios";
 
 function OrderItem() {
 
-    let [title, setTitle] = useState(purchaseOrderData);
-
-    const [inputValues, setInputValues] = useState(title.map(() => ''));
+    const [inputValue, setInputValue] = useState([]);
 
     const handleInputChange = (index, value) => {
-        const newInputValues = [...inputValues];
-        newInputValues[index] = value;
-        setInputValues(newInputValues);
+        const newInputValue = [...inputValue];
+        newInputValue[index] = value;
+        setInputValue(newInputValue);
     };
 
+    // 초기화  버튼 선택시
     const handleReset = () => {
-        setInputValues(title.map(() => ''));
+        const newInputValue = inputValue.map(() => "");
+        setInputValue(newInputValue);
     };
 
+    // 저장 버튼 선택시
     const handleSubmit = () => {
+        if (inputValue.length === 2 && inputValue.every((value) => value.trim() !== '')) {
+            const data = {
+                // rawCode: inputValue[0],
+                rawName: inputValue[0],
+                rawType: inputValue[1]
+            };
 
-        const data = title.map((item, i) => {
-            if (item.title === "발주서 번호") {
-                return {itemOrderCode: inputValues[i],};
-            } else if (item.title === "발주 확정") {
-                return {itemOrderCheck: parseInt(inputValues[i])};
-            } else if (item.title === "입고예정일") {
-                return {itemOrderStart: parseInt(inputValues[i]),};
-            } else if (item.title === "마감기한") {
-                return {itemOrderEnd: parseInt(inputValues[i]),};
-            } else if (item.title === "거래처코드") {
-                return {trCompCode: parseInt(inputValues[i]),};
-            } else if (item.title === "거래처명") {
-                return {trCompName: parseInt(inputValues[i]),};
-            } else if (item.title === "사원번호") {
-                return {empNo: parseInt(inputValues[i]),};
-            } else if (item.title === "등록시간") {
-                return {itemOrderReg: parseInt(inputValues[i]),};
-            } else if (item.title === "수정시간") {
-                return {itemOrderUpdate: parseInt(inputValues[i]),};
-            }
-        });
+            // console.log(data);
+            axios
+                .post('http://localhost:8888/ynfinal/rawitem', data)
+                .then(response => {
+                    // const {rawCode} = response.data;
+                    console.log(response.data);
 
-        console.log(data)
-        const mergedObject = data.reduce((result, currentObject) => {
-            return {...result, ...currentObject};
-
-        }, {})
-        console.log(mergedObject)
-
-        axios.post('http://localhost:8888/ynfinal/orderitem', mergedObject)
-            .then(response => {
-                // Handle the response if needed
-                console.log(response.mergedObject);
-            })
-            .catch(error => {
-                // Handle errors if any
-                console.error(error);
-            });
+                })
+                .catch(error => {
+                    console.error('실패함', error);
+                });
+        } else {
+            alert('항목을 모두 입력해야 합니다.');
+        }
     };
+
 
     return (
         <>
@@ -78,10 +61,6 @@ function OrderItem() {
                         <TabsforOrderItems/>
                     </div>
                     <div className={styles.navLeft}>
-                        <Button variant="outline-primary">발주확정</Button>{' '}
-                        <Button variant="outline-danger">확정취소</Button>{' '}
-                        <Button variant="outline-success">발주마감</Button>{' '}
-                        <Button variant="outline-secondary">발주서출력</Button>{' '}
                         <Button variant="outline-primary">조회</Button>{' '}
                         <Button variant="outline-success" onClick={handleSubmit}>저장</Button>{' '}
                         <Button variant="outline-danger">삭제</Button>{' '}
@@ -90,76 +69,150 @@ function OrderItem() {
                 </section>
 
                 < section className={styles.searchBox} style={{marginBottom: '30px'}}>
-                    {
-                        title.map((a, i) => {
-                                return (
-                                    <>
-                                        {a.content === '선택하세요' ? (
-                                            <Form style={{marginBottom: '10px'}} className={styles.searchSection}>
-                                                <Row>
-                                                    <Col xs="auto">
-                                                        <div style={{display: 'flex'}}>
-                                                            <Form.Control readOnly placeholder={title[i].title}
-                                                                          style={{width: '150px',}}/>
-                                                            <Label for="searchDate"> </Label>
-                                                            <Input id="searchDate"
-                                                                   name="searchDate"
-                                                                   type='date'
-                                                                   style={{ width: '280px'}}
-                                                                   onChange={(e) => handleInputChange(i, e.target.value)}/>
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                            </Form>
-                                        ) : (
-                                            <div key={i} className={styles.searchSection}>
-                                                <Form>
-                                                    <Row>
-                                                        <div style={{display: 'flex'}}>
-                                                            <Col xs="auto">
-                                                                <Form.Control readOnly placeholder={title[i].title} style={{
-                                                                    marginRight: '10px',
-                                                                    width: '150px'
-                                                                }}/>
-                                                            </Col>
-                                                            <Col xs="auto">
-                                                                <Form.Control className="mb-2" id="inlineFormInput"
-                                                                              placeholder={title[i].content}
-                                                                              value={inputValues[i]}
-                                                                              onChange={(e) => handleInputChange(i, e.target.value)}
-                                                                />
-                                                            </Col>
-                                                        </div>
-                                                    </Row>
-                                                </Form>
-                                            </div>
-                                        )}
-                                    </>
-                                )
-                            }
-                        )
-                    }
-                </section>
-
-                <Button className={styles.sendPurchaseButton}>입고</Button>
-
-                <section className={styles.tableArea}>
-                    <div className={styles.divStyle}>구매발주</div>
-                    <div style={{marginTop: "30px"}}>
-                        <Container>
-                            <OrderItemTable/>
-                        </Container>
-                    </div>
-                </section>
-                <section className={styles.tableArea}>
-                    <div className={styles.divStyle}>세부항목</div>
-                    <div style={{marginTop: "30px"}}>
-                        <Container>
-                          <OrderItemDetailTable/>
-                        </Container>
-                    </div>
+                    <Form>
+                        <Row>
+                            <div style={{display: 'flex'}}>
+                                <Col xs="auto">
+                                    <Form.Control
+                                        readOnly
+                                        placeholder="발주서 번호"
+                                        style={{
+                                            marginRight: '10px',
+                                            width: '150px'
+                                        }}/>
+                                </Col>
+                                <Col xs="auto">
+                                    <Form.Control className="mb-2" id="inlineFormInput"
+                                                  placeholder="입력하세요"
+                                                  value={inputValue}
+                                                  onChange={(e) => handleInputChange(e.target.value)}
+                                    />
+                                </Col>
+                            </div>
+                        </Row>
+                    </Form>
+                    <Form>
+                        <Row>
+                            <div style={{display: 'flex'}}>
+                                <Col xs="auto">
+                                    <Form.Control
+                                        readOnly
+                                        placeholder="발주 확정"
+                                        style={{
+                                            marginRight: '10px',
+                                            width: '150px'
+                                        }}/>
+                                </Col>
+                                <Col xs="auto">
+                                    <Form.Select aria-label="Default select example">
+                                        <option>선택하세요</option>
+                                            <option value="1">발주확정</option>
+                                            <option value="2">확정취소</option>
+                                            <option value="3">발주마감</option>
+                                    </Form.Select>
+                                </Col>
+                            </div>
+                        </Row>
+                    </Form>
+                    <Form>
+                        <Row>
+                            <Col xs="auto">
+                                <div style={{display: 'flex'}}>
+                                    <Form.Control readOnly
+                                                  placeholder="입고 예정일"
+                                                  style={{width: '150px',}}/>
+                                    <Label for="searchDate"> </Label>
+                                    <Input id="searchDate"
+                                           name="searchDate"
+                                           type='date'
+                                           style={{width: '280px'}}
+                                           onChange={(e) => handleInputChange(e.target.value)}/>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Form>
+                    <Form>
+                        <Row>
+                            <Col xs="auto">
+                                <div style={{display: 'flex'}}>
+                                    <Form.Control readOnly
+                                                  placeholder="마감 기한"
+                                                  style={{width: '150px',}}/>
+                                    <Label for="searchDate"> </Label>
+                                    <Input id="searchDate"
+                                           name="searchDate"
+                                           type='date'
+                                           style={{width: '280px'}}
+                                           onChange={(e) => handleInputChange(e.target.value)}/>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Form>
+                    <Form>
+                        <Row>
+                            <div style={{display: 'flex'}}>
+                                <Col xs="auto">
+                                    <Form.Control
+                                        readOnly
+                                        placeholder="거래처 코드"
+                                        style={{
+                                            marginRight: '10px',
+                                            width: '150px'
+                                        }}/>
+                                </Col>
+                                <Col xs="auto">
+                                    <Form.Control className="mb-2" id="inlineFormInput"
+                                                  placeholder="입력하세요"
+                                                  value={inputValue}
+                                                  onChange={(e) => handleInputChange(e.target.value)}
+                                    />
+                                </Col>
+                            </div>
+                        </Row>
+                    </Form>
+                    <Form>
+                        <Row>
+                            <div style={{display: 'flex'}}>
+                                <Col xs="auto">
+                                    <Form.Control
+                                        readOnly
+                                        placeholder="비고"
+                                        style={{
+                                            marginRight: '10px',
+                                            width: '150px'
+                                        }}/>
+                                </Col>
+                                <Col xs="auto">
+                                    <Form.Control className="mb-2" id="inlineFormInput"
+                                                  placeholder="입력하세요"
+                                                  value={inputValue}
+                                                  onChange={(e) => handleInputChange(e.target.value)}
+                                    />
+                                </Col>
+                            </div>
+                        </Row>
+                    </Form>
                 </section>
             </div>
+
+            <Button className={styles.sendPurchaseButton}>입고</Button>
+
+            <section className={styles.tableArea}>
+                <div className={styles.divStyle}>구매발주</div>
+                <div style={{marginTop: "30px"}}>
+                    <Container>
+                        <OrderItemTable/>
+                    </Container>
+                </div>
+            </section>
+            <section className={styles.tableArea}>
+                <div className={styles.divStyle}>세부항목</div>
+                <div style={{marginTop: "30px"}}>
+                    <Container>
+                        <OrderItemDetailTable/>
+                    </Container>
+                </div>
+            </section>
 
         </>
     );

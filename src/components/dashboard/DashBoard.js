@@ -1,9 +1,12 @@
 import styles from './css/DashBoard.module.css';
 import Header from "../common/Header";
 import SideMenu from "../common/SideMenu";
-import Piechart from '../../chart/PieChart';
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faRectangleXmark} from "@fortawesome/free-solid-svg-icons/faRectangleXmark";
+
 
 
 function DashBoard() {
@@ -48,7 +51,7 @@ function DashBoard() {
             <div className={styles.mainStyle}>
                 <SideMenu addTab={addTab} path={path}/>
                 <div className={styles.changeArea}>
-                {/* <Outlet/> */}
+                    {/* <Outlet/> */}
                     <div className={styles.topNav}>
                         <TabBar tabs={tabs} onCloseTab={handleTabClose}/>
                     </div>
@@ -80,9 +83,10 @@ function TabBar({tabs, onCloseTab}) { // TabBar 컴포넌트에 tabs(state 배�
                         className={styles.tabCloseBtn}
                         onClick={(e) => {
                             e.stopPropagation();
-                            onCloseTab(tab.id)}}
+                            onCloseTab(tab.id)
+                        }}
                     >
-                       x
+                        <span><FontAwesomeIcon icon={faTimes} style={{ color: "#fff", marginLeft:'5px'}} /></span>
                     </button>
                 </div>
             ))}

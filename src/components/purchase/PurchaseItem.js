@@ -7,10 +7,9 @@ import Col from "react-bootstrap/Form";
 import {purchaseItemsData, tableHeadersPurchase} from "./InputDataforPurchase";
 import Button from "react-bootstrap/Button";
 import {Container} from "react-bootstrap";
-import Table from "react-bootstrap/Table";
-import {tableCells} from "../masterData/InputDataforMaster";
 import PurchaseItemTable from "./PurchaseItemTable";
 import axios from "axios";
+
 
 
 
@@ -18,47 +17,43 @@ function PurchaseItem() {
 
     let [title, setTitle] = useState(purchaseItemsData);
 
-    const [inputValues, setInputValues] = useState(title.map(() => ''));
+    const [inputValue, setInputValue] = useState(title.map(() => ''));
 
     const handleInputChange = (index, value) => {
-        const newInputValues = [...inputValues];
-        newInputValues[index] = value;
-        setInputValues(newInputValues);
+        const newInputValue = [...inputValue];
+        newInputValue[index] = value;
+        setInputValue(newInputValue);
     };
 
-    // 초기화 버튼 클릭 시 모든 값들을 ''로 초기화
+    // 초기화  버튼 선택시
     const handleReset = () => {
-        setInputValues(title.map(() => ''));
+        const newInputValue = inputValue.map(() => "");
+        setInputValue(newInputValue);
     };
 
+    // 저장 버튼 선택시
     const handleSubmit = () => {
+        if (inputValue.length === 2 && inputValue.every((value) => value.trim() !== '')) {
+            const data = {
+                // rawCode: inputValue[0],
+                rawName: inputValue[0],
+                rawType: inputValue[1]
+            };
 
-        const data = title.map((item, i) => {
-            if (item.title === "ITEM 코드") {
-                return {rawName: inputValues[i],};
-            } else if (item.title === "원자재 개수") {
-                return {rawCount: parseInt(inputValues[i])};
-            } else if (item.title === "원자재 가격") {
-                return {rawPrice: parseInt(inputValues[i]),};
-            }
-        }); // 생성된 JSON 데이터 출력 console.log(data);
+            // console.log(data);
+            axios
+                .post('http://localhost:8888/ynfinal/rawitem', data)
+                .then(response => {
+                    // const {rawCode} = response.data;
+                    console.log(response.data);
 
-        console.log(data)
-        const mergedObject = data.reduce((result, currentObject) => {
-            return {...result, ...currentObject};
-
-        }, {})
-        console.log(mergedObject)
-
-        axios.post('http://localhost:8888/ynfinal/rawitem', mergedObject)
-            .then(response => {
-                // Handle the response if needed
-                console.log(response.mergedObject);
-            })
-            .catch(error => {
-                // Handle errors if any
-                console.error(error);
-            });
+                })
+                .catch(error => {
+                    console.error('실패함', error);
+                });
+        } else {
+            alert('항목을 모두 입력해야 합니다.');
+        }
     };
 
 
@@ -70,10 +65,8 @@ function PurchaseItem() {
                         <TabsforPurchaseItems/>
                     </div>
                     <div className={styles.navLeft}>
-                        {/*<PurcahseButtons/>*/}
                         <Button variant="outline-success">입고확정</Button>{' '}
                         <Button variant="outline-danger">확정취소</Button>{' '}
-                        {/*<ColorfulButtons/>*/}
                         <Button variant="outline-primary">조회</Button>{' '}
                         <Button variant="outline-success" onClick={handleSubmit}>저장</Button>{' '}
                         <Button variant="outline-danger">삭제</Button>{' '}
@@ -156,7 +149,7 @@ function PurchaseItem() {
                                                                 <Col xs="auto">
                                                                     <Form.Control className="mb-2" id="inlineFormInput"
                                                                                   placeholder={title[i].content}
-                                                                                  value={inputValues[i]} // 입력된 값으로 설정
+                                                                                  value={inputValue[i]} // 입력된 값으로 설정
                                                                                   onChange={(e) => handleInputChange(i, e.target.value)}
                                                                     />
                                                                 </Col>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from './css/ProductManagement.module.css'
 import Nav from "react-bootstrap/Nav";
 import {ProductManagementRawTable, OrangeInputforRaw} from "./ProductManagementRawTable";
@@ -79,6 +79,66 @@ function TabContent({tab}) {
         </div>
     );
 }
+
+//
+//
+// function TabContent({ tab }) {
+//     const [content, setContent] = useState('');
+//
+//     useEffect(() => {
+//         // 페이지 로드 시 저장된 데이터 불러오기
+//         const savedContent = localStorage.getItem(`tab${tab}Content`);
+//         if (savedContent) {
+//             setContent(savedContent);
+//         }
+//     }, [tab]);
+//
+//     const handleContentChange = (event) => {
+//         const newContent = event.target.value;
+//         setContent(newContent);
+//
+//         // 글이 변경될 때마다 로컬 스토리지에 저장
+//         localStorage.setItem(`tab${tab}Content`, newContent);
+//     };
+//
+//     return (
+//         <div>
+//             {tab === 0 && (
+//                 <div>
+//                     <section className={styles.searchBox} style={{marginBottom: '30px'}}>
+//                         <OrangeInputforRaw/>
+//                     </section>
+//                     <section className={styles.tableArea}>
+//                         <ProductManagementRawTable/>
+//                     </section>
+//                 </div>
+//             )}
+//
+//             {tab === 1 && (
+//                 <div>
+//                     <section className={styles.searchBox} style={{marginBottom: '30px'}}>
+//                         <OrangeInputforHalf value={content} onChange={handleContentChange}/>
+//                     </section>
+//                     <section className={styles.tableArea}>
+//                         <ProductManagementHalfTable/>
+//                     </section>
+//                 </div>
+//             )}
+//
+//             {tab === 2 && (
+//                 <div>
+//                     <section className={styles.searchBox} style={{marginBottom: '30px'}}>
+//                         <OrangeInputforFull/>
+//                     </section>
+//                     <section className={styles.tableArea}>
+//                         <ProductManagementFullTable/>
+//                     </section>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// }
+//
 
 
 export default ProductManagement;
