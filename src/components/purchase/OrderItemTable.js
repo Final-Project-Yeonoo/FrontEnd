@@ -32,7 +32,7 @@ const OrderItemTable = () => {
         { field: 'itemOrderStart', headerName: '입고예정일', width: 150 },
         { field: 'itemOrderEnd', headerName: '마감기한', width: 150 },
         { field: 'trCompCode', headerName: '거래처코드', width: 150 },
-        { field: 'trCompName', headerName: '거래처명', width: 150 },
+        // { field: 'trCompName', headerName: '거래처명', width: 150 },
         { field: 'empNo', headerName: '사원번호', width: 150 },
         { field: 'itemOrderReg', headerName: '등록시간', width: 150 },
         { field: 'itemOrderUpdate', headerName: '수정시간', width: 150 },

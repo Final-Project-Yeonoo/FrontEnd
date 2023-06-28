@@ -30,11 +30,11 @@ const OrderItemDetailTable = () => {
         { field: 'itemOrderDetailCode', headerName: '발주 상세번호', width: 150 },
         { field: 'itemOrderDetailName', headerName: '발주 품목상세명', width: 150 },
         { field: 'itemOrderNetPrice', headerName: '가격', width: 150 },
-        { field: 'itemOrderDetailCount', headerName: '수량', width: 150 },
+        { field: 'itemOrderCount', headerName: '수량', width: 150 },
         { field: 'taxCode', headerName: '세금10%', width: 150 },
         { field: 'itemOrderCode', headerName: '발주서 번호', width: 150 },
         { field: 'storehouseCode', headerName: '창고 번호', width: 150 },
-        { field: 'comment', headerName: '비고', width: 200 },
+        // { field: 'comment', headerName: '비고', width: 200 },
     ];
 
     return (
