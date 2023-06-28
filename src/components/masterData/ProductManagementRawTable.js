@@ -66,8 +66,6 @@ function OrangeInputforRaw() {
                                     className="mb-2"
                                     id="inlineFormInput"
                                     placeholder='자동 완성'
-                                    // value={inputValue[0]}
-                                    // onChange={(e) => handleInputChange(0, e.target.value)}
                                     readOnly
                                 />
                             </Col>
@@ -153,11 +151,7 @@ const ProductManagementRawTable = () => {
         setSelectedRow(selectedRowData);
     };
 
-    //체크 박스 선택
-
-
     // 수정 버튼
-    // const gridRef = useRef(null);
 
     const handleModifyClick = async () => {
         const arrayData = selectedRow
