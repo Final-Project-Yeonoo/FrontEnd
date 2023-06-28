@@ -30,22 +30,26 @@ function OrangeInputforRaw() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
-        const data = {
-            "rawCode": inputValue[0],
-            "rawName": inputValue[1],
-            "rawType": inputValue[2]
+        if (inputValue.length === 3 && inputValue.every((value) => value.trim() !== '')) {
+            const data = {
+                rawCode: inputValue[0],
+                rawName: inputValue[1],
+                rawType: inputValue[2]
+            };
+
+            console.log(data);
+
+            axios
+                .post('http://localhost:8888/ynfinal/rawitem', data)
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error('실패함', error);
+                });
+        } else {
+            alert('3개의 항목을 모두 입력해야 합니다.');
         }
-
-        console.log(data);
-
-        axios
-            .post('http://localhost:8888/ynfinal/rawitem', data)
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('실패함', error);
-            });
     };
 
 
@@ -174,13 +178,15 @@ const ProductManagementRawTable = () => {
         // 삭제할 행의 id를 서버로 전달하여 해당 행을 삭제하는 작업을 수행합니다.
         // 자세한 내용은 백엔드 API 문서를 참조하시기 바랍니다.
     };
-    
+
     return (
         <div style={{height: 800, width: '100%'}}>
             <div style={{marginBottom: '1rem'}}>
-                <Button variant="primary" onClick={handleButtonClick} style={{marginRight: '10px'}}>전송</Button>
-                <Button variant="danger" onClick={() => {
-                }}>삭제</Button>
+                <div style={{marginBottom:'20px'}}>
+                    <Button variant="primary" onClick={handleButtonClick} style={{marginRight: '10px'}}>수정 완료</Button>
+                    <Button variant="danger" onClick={() => {
+                    }}>삭제</Button>
+                </div>
                 <DataGrid
                     rows={rows}
                     columns={[

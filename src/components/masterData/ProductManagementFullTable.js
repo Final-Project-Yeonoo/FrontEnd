@@ -28,23 +28,27 @@ function OrangeInputforFull() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
-        const data = {
-            "finishedCode": inputValue[0],
-            "finishedName": inputValue[1],
-            "finishedSize": inputValue[2]
+        if (inputValue.length === 3 && inputValue.every((value) => value.trim() !== '')) {
+            const data = {
+                "finishedCode": inputValue[0],
+                "finishedName": inputValue[1],
+                "finishedSize": inputValue[2]
+            }
+
+
+            console.log(data);
+
+            axios
+                .post('http://localhost:8888/ynfinal/finisheditem', data)
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error('실패함', error);
+                });
+        } else {
+            alert('3개의 항목을 모두 입력해야 합니다.');
         }
-
-
-        console.log(data);
-
-        axios
-            .post('http://localhost:8888/ynfinal/finisheditem', data)
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('실패함', error);
-            });
     };
 
 

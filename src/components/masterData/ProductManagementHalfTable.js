@@ -29,6 +29,7 @@ function OrangeInputforHalf() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
+        if (inputValue.length === 3 && inputValue.every((value) => value.trim() !== '')) {
         const data = {
             "halfCode": inputValue[0],
             "halfName": inputValue[1],
@@ -46,8 +47,10 @@ function OrangeInputforHalf() {
             .catch(error => {
                 console.error('실패함', error);
             });
+    } else {
+            alert('3개의 항목을 모두 입력해야 합니다.');
+        }
     };
-
 
 
     return (
