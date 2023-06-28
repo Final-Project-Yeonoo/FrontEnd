@@ -9,11 +9,14 @@ import Button from "react-bootstrap/Button";
 import styles from "./css/ProductManagement.module.css";
 import {Checkbox} from "@mui/material";
 
+// useEffect(
+//
+// ,[])
 
 function OrangeInputforRaw() {
 
     const [inputValue, setInputValue] = useState([]);
-
+    localStorage.setItem()
     const handleInputChange = (index, value) => {
         const newInputValue = [...inputValue];
         newInputValue[index] = value;
@@ -30,11 +33,11 @@ function OrangeInputforRaw() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
-        if (inputValue.length === 3 && inputValue.every((value) => value.trim() !== '')) {
+        if (inputValue.length === 2 && inputValue.every((value) => value.trim() !== '')) {
             const data = {
-                rawCode: inputValue[0],
-                rawName: inputValue[1],
-                rawType: inputValue[2]
+                // rawCode: inputValue[0],
+                rawName: inputValue[0],
+                rawType: inputValue[1]
             };
 
             console.log(data);
@@ -42,13 +45,15 @@ function OrangeInputforRaw() {
             axios
                 .post('http://localhost:8888/ynfinal/rawitem', data)
                 .then(response => {
+                    const { rawCode } = response.data;
                     console.log(response.data);
+                    console.log('Received rawCode:', rawCode); // rawCode를 콘솔에 출력
                 })
                 .catch(error => {
                     console.error('실패함', error);
                 });
         } else {
-            alert('3개의 항목을 모두 입력해야 합니다.');
+            alert('항목을 모두 입력해야 합니다.');
         }
     };
 
@@ -68,9 +73,10 @@ function OrangeInputforRaw() {
                                 <Form.Control
                                     className="mb-2"
                                     id="inlineFormInput"
-                                    placeholder='입력하세요'
-                                    value={inputValue[0]}
-                                    onChange={(e) => handleInputChange(0, e.target.value)}
+                                    placeholder='자동 완성'
+                                    // value={inputValue[0]}
+                                    // onChange={(e) => handleInputChange(0, e.target.value)}
+                                    readOnly
                                 />
                             </Col>
                         </div>
@@ -88,8 +94,8 @@ function OrangeInputforRaw() {
                                     className="mb-2"
                                     id="inlineFormInput"
                                     placeholder='입력하세요'
-                                    value={inputValue[1]}
-                                    onChange={(e) => handleInputChange(1, e.target.value)}
+                                    value={inputValue[0]}
+                                    onChange={(e) => handleInputChange(0, e.target.value)}
                                 />
                             </Col>
                         </div>
@@ -107,8 +113,8 @@ function OrangeInputforRaw() {
                                     className="mb-2"
                                     id="inlineFormInput"
                                     placeholder='입력하세요'
-                                    value={inputValue[2]}
-                                    onChange={(e) => handleInputChange(2, e.target.value)}
+                                    value={inputValue[1]}
+                                    onChange={(e) => handleInputChange(1, e.target.value)}
                                 />
                             </Col>
                         </div>

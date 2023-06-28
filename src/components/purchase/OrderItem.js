@@ -105,7 +105,7 @@ function OrderItem() {
                                                             <Input id="searchDate"
                                                                    name="searchDate"
                                                                    type='date'
-                                                                   style={{marginLeft:"10px", width: '280px'}}
+                                                                   style={{ width: '280px'}}
                                                                    onChange={(e) => handleInputChange(i, e.target.value)}/>
                                                         </div>
                                                     </Col>
