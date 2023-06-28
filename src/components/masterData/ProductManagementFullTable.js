@@ -28,11 +28,11 @@ function OrangeInputforFull() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
-        if (inputValue.length === 3 && inputValue.every((value) => value.trim() !== '')) {
+        if (inputValue.length === 2 && inputValue.every((value) => value.trim() !== '')) {
             const data = {
-                "finishedCode": inputValue[0],
-                "finishedName": inputValue[1],
-                "finishedSize": inputValue[2]
+                // "finishedCode": inputValue[0],
+                "finishedName": inputValue[0],
+                "finishedSize": inputValue[1]
             }
 
 
@@ -47,7 +47,7 @@ function OrangeInputforFull() {
                     console.error('실패함', error);
                 });
         } else {
-            alert('3개의 항목을 모두 입력해야 합니다.');
+            alert('항목을 모두 입력해야 합니다.');
         }
     };
 
@@ -66,9 +66,10 @@ function OrangeInputforFull() {
                             <Col xs="au₩to">
                                 <Form.Control className="mb-2"
                                               id="inlineFormInput"
-                                              placeholder='입력하세요'
-                                              value={inputValue[0]}
-                                              onChange={(e) => handleInputChange(0, e.target.value)}
+                                              placeholder='자동 완성'
+                                              // value={inputValue[0]}
+                                              // onChange={(e) => handleInputChange(0, e.target.value)}
+                                              readOnly
                                 />
                             </Col>
                         </div>
@@ -83,8 +84,8 @@ function OrangeInputforFull() {
                                 <Form.Control className="mb-2"
                                               id="inlineFormInput"
                                               placeholder='입력하세요'
-                                              value={inputValue[1]}
-                                              onChange={(e) => handleInputChange(1, e.target.value)}
+                                              value={inputValue[0]}
+                                              onChange={(e) => handleInputChange(0, e.target.value)}
                                 />
                             </Col>
                         </div>
@@ -99,8 +100,8 @@ function OrangeInputforFull() {
                                 <Form.Control className="mb-2"
                                               id="inlineFormInput"
                                               placeholder='입력하세요'
-                                              value={inputValue[2]}
-                                              onChange={(e) => handleInputChange(2, e.target.value)}
+                                              value={inputValue[1]}
+                                              onChange={(e) => handleInputChange(1, e.target.value)}
                                 />
                             </Col>
                         </div>

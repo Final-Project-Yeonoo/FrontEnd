@@ -29,11 +29,11 @@ function OrangeInputforHalf() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
-        if (inputValue.length === 3 && inputValue.every((value) => value.trim() !== '')) {
+
         const data = {
-            "halfCode": inputValue[0],
-            "halfName": inputValue[1],
-            "halfComment": inputValue[2]
+            // "halfCode": inputValue[0],
+            "halfName": inputValue[0],
+            "halfComment": inputValue[1]
         }
 
 
@@ -47,10 +47,7 @@ function OrangeInputforHalf() {
             .catch(error => {
                 console.error('실패함', error);
             });
-    } else {
-            alert('3개의 항목을 모두 입력해야 합니다.');
-        }
-    };
+    }
 
 
     return (
@@ -67,9 +64,10 @@ function OrangeInputforHalf() {
                             <Col xs="auto">
                                 <Form.Control className="mb-2"
                                               id="inlineFormInput"
-                                              placeholder='입력하세요'
-                                              value={inputValue[0]}
-                                              onChange={(e) => handleInputChange(0, e.target.value)}
+                                              placeholder='자동 완성'
+                                              // value={inputValue[0]}
+                                              // onChange={(e) => handleInputChange(0, e.target.value)}
+                                              readOnly
                                 />
                             </Col>
                         </div>
@@ -84,8 +82,8 @@ function OrangeInputforHalf() {
                                 <Form.Control className="mb-2"
                                               id="inlineFormInput"
                                               placeholder='입력하세요'
-                                              value={inputValue[1]}
-                                              onChange={(e) => handleInputChange(1, e.target.value)}
+                                              value={inputValue[0]}
+                                              onChange={(e) => handleInputChange(0, e.target.value)}
                                 />
                             </Col>
                         </div>
@@ -100,8 +98,8 @@ function OrangeInputforHalf() {
                                 <Form.Control className="mb-2"
                                               id="inlineFormInput"
                                               placeholder='입력하세요'
-                                              value={inputValue[2]}
-                                              onChange={(e) => handleInputChange(2, e.target.value)}
+                                              value={inputValue[1]}
+                                              onChange={(e) => handleInputChange(1, e.target.value)}
                                 />
                             </Col>
                         </div>

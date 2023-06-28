@@ -53,14 +53,22 @@ function SideMenu({addTab}) {
                             사용자 정보수정
                         </Accordion.Body>
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
-                                        onClick={() => {navigate('admin/mycom')}}>
+                                        // onClick={() => {navigate('admin/mycom')}}
+                                        onClick={() => {
+                                            handleAccordionItemClick('admin/mycom', "회사정보 입력");
+                                        }}
+                        >
                             회사정보 입력
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="2">
                         <Accordion.Header>기준 정보</Accordion.Header>
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
-                                        onClick={() => {navigate('/masterData/info')}}>
+                                        // onClick={() => {navigate('/masterData/info')}}
+                                        onClick={() => {
+                                            handleAccordionItemClick('/masterData/info', "거래처정보");
+                                        }}
+                        >
                             거래처정보
                         </Accordion.Body>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
@@ -100,12 +108,12 @@ function SideMenu({addTab}) {
                     </Accordion.Item>
                     <Accordion.Item eventKey="4">
                         <Accordion.Header>재고 관리</Accordion.Header>
-                        <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
-                                        onClick={() => {
-                                            handleAccordionItemClick('/inventory/manage', "입고관리")
-                                        }}>
-                            입고관리
-                        </Accordion.Body>
+                        {/*<Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}*/}
+                        {/*                onClick={() => {*/}
+                        {/*                    handleAccordionItemClick('/inventory/manage', "입고관리")*/}
+                        {/*                }}>*/}
+                        {/*    입고관리*/}
+                        {/*</Accordion.Body>*/}
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
                                             handleAccordionItemClick('/inventory/check', "재고현황")
@@ -129,7 +137,7 @@ function SideMenu({addTab}) {
                         </Accordion.Body>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
-                                            handleAccordionItemClick('/yougeun', "유근두근")
+                                            handleAccordionItemClick('/yougeun', "유근 테스트")
                                         }}>
                             유근 테스트
                         </Accordion.Body>
