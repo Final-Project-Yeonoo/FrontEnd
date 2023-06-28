@@ -7,12 +7,13 @@ import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
 import { Checkbox, Divider } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Layouts from '../common/TableLayout';
-import {API_BASE_URL, DEPARTMENT, POSITION} from '../../config/host-cofig';
+import {API_BASE_URL, DEPARTMENT, POSITION, FINDALL} from '../../config/host-cofig';
 
 function AdminUser() {
 
   const API_DEPT_URL = API_BASE_URL + DEPARTMENT ; 
   const API_POS_URL = API_BASE_URL + POSITION ; 
+  const API_ADD_URL = API_BASE_URL + FINDALL;
 
 
   const label = { inputProps: { "aria-label": "Switch demo" } };
@@ -32,11 +33,11 @@ function AdminUser() {
     empPhone: "",
     empExtension: "",
     empHireDate: "",
-    empValidate: false, // 권한 체크박스의 기본 값
-    adminMenu: { checka: true, inputa: false },
-    masterDataMenu: { checka: true, inputa: false },
-    purchaseMenu: { checka: true, inputa: false },
-    inventoryMenu: { checka: true, inputa: false }
+    empValidate: true, // 권한 체크박스의 기본 값
+    adminMenu: { checka: "Y", inputa: "N" },
+    masterDataMenu: { checka: "Y", inputa: "N" },
+    purchaseMenu: { checka: "Y", inputa: "N" },
+    inventoryMenu: { checka: "Y", inputa: "N" }
   });
 
 
@@ -225,7 +226,7 @@ useEffect(() => {
 // // }
 
        // 사용자 정보 서버 전달 요청
-       const response = await fetch(API_DEPT_URL, {
+       const response = await fetch(API_ADD_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

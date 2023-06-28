@@ -2,14 +2,23 @@ import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import styles from './css/UserList.module.css';
-import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
+import {API_BASE_URL, FINDALL,DEPARTMENT,POSITION} from '../../config/host-cofig';
 import {Button} from 'reactstrap';
 
 const UserList = () => {
   const [data, setData] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [deptData, setDeptData] = useState([
+    { deptCode: "", deptName: "" }]);
+    const [posData, setPosData] = useState([
+      { posCode: "", posName: "" },
+      
+    ]);
 
   const API_USERLIST_URL = API_BASE_URL + FINDALL;
+  const API_DEPT_URL = API_BASE_URL + DEPARTMENT ; 
+  const API_POS_URL = API_BASE_URL + POSITION ; 
+
  
  
 
@@ -127,6 +136,7 @@ const UserList = () => {
 
 
   useEffect(() => {
+
     const fetchData = async () => {
       try {
         // Send a GET request to the API endpoint
@@ -145,6 +155,35 @@ const UserList = () => {
         console.error('Error fetching data:', error);
       }
     };
+    const fetchDeptData = async () => {
+      try {
+        // Send a GET request to the backend API to fetch department data
+        const response = await fetch(API_DEPT_URL);
+        const jsonData = await response.json();
+  
+        // Update the data state with the fetched department data
+        setDeptData(jsonData);
+      } catch (error) {
+        console.error('Error fetching department data:', error);
+      }
+    };
+  
+     const fetchPOSData = async () => {
+      try {
+        // Send a GET request to the backend API to fetch department data
+        const response = await fetch(API_POS_URL);
+        const jsonData = await response.json();
+  
+        // Update the data state with the fetched department data
+        setPosData(jsonData);
+      } catch (error) {
+        console.error('Error fetching department data:', error);
+      }
+    };
+  
+    fetchPOSData();
+  
+    fetchDeptData();
 
     // Call the fetchData function
     fetchData();
@@ -159,9 +198,10 @@ const UserList = () => {
     setSelectedRow(selectedRowData);
   };
 
+
  //백으로 정보를 전달
  const handleSaveClick = async () => {
-  const arrayData = [selectedRow]
+  // const arrayData = [selectedRow]
   // try {
   //   const response = await fetch(API_USERLIST_URL, {
   //     method: 'POST',
@@ -170,29 +210,70 @@ const UserList = () => {
   //     },
   //     body: JSON.stringify(selectedRow),
   //   });
+  // try {
+  //   // 1. deptName과 posName 값을 가져옵니다.
+  //   const { deptName, posName, ...otherFields } = selectedRow;
+
+  //   // 2. 전체 부서 목록과 직급 목록을 비교하여 코드를 찾습니다.
+ 
+
+  //   // 3. 선택된 부서와 직급의 코드 값을 수정합니다.
+  
+
+
+
+  //   const response = await fetch(API_USERLIST_URL, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(modifiedRow),
+  //   });
+  //   console.log('선택정보 수정확인',modifiedRow);
+
+  //   if (!response.ok) {
+  //     throw new Error('Failed to save data');
+  //   }
+
+  //   // Optional: Display a success message or perform any other actions
+  //   console.log('Data saved successfully');
+  // } catch (error) {
+  //   console.error('Error saving data:', error);
+  // }
+
   try {
-    // 선택된 row의 값을 수정합니다.
+    // 1. deptName과 posName 값을 가져옵니다.
+    const { deptName, posName, ...otherFields } = selectedRow;
 
+    // 2. 전체 부서 목록과 직급 목록을 비교하여 코드를 찾습니다.
+    const selectedDept = deptData.find((dept) => dept.deptName === deptName);
+    const selectedPos = posData.find((pos) => pos.posName === posName);
 
+    // 3. 선택된 부서와 직급의 코드 값을 수정합니다.
+    const modifiedRow = {
+      ...otherFields,
+      deptCode: selectedDept.deptCode,
+      posCode: selectedPos.posCode,
+    };
 
     const response = await fetch(API_USERLIST_URL, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(arrayData),
+      body: JSON.stringify(modifiedRow),
     });
-    console.log('선택정보 수정확인',arrayData);
-
+   console.log('선택정보 수정확인',modifiedRow);
     if (!response.ok) {
       throw new Error('Failed to save data');
     }
 
-    // Optional: Display a success message or perform any other actions
     console.log('Data saved successfully');
   } catch (error) {
     console.error('Error saving data:', error);
   }
+
+
 };
 
 
