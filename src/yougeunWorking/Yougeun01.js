@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "reactstrap";
 import { Button, TextField } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
+import { PacmanLoader } from "react-spinners";
 import Box from "@mui/material/Box";
 import {
   DataGrid,
@@ -11,7 +12,11 @@ import {
 } from "@mui/x-data-grid";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { API_YGBASE_URL as BASE, PROJECT, DELIVERY, DELIVERY_DETAIL, RETURNED,
+  RETURN_DETAIL, PERFORMANCE, JOBORDER, ORDERS_DETAIL, ESTIMATE,
+  ORDERS, STORE, ORDER, DEPARTMENT, FINISHED_ITEM, HALF_ITEM,
+  RAW_ITEM, TR_COMP, EMPLOYEE, COMPANY
+} from './YougeunConfig';
 
 // 프로젝트 등록
 function RegisterProject() {
@@ -22,6 +27,7 @@ function RegisterProject() {
   const [originalRows, setOriginalRows] = React.useState([]);
   const apiRef = React.useRef(null);
   const [data, setData] = useState([]);
+  const [loading, setLoader] = useState(true);
 
 
   const handleFilter = () => {
@@ -76,6 +82,7 @@ function RegisterProject() {
       storehouseName: formData.storehouseName,
       storehouseEtc: formData.storehouseEtc,
       storehouseStartDate: formattedDate,
+      projectDate : new Date(),
     };
   
     // Add the new row to the responseData array
@@ -109,7 +116,7 @@ function RegisterProject() {
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/project");
+          const response = await fetch(BASE + PROJECT);
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
@@ -123,7 +130,10 @@ function RegisterProject() {
         } catch (error) {
           console.error("Error:", error);
         }
+
+        setLoader(false);
       };
+
 
 
   const [formData, setFormData] = useState({
@@ -184,7 +194,7 @@ function RegisterProject() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/project', requestOptions)
+    fetch(BASE + PROJECT, requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -232,7 +242,7 @@ function RegisterProject() {
         body: JSON.stringify(selectionModel),
       };
     
-      fetch('http://localhost:8888/ynfinal/project', requestOptions)
+      fetch(BASE + PROJECT, requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {
@@ -370,8 +380,23 @@ function RegisterProject() {
 
 
 
+
+
   return (
     <>
+       <div
+        style={{
+          position: "absolute",
+          top: "40%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        {loading ? <PacmanLoader size={50} color="#36d7b7" /> : ""}
+      </div>
       <div>
         <Form onSubmit={handleSubmit}>
 
@@ -413,6 +438,7 @@ function RegisterProject() {
       </div>
      {/* Modal */}
      
+    
         {responseData !== null && (
   <Box sx={{ height: 600, width: '100%' }}>
     <DataGrid

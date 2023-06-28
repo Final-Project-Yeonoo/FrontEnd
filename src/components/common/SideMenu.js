@@ -112,10 +112,10 @@ function SideMenu() {
                                         onClick={() => {navigate('/yougeun04')}}>
                             작업지시
                         </Accordion.Body>
-                        <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
+                        {/* <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/yougeun05')}}>
                             자재소요분석
-                        </Accordion.Body>
+                        </Accordion.Body> */}
                         <Accordion.Body style={{color:"darkblue", fontSize:"small", textAlign:"center"}}
                                         onClick={() => {navigate('/yougeun06')}}>
                             구매발주

@@ -12,7 +12,7 @@ import {
 
 
 
-// 구매 발주
+// 구매 발주[빛나님]
 function PlacePurchaseOrder() {
 
   
