@@ -40,7 +40,7 @@ function RegisterDelivery(){
     fetch(BASE + DELIVERY_DETAIL)
       .then((response) => response.json())
       .then((data) => {
-        const filteredData = Object.values(data).filter((item) => ids.row.orderCode === item.orderCode);
+        const filteredData = Object.values(data).filter((item) => ids.row.deliveryCode === item.deliveryCode);
   
         const processedData = filteredData.map((item, index) => ({
           id: index + 1,

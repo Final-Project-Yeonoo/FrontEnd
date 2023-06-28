@@ -386,6 +386,7 @@ function RegisterEstimate() {
         headerName: "수주유형",
         width: 110,
         editable: true,
+        cellClassName: 'selectCell',
         type: 'singleSelect',
         valueOptions: ['OEM', '자체생산'],
       },
@@ -394,6 +395,7 @@ function RegisterEstimate() {
       headerName: '결재조건',
       sortable: false,
       editable: true,
+      cellClassName: 'selectCell',
       type: 'singleSelect',
       valueOptions: ['카드', '현금'],
       width: 110,
@@ -650,14 +652,19 @@ function RegisterEstimate() {
       </pre>
       {/* 스타일을 적용할 CSS 스타일시트 */}
       <style>{`
-        .grayCell {
-          background-color: #676767;
+         .grayCell {
+          background-color: #0E2954;
           color: white;
         }
 
         .blueCell{
-          background-color: #0072e8;
+          background-color: #7895B2;
           color: white;
+        }
+
+        .selectCell {
+          background-color: #FFEEBB;
+          
         }
       `}</style>
     </>

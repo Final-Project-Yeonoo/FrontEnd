@@ -62,37 +62,37 @@ function RegisterPerformance() {
   const handleFilter = () => {
     const { performanceStartdate, performanceGoodCnt, performanceEnddate, performanceBadCnt } = formData;
   
-    
     const filteredData = originalRows.filter((row) => {
-      if(performanceStartdate){
-      const nextDay = new Date(performanceStartdate);
-      nextDay.setDate(nextDay.getDate() - 1);
-      const formattedRowperformanceStartdate = new Date(row.performanceStartdate).toISOString().split('T')[0];
-      const formattedperformanceStartdate = nextDay.toISOString().split('T')[0];
-
-    
-      if (formattedperformanceStartdate && formattedRowperformanceStartdate !== formattedperformanceStartdate) {
+      if (performanceStartdate) {
+        const nextDay = new Date(performanceStartdate);
+        nextDay.setDate(nextDay.getDate() - 1);
+        const formattedRowperformanceStartdate = new Date(row.performanceStartdate).toISOString().split('T')[0];
+        const formattedperformanceStartdate = nextDay.toISOString().split('T')[0];
+  
+        if (formattedperformanceStartdate && formattedRowperformanceStartdate !== formattedperformanceStartdate) {
+          return false;
+        }
+      }
+  
+      if (performanceGoodCnt && row.performanceGoodCnt && !row.performanceGoodCnt.toString().toLowerCase().includes(performanceGoodCnt.toString().toLowerCase())) {
         return false;
       }
-      }
-
-
-      if (performanceGoodCnt && row.performanceGoodCnt && !row.performanceGoodCnt.toLowerCase().includes(performanceGoodCnt.toLowerCase())) {
-        return false;
-      }
-      if(performanceEnddate){
+  
+      if (performanceEnddate) {
         const nextDay2 = new Date(performanceEnddate);
-        nextDay2.setDate(nextDay2.getDate()-1);
+        nextDay2.setDate(nextDay2.getDate() - 1);
         const formattedRowperformanceEnddate = new Date(row.performanceEnddate).toISOString().split('T')[0];
         const formattedperformanceEnddate = nextDay2.toISOString().split('T')[0];
-
+  
         if (formattedperformanceEnddate && formattedRowperformanceEnddate != formattedperformanceEnddate) {
           return false;
         }
-    }
-      if (performanceBadCnt && row.performanceBadCnt && !row.performanceBadCnt.includes(performanceBadCnt)) {
+      }
+  
+      if (performanceBadCnt && row.performanceBadCnt && !row.performanceBadCnt.includes(performanceBadCnt.toString())) {
         return false;
       }
+  
       return true;
     });
   
@@ -139,7 +139,7 @@ function RegisterPerformance() {
           performanceStartdate: rowDate,
           performanceGoodCnt: formData.performanceGoodCnt > 0 ? formData.performanceGoodCnt : 0,
           performanceEnddate: rowDate2,
-          performanceBadCnt: formData.performanceBadCnt > 0 ? formData.performanceGoodCnt : 0,
+          performanceBadCnt: formData.performanceBadCnt > 0 ? formData.performanceBadCnt : 0,
           // storehouseStartDate : formattedDate,  
         };
       
@@ -276,6 +276,7 @@ function RegisterPerformance() {
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
             ...item,
+            jobOrderInstructDate : new Date(item.jobOrderInstructDate),
             performanceStartdate : new Date(item.performanceStartdate),
             performanceEnddate: new Date(item.performanceEnddate)
             // projectRegDate: new Date(item.projectRegDate),
@@ -669,7 +670,7 @@ function RegisterPerformance() {
           projectName: selectedProject ? selectedProject.projectName : '',
           trCompName: selectedTrComp ? selectedTrComp.trCompName : '',
           storehouseName : selectedStore ? selectedStore.storehouseName : '',
-          jobOrderInstructDate : selectedJoborder ? selectedJoborder.jobOrderInstructDate : '',
+          jobOrderInstructDate : selectedJoborder ? new Date(selectedJoborder.jobOrderInstructDate) : '',
           jobOrderType : selectedJoborder ? selectedJoborder.jobOrderType : '',
           jobOrderQuantity : selectedJoborder ? selectedJoborder.jobOrderQuantity : '',
           finishedName : selectedFinished ? selectedFinished.finishedName : '',

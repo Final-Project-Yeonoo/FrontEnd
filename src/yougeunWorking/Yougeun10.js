@@ -37,18 +37,22 @@ function RegisterReturn() {
     console.log(ids.row.orderCode);
     setCode(ids.row.orderCode);
   
-    fetch(BASE + RETURNED)
+    fetch(BASE + RETURN_DETAIL)
       .then((response) => response.json())
       .then((data) => {
-        const filteredData = Object.values(data).filter((item) => ids.row.orderCode === item.orderCode);
+        const filteredData = Object.values(data).filter((item) => ids.row.returnedCode === item.returnedCode);
   
         const processedData = filteredData.map((item, index) => ({
           id: index + 1,
           ...item,
         }));
-  
+        
         setResponseData2(processedData);
+        // console.log('테스틍ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ');
         console.log(processedData);
+ console.log('테스틍ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ');
+       
+        console.log(responseData2);
       })
       .catch((error) => {
         console.error('Failed to fetch employee list:', error);
@@ -681,7 +685,7 @@ function RegisterReturn() {
                 // empName: selectedEmp ? selectedEmp.empName : '',
                 // projectName: selectedProject ? selectedProject.projectName : '',
                 // trCompName: selectedTrComp ? selectedTrComp.trCompName : '',
-                orderDetailVat: sum,
+                // orderDetailVat: sum,
                 finishedName : selectedFinished ? selectedFinished.finishedName : '',
                 // orderCode : ,
               };
