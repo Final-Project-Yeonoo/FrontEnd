@@ -4,13 +4,13 @@ const clientHostName = window.location.hostname;
 let backEndHostName; //백엔드 서버 호스트 이름
 
 
-// if(clientHostName === 'localhost') {
+if(clientHostName === 'localhost') {
 
-    // backEndHostName = 'http://localhost:8888/';
-// }else if(clientHostName === '.com'){
-    backEndHostName = 'http://13.124.224.231/';
+    backEndHostName = 'http://localhost:8888/';
+}else if(clientHostName === '.com'){
+//     backEndHostName = 'http://13.124.224.231/';
 
-// }
+}
 
 
 
