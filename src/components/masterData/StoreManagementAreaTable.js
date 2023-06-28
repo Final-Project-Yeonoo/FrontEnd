@@ -203,7 +203,6 @@ const StoreManagementAreaTable = forwardRef((props, ref) => {
                 options={options}
                 rowFormatter={rowFormatter}
             />
-            <button onClick={handleSaveData}>데이터 저장</button>
         </div>
     );
 });

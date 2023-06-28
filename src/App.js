@@ -15,8 +15,6 @@ import PurchaseItem from "./components/purchase/PurchaseItem";
 import InvenManage from "./components/inventory/InvenManage";
 import InvenCheck from "./components/inventory/InvenCheck";
 import Mypage from "./components/mypage/Mypage";
-import List from "./components/admin/UserList";
-import MyComInfo from './components/admin/MyComInfo';
 import Yougeun from './components/yougeun/yougeun';
 import StoreYougeun from './components/yougeun/StoreYougeun';
 import Yougeun2 from './components/yougeun/Yougeun2';
@@ -32,15 +30,17 @@ import RegisterDelivery from './yougeunWorking/Yougeun09';
 import RegisterReturn from './yougeunWorking/Yougeun10';
 import Piechart from './chart/PieChart';
 import Barchart from './chart/BarChart';
-
+import Yougeun1 from './components/yougeun/Yougeun1';
+import Message from "./components/common/Message";
+import MyComInfo from "./components/admin/MyComInfo";
 
 function App() {
     return (
         <>
 
-     
-        {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
-        {/* <DashBoard /> */}
+
+            {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
+            {/* <DashBoard /> */}
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 {/*Header&Side포함 DashBoard에 nestedRoute 적용*/}
@@ -86,6 +86,7 @@ function App() {
                         <Route path="yougeun08" element={<RegisterPerformance/>}/>
                         <Route path="yougeun09" element={<RegisterDelivery/>}/>
                         <Route path="yougeun10" element={<RegisterReturn/>}/>
+                    <Route path="message" element={<Message/>}/>
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
                 <Route path="*" element={<div>없는 페이지 입니다.</div>}/>

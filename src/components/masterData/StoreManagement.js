@@ -56,9 +56,9 @@ function StoreManagement() {
                                                         <div style={{display: 'flex'}}>
                                                             <Form.Control readOnly placeholder={title[i].title}
                                                                           style={{
-                                                                              marginRight: '20px',
+                                                                              marginRight: '10px',
                                                                               width: '150px',
-                                                                              marginLeft: "18px"
+                                                                              // marginLeft: "18px"
                                                                           }}/>
                                                             <Form.Select aria-label="Default select example"
                                                                          style={{width: '280px'}}
@@ -108,18 +108,8 @@ function StoreManagement() {
                         )
                     }
                 </section>
-                <button onClick={() => {
-                    axios.get('http://localhost:8888/ynfinal/rawitem').then((결과) => {
-                        console.log('성공함', 결과.data)
-                    })
-                        .catch(() => {
-                            console.log('실패함')
-                        })
-                }}> 백 데이터 받는 버튼
-                </button>
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>창고</div>
-                    {/*<TableExample tableHeaders={tableHeadersProduct[3]} />*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
                             <StoreManagementTable/>
@@ -128,14 +118,12 @@ function StoreManagement() {
                 </section>
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>구역(Area)</div>
-                    {/*<TableExample tableHeaders={tableHeadersProduct[4]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
                             <StoreManagementAreaTable/>
                         </Container>
                     </div>
                     <div className={styles.divStyle}>렉(Rack)</div>
-                    {/*<TableExample tableHeaders={tableHeadersProduct[5]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
                             <StoreManagementRackTable/>

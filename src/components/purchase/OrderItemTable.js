@@ -10,7 +10,7 @@ const OrderItemTable = () => {
 
     const fetchGridData = async () => {
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/trcomp');
+            const response = await fetch('http://localhost:8888/ynfinal/itemorder');
             const data = await response.json();
 
             // Generate unique IDs for the rows based on their index
@@ -27,14 +27,15 @@ const OrderItemTable = () => {
     }, []);
 
     const columns = [
-        { field: 'trCompCode', headerName: '구매 발주', width: 150 },
-        { field: 'trCompName', headerName: 'Company Name', width: 150 },
-        { field: 'trCompPhone', headerName: 'Company Phone', width: 150 },
-        { field: 'trBuy', headerName: 'Buy', width: 100 },
-        { field: 'trSell', headerName: 'Sell', width: 100 },
-        { field: 'trStartDate', headerName: 'Start Date', width: 150 },
-        { field: 'trAddr', headerName: 'Address', width: 200 },
-        { field: 'storehouseName', headerName: 'Storehouse', width: 150 },
+        { field: 'itemOrderCode', headerName: '발주서 번호', width: 150 },
+        { field: 'itemOrderCheck', headerName: '발주 확정', width: 150 },
+        { field: 'itemOrderStart', headerName: '입고예정일', width: 150 },
+        { field: 'itemOrderEnd', headerName: '마감기한', width: 150 },
+        { field: 'trCompCode', headerName: '거래처코드', width: 150 },
+        { field: 'trCompName', headerName: '거래처명', width: 150 },
+        { field: 'empNo', headerName: '사원번호', width: 150 },
+        { field: 'itemOrderReg', headerName: '등록시간', width: 150 },
+        { field: 'itemOrderUpdate', headerName: '수정시간', width: 150 },
     ];
 
     return (

@@ -1,21 +1,3 @@
-let productInputData = [
-    {
-        title: "ITEM 코드",
-        content: "자동완성"
-    },
-    {
-        title: "품명",
-        content: "자동완성"
-    },
-    {
-        title: "품목코드",
-        content: "입력하세요"
-    },
-    {
-        title: "유형",
-        content: "입력하세요"
-    }
-]
 
 let storeInputData = [
     {
@@ -63,36 +45,5 @@ let tableHeadersProduct = [
 ];
 
 
-        // selectedOpt: '일반창고',
-        // inputData: {
-        //     itemCode: '31234',
-        //     name: '반자재',
-        //     amount: '10'
-        // }
 
-const tableCells = [
-        [
-            { itemCode: '강아지' },
-            { name: '반자재' },
-            { amount: '강아지' },
-            { reg: '멍멍이' },
-            { no: '원자재' },
-            { aaa: '원자재' },
-            { bbb: '원자재' },
-            { ccc: '원자재' }
-        ],
-        [
-            { itemCode: '멍멍' },
-            { name: 'ㅇㅇ' },
-            { amount: '강아지' },
-            { reg: '멍멍이' },
-            { no: '원자재' },
-            { aaa: '원자재' },
-            { bbb: '원자재' },
-            { ccc: '원자재' }
-        ],
-
-];
-
-
-export {productInputData, storeInputData, tableHeadersProduct, tableCells}
+export {storeInputData, tableHeadersProduct}

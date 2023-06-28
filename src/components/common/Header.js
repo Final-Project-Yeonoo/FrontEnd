@@ -30,7 +30,7 @@ function Header() {
                                 navbarScroll
                             >
                                 <Nav.Link href="/"  className="col-lg-3">Home</Nav.Link>
-                                <Nav.Link href="#action2" className="col-lg-4">Message</Nav.Link>
+                                <Nav.Link href="/message" className="col-lg-4">Message</Nav.Link>
                                 <NavDropdown title="Setting" id="navbarScrollingDropdown" className="col-lg-4">
                                     <NavDropdown.Item href="#action3" style={{display:"flex"}}>
                                         <span style={{marginRight:"30px"}} >Dark Mode</span>

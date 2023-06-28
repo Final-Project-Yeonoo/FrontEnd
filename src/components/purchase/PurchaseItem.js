@@ -10,12 +10,57 @@ import {Container} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import {tableCells} from "../masterData/InputDataforMaster";
 import PurchaseItemTable from "./PurchaseItemTable";
+import axios from "axios";
 
 
 
 function PurchaseItem() {
 
     let [title, setTitle] = useState(purchaseItemsData);
+
+    const [inputValues, setInputValues] = useState(title.map(() => ''));
+
+    const handleInputChange = (index, value) => {
+        const newInputValues = [...inputValues];
+        newInputValues[index] = value;
+        setInputValues(newInputValues);
+    };
+
+    // 초기화 버튼 클릭 시 모든 값들을 ''로 초기화
+    const handleReset = () => {
+        setInputValues(title.map(() => ''));
+    };
+
+    const handleSubmit = () => {
+
+        const data = title.map((item, i) => {
+            if (item.title === "ITEM 코드") {
+                return {rawName: inputValues[i],};
+            } else if (item.title === "원자재 개수") {
+                return {rawCount: parseInt(inputValues[i])};
+            } else if (item.title === "원자재 가격") {
+                return {rawPrice: parseInt(inputValues[i]),};
+            }
+        }); // 생성된 JSON 데이터 출력 console.log(data);
+
+        console.log(data)
+        const mergedObject = data.reduce((result, currentObject) => {
+            return {...result, ...currentObject};
+
+        }, {})
+        console.log(mergedObject)
+
+        axios.post('http://localhost:8888/ynfinal/rawitem', mergedObject)
+            .then(response => {
+                // Handle the response if needed
+                console.log(response.mergedObject);
+            })
+            .catch(error => {
+                // Handle errors if any
+                console.error(error);
+            });
+    };
+
 
     return (
         <>
@@ -30,9 +75,9 @@ function PurchaseItem() {
                         <Button variant="outline-danger">확정취소</Button>{' '}
                         {/*<ColorfulButtons/>*/}
                         <Button variant="outline-primary">조회</Button>{' '}
-                        <Button variant="outline-success">저장</Button>{' '}
+                        <Button variant="outline-success" onClick={handleSubmit}>저장</Button>{' '}
                         <Button variant="outline-danger">삭제</Button>{' '}
-                        <Button variant="outline-secondary">초기화</Button>{' '}
+                        <Button variant="outline-secondary" onClick={handleReset}>초기화</Button>{' '}
                     </div>
                 </section>
 
@@ -47,12 +92,13 @@ function PurchaseItem() {
                                                         <Col xs="auto">
                                                             <div style={{display: 'flex'}}>
                                                                 <Form.Control readOnly placeholder={title[i].title}
-                                                                              style={{width: '150px', marginLeft: "18px"}}/>
+                                                                              style={{width: '150px', }}/>
                                                                 <Label for="searchDate"> </Label>
                                                                 <Input id="searchDate"
                                                                        name="searchDate"
                                                                        type='date'
-                                                                       style={{marginLeft: "20px", width: '280px'}}/>
+                                                                       style={{marginLeft: "10px", width: '280px'}}
+                                                                       onChange={(e) => handleInputChange(i, e.target.value)}/>
                                                             </div>
                                                         </Col>
                                                     </Row>
@@ -66,9 +112,9 @@ function PurchaseItem() {
                                                             <div style={{display: 'flex'}}>
                                                                 <Form.Control readOnly placeholder={title[i].title}
                                                                               style={{
-                                                                                  marginRight: '20px',
+                                                                                  marginRight: '10px',
                                                                                   width: '150px',
-                                                                                  marginLeft: "18px"
+
                                                                               }}/>
                                                                 <Form.Select aria-label="Default select example"
                                                                              style={{width: '280px'}}>
@@ -110,6 +156,8 @@ function PurchaseItem() {
                                                                 <Col xs="auto">
                                                                     <Form.Control className="mb-2" id="inlineFormInput"
                                                                                   placeholder={title[i].content}
+                                                                                  value={inputValues[i]} // 입력된 값으로 설정
+                                                                                  onChange={(e) => handleInputChange(i, e.target.value)}
                                                                     />
                                                                 </Col>
                                                             </div>
@@ -127,7 +175,6 @@ function PurchaseItem() {
 
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>구매입고</div>
-                    {/*<TableExample tableHeaders={tableHeadersPurchase[2]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
                             <PurchaseItemTable/>
@@ -136,7 +183,6 @@ function PurchaseItem() {
                 </section>
                 <section className={styles.tableArea}>
                     <div className={styles.divStyle}>세부항목</div>
-                    {/*<TableExample tableHeaders={tableHeadersPurchase[3]}/>*/}
                     <div style={{marginTop: "30px"}}>
                         <Container>
                             <PurchaseItemTable/>

@@ -1,19 +1,53 @@
 #loginBox {
-    color:red;
+    /* color:red; */
 }
 
 .mainStyle {
     display: flex;
-    /*background-color: orange;*/
+    /*background-color: green;*/
 
 }
 
 .changeArea {
     width: 85%;
-    /*background-color: yellow;*/
-    /*border: 2px solid red;*/
+    /*background-color: blue;*/
+    /*border: 1px solid black;*/
     height: 100vh;
     padding: 50px;
 }
 
 
+    
+
+.topNav {
+    /*border: 2px solid blue;*/
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+/* DashBoard.module.css */
+
+.tabBar {
+    display: flex;
+    flex-direction: row; /* 탭을 가로 방향으로 정렬 */
+}
+
+.tabItem {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    background-color: lightblue;
+    margin-right: 10px; /* 탭 사이 간격 설정 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.tabItem:hover {
+    background-color: #f5b56d;
+}
+
+.tabCloseBtn {
+    margin-left: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
