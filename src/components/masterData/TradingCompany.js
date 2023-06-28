@@ -1,30 +1,21 @@
 import styles from './css/TradingCompany.module.css'
 import React, { useState, useEffect } from "react";
 import TableLayout from "../common/TableLayout";
-import Modal from "../common/Modal";
+
 import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import {API_BASE_URL, TRADING} from "../../config/host-cofig";
+import Modal from "./Modal"; // 모달 컴포넌트를 import 합니다.
 
 function TradingCompany() {
 
   const API_TRC_URL = API_BASE_URL + TRADING;
     const [companyData, setCompanyData] = useState({ });
-    
-    // useEffect(() => {
-    //   fetchCompanyData(); // 컴포넌트가 마운트되었을 때 거래처 데이터를 가져옵니다.
-    // }, []);
-  
-    // const fetchCompanyData = async () => {
-     
-    //     const response = await fetch(API_TRC_URL); // 백엔드의 거래처 데이터를 가져오는 API 엔드포인트로 요청합니다.
-    //     const companyData = await response.json(); // 응답 데이터를 JSON 형식으로 변환합니다.
-    //     console.log(companyData);
-    //     const newformData = Object.values(companyData);
-    //     setCompanyData(newformData); // 거래처 데이터를 상태에 설정합니다.
-     
-    // };
+
+    const [filteredData, setFilteredData] = useState([]); // 필터링된 데이터를 관리합니다.
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태를 관리합니다.
 
 
     useEffect(() => {
@@ -97,48 +88,74 @@ function TradingCompany() {
 
     }
   ];
-    
-  
-    
-  
 
-     
-   
+
+
     console.log(companyData);
-  //   const data = [
-  //     // 테이블에 표시할 데이터 배열, 
-  //     {
-  //         구분: "12345",
-  //         trCompCode: "입고",
-  //         trCompName: "품목 A",
-  //         trCompPhone: "A001",
-  //         trAddr: "10",
-  //         trEtc: "정상"  
-  //     },
-  //     {
-  //       구분: "12345",
-  //       trCompCode: "입고",
-  //       trCompName: "품목 A",
-  //       trCompPhone: "A001",
-  //       trAddr: "10",
-  //       trEtc: "정상"  
-  //   },
-  //   {
-  //     구분: "12345",
-  //     trCompCode: "입고",
-  //     trCompName: "품목 A",
-  //     trCompPhone: "A001",
-  //     trAddr: "10",
-  //     trEtc: "정상"  
-  // }
-  //   ];
-    
+ 
+    const handleSearch = () => {
+      const filteredCompanies = companyData.filter(company =>
+        company.trCompName.includes(searchQuery) // 거래처명을 검색어로 포함하는 데이터를 필터링합니다.
+      );
+      setFilteredData(filteredCompanies);
+    };
+  
+    const toggleModal = () => {
+      setIsModalOpen(!isModalOpen);
+    };
+  
+    const handleAddCompany = async (newCompanyData) => {
+      console.log('이건 되나');
+      setCompanyData(prevData => [...prevData,newCompanyData])
+      
+        toggleModal();
+     
+    };
+
+    //row 선택해서 지우기 
+    const [selectedRow, setSelectedRow] = useState(null); // 선택된 row의 정보를 관리합니다.
+    const handleRowClick = (params) => {
+      // 클릭한 row의 정보를 가져옵니다.
+      const selectedRowData = params.row;
+      // 필요한 처리를 수행합니다.
+      console.log("선택된 row의 정보:", selectedRowData);
+      setSelectedRow(selectedRowData);
+    };
+
+    const remove = async () => {
+      console.log('확인',selectedRow);
+        const ArraySelectedRow = [selectedRow.trCompCode]
+        try {
+          const response = await fetch(API_TRC_URL, {
+        method: "DELETE",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(ArraySelectedRow),
+      });
+      console.log('1111', ArraySelectedRow);
+      if (!response.ok) {
+        throw new Error("Failed to save company data");
+      } }catch (error) {
+        console.error("Error saving company data:", error);
+      }
+    };
 
     return (
       <>
       <div className={styles.container}>
       <div className={styles.headerContainer}>
         <h2>거래처 관리</h2>
+        <div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+            <button onClick={handleSearch}>검색</button>
+          </div>
+          <button onClick={toggleModal}>거래처 입력</button>
+          <button  onClick={remove}>삭제</button>
        
      </div>
      </div>
@@ -148,14 +165,18 @@ function TradingCompany() {
         <DataGrid
           rows={companyData}
           columns={columns}
-          disableRowSelectionOnClick
-          getRowId={(row) => row.trCompCode}
+          // disableRowSelectionOnClick
+          onRowClick={handleRowClick}
+          getRowId={(row) => row.trCompName}
           hideFooter={true}
        
         />
       </Box>
     </div>  
     </div>
+    {isModalOpen && (
+        <Modal onClose={toggleModal} onAddCompany={handleAddCompany} />
+      )}
  
       </>
     );

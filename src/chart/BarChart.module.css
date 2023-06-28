@@ -1,0 +1,11 @@
+.barchartHead {
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 25px;
+    border: 1px solid #000;
+}
+.barchartContainer {
+    width: 500px;
+    height: 500px;
+    border: 1px solid #000;
+}

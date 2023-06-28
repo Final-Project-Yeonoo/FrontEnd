@@ -30,6 +30,8 @@ import RegisterPurchaseReceipt from './yougeunWorking/Yougeun07';
 import RegisterPerformance from './yougeunWorking/Yougeun08';
 import RegisterDelivery from './yougeunWorking/Yougeun09';
 import RegisterReturn from './yougeunWorking/Yougeun10';
+import Piechart from './chart/PieChart';
+import Barchart from './chart/BarChart';
 
 
 function App() {
@@ -42,7 +44,9 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 {/*Header&Side포함 DashBoard에 nestedRoute 적용*/}
-                <Route path="/" element={<DashBoard/>}>
+                <Route path="/" element={<DashBoard/> }>
+                <Route path='/' element={<Barchart/>}    />
+                        <Route path='/' element={<Piechart/>} />
                         {/*사용자*/}
                         <Route path="admin/user" element={<AdminUser/>}/>
                         <Route path="admin/search" element={<SearchUser/>}/>

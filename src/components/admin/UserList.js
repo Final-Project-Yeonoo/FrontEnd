@@ -6,10 +6,13 @@ import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
 import {Button} from 'reactstrap';
 
 const UserList = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   const API_USERLIST_URL = API_BASE_URL + FINDALL;
-  
+ 
+ 
+
   const columns = [
   
     {
@@ -56,6 +59,7 @@ const UserList = () => {
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
       width: 170,
+      editable: true,
   
     },
     {
@@ -117,6 +121,11 @@ const UserList = () => {
       editable: true,
     }
   ];
+
+
+ 
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -141,6 +150,58 @@ const UserList = () => {
     fetchData();
   }, []);
 
+  const [selectedRow, setSelectedRow] = useState(null); // 선택된 row의 정보를 관리합니다.
+  const handleRowClick = (params) => {
+    // 클릭한 row의 정보를 가져옵니다.
+    const selectedRowData = params.row;
+    // 필요한 처리를 수행합니다.
+    console.log("선택된 row의 정보:", selectedRowData);
+    setSelectedRow(selectedRowData);
+  };
+
+ //백으로 정보를 전달
+ const handleSaveClick = async () => {
+  // const arrayData = [selectedRow]
+  // try {
+  //   const response = await fetch(API_USERLIST_URL, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(selectedRow),
+  //   });
+  try {
+    // 선택된 row의 값을 수정합니다.
+
+
+
+    const response = await fetch(API_USERLIST_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(selectedRow),
+    });
+    console.log('선택정보 수정확인',selectedRow);
+
+    if (!response.ok) {
+      throw new Error('Failed to save data');
+    }
+
+    // Optional: Display a success message or perform any other actions
+    console.log('Data saved successfully');
+  } catch (error) {
+    console.error('Error saving data:', error);
+  }
+};
+
+
+ 
+
+
+
+
+
 
 
     return (
@@ -155,7 +216,7 @@ const UserList = () => {
 
     <div className={styles.container}>
       <div className={styles.buttonContainer}> 
-      <Button color="success" outline >
+      <Button color="success" outline onClick={handleSaveClick}>
             수정
       </Button>
       </div>
@@ -163,11 +224,11 @@ const UserList = () => {
         <DataGrid
           rows={data}
           columns={columns}
-          checkboxSelection
-          disableRowSelectionOnClick
+          // checkboxSelection
+          // disableRowSelectionOnClick
+          onRowClick={handleRowClick}
           getRowId={(row) => row.empId}
           hideFooter={true}
-       
         />
       </Box>
     </div>  
