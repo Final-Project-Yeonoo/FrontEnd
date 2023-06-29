@@ -1,0 +1,16 @@
+
+.orangeBoxContainer {
+    display: flex;
+    justify-content: space-between;
+    /*border: 2px solid red;*/
+    height: 80px;
+    padding:10px;
+    background: #f5b56d;
+    margin-bottom: 20px;
+}
+.insertTag {
+    margin-right: 10px;
+}
+.clickModal {
+
+}
