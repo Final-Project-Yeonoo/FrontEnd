@@ -6,7 +6,6 @@ import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import { isLogin } from '../../yougeunWorking/login-util';
 
-
 function DashBoard() {
     const [tabs, setTabs] = useState([]); // 탭 목록을 관리하는 상태
     const navigate = useNavigate();
@@ -61,9 +60,14 @@ function DashBoard() {
                 <div className={styles.changeArea}>
                 {/* <Outlet/> */}
                     <div className={styles.topNav}>
+                    {/* <Route path="/" element={<DashBoard/> }> */}
+                       
                         <TabBar tabs={tabs} onCloseTab={handleTabClose}/>
                     </div>
+                    
                     <Outlet/>
+               
+        
                 </div>
             </div>
         </>

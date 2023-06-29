@@ -41,9 +41,20 @@ function App() {
             {/* <DashBoard /> */}
             <Routes>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="/" element={<DashBoard/> }>
-                <Route path='/' element={<Barchart/>}    />
-                        <Route path='/' element={<Piechart/>} />
+             <Route path="/" element={<DashBoard/> }>
+                <Route path='/' element={
+                <>
+                <div style={{display: 'flex'}}>
+                <Barchart/>
+                <Piechart/>
+                </div>
+                <div style={{display: 'flex'}}>
+                <Piechart/>
+                <Piechart/>
+                </div>
+                </>
+                }    />
+                        {/* <Route path='/' element={<Piechart/>} /> */}
                         {/*사용자*/}
                         <Route path="admin/user" element={<AdminUser/>}/>
                         <Route path="admin/search" element={<SearchUser/>}/>

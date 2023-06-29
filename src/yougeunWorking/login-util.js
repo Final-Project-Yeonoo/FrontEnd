@@ -1,5 +1,5 @@
 // 토큰및 로그인 유저 데이터를 브라우저에 저장하는 함수
-export const setLoginUserInfo = ({ token, empNo, empId, empName, userAuth, infoAuth, purchaseAuth, inventoryAuth}) => {
+export const setLoginUserInfo = ({ token, empNo, empId, empName, userAuth, infoAuth, purchaseAuth, inventoryAuth, empProfile}) => {
     localStorage.setItem('ACCESS_TOKEN', token);
     localStorage.setItem('EMP_NO', empNo);
     localStorage.setItem('EMP_ID', empId);
@@ -8,6 +8,7 @@ export const setLoginUserInfo = ({ token, empNo, empId, empName, userAuth, infoA
     localStorage.setItem('INFO_AUTH', infoAuth);
     localStorage.setItem('PURCHASE_AUTH', purchaseAuth);
     localStorage.setItem('INVENTORY_AUTH', inventoryAuth);
+    localStorage.setItem('EMP_IMG', empProfile);
 };
 
 
@@ -22,6 +23,7 @@ export const getLoginUserInfo = () => {
     infoAuth: localStorage.getItem('INFO_AUTH'),
     purchaseAuth: localStorage.getItem('PURCHASE_AUTH'),
     inventoryAuth: localStorage.getItem('INVENTORY_AUTH'),
+    empProfile: localStorage.getItem('EMP_IMG'),
   };
 };
 

@@ -1,9 +1,14 @@
 import styles from "./css/Mypage.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import React from "react";
 import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
-import { Checkbox, Divider } from '@mui/material';
+import { Checkbox, Divider, Grid } from '@mui/material';
 import ImgUpload from "./ImgUpload";
+import { getLoginUserInfo } from "../../yougeunWorking/login-util";
+import { json } from "react-router-dom";
+
+
+
 
 function Mypage({ employeeId }) {
   const [employeeInfo, setEmployeeInfo] = useState({
@@ -16,13 +21,13 @@ function Mypage({ employeeId }) {
     empPhone: "010-111-222",
     empAddress: "서울시 강남구"
   });
- 
+
 
   useEffect(() => {
     // 백엔드에서 사원 정보를 FETCH하는 함수
     const fetchEmployeeInfo = async () => {
       try {
-        const response = await fetch(`http://localhost:8888/ynfinal/employee/mypage/5`);
+        const response = await fetch(`http://localhost:8888/ynfinal/employee/mypage/`+ localStorage.getItem('EMP_NO'));
        
         const data = await response.json();
         console.log(data);
@@ -55,10 +60,56 @@ function Mypage({ employeeId }) {
   };
 
 
+  const [token, setToken] = useState(getLoginUserInfo().token);
+
+
+  
+  const fetchSignUpPost = async () => {
+
+    // 요청 헤더 설정
+    const requestHeader = {
+      'Authorization': 'Bearer ' + token
+    };
+
+      console.log(token);
+
+
+    const userFormData = new FormData();
+    userFormData.append('profileImg', $fileTag.current.files[0]);
+
+    const res = await fetch('http://localhost:8888/ynfinal/employee/image', {
+      method: 'POST',
+      headers: requestHeader,
+      body: userFormData
+    });
+    if (res.status === 200) {
+      alert('사진 업로드 성공');
+      
+    } else {
+      alert('서버와의 통신이 원활하지 않습니다.');
+    }
+  };
 
 
 
+  const $fileTag = useRef();
 
+  // 이미지 파일 상태변수
+  const [imgFile, setImgFile] = useState(null);
+
+  // 이미지파일을 선택했을 때 썸네일 뿌리기
+  const showThumbnailHandler = e => {
+
+    // 첨부된 파일 정보
+    const file = $fileTag.current.files[0];
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+    }
+  };
 
 
   return (
@@ -77,9 +128,30 @@ function Mypage({ employeeId }) {
         <div className={styles.profileImgcontainer}>
           <div className={styles.profileImg}>
               <div>
+              <Grid item xs={12}>
+                  <div className="thumbnail-box" style={{width:'100px', height:'100px', overflow:'hidden'}} onClick={() => $fileTag.current.click()}>
+                      <img
+                        style={{width:'100%', height:'100%'}}
+                        src={imgFile  || require('./img/122.png')}
+                        alt="profile"
+                        
+                      />
+                  </div>
+                  <label className='signup-img-label' htmlFor='profile-img' >프로필 이미지 추가</label>
+                  <input
+                      id='profile-img'
+                      type='file'
+                      style={{display: 'none'}}
+                      accept='image/*'
+                      ref={$fileTag}
+                      onChange={showThumbnailHandler}
+                  />
+                </Grid>
+                <button onClick={fetchSignUpPost}>사진 적용</button>
+
                 {/* <ImgUpload /> */}
               </div>
-              <span>클릭해서 사진을 변경하세요</span>
+              {/* <span>클릭해서 사진을 변경하세요</span> */}
           </div>
         </div> 
         <Form className={styles.form}>
