@@ -51,38 +51,7 @@ function App() {
                             </div>
                         </>
                     }/>
-                    {/*사용자*/}
-                    <Route path="admin/user" element={<AdminUser/>}/>
-                    <Route path="admin/search" element={<SearchUser/>}/>
-                    <Route path="admin/mycom" element={<MyComInfo/>}/>
-                    <Route path="admin/list" element={<UserList/>}/>
-                    {/*기준 정보*/}
-                    <Route path="masterData/info" element={<TradingCompany/>}/>
-                    <Route path="masterData/product" element={<ProductManagement/>}/>
-                    <Route path="masterData/store" element={<StoreManagement/>}/>
-                    {/*구매*/}
-                    <Route path="purchase/order" element={<OrderItem/>}/>
-                    <Route path="purchase/buy" element={<PurchaseItem/>}/>
-                    {/*재고*/}
-                    <Route path="inventory/manage" element={<InvenManage/>}/>
-                    <Route path="inventory/check" element={<InvenCheck/>}/>
-                    <Route path="yougeun" element={<Yougeun2/>}/>
-                    <Route path="yougeun2" element={<StoreYougeun/>}/>
-                    {/*유근작업중
-             <Route path="/" element={<DashBoard/> }>
-                <Route path='/' element={
-                <>
-                <div style={{display: 'flex'}}>
-                <Barchart/>
-                <Piechart/>
-                </div>
-                <div style={{display: 'flex'}}>
-                <Piechart/>
-                <Piechart/>
-                </div>
-                </>
-                }    />
-                        {/* <Route path='/' element={<Piechart/>} /> */}
+                   
                         {/*사용자*/}
                         <Route path="admin/user" element={<AdminUser/>}/>
                         <Route path="admin/search" element={<SearchUser/>}/>
@@ -100,18 +69,7 @@ function App() {
                         <Route path="inventory/check" element={<InvenCheck/>}/>
                         <Route path="yougeun" element={<Yougeun2/>}/>
                         <Route path="yougeun2" element={<StoreYougeun/>}/>
-                        {/*유근작업중
-                            1. 프로젝트 등록
-                            2. 견적서 등록
-                            3. 수주서 관리
-                            4. 작업지시
-                            5. 자재소요분석
-                            6. 구매 발주
-                            7. 구매입고등록
-                            8. 실적등록
-                            9. 납품등록
-                            10. 반품등록
-                        */}
+                       
                     <Route path="yougeun01" element={<RegisterProject/>}/>
                     <Route path="yougeun02" element={<RegisterEstimate/>}/>
                     <Route path="yougeun03" element={<ManageSalesOrder/>}/>

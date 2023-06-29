@@ -1,6 +1,7 @@
 import styles from "./css/Mypage.module.css";
 import { useEffect, useState, useRef } from "react";
 import React from "react";
+import Nav from "react-bootstrap/Nav";
 import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
 import { Checkbox, Divider, Grid } from '@mui/material';
 import ImgUpload from "./ImgUpload";
