@@ -31,14 +31,17 @@ function OrderItem() {
     const handleSubmit = () => {
         if (inputValue.length === 2 && inputValue.every((value) => value.trim() !== '')) {
             const data = {
-                // rawCode: inputValue[0],
-                rawName: inputValue[0],
-                rawType: inputValue[1]
+                itemOrderCode: inputValue[0],
+                itemOrderCheck: inputValue[1],
+                itemOrderStart: inputValue[2],
+                itemOrderEnd: inputValue[3],
+                trCompCode: inputValue[4],
+                empNo: inputValue[5],
             };
 
             // console.log(data);
             axios
-                .post('http://localhost:8888/ynfinal/rawitem', data)
+                .post('http://localhost:8888/ynfinal/order', data)
                 .then(response => {
                     // const {rawCode} = response.data;
                     console.log(response.data);
@@ -106,9 +109,9 @@ function OrderItem() {
                                 <Col xs="auto">
                                     <Form.Select aria-label="Default select example">
                                         <option>선택하세요</option>
-                                            <option value="1">발주확정</option>
-                                            <option value="2">확정취소</option>
-                                            <option value="3">발주마감</option>
+                                        <option value="1">발주확정</option>
+                                        <option value="2">확정취소</option>
+                                        <option value="3">발주마감</option>
                                     </Form.Select>
                                 </Col>
                             </div>
@@ -176,7 +179,7 @@ function OrderItem() {
                                 <Col xs="auto">
                                     <Form.Control
                                         readOnly
-                                        placeholder="비고"
+                                        placeholder="사원번호"
                                         style={{
                                             marginRight: '10px',
                                             width: '150px'
