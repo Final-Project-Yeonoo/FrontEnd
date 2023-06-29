@@ -4,6 +4,7 @@ import { Divider } from "@mui/material";
 import { Button } from "reactstrap";
 import {API_BASE_URL, COMPANY} from '../../config/host-cofig';
 import adminUser from './AdminUser';
+import Nav from "react-bootstrap/Nav";
 
 const MyComInfo = () => {
 
@@ -97,12 +98,11 @@ useEffect(() => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.contentTitleBox}>
-        <div className={styles.contentTitle}>
-          {/* 회사정보 입력 */}
-          <span>회사정보 입력</span>
-        </div>
-      </div>
+      <Nav variant="tabs" defaultActiveKey="0">
+        <Nav.Item>
+          <Nav.Link eventKey="0">회사정보 입력</Nav.Link>
+        </Nav.Item>
+      </Nav>
 
       <div className={styles.empListBox}>
         <div className={styles.empListHeaders}>{headersName}</div>

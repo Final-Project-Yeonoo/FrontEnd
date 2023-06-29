@@ -4,13 +4,20 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import React from "react";
+import React, {useState} from "react";
 import styles from './css/Header.module.css'
 import {useNavigate} from "react-router-dom";
 
 function Header() {
 
     let navigate = useNavigate()
+
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const darkModeClass = isDarkMode ? 'dark-mode' : '';
+
+    const handleDarkModeToggle = () => {
+        setIsDarkMode(!isDarkMode);
+    };
 
     return (
 
@@ -34,17 +41,14 @@ function Header() {
                                 <NavDropdown title="Setting" id="navbarScrollingDropdown" className="col-lg-4">
                                     <NavDropdown.Item href="#action3" style={{display:"flex"}}>
                                         <span style={{marginRight:"30px"}} >Dark Mode</span>
-                                        <SwitchExample/>
+                                        <SwitchExample isDarkMode={isDarkMode} setIsDarkMode={handleDarkModeToggle} />
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href="#action4">
+                                    <NavDropdown.Item href='/mypage'>
                                         Change Profile
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider/>
-                                    <NavDropdown.Item href="#action5">
-                                        Something else here
-                                    </NavDropdown.Item>
                                 </NavDropdown>
-                                <Nav.Link href="#" className="col-lg-4">
+                                <Nav.Link href="/login" className="col-lg-4">
                                     Logout
                                 </Nav.Link>
                             </Nav>

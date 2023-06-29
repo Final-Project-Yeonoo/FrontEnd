@@ -78,7 +78,7 @@ const Barchart = () => {
 
   return (
     <div className={styles.barchartContainer}>
-      <p className={styles.barchartHead}>인원현황</p>
+      <p className={styles.barchartHead}>인원 현황</p>
       <div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
         <ResponsiveBar
           data={chartData}
@@ -124,14 +124,14 @@ const Barchart = () => {
             legendPosition: 'middle',
             legendOffset: 40,
           }}
-          axisLeft={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: '인원',
-            legendPosition: 'middle',
-            legendOffset: -60,
-          }}
+          // axisLeft={{
+          //   tickSize: 5,
+          //   tickPadding: 5,
+          //   tickRotation: 0,
+          //   legend: '인원',
+          //   legendPosition: 'middle',
+          //   legendOffset: -60,
+          // }}
           labelSkipWidth={36}
           labelSkipHeight={12}
           onClick={handle.barClick}

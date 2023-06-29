@@ -52,7 +52,7 @@ const fetchFinishedProducts = fetch(API_FINISHED_URL)
 
     return (
         <div className={styles.piechartContainer}> 
-        <p className={styles.piechartHead}>재고현황</p>    
+        <p className={styles.piechartHead}>재고 현황</p>
         <div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
             <ResponsivePie
                 /**
