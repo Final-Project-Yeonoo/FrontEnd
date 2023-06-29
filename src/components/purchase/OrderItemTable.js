@@ -8,7 +8,7 @@ const OrderItemTable = () => {
 
     const fetchGridData = async () => {
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/itemorder');
+            const response = await fetch('http://localhost:8888/ynfinal/order');
             const data = await response.json();
 
             const rowsWithIds = data.map((row, index) => ({...row, id: index + 1}));
@@ -35,16 +35,11 @@ const OrderItemTable = () => {
         setSelectedRow(selectedRowData);
     };
 
-    //체크 박스 선택
-
-
     // 수정 버튼
-    // const gridRef = useRef(null);
-
     const handleModifyClick = async () => {
         const arrayData = selectedRow
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/rawitem', {
+            const response = await fetch('http://localhost:8888/ynfinal/order', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,9 +59,9 @@ const OrderItemTable = () => {
 
     // 삭제
     const handleDeleteClick = async () => {
-        const arrayData = selectedRow.rawCode
+        const arrayData = selectedRow.itemOrderCode
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/rawitem/' + `${arrayData}`, {
+            const response = await fetch('http://localhost:8888/ynfinal/order/' + arrayData, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,17 +82,17 @@ const OrderItemTable = () => {
 
 
     return (
-        <div style={{height: 800, width: '100%'}}>
+        <div style={{height: 500, width: '100%'}}>
             <div style={{marginBottom: '1rem'}}>
                 <div style={{marginBottom: '20px'}}>
                     <Button variant="primary" onClick={handleModifyClick} style={{marginRight: '10px'}}>수정 저장</Button>
                     <Button variant="danger" onClick={handleDeleteClick}>삭제</Button>
                 </div>
                 <DataGrid rows={rows} columns={[
-                    {field: 'itemOrderCode', headerName: '발주서 번호', width: 150},
-                    {field: 'itemOrderCheck', headerName: '발주 확정', width: 150},
-                    {field: 'itemOrderStart', headerName: '입고예정일', width: 150},
-                    {field: 'itemOrderEnd', headerName: '마감 기한', width: 150},
+                    {field: 'itemOrderCode', headerName: '발주서 번호', width: 100},
+                    {field: 'itemOrderCheck', headerName: '발주 확정', width: 100},
+                    {field: 'itemOrderStart', headerName: '입고 예정일', width: 180},
+                    {field: 'itemOrderEnd', headerName: '마감 기한', width: 180},
                     {field: 'trCompCode', headerName: '거래처 코드', width: 150},
                     {field: 'empNo', headerName: '사원번호', width: 150},
                     {field: 'itemOrderReg', headerName: '등록시간', width: 150},
