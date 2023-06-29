@@ -5,7 +5,6 @@ import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {faRectangleXmark} from "@fortawesome/free-solid-svg-icons/faRectangleXmark";
 
 
 
@@ -51,7 +50,6 @@ function DashBoard() {
             <div className={styles.mainStyle}>
                 <SideMenu addTab={addTab} path={path}/>
                 <div className={styles.changeArea}>
-                    {/* <Outlet/> */}
                     <div className={styles.topNav}>
                         <TabBar tabs={tabs} onCloseTab={handleTabClose}/>
                     </div>

@@ -36,15 +36,12 @@ function Header() {
                                         <span style={{marginRight:"30px"}} >Dark Mode</span>
                                         <SwitchExample/>
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href="#action4">
+                                    <NavDropdown.Item href='/mypage'>
                                         Change Profile
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider/>
-                                    <NavDropdown.Item href="#action5">
-                                        Something else here
-                                    </NavDropdown.Item>
                                 </NavDropdown>
-                                <Nav.Link href="#" className="col-lg-4">
+                                <Nav.Link href="/login" className="col-lg-4">
                                     Logout
                                 </Nav.Link>
                             </Nav>
