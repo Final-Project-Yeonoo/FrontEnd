@@ -19,11 +19,11 @@ function AdminUser() {
   const label = { inputProps: { "aria-label": "Switch demo" } };
   //상태변수로 회원가입 입력값 관리 , 실시간으로 userValue에 저장하는 방법을 사용
 
-  const adminMenu = "adminMenu";
-  const masterDataMenu = "masterDataMenu";
-  const purchaseMenu = "purchaseMenu";
-  const inventoryMenu = "inventoryMenu";
-
+  const userAuth = "userAuth";
+  const infoAuth = "infoAuth";
+  const purchaseAuth = "purchaseAuth";
+  const inventoryAuth = "inventoryMenu";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
   const [userValue, setUserValue] = useState({
     empName: "",
     empId: "",
@@ -32,12 +32,12 @@ function AdminUser() {
     posCode: "",
     empPhone: "",
     empExtension: "",
-    empHireDate: "",
-    empValidate: true, // 권한 체크박스의 기본 값
-    adminMenu: { checka: "Y", inputa: "N" },
-    masterDataMenu: { checka: "Y", inputa: "N" },
-    purchaseMenu: { checka: "Y", inputa: "N" },
-    inventoryMenu: { checka: "Y", inputa: "N" }
+    empHiredDate: "",
+    empValidate: false, // 권한 체크박스의 기본 값
+    userAuth: "N", 
+    infoAuth: "N",
+    purchaseAuth: "N",
+    inventoryAuth: "N"
   });
 
 
@@ -166,65 +166,27 @@ useEffect(() => {
     }));
   };
 
-  const handleMenuPermissionChange2 = (category, permission, checked) => {
-    setUserValue((prevPermissions) => ({
-      ...prevPermissions,
-      [category]: {
-        ...prevPermissions[category],
-        [permission]: checked
-      }
-    }));
-  };
-  const convertBooleanToEnum = (value) => {
-    return value ? "Y" : "N";
+  
+  const convertBooleanToEnum = (name, value) => {
+
+    return setUserValue({...userValue, [name]:value ? "Y" : "N" } );
     
   }; 
 
-  const addUser = async (e) => {
 
-    // try {
-       
-      
-      //t/f enum으로 바꾸기
-     const convertBooleanToEnum = (value) => {
-        return value ? "Y" : "N";
-      };
-    
-      setUserValue({...userValue, 
-              empValidate: convertBooleanToEnum(userValue.empValidate),
-              adminMenu : {checka: convertBooleanToEnum(userValue.adminMenu.checka),
-                          inputa: convertBooleanToEnum(userValue.adminMenu.inputa)},
-              masterDataMenu: {checka: convertBooleanToEnum(userValue.masterDataMenu.checka),
-                              inputa: convertBooleanToEnum(userValue.masterDataMenu.inputa)},
-              purchaseMenu: {checka: convertBooleanToEnum(userValue.purchaseMenu.checka),
-                            inputa: convertBooleanToEnum(userValue.purchaseMenu.inputa)},
-              inventoryMenu: {checka: convertBooleanToEnum(userValue.inventoryMenu.checka),
-                              inputa: convertBooleanToEnum(userValue.inventoryMenu.inputa)}  })
-          //enum으로 보내기 위해 t/f 바꿔서 담기
-          
-             
-       
-
-  };
 
   console.log('밖에서 하는 확인! ', posData);
 
   // 저장하기 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = async (e) => {
     e.preventDefault();
+    // const updatedUserValue = {
+    //   ...userValue,
+    //   empValidate: isChecked
+    // };
 
-//     try{
 
-//     }
-
-//     addUser();
-//  // 회원가입 서버 요청
-// //  if(isValid()){
-// //   alert('회원가입정보를 서버에 전송합니다');
-// // }  else {
-// //   alert ('입력란을 다시 확인해주세요');
-// // }
-
+    try{
        // 사용자 정보 서버 전달 요청
        const response = await fetch(API_ADD_URL, {
         method: "POST",
@@ -243,17 +205,13 @@ useEffect(() => {
       } else {
         alert("등록에 실패했습니다");
       }
-  //   } catch (error) {
-  //     alert("서버와의 통신이 원활하지 않습니다");
-  //     console.error(error);
-  //  }
-   console.log('addUser 호출 전 로그 찍기',userValue);
+    } catch (error) {
+      alert("서버와의 통신이 원활하지 않습니다");
+      console.error(error);
+   }
+   console.log('addUser 호출 전 로그 찍기', JSON.stringify(userValue));
 
-
-
-   
   };
-
 
 
 
@@ -276,21 +234,37 @@ useEffect(() => {
   posModalClose();
 };
 
-console.log(userValue);
+// console.log(userValue);
 
 
 
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setUserValue((prevUserValue) => ({
+    ...prevUserValue,
+    [name]: value
+  }));
+};
 
 
+const tfhandle = (name, value) => {
+  console.log(name ,':',value);
+  setUserValue({...userValue, [name] : value}); 
+  console.log(userValue);
+}
 
 
   return (
     <>
-    <div className={styles.contentHeadcontainer}>
-      <div className={styles.contentHeadName}>
-        <span>사용자 등록</span>
-      </div>
-    </div>
+        <div className={styles.contentHeadcontainer}>
+          <div className={styles.contentHeadName}>
+            <span>사용자 등록</span>
+          </div>
+        </div>
+
+
+
+    {/* 유저정보 등록 */}
       <div className={styles.usercontainer}>
         <Form className={styles.form}>
           <Row className={styles.row}>
@@ -305,9 +279,7 @@ console.log(userValue);
                   name="empName"
                   placeholder="사용자명"
                   type="text"
-                  onChange={(e) =>
-                    setUserValue({ ...userValue, empName: e.target.value })
-                  }
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -322,9 +294,7 @@ console.log(userValue);
                   name="empId"
                   placeholder="사원ID"
                   type="text"
-                  onChange={(e) =>
-                    setUserValue({ ...userValue, empId: e.target.value })
-                  }
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -339,9 +309,7 @@ console.log(userValue);
                   name="empPassword"
                   type='password'
                   placeholder="비밀번호"
-                  onChange={(e) =>
-                    setUserValue({ ...userValue, empPassword: e.target.value })
-                  }
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -350,28 +318,27 @@ console.log(userValue);
           <Row className={styles.row}>
             <Col md={4}>
             <FormGroup className={styles.formGroup}>
-  <div className={styles.tag}>
-    <Label for="deptCode">부서명</Label>
-  </div>
-  <Input
-    id="deptCode"
-    name="deptCode"
-    placeholder="클릭해서 부서명을 설정하세요"
-    value={selectedDeptName}
-    onClick={openModal}
-    onChange={(e) => setUserValue({ ...userValue, deptCode: e.target.value })
-  }
-  />
-  <BasicModal open={modalVisible} onClose={closeModal}>
-    <div>
-      <h2>부서 선택</h2>
-      <main>
-        <Layouts columns={columns} data={deptData} onClick={handleDeptCellClick} 
-         />
-      </main>
-    </div>
-  </BasicModal>
-</FormGroup>
+              <div className={styles.tag}>
+              <Label for="deptCode">부서명</Label>
+              </div>
+              <Input
+              id="deptCode"
+              name="deptCode"
+              placeholder="클릭해서 부서명을 설정하세요"
+              value={selectedDeptName}
+              onClick={openModal}
+              onChange={handleChange}
+              />
+              <BasicModal open={modalVisible} onClose={closeModal}>
+              <div>
+                <h2>부서 선택</h2>
+                <main>
+                  <Layouts columns={columns} data={deptData} onClick={handleDeptCellClick} 
+                    />
+                </main>
+              </div>
+            </BasicModal>
+          </FormGroup>
 
 
             </Col>
@@ -387,7 +354,7 @@ console.log(userValue);
                   placeholder="클릭해서 직급명을 설정하세요"
                   value={selectedPosName}
                   onClick={posModalOpen}
-                  onChange={(e) => setUserValue({ ...userValue, posCode: e.target.value })}/>
+                  onChange={handleChange}/>
 
                 <BasicModal open={modalPosVisible} onClose={posModalClose}>
               <div>
@@ -409,9 +376,7 @@ console.log(userValue);
                 <Input
                   id="empPhone"
                   name="empPhone"
-                  onChange={(e) =>
-                    setUserValue({ ...userValue, empPhone: e.target.value })
-                  }
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -427,9 +392,7 @@ console.log(userValue);
                 <Input
                   id="empExtension"
                   name="empExtension"
-                  onChange={(e) =>
-                    setUserValue({ ...userValue, empExtension: e.target.value })
-                  }
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -440,12 +403,10 @@ console.log(userValue);
                   <Label for="empHireDate">입사일</Label>
                 </div>
                 <Input
-                  id="empHireDate"
-                  name="empHireDate"
+                  id="empHiredDate"
+                  name="empHiredDate"
                   type="date"
-                  onChange={(e) =>
-                    setUserValue({ ...userValue, empHireDate: e.target.value })
-                  }
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
@@ -456,23 +417,26 @@ console.log(userValue);
                   <Label for="empValidate">활성화</Label>
                 </div>
                 <Switch
-                  {...label}
-                  defaultChecked={userValue.empValidate}
+                  {...label}    
+                              
                   id="empValidate"
-                  onChange={(checked) =>
-                    handlePermissionChange("empValidate", checked)
-                  }
+                  onChange={(e) => tfhandle(e.target.id, e.target.checked)}
                 />
               </FormGroup>
             </Col>
           </Row>
         </Form>
-
-
-        {/* 권한관리 메뉴  */}
       </div>
 
+      
+      
+      {/* 권한관리 메뉴  */}
+
+      
       <div className={styles.container}>
+
+
+        {/* 테이블 헤더 */}
         <div className={styles.headers}>
           <div className={`${styles.rowHeader}, ${styles.header1}`}>
             <span>메뉴</span>
@@ -480,203 +444,196 @@ console.log(userValue);
           <div className={`${styles.rowHeader}, ${styles.header2}`}>
             <span>하위메뉴</span>
           </div>
-          <div className={`${styles.rowHeader}, ${styles.header3}`}>
-            <span>조회</span>
-          </div>
+        
           <div className={`${styles.rowHeader}, ${styles.header4}`}>
-            <span>입력</span>
+            <span>입력권한</span>
           </div>
         </div>
+
+
+        {/* 테이블내용  */}
         <div className={styles.contentSection}>
+
+
+          {/* 사용자 관리 메뉴 체크 */}
           <div className={styles.content}>
-            <div className={`${styles.dataSection}, ${styles.header1}`}>
+            <div className={`${styles.dataSection}, ${styles.header1}`}
+                  style={{ paddingTop : "10px" }}>
               <span>사용자관리</span>
             </div>
+
+
             <div className={`${styles.dataSection}, ${styles.header2}`}>
               <span
-                style={{ display: "block", borderBottom: "1px solid #000" }}
-              >
+                style={{ display: "block", borderBottom: "1px solid #92B4EC" }}>
                 사용자 개인정보 관리
               </span>
               <span style={{ display: "block" }}>사용자 권한관리</span>
             </div>
-            <div className={`${styles.dataSection}, ${styles.header3}`}>
-              <span>
-                <Checkbox
-                  defaultChecked={userValue.adminMenu.checka}
-                  color="success"
-                  checked={userValue.adminMenu.checka}
-                  onChange={(e) =>
-                    handleMenuPermissionChange2(
-                      "adminMenu",
-                      "checka",
-                      e.target.checked
-                    )
-                  }
-                />
-              </span>
-            </div>
+         
+           
             <div className={`${styles.dataSection}, ${styles.header4}`}>
               <span>
                 <Checkbox
                   color="success"
-                  checked={userValue.adminMenu.inputa}
-                  onChange={(e) =>
-                    handleMenuPermissionChange2(
-                      "adminMenu",
-                      "inputa",
-                      e.target.checked
-                    )
-                  }
-                />
+                  disabled={!userValue.empValidate}
+                  onChange={(e) => convertBooleanToEnum(userAuth,e.target.checked)}/>
               </span>
             </div>
           </div>
+
+
+
+          {/* 기준정보 메뉴 체크 */}
           <div className={styles.content}>
-            <div className={`${styles.dataSection}, ${styles.header1}`}>
+            <div className={`${styles.dataSection}, ${styles.header1}`}
+                  style={{ paddingTop : "25px" }}>
               <span>기준정보</span>
             </div>
+
+
             <div className={`${styles.dataSection}, ${styles.header2}`}>
               <span
-                style={{ display: "block", borderBottom: "1px solid #000" }}
-              >
+                style={{ display: "block", borderBottom: "1px solid #92B4EC" }}>
                 거래처관리
               </span>
               <span
-                style={{ display: "block", borderBottom: "1px solid #000" }}
-              >
+                style={{ display: "block", borderBottom: "1px solid #92B4EC" }}>
                 품목정보
               </span>
               <span style={{ display: "block" }}>창고정보</span>
             </div>
-            <div className={`${styles.dataSection}, ${styles.header3}`}>
-              <span>
-                <Checkbox
-                  defaultChecked={userValue.masterDataMenu.checka}
-                  color="success"
-                  checked={userValue.masterDataMenu.checka}
-                  onChange={(e) =>
-                    handleMenuPermissionChange2(
-                      "masterDataMenu",
-                      "checka",
-                      e.target.checked
-                    )
-                  }
-                />
-              </span>
-            </div>
+
+            {/* 체크박스 */}
             <div className={`${styles.dataSection}, ${styles.header4}`}>
               <span>
                 <Checkbox
                   color="success"
-                  checked={userValue.masterDataMenu.inputa}
-                  onChange={(e) =>
-                    handleMenuPermissionChange2(
-                      "masterDataMenu",
-                      "inputa",
-                      e.target.checked
-                    )
-                  }
-                />
+                  disabled={!userValue.empValidate}
+                  onChange={(e) => convertBooleanToEnum(infoAuth, e.target.checked)}/>
               </span>
             </div>
           </div>
 
+          {/* 구매 관리 메뉴 */}
           <div className={styles.content}>
-            <div className={`${styles.dataSection}, ${styles.header1}`}>
+            <div className={`${styles.dataSection}, ${styles.header1}`}
+                  style={{ paddingTop : "10px" }}>
               <span>구매</span>
             </div>
+
+
             <div className={`${styles.dataSection}, ${styles.header2}`}>
               <span
-                style={{ display: "block", borderBottom: "1px solid #000" }}
-              >
+                style={{ display: "block", borderBottom: "1px solid #92B4EC" }}>
                 구매발주관리
               </span>
               <span style={{ display: "block" }}>구매입고관리</span>
             </div>
-            <div className={`${styles.dataSection}, ${styles.header3}`}>
-              <span>
-                <Checkbox
-                  defaultChecked={userValue.purchaseMenu.checka}
-                  color="success"
-                  checked={userValue.purchaseMenu.checka}
-                  onChange={(e) =>
-                    handleMenuPermissionChange2(
-                      "purchaseMenu",
-                      "checka",
-                      e.target.checked
-                    )
-                  }
-                />
-              </span>
-            </div>
+          
             <div className={`${styles.dataSection}, ${styles.header4}`}>
               <span>
                 <Checkbox
                   color="success"
-                  checked={userValue.purchaseMenu.inputa}
-                  onChange={(e) =>
-                    handleMenuPermissionChange2(
-                      "purchaseMenu",
-                      "inputa",
-                      e.target.checked
-                    )
-                  }
-                />
+                  disabled={!userValue.empValidate}
+                  onChange={(e) => convertBooleanToEnum(purchaseAuth, e.target.checked)}/>
               </span>
             </div>
           </div>
 
+          {/* 영업관리 메뉴 */}
           <div className={styles.content}>
-            <div className={`${styles.dataSection}, ${styles.header1}`}>
-              <span>재고</span>
+            <div className={`${styles.dataSection}, ${styles.header1}`}
+                  style={{ paddingTop : "35px" }}>
+              <span>영업관리</span>
             </div>
             <div className={`${styles.dataSection}, ${styles.header2}`}>
               <span
-                style={{ display: "block", borderBottom: "1px solid #000" }}
-              >
-                재고입고관리
+                style={{ display: "block", borderBottom: "1px solid #92B4EC" }}>
+                견적서등록
               </span>
-              <span style={{ display: "block" }}>창고현황관리</span>
+              <span
+                style={{ display: "block", borderBottom: "1px solid #92B4EC" }}>
+                수주서관리
+              </span>
+              <span
+                style={{ display: "block", borderBottom: "1px solid #92B4EC" }}>
+                납품 등록
+              </span>
+              <span style={{ display: "block" }}>구매입고관리</span>
             </div>
-            <div className={`${styles.dataSection}, ${styles.header3}`}>
+          
+            <div className={`${styles.dataSection}, ${styles.header4}`}
+                  style={{ paddingTop : "35px" }}>
               <span>
                 <Checkbox
-                  defaultChecked={userValue.inventoryMenu.checka}
                   color="success"
-                  checked={userValue.inventoryMenu.checka}
-                  onChange={(e) =>
-                    handleMenuPermissionChange2(
-                      "inventoryMenu",
-                      "checka",
-                      e.target.checked
-                    )
-                  }
-                />
+                  disabled={!userValue.empValidate}
+                  onChange={(e) => convertBooleanToEnum(purchaseAuth, e.target.checked)}/>
               </span>
             </div>
+          </div>
+
+
+
+          {/* 재고 관리 메뉴  */}
+          <div className={styles.content}>
+            <div className={`${styles.dataSection}, ${styles.header1}`}
+                style={{ paddingTop : "5px" }}>
+              <span>재고</span>
+            </div>
+            <div className={`${styles.dataSection}, ${styles.header2}`}>
+              <span style={{ display: "block" ,paddingTop: "7px"}}>재고현황</span>
+            </div>
+
             <div className={`${styles.dataSection}, ${styles.header4}`}>
               <span>
                 <Checkbox
                   color="success"
-                  checked={userValue.inventoryMenu.inputa}
-                  onChange={(e) =>
-                    handleMenuPermissionChange2(
-                      "inventoryMenu",
-                      "inputa",
-                      e.target.checked
-                    )
-                  }
-                />
+                  name='inventoryMenu'
+                  disabled={!userValue.empValidate}
+                  onChange={(e) => convertBooleanToEnum(inventoryAuth, e.target.checked)}/>
               </span>
             </div>
           </div>
-        </div>
+
+          {/* 생산관리 메뉴  */}
+          <div className={styles.content}>
+            <div className={`${styles.dataSection}, ${styles.header1}`}
+                  style={{ paddingTop : "10px" }}>
+              <span>생산관리</span>
+            </div>
+            <div className={`${styles.dataSection}, ${styles.header2}`}>
+              <span style={{ display: "block", borderBottom: "1px solid #92B4EC" }}>
+                작업지시
+              </span>
+              <span style={{ display: "block" }}>
+                실적등록
+              </span>
+            </div>
+
+            <div className={`${styles.dataSection}, ${styles.header4}`}>
+              <span>
+                <Checkbox
+                  color="success"
+                  disabled={!userValue.empValidate}
+                  onChange={(e) => convertBooleanToEnum(purchaseAuth, e.target.checked)}/>
+              </span>
+            </div>
+          </div>
+        </div> 
+
       </div>
+      {/* 저장버튼 */}
       <div className={styles.buttoncontainer}>
         <Button color="primary"outline  className={styles.Button} onClick={joinButtonClickHandler}>저장</Button>
       </div>
-    </>
+
+
+  </>
+
+
+
   );
 }
 

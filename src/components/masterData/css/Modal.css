@@ -80,3 +80,13 @@
       opacity: 1;
     }
   }
+  .inputTag {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .nameTag {
+    text-align: center;
+    justify-content: center;
+    width: 100px;
+  }

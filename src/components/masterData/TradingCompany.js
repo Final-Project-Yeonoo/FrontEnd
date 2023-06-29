@@ -6,7 +6,7 @@ import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import {API_BASE_URL, TRADING} from "../../config/host-cofig";
-import Modal from "./Modal"; // 모달 컴포넌트를 import 합니다.
+import Modal from "./trModal"; // 모달 컴포넌트를 import 합니다.
 
 function TradingCompany() {
 
@@ -105,7 +105,7 @@ function TradingCompany() {
     };
   
     const handleAddCompany = async (newCompanyData) => {
-      console.log('이건 되나');
+    
       setCompanyData(prevData => [...prevData,newCompanyData])
       
         toggleModal();

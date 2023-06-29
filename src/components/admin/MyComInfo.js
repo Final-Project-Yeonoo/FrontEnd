@@ -27,6 +27,7 @@ const MyComInfo = () => {
     "compPhone"
   ];
 
+  console.log(comValue);
 
   const fetchCompanyInfo = async () => {
     try {
@@ -47,6 +48,8 @@ useEffect(() => {
   }, []);
 
   const handlerSaveInfo = async () => {
+
+    
     try {
       // 회사 정보를 서버에 전송하여 저장하는 API 호출
       const response = await fetch(API_COM_URL, {
