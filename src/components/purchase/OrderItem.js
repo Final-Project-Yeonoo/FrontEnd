@@ -207,7 +207,7 @@ function OrderItem() {
                 </section>
             </div>
 
-            <Button className={styles.sendPurchaseButton}>입고</Button>
+            <Button className={styles.sendPurchaseButton} style={{border:'none'}}>입고</Button>
 
             <section className={styles.tableArea}>
                 <div className={styles.divStyle}>구매발주</div>

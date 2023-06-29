@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styles from './css/PurchaseItem.module.css';
-import {TabsforOrderItems} from "../common/UsefulButtons";
+import {TabsforOrderItems, TabsforPurchaseItems} from "../common/UsefulButtons";
 import Form from "react-bootstrap/Form";
 import {Input, Label, Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
@@ -60,7 +60,7 @@ function PurchaseItem() {
             <div id={styles.divideSections}>
                 <section className={styles.buttonsArea}>
                     <div className={styles.navRight}>
-                        <TabsforOrderItems/>
+                        <TabsforPurchaseItems/>
                     </div>
                     <div className={styles.navLeft}>
                         <Button variant="success" onClick={handleSubmit}>저장</Button>{' '}
@@ -112,8 +112,71 @@ function PurchaseItem() {
                                     </div>
                                 </Row>
                             </Form>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="거래처코드"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[1]}
+                                                          onChange={(e) => handleInputChange(1, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="프로젝트 코드"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[1]}
+                                                          onChange={(e) => handleInputChange(1, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
                         </div>
                         <div className={styles.divideSection}>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="수불 타입"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[1]}
+                                                          onChange={(e) => handleInputChange(1, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
                             <Form>
                                 <Row className={styles.afterEachRow}>
                                     <div style={{display: 'flex'}}>

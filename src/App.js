@@ -15,7 +15,6 @@ import PurchaseItem from "./components/purchase/PurchaseItem";
 import InvenManage from "./components/inventory/InvenManage";
 import InvenCheck from "./components/inventory/InvenCheck";
 import Mypage from "./components/mypage/Mypage";
-import Yougeun from './components/yougeun/yougeun';
 import StoreYougeun from './components/yougeun/StoreYougeun';
 import Yougeun2 from './components/yougeun/Yougeun2';
 import RegisterProject from './yougeunWorking/Yougeun01';
@@ -32,6 +31,8 @@ import Piechart from './chart/PieChart';
 import Barchart from './chart/BarChart';
 import Message from "./components/common/Message";
 import MyComInfo from "./components/admin/MyComInfo";
+import errorPage from "./components/errorPage/ErrorPage";
+import ErrorPage from "./components/errorPage/ErrorPage";
 
 function App() {
     return (
@@ -93,7 +94,7 @@ function App() {
                     <Route path="message" element={<Message/>}/>
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>
-                <Route path="*" element={<div>없는 페이지 입니다.</div>}/>
+                <Route path="*" element={<ErrorPage/>}/>
             </Routes>
 
         </>

@@ -32,13 +32,13 @@ const PurchaseItemTable = () => {
         { field: 'itemOrderCode', headerName: "발주서 번호", width: 150 },
         { field: 'storehouseCode', headerName: "창고번호", width: 150 },
         { field: 'empNo', headerName: "사원번호", width: 150 },
-        // { field: 'companyCode', headerName: "거래처코드", width: 150 },
+        { field: 'companyCode', headerName: "거래처코드", width: 150 },
         // { field: 'companyName', headerName: "거래처명", width: 150 },
         // { field: 'trCompName', headerName: "입고유형", width: 150 },
-        // { field: 'projectCode', headerName: "프로젝트 코드", width: 200 },
-        // { field: 'projectName', headerName: "프로젝트명", width: 200 },
-        // { field: 'payMode', headerName: "무상여부", width: 150 },
-        // { field: 'payType', headerName: "수불타입", width: 150 },
+        { field: 'projectCode', headerName: "프로젝트 코드", width: 200 },
+        { field: 'projectName', headerName: "프로젝트명", width: 200 },
+        { field: 'payMode', headerName: "무상여부", width: 150 },
+        { field: 'payType', headerName: "수불타입", width: 150 },
         // { field: 'comment', headerName: "비고", width: 150 },
     ];
 

@@ -4,6 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import styles from './css/SearchUser.module.css';
 import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
 import { display, margin } from '@mui/system';
+import Nav from "react-bootstrap/Nav";
 
 const SearchUser = () => {
   const [data, setData] = useState([]);
@@ -90,11 +91,16 @@ const SearchUser = () => {
 
     return (
     <>
-    <div className={styles.contentHeadcontainer}>
-      <div className={styles.contentHeadName}>
-        <span>사원조회 </span>
-      </div>
-    </div>
+      <Nav variant="tabs" defaultActiveKey="0">
+        <Nav.Item>
+          <Nav.Link eventKey="0">사원조회</Nav.Link>
+        </Nav.Item>
+      </Nav>
+    {/*<div className={styles.contentHeadcontainer}>*/}
+    {/*  <div className={styles.contentHeadName}>*/}
+    {/*    <span>사원조회 </span>*/}
+    {/*  </div>*/}
+    {/*</div>*/}
 
 
   
