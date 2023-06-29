@@ -7,12 +7,24 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 
 
+import {useState, useEffect} from "react";
+import { isLogin } from '../../yougeunWorking/login-util';
 
 function DashBoard() {
     const [tabs, setTabs] = useState([]); // 탭 목록을 관리하는 상태
     const navigate = useNavigate();
     const path = useLocation().pathname; // 현재 경로를 가져옴
     console.log('path 입니다', path);
+
+
+    // 로그인 여부 확인하기
+    useEffect(() => {
+       console.log(isLogin());
+        if(!isLogin()) navigate('/login');
+
+    }, [])
+
+
 
     // 탭 추가 함수
     const addTab = (tabId, tabPath) => { // tabId와 tabPath 매개 변수 받음
@@ -51,9 +63,14 @@ function DashBoard() {
                 <SideMenu addTab={addTab} path={path}/>
                 <div className={styles.changeArea}>
                     <div className={styles.topNav}>
+                    {/* <Route path="/" element={<DashBoard/> }> */}
+                       
                         <TabBar tabs={tabs} onCloseTab={handleTabClose}/>
                     </div>
+                    
                     <Outlet/>
+               
+        
                 </div>
             </div>
         </>

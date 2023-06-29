@@ -297,7 +297,7 @@ function RegisterDelivery(){
             // projectRegDate: new Date(item.projectRegDate),
             // projectUpdateDate: new Date(item.projectUpdateDate),
           }));
-          console.log(processedData);
+          console.log(processedData); 
           setResponseData(processedData);
           setOriginalRows(processedData);
         } catch (error) {

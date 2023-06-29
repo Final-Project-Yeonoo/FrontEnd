@@ -37,8 +37,7 @@ import ErrorPage from "./components/errorPage/ErrorPage";
 function App() {
     return (
         <>
-
-
+            
             {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
             {/* <DashBoard /> */}
             <Routes>
@@ -70,6 +69,38 @@ function App() {
                     <Route path="yougeun" element={<Yougeun2/>}/>
                     <Route path="yougeun2" element={<StoreYougeun/>}/>
                     {/*유근작업중
+             <Route path="/" element={<DashBoard/> }>
+                <Route path='/' element={
+                <>
+                <div style={{display: 'flex'}}>
+                <Barchart/>
+                <Piechart/>
+                </div>
+                <div style={{display: 'flex'}}>
+                <Piechart/>
+                <Piechart/>
+                </div>
+                </>
+                }    />
+                        {/* <Route path='/' element={<Piechart/>} /> */}
+                        {/*사용자*/}
+                        <Route path="admin/user" element={<AdminUser/>}/>
+                        <Route path="admin/search" element={<SearchUser/>}/>
+                        <Route path="admin/mycom" element={<MyComInfo />} />
+                        <Route path="admin/list" element={<UserList/>}/>
+                        {/*기준 정보*/}
+                        <Route path="masterData/info" element={<TradingCompany/>}/>
+                        <Route path="masterData/product" element={<ProductManagement/>}/>
+                        <Route path="masterData/store" element={<StoreManagement/>}/>
+                        {/*구매*/}
+                        <Route path="purchase/order" element={<OrderItem/>}/>
+                        <Route path="purchase/buy" element={<PurchaseItem/>}/>
+                        {/*재고*/}
+                        <Route path="inventory/manage" element={<InvenManage/>}/>
+                        <Route path="inventory/check" element={<InvenCheck/>}/>
+                        <Route path="yougeun" element={<Yougeun2/>}/>
+                        <Route path="yougeun2" element={<StoreYougeun/>}/>
+                        {/*유근작업중
                             1. 프로젝트 등록
                             2. 견적서 등록
                             3. 수주서 관리

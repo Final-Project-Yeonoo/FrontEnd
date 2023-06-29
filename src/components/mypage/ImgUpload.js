@@ -34,6 +34,9 @@ const ImgUpload = () => {
         getBase64(info.file.originFileObj, (url) => {
           setLoading(false);
           setImageUrl(url);
+
+
+          
         });
       }
     };

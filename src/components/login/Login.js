@@ -1,8 +1,11 @@
-import React, {useState, useNavigate} from 'react';
+import React, {useState} from 'react';
 import {Container, Form, Button} from 'react-bootstrap';
 import styles from './css/Login.module.css';
-
+import { setLoginUserInfo } from '../../yougeunWorking/login-util';
+import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
+
+    const redirection = useNavigate();
     const [companyCode, setCompanyCode] = useState('');
     const [email, setEmail] = useState('');
     const [id, setId] = useState('');
@@ -12,7 +15,7 @@ const Login = () => {
         e.preventDefault();
 
         // 폼 유효성 검사를 수행하고 필요한 경우 경고 메시지를 표시합니다.
-        if (!companyCode || !email || !password) {
+        if (!companyCode || !id || !password) {
             alert('모든 값을 입력해주세요.');
             return;
         }
@@ -20,7 +23,44 @@ const Login = () => {
         // 로그인 처리 로직을 추가하세요
         // API 호출이나 다른 필요한 로직을 수행할 수 있습니다.
         console.log('로그인 처리 로직 실행');
+
+        fetchLogin();
+
     };
+
+    // 서버에 AJAX요청
+  const fetchLogin = async() => {
+
+ 
+
+    const res = await fetch('http://localhost:8888/ynfinal/employee/signin', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        empId : id, 
+        empPassword : password
+      })
+    });
+
+    if (res.status === 400) { // 가입이 안되어있거나, 비번틀린 경우
+      const text = await res.text(); // 서버에서 온 문자열 읽기
+      alert(text);
+      return;
+    }
+
+    const userInfo = await res.json(); // 서버에서 온 json 읽기
+    // alert(json.userName);
+
+    // json에 담긴 인증정보를 클라이언트에 보관
+    // 1. 로컬 스토리지 - 브라우저가 종료되어도 보관됨
+    // 2. 세션 스토리지 - 브라우저가 종료되면 사라짐
+    setLoginUserInfo(userInfo);
+
+   
+    // 홈으로 리다이렉트
+    redirection('/');
+
+  };
 
   
   

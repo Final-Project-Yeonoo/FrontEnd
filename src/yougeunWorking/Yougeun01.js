@@ -204,6 +204,8 @@ function RegisterProject() {
 
         } else {
           console.log('POST 요청이 실패했습니다.');
+          alert('ㅠㅠㅠㅠ');
+          window.location.reload();
         }
       })
       .catch((error) => {
