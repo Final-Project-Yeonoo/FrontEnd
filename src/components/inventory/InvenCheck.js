@@ -5,6 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import styles from './css/InvenCheck.module.css';
 import {API_BASE_URL, RAW, HALF, FINISHED} from '../../config/host-cofig';
 import {Button} from 'reactstrap';
+import Nav from "react-bootstrap/Nav";
 
 
 const InvenCheck = () => {
@@ -106,11 +107,17 @@ console.log(inventoryData);
 
     return (
     <>
-    <div className={styles.contentHeadcontainer}>
-      <div className={styles.contentHeadName}>
-        <span> 재고현황 </span>
-      </div>
-    </div>
+    {/*<div className={styles.contentHeadcontainer}>*/}
+    {/*  <div className={styles.contentHeadName}>*/}
+    {/*    <span> 재고현황 </span>*/}
+    {/*  </div>*/}
+    {/*</div>*/}
+      <Nav variant="tabs" defaultActiveKey="0">
+        <Nav.Item>
+          <Nav.Link eventKey="0">재고현황</Nav.Link>
+        </Nav.Item>
+      </Nav>
+
 
 
   <div className={styles.usercontainer}>

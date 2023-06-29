@@ -1,66 +1,59 @@
 import React, {useState} from "react";
 import styles from './css/PurchaseItem.module.css';
-import {TabsforPurchaseItems} from "../common/UsefulButtons";
+import {TabsforOrderItems, TabsforPurchaseItems} from "../common/UsefulButtons";
 import Form from "react-bootstrap/Form";
 import {Input, Label, Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
-import {purchaseItemsData, tableHeadersPurchase} from "./InputDataforPurchase";
 import Button from "react-bootstrap/Button";
 import {Container} from "react-bootstrap";
-import Table from "react-bootstrap/Table";
-import {tableCells} from "../masterData/InputDataforMaster";
 import PurchaseItemTable from "./PurchaseItemTable";
 import axios from "axios";
 
 
-
 function PurchaseItem() {
 
-    let [title, setTitle] = useState(purchaseItemsData);
-
-    const [inputValues, setInputValues] = useState(title.map(() => ''));
+    const [inputValue, setInputValue] = useState([]);
 
     const handleInputChange = (index, value) => {
-        const newInputValues = [...inputValues];
-        newInputValues[index] = value;
-        setInputValues(newInputValues);
+        const newInputValue = [...inputValue];
+        newInputValue[index] = value;
+        setInputValue(newInputValue);
     };
 
-    // 초기화 버튼 클릭 시 모든 값들을 ''로 초기화
+
+    // 초기화  버튼 선택시
     const handleReset = () => {
-        setInputValues(title.map(() => ''));
+        const newInputValue = inputValue.map(() => "");
+        setInputValue(newInputValue);
     };
 
+    // 저장 버튼 선택시
     const handleSubmit = () => {
+        if (inputValue.length === 5 && inputValue.every((value) => value.trim() !== '')) {
+            const data = {
+                // itemOrderCode: inputValue[0],
+                itemOrderCheck: inputValue[0],
+                itemOrderStart: inputValue[1],
+                itemOrderEnd: inputValue[2],
+                trCompCode: inputValue[3],
+                empNo: inputValue[4],
+            };
 
-        const data = title.map((item, i) => {
-            if (item.title === "ITEM 코드") {
-                return {rawName: inputValues[i],};
-            } else if (item.title === "원자재 개수") {
-                return {rawCount: parseInt(inputValues[i])};
-            } else if (item.title === "원자재 가격") {
-                return {rawPrice: parseInt(inputValues[i]),};
-            }
-        }); // 생성된 JSON 데이터 출력 console.log(data);
+            // console.log(data);
+            axios
+                .post('http://localhost:8888/ynfinal/order', data)
+                .then(response => {
+                    // const {rawCode} = response.data;
+                    console.log(response.data);
 
-        console.log(data)
-        const mergedObject = data.reduce((result, currentObject) => {
-            return {...result, ...currentObject};
-
-        }, {})
-        console.log(mergedObject)
-
-        axios.post('http://localhost:8888/ynfinal/rawitem', mergedObject)
-            .then(response => {
-                // Handle the response if needed
-                console.log(response.mergedObject);
-            })
-            .catch(error => {
-                // Handle errors if any
-                console.error(error);
-            });
+                })
+                .catch(error => {
+                    console.error('실패함', error);
+                });
+        } else {
+            alert('항목을 모두 입력해야 합니다.');
+        }
     };
-
 
     return (
         <>
@@ -70,128 +63,206 @@ function PurchaseItem() {
                         <TabsforPurchaseItems/>
                     </div>
                     <div className={styles.navLeft}>
-                        {/*<PurcahseButtons/>*/}
-                        <Button variant="outline-success">입고확정</Button>{' '}
-                        <Button variant="outline-danger">확정취소</Button>{' '}
-                        {/*<ColorfulButtons/>*/}
-                        <Button variant="outline-primary">조회</Button>{' '}
-                        <Button variant="outline-success" onClick={handleSubmit}>저장</Button>{' '}
-                        <Button variant="outline-danger">삭제</Button>{' '}
-                        <Button variant="outline-secondary" onClick={handleReset}>초기화</Button>{' '}
+                        <Button variant="success" onClick={handleSubmit}>저장</Button>{' '}
+                        <Button variant="secondary" onClick={handleReset}>초기화</Button>{' '}
                     </div>
                 </section>
 
                 < section className={styles.searchBox} style={{marginBottom: '30px'}}>
-                    {
-                        title.map((a, i) => {
-                                return (
-                                    <>
-                                        {a.title === '입고일자' &&
-                                            (<Form style={{marginBottom: '10px'}} className={styles.searchSection}>
-                                                    <Row>
-                                                        <Col xs="auto">
-                                                            <div style={{display: 'flex'}}>
-                                                                <Form.Control readOnly placeholder={title[i].title}
-                                                                              style={{width: '150px', }}/>
-                                                                <Label for="searchDate"> </Label>
-                                                                <Input id="searchDate"
-                                                                       name="searchDate"
-                                                                       type='date'
-                                                                       style={{marginLeft: "10px", width: '280px'}}
-                                                                       onChange={(e) => handleInputChange(i, e.target.value)}/>
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                </Form>
-                                            )}
-                                        {a.content === '선택하세요' &&
-                                            (
-                                                <Form style={{marginBottom: '10px'}} className={styles.searchSection}>
-                                                    <Row>
-                                                        <Col xs="auto">
-                                                            <div style={{display: 'flex'}}>
-                                                                <Form.Control readOnly placeholder={title[i].title}
-                                                                              style={{
-                                                                                  marginRight: '10px',
-                                                                                  width: '150px',
-
-                                                                              }}/>
-                                                                <Form.Select aria-label="Default select example"
-                                                                             style={{width: '280px'}}>
-                                                                    <option>선택하세요</option>
-                                                                    {a.title === '수불타입' ? (
-                                                                            <>
-                                                                                <option value="1">일반</option>
-                                                                                <option value="2">사급</option>
-                                                                                <option value="3">샘플</option>
-                                                                            </>
-                                                                        ) :
-                                                                        (
-                                                                            <>
-                                                                                <option value="1">유급</option>
-                                                                                <option value="2">무급</option>
-                                                                            </>
-                                                                        )
-                                                                    }
-                                                                </Form.Select>
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                </Form>
-
-                                            )}
-                                        {a.content === '입력하세요' &&
-                                            (
-                                                <div key={i} className={styles.searchSection}>
-                                                    <Form>
-                                                        <Row>
-                                                            <div style={{display: 'flex'}}>
-                                                                <Col xs="auto">
-                                                                    <Form.Control readOnly placeholder={title[i].title}
-                                                                                  style={{
-                                                                                      marginRight: '10px',
-                                                                                      width: '150px'
-                                                                                  }}/>
-                                                                </Col>
-                                                                <Col xs="auto">
-                                                                    <Form.Control className="mb-2" id="inlineFormInput"
-                                                                                  placeholder={title[i].content}
-                                                                                  value={inputValues[i]} // 입력된 값으로 설정
-                                                                                  onChange={(e) => handleInputChange(i, e.target.value)}
-                                                                    />
-                                                                </Col>
-                                                            </div>
-                                                        </Row>
-                                                    </Form>
-                                                </div>
-                                            )
-                                        }
-                                    </>
-                                )
-                            }
-                        )
-                    }
-                </section>
-
-                <section className={styles.tableArea}>
-                    <div className={styles.divStyle}>구매입고</div>
-                    <div style={{marginTop: "30px"}}>
-                        <Container>
-                            <PurchaseItemTable/>
-                        </Container>
-                    </div>
-                </section>
-                <section className={styles.tableArea}>
-                    <div className={styles.divStyle}>세부항목</div>
-                    <div style={{marginTop: "30px"}}>
-                        <Container>
-                            <PurchaseItemTable/>
-                        </Container>
+                    <div className={styles.searchSection}>
+                        <div className={styles.divideSection}>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="입고코드"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                placeholder="자동 완성"
+                                                className={styles.longInput}
+                                                readOnly
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="입고 날짜"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Input id="searchDate"
+                                                   name="searchDate"
+                                                   className={styles.longInput}
+                                                   type='date'
+                                                   value={inputValue[0]}
+                                                   onChange={(e) => handleInputChange(0, e.target.value)}/>
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="거래처코드"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[1]}
+                                                          onChange={(e) => handleInputChange(1, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="프로젝트 코드"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[1]}
+                                                          onChange={(e) => handleInputChange(1, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                        </div>
+                        <div className={styles.divideSection}>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="수불 타입"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[1]}
+                                                          onChange={(e) => handleInputChange(1, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="발주서 번호"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[1]}
+                                                          onChange={(e) => handleInputChange(1, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                            <Form>
+                                <Row className={styles.afterEachRow}>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="창고 번호"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[2]}
+                                                          onChange={(e) => handleInputChange(2, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                            <Form>
+                                <Row>
+                                    <div style={{display: 'flex'}}>
+                                        <Col xs="auto">
+                                            <Form.Control
+                                                readOnly
+                                                placeholder="사원번호"
+                                                className={styles.shortInput}
+                                            />
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Form.Control className={styles.longInput}
+                                                          id="inlineFormInput"
+                                                          placeholder="입력하세요"
+                                                          value={inputValue[3]}
+                                                          onChange={(e) => handleInputChange(3, e.target.value)}
+                                            />
+                                        </Col>
+                                    </div>
+                                </Row>
+                            </Form>
+                        </div>
                     </div>
                 </section>
             </div>
+            <section className={styles.tableArea}>
+                <div className={styles.divStyle}>구매입고</div>
+                <div style={{marginTop: "30px"}}>
+                    <Container>
+                        <PurchaseItemTable/>
+                    </Container>
+                </div>
+            </section>
+            <section className={styles.tableArea}>
+                <div className={styles.divStyle}>세부항목</div>
+                <div style={{marginTop: "30px"}}>
+                    <Container>
+                        <PurchaseItemTable/>
+                    </Container>
+                </div>
+            </section>
         </>
-    );
+    )
+        ;
 }
 
 export default PurchaseItem;

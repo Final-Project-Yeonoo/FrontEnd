@@ -5,7 +5,7 @@ import './css/Message.css'
 const Message = () => {
     const [messages, setMessages] = useState([
         { id: 1, content: '안녕하세요!', sender: 'sent' },
-        { id: 2, content: '안녕하세요! 어떤 도움이 필요하신가요?', sender: 'received' }
+        { id: 2, content: 'Hi ERP System에 오신것을 환영합니다. 도움이 필요하신가요?', sender: 'received' }
     ]);
 
     const [newMessage, setNewMessage] = useState('');

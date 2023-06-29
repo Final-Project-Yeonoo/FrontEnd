@@ -1,4 +1,4 @@
-
+/* 버튼 영역 */
 .buttonsArea {
     display: flex;
     flex-direction: row;
@@ -6,20 +6,37 @@
     /*border: 2px solid black;*/
 }
 
+/*오렌지 박스 표 */
 .searchBox {
-    background-color: orange;
-    padding:10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    background-color: #f5b56d;
+    padding:20px;
+
 }
 
+/*박스 내부 input 감싸는 박스 */
 .searchSection{
     /*border: 2px solid red;*/
-    flex-direction: column;
-    justify-content: space-around;
+    display: flex;
+    width: 100%;
+}
+
+.divideSection {
+    /*border: 2px solid blue;*/
     width: 50%;
-    /*    한 줄에 2개의 form 이 생성됨 */
+}
+
+.afterEachRow{
+    margin-bottom: 10px;
+}
+
+/*박스 내부 input 감싸는 박스 */
+.shortInput {
+    margin-right: 10px;
+    width: 150px;
+}
+
+.longInput {
+    width: 300px;
 }
 
 /*표 두개 구분선 */
@@ -31,7 +48,7 @@
 }
 
 .sendPurchaseButton {
-    border-color: black;
+    /*border-color: black;*/
     background:darkgrey;
     width: 100%;
     margin-bottom:20px;

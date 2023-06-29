@@ -5,7 +5,6 @@
 .mainStyle {
     display: flex;
     /*background-color: green;*/
-
 }
 
 .changeArea {
@@ -13,16 +12,14 @@
     /*background-color: blue;*/
     /*border: 1px solid black;*/
     height: 100vh;
-    padding: 50px;
+    padding: 20px;
 }
 
 
-    
-
 .topNav {
     /*border: 2px solid blue;*/
-    height: 50px;
-    margin-bottom: 20px;
+    height: 100px;
+    margin-bottom: 10px;
 }
 
 /* DashBoard.module.css */
@@ -36,18 +33,24 @@
     display: flex;
     align-items: center;
     padding: 0 15px;
-    background-color: lightblue;
-    margin-right: 10px; /* 탭 사이 간격 설정 */
-    border-radius: 5px;
+    background-color: navy;
+    margin-right: 3px; /* 탭 사이 간격 설정 */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 600;
+    color:white;
 }
 .tabItem:hover {
-    background-color: #f5b56d;
+    background-color: #de8a2c;
 }
 
 .tabCloseBtn {
-    margin-left: 3px;
+    /* 버튼의 기본 스타일 제거 */
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
     cursor: pointer;
     font-size: 12px;
 }

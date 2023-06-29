@@ -10,15 +10,14 @@ import Button from "react-bootstrap/Button";
 
 function OrangeInputforFull() {
 
-    const [inputValue, setInputValue] = useState([]); // 초기값 빈 배열로 설정
-
+    const [inputValue, setInputValue] = useState([]);
     const handleInputChange = (index, value) => {
         const newInputValue = [...inputValue];
         newInputValue[index] = value;
         setInputValue(newInputValue);
     };
 
-    console.log(inputValue)
+    // console.log(inputValue)
 
     // 초기화  버튼 선택시
     const handleReset = () => {
@@ -41,6 +40,7 @@ function OrangeInputforFull() {
             axios
                 .post('http://localhost:8888/ynfinal/finisheditem', data)
                 .then(response => {
+                    // const {finishedCode} = response.data;
                     console.log(response.data);
                 })
                 .catch(error => {
@@ -67,8 +67,8 @@ function OrangeInputforFull() {
                                 <Form.Control className="mb-2"
                                               id="inlineFormInput"
                                               placeholder='자동 완성'
-                                              // value={inputValue[0]}
-                                              // onChange={(e) => handleInputChange(0, e.target.value)}
+                                    // value={inputValue[0]}
+                                    // onChange={(e) => handleInputChange(0, e.target.value)}
                                               readOnly
                                 />
                             </Col>
@@ -93,15 +93,18 @@ function OrangeInputforFull() {
                     <Row>
                         <div style={{display: 'flex'}}>
                             <Col xs="auto">
-                                <Form.Control readOnly placeholder='규격'
-                                              style={{marginRight: '10px', width: '150px'}}/>
+                                <Form.Control
+                                    readOnly
+                                    placeholder='규격'
+                                    style={{marginRight: '10px', width: '150px'}}/>
                             </Col>
                             <Col xs="auto">
-                                <Form.Control className="mb-2"
-                                              id="inlineFormInput"
-                                              placeholder='입력하세요'
-                                              value={inputValue[1]}
-                                              onChange={(e) => handleInputChange(1, e.target.value)}
+                                <Form.Control
+                                    className="mb-2"
+                                    id="inlineFormInput"
+                                    placeholder='입력하세요'
+                                    value={inputValue[1]}
+                                    onChange={(e) => handleInputChange(1, e.target.value)}
                                 />
                             </Col>
                         </div>
@@ -109,11 +112,7 @@ function OrangeInputforFull() {
                 </Form>
             </div>
             <div className={styles.navRight}>
-                <Button variant="primary" onClick={() => {
-                }}>조회</Button>
                 <Button variant="success" onClick={handleSubmit}>저장</Button>
-                <Button variant="danger" onClick={() => {
-                }}>삭제</Button>
                 <Button variant="secondary" onClick={handleReset}>초기화</Button>
             </div>
         </>
@@ -125,11 +124,11 @@ function OrangeInputforFull() {
 
 const ProductManagementFullTable = () => {
     const CustomPagination = () => null;
-
     const [rows, setRows] = useState([]);
-    const [selectedRows, setSelectedRows] = useState([]);
-    const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
-    const [deleteRowId, setDeleteRowId] = useState(null);
+
+    useEffect(() => {
+        fetchGridData();
+    }, []);
 
     const fetchGridData = async () => {
         try {
@@ -144,85 +143,88 @@ const ProductManagementFullTable = () => {
         }
     };
 
-    useEffect(() => {
-        fetchGridData();
-    }, []);
+    // 행 선택
+    const [selectedRow, setSelectedRow] = useState(null);
+    const handleRowClick = (params) => {
 
-    const columns = [
-        {field: 'finishedCode', headerName: '제품 코드', width: 150},
-        {field: 'finishedName', headerName: '제품명', width: 150},
-        {field: 'finishedSize', headerName: '규격', width: 150},
-        {field: 'finishedCount', headerName: '수량', width: 150, editable: true},
-        {field: 'finishedPrice', headerName: '금액', width: 150, editable: true},
-        {field: 'storehouseCode', headerName: '창고 번호', width: 150, editable: true},
-        {field: 'empNo', headerName: '사원 번호', width: 150},
-        {field: 'finishedRegDate', headerName: '제품 등록일', width: 150},
-        {field: 'finishedRegUpdate', headerName: '제품 수정일', width: 150},
+        const selectedRowData = params.row;
 
-    ];
+        console.log("선택된 row의 정보:", selectedRowData);
 
-    const handleSelectionModelChange = (selection) => {
-        setSelectedRows(selection);
-        console.log(selection); // 선택한 행 출력
-
-        if (selection.length > 0) {
-            // 선택된 행이 있는 경우에만 삭제 알림 창을 엽니다.
-            setIsDeleteAlertOpen(true);
-            // 선택된 행 중 첫 번째 행의 id를 설정합니다.
-            setDeleteRowId(selection[0]);
-        } else {
-            setIsDeleteAlertOpen(false);
-            setDeleteRowId(null);
-        }
+        setSelectedRow(selectedRowData);
     };
 
-    const handleDeleteConfirm = async () => {
+
+// 표 내용 수정시
+    const handleModifyClick = async () => {
+        const arrayData = selectedRow
         try {
-            console.log('Deleting row with id:', deleteRowId);
+            const response = await fetch('http://localhost:8888/ynfinal/finisheditem', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(arrayData),
+            });
+            console.log('선택정보 수정확인', arrayData);
 
-            // 서버로 삭제 요청을 보내는 코드
-            const response = await fetch(
-                `http://localhost:8888/ynfinal/finisheditem/${deleteRowId}`,
-                {
-                    method: 'DELETE',
-                    // 필요한 헤더 등을 추가합니다.
-                }
-            );
-            const data = await response.json();
-            console.log('Delete response:', data);
-            setIsDeleteAlertOpen(false);
+            if (!response.ok) {
+                throw new Error('Failed to save data');
+            }
+            console.log('Data saved successfully');
         } catch (error) {
-            console.log(error)
+            console.error('Error saving data:', error);
         }
-    }
-
-    const handleDeleteCancel = () => {
-        // 삭제 취소 시 알림 창을 닫습니다.
-        setIsDeleteAlertOpen(false);
     };
+
+    // 삭제
+    const handleDeleteClick = async () => {
+        const arrayData = selectedRow.finishedCode
+        try {
+            const response = await fetch('http://localhost:8888/ynfinal/finisheditem/' + arrayData, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(arrayData),
+            });
+            console.log('선택정보 삭제확인', arrayData);
+
+            if (!response.ok) {
+                throw new Error('Failed to save data');
+            }
+
+            console.log('Data saved successfully');
+        } catch (error) {
+            console.error('Error saving data:', error);
+        }
+    };
+
 
     return (
         <div style={{height: 500, width: '100%'}}>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                getRowId={(row) => row.id}
-                components={{
-                    Pagination: CustomPagination,
-                }}
-                checkboxSelection={true}
-                selectionModel={selectedRows}
-                onSelectionModelChange={handleSelectionModelChange}
-            />
-            {isDeleteAlertOpen && (
-                <div className="delete-alert">
-                    <div className="delete-alert-message">삭제하시겠습니까?</div>
-                    <div className="delete-alert-buttons">
-                        <button onClick={handleDeleteConfirm}>확인</button>
-                        <button onClick={handleDeleteCancel}>취소</button>
-                    </div>
+            <div style={{marginBottom: '1rem'}}>
+                <div style={{marginBottom: '20px'}}>
+                    <Button variant="primary" onClick={handleModifyClick} style={{marginRight: '10px'}}>수정 저장</Button>
+                    <Button variant="danger" onClick={handleDeleteClick}>삭제</Button>
                 </div>
-            )}
+                <DataGrid
+                    rows={rows}
+                    columns={[
+                        {field: 'finishedCode', headerName: '제품 코드', width: 150},
+                        {field: 'finishedName', headerName: '제품명', width: 150},
+                        {field: 'finishedSize', headerName: '규격', width: 150},
+                        {field: 'finishedCount', headerName: '수량', width: 150, editable: true},
+                        {field: 'finishedPrice', headerName: '금액', width: 150, editable: true},
+                        {field: 'empNo', headerName: '사원 번호', width: 150},
+                        {field: 'finishedRegDate', headerName: '제품 등록일', width: 150},
+                        {field: 'finishedRegUpdate', headerName: '제품 수정일', width: 150},
+                    ]}
+                    checkboxSelection={true}
+                    onRowClick={handleRowClick}
+                    getRowId={(row) => row.id}
+                />
+            </div>
         </div>
     );
 }

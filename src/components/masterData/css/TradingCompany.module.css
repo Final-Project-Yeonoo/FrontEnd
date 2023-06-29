@@ -1,18 +1,16 @@
-.headerContainer {
-    display: flex;
-    justify-content: space-between;
-    
-}
-.searchContainer {
-    display: flex;
-    
-    margin-right: 20px;
 
-}
-.rightContainer {
+.orangeBoxContainer {
     display: flex;
     justify-content: space-between;
+    /*border: 2px solid red;*/
+    height: 80px;
+    padding:10px;
+    background: #f5b56d;
+    margin-bottom: 20px;
 }
 .insertTag {
-    margin-right: 5px;
+    margin-right: 10px;
+}
+.clickModal {
+
 }

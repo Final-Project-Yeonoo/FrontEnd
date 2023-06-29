@@ -3,11 +3,14 @@ import { useState, useEffect } from 'react';
 import styles from '../admin/css/AdminUser.module.css';
 import * as React from 'react';
 import BasicModal from '../common/Modal';
-import { Form, Row,FormGroup,Label,Input,Col,Button  } from 'reactstrap';
+import { Form, Row,FormGroup,Label,Input,Col } from 'reactstrap';
 import { Checkbox, Divider } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Layouts from '../common/TableLayout';
 import {API_BASE_URL, DEPARTMENT, POSITION, FINDALL} from '../../config/host-cofig';
+import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
+
 
 function AdminUser() {
 
@@ -626,9 +629,8 @@ const tfhandle = (name, value) => {
       </div>
       {/* 저장버튼 */}
       <div className={styles.buttoncontainer}>
-        <Button color="primary"outline  className={styles.Button} onClick={joinButtonClickHandler}>저장</Button>
+        <Button variant="success" className={styles.Button} onClick={joinButtonClickHandler}>저장</Button>
       </div>
-
 
   </>
 

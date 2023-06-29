@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from './css/ProductManagement.module.css'
 import Nav from "react-bootstrap/Nav";
 import {ProductManagementRawTable, OrangeInputforRaw} from "./ProductManagementRawTable";

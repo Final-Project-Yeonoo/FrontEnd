@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import styles from './css/UserList.module.css';
-import {API_BASE_URL, FINDALL,DEPARTMENT,POSITION} from '../../config/host-cofig';
-import {Button} from 'reactstrap';
+import {API_BASE_URL, FINDALL, DEPARTMENT,POSITION } from '../../config/host-cofig';
+import Button from "react-bootstrap/Button";
+import Nav from "react-bootstrap/Nav";
+
 
 const UserList = () => {
   const [data, setData] = useState('');
@@ -287,17 +289,15 @@ const UserList = () => {
 
     return (
     <>
-    <div className={styles.contentHeadcontainer}>
-      <div className={styles.contentHeadName}>
-        <span>사용자 정보 수정 </span>
-      </div>
-    </div>
-
-
+      <Nav variant="tabs" defaultActiveKey="0">
+        <Nav.Item>
+          <Nav.Link eventKey="0">사용자 정보수정</Nav.Link>
+        </Nav.Item>
+      </Nav>
 
     <div className={styles.container}>
       <div className={styles.buttonContainer}> 
-      <Button color="success" outline onClick={handleSaveClick}>
+      <Button variant="success" onClick={handleSaveClick}>
             수정
       </Button>
       </div>
