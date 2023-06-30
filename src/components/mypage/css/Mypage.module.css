@@ -1,8 +1,6 @@
 
-
-   
 .contentHeadName {
-  font-size: 25px;
+    font-size: 25px;
 }
 
 .usercontainer {
@@ -12,105 +10,124 @@
     margin-top: 100px;
     display: flex;
     flex-direction: row;
-  }
-  
-  .profileImgcontainer {
-    flex: 1; 
+}
+
+.profileImgcontainer {
+    flex: 1;
     justify-content: center;
 
-  }
-  .profileImg {
-    
+}
+
+.profileImg {
+
     width: 50%;
     height: 55%;
     margin: 0 auto;
     margin-top: 10%;
     border: 1px solid #000;
-  }
-  .profileImg > span {
-   margin: 0;
+}
+
+.profileImg > span {
+    margin: 0;
     font-size: 12px;
-  }
+}
 
-  .form {
-    flex: 2; 
-  }
+.form {
+    flex: 2;
+}
 
-  
-  
-  .tag {
+.buttonStyle {
+    margin-top: 100px;
+    /*border: 1px solid red;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.tag {
     padding-top: 10px;
     /* background-color: red; */
     width: 70px;
     text-align: center;
     font-size: 12px;
-  }
-  .formGroup {
+}
+
+.formGroup {
     display: flex;
-    margin-top: 10px; 
-  }
-  
-  
-  
-  .container {
+    margin-top: 10px;
+}
+
+
+.container {
     border: 1px solid #000;
     width: 65%;
     height: fit-content;
     margin: 0 auto;
     justify-content: center;
-    
-  }
-  .headers {
+
+}
+
+.headers {
     text-align: center;
     display: flex;
     background-color: #EAEBEB;
-    }
-   .header1 {
-      width: 40%;
-    }
-    .header2 {
-      width: 30%;
-    }
-    .header3 {
-      width: 15%;
-    }
-    .header4 {
-      width: 15%;
-    }
-    .content {
-      display: flex;
-      text-align: center;
-      border-bottom: 1px solid #000;
-      
-    }
- 
-    
-    .dataSection {
-      border-right: 1px solid #000;
-    }
-    .buttoncontainer {
-      margin-top: 20px;
-      text-align: right;
-    }
-    .profilebutton {
-      padding: 8px 12px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      
-      text-align: center;
-    }
-    
-    .profilebutton:hover {
-      background-color: #0056b3;
+}
 
-    }
-    .addrInput {
-      margin-left: 15px;
-    }
-    .uploader {
-      width: 100%;
-    }
+.header1 {
+    width: 40%;
+}
+
+.header2 {
+    width: 30%;
+}
+
+.header3 {
+    width: 15%;
+}
+
+.header4 {
+    width: 15%;
+}
+
+.content {
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid #000;
+
+}
+
+
+.dataSection {
+    border-right: 1px solid #000;
+}
+
+.buttoncontainer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.profilebutton {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    text-align: center;
+}
+
+.profilebutton:hover {
+    background-color: #0056b3;
+
+}
+
+.addrInput {
+    margin-left: 15px;
+}
+
+.uploader {
+    width: 100%;
+}

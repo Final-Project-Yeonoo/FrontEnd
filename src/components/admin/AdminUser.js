@@ -417,7 +417,7 @@ const tfhandle = (name, value) => {
               <FormGroup className={styles.formGroup}>
                 <div className={styles.tag}>
                   {" "}
-                  <Label for="empValidate">활성화</Label>
+                  <Label for="empValidate">입력권한 활성</Label>
                 </div>
                 <Switch
                   {...label}    
@@ -629,7 +629,7 @@ const tfhandle = (name, value) => {
       </div>
       {/* 저장버튼 */}
       <div className={styles.buttoncontainer}>
-        <Button variant="success" className={styles.Button} onClick={joinButtonClickHandler}>저장</Button>
+        <Button variant="primary" className={styles.Button} onClick={joinButtonClickHandler}>저장</Button>
       </div>
 
   </>

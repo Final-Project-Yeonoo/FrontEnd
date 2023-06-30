@@ -27,6 +27,7 @@
 .tabBar {
     display: flex;
     flex-direction: row; /* 탭을 가로 방향으로 정렬 */
+    margin-bottom: 15px;
 }
 
 .tabItem {

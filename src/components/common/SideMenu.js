@@ -118,7 +118,7 @@ function SideMenu({addTab}) {
                             구매 입고관리
                         </Accordion.Body>
                     </Accordion.Item>
-                    <Accordion.Item eventKey="5" style={{borderRadius: '0'}}>
+                    <Accordion.Item eventKey="5">
                         <Accordion.Header>영업 관리</Accordion.Header>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {

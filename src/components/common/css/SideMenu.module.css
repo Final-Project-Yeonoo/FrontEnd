@@ -9,10 +9,11 @@
 }
 
 #imgCircle {
-  border: 1px solid black;
-  height: 250px;
+  border: 1px solid darkgray;
+  height: 220px;
   border-radius: 60%;
   overflow: hidden;
+  margin: 20px;
   padding: 3px;
 }
 

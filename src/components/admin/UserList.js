@@ -248,7 +248,7 @@ const UserList = () => {
 
     <div className={styles.container}>
       <div className={styles.buttonContainer}> 
-      <Button variant="success" onClick={handleSaveClick}>
+      <Button variant="primary" onClick={handleSaveClick}>
             수정
       </Button>
       </div>

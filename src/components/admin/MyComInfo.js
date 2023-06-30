@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./css/MyComInfo.module.css";
 import { Divider } from "@mui/material";
-import { Button } from "reactstrap";
 import {API_BASE_URL, COMPANY} from '../../config/host-cofig';
-import adminUser from './AdminUser';
 import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
 
 const MyComInfo = () => {
 
@@ -115,7 +114,7 @@ useEffect(() => {
       <div className={styles.empListBox}>
         <div className={styles.empListHeaders}>{headersName}</div>
         <div className={styles.buttonContainer}>
-          <Button color="primary" outline onClick={handlerSaveInfo}>
+          <Button variant="primary" onClick={handlerSaveInfo}>
             저장
           </Button>
         </div>
