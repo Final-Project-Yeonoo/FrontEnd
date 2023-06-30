@@ -144,35 +144,36 @@ function SideMenu({addTab}) {
                                         }}>
                             반품등록
                         </Accordion.Body>
-                        <Accordion.Item eventKey="6">
-                            <Accordion.Header>재고 관리</Accordion.Header>
-                            <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
-                                            onClick={() => {
-                                                handleAccordionItemClick('/inventory/check', "재고현황")
-                                            }}>
-                                재고현황
-                            </Accordion.Body>
-                        </Accordion.Item>
-                        <Accordion.Item eventKey="7">
-                            <Accordion.Header>생산 관리</Accordion.Header>
-                            <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
-                                            onClick={() => {
-                                                handleAccordionItemClick('/prod/order', "작업지시")
-                                            }}>
-                                작업지시
-                            </Accordion.Body>
-                            <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
-                                            onClick={() => {
-                                                handleAccordionItemClick('/register/perf', "실적등록")
-                                            }}>
-                                실적등록
-                            </Accordion.Body>
-                        </Accordion.Item>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="6">
+                        <Accordion.Header>재고 관리</Accordion.Header>
+                        <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
+                                        onClick={() => {
+                                            handleAccordionItemClick('/inventory/check', "재고현황")
+                                        }}>
+                            재고현황
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="7">
+                        <Accordion.Header>생산 관리</Accordion.Header>
+                        <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
+                                        onClick={() => {
+                                            handleAccordionItemClick('/prod/order', "작업지시")
+                                        }}>
+                            작업지시
+                        </Accordion.Body>
+                        <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
+                                        onClick={() => {
+                                            handleAccordionItemClick('/register/perf', "실적등록")
+                                        }}>
+                            실적등록
+                        </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
             </div>
         </>
-    );
+    )
+        ;
 }
 
 export default SideMenu;
