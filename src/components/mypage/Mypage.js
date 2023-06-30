@@ -82,7 +82,7 @@ function Mypage({employeeId}) {
        const userFormData = new FormData();
        userFormData.append('profileImg', $fileTag.current.files[0]);
 
-    const res = await fetch('http://localhost:8888/ynfinal/employee/image', {
+    const res = await fetch(API_BASE_URL + FINDALL +'/image', {
       method: 'POST',
       headers: requestHeader,
       body: userFormData
@@ -144,11 +144,11 @@ function Mypage({employeeId}) {
                         <div>
                             <Grid item xs={12}>
                                 <div className="thumbnail-box"
-                                     style={{width: '100px', height: '100px', overflow: 'hidden'}}
+                                     style={{width: '100%', height: '100%', overflow: 'hidden'}}
                                      onClick={() => $fileTag.current.click()}>
                                     <img
                                         style={{width: '100%', height: '100%'}}
-                                        src={imgFile || require('./img/122.png')}
+                                        src={localStorage.getItem('EMP_IMG') || require('./img/122.png')}
                                         alt="profile"
 
                                     />

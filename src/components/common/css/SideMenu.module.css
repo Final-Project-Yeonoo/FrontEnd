@@ -5,7 +5,7 @@
 }
 
 #profileBox {
-  /*border: 1px solid black;*/
+  /* border: 1px solid black; */
 }
 
 #imgCircle {
@@ -15,6 +15,10 @@
   overflow: hidden;
   margin: 20px;
   padding: 3px;
+}
+#imgCircle img {
+  width: 110%;
+  height: 110%;
 }
 
 #userName, #userId {
