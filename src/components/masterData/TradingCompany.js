@@ -100,11 +100,16 @@ function TradingCompany() {
     };
 
     const toggleModal = () => {
+        if(localStorage.getItem('INFO_AUTH') === 'N') {
+            alert("권한이 없습니다.");
+            return;
+          }
+      
         setIsModalOpen(!isModalOpen);
     };
 
     const handleAddCompany = async (newCompanyData) => {
-    
+        
       setCompanyData(prevData => [...prevData,newCompanyData])
       
         toggleModal();
@@ -122,6 +127,11 @@ function TradingCompany() {
     };
 
     const remove = async () => {
+        if(localStorage.getItem('INFO_AUTH') === 'N') {
+            alert("권한이 없습니다.");
+            return;
+          }
+      
         console.log('확인', selectedRow);
         const ArraySelectedRow = [selectedRow.trCompCode]
         try {

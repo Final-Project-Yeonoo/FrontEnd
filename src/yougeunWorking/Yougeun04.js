@@ -109,6 +109,11 @@ function CreateWorkOrder(){
 
 
     const handleAdd = (event) => {
+      if(localStorage.getItem('PRODUCT_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
+  
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -302,6 +307,10 @@ function CreateWorkOrder(){
   
 
   const handleSave = () => {
+    if(localStorage.getItem('PRODUCT_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
 
     
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
@@ -388,12 +397,17 @@ function CreateWorkOrder(){
   };
 
   const handleDelete = () => {
+    if(localStorage.getItem('PRODUCT_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     if(selectionModel.length<1) {
       alert("삭제할 행이 없습니다.");
       return;
     }
-    const orderCodes = selectionModel.map((selectedRow) => selectedRow.orderCode);
-      console.log(orderCodes);
+    const jobOrderCode = selectionModel.map((selectedRow) => selectedRow.jobOrderCode);
+      console.log(jobOrderCode);
     console.log(selectionModel);
     const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
 
@@ -406,7 +420,7 @@ function CreateWorkOrder(){
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderCodes),
+        body: JSON.stringify(jobOrderCode),
       };
     
       fetch(BASE + JOBORDER, requestOptions)

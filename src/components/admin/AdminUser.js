@@ -25,8 +25,9 @@ function AdminUser() {
   const userAuth = "userAuth";
   const infoAuth = "infoAuth";
   const purchaseAuth = "purchaseAuth";
-  const inventoryAuth = "inventoryMenu";
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+  const inventoryAuth = "inventoryAuth";
+  const salesAuth = "salesAuth";
+  const productAuth = "productAuth";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
   const [userValue, setUserValue] = useState({
     empName: "",
     empId: "",
@@ -40,7 +41,9 @@ function AdminUser() {
     userAuth: "N", 
     infoAuth: "N",
     purchaseAuth: "N",
-    inventoryAuth: "N"
+    inventoryAuth: "N",
+    salesAuth : "N",
+    productAuth : "N"
   });
 
 
@@ -182,6 +185,12 @@ useEffect(() => {
 
   // 저장하기 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = async (e) => {
+
+    if(localStorage.getItem('USER_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     e.preventDefault();
     // const updatedUserValue = {
     //   ...userValue,
@@ -572,7 +581,7 @@ const tfhandle = (name, value) => {
                 <Checkbox
                   color="success"
                   disabled={!userValue.empValidate}
-                  onChange={(e) => convertBooleanToEnum(purchaseAuth, e.target.checked)}/>
+                  onChange={(e) => convertBooleanToEnum(salesAuth, e.target.checked)}/>
               </span>
             </div>
           </div>
@@ -593,7 +602,7 @@ const tfhandle = (name, value) => {
               <span>
                 <Checkbox
                   color="success"
-                  name='inventoryMenu'
+                  name='inventoryAuth'
                   disabled={!userValue.empValidate}
                   onChange={(e) => convertBooleanToEnum(inventoryAuth, e.target.checked)}/>
               </span>
@@ -620,7 +629,7 @@ const tfhandle = (name, value) => {
                 <Checkbox
                   color="success"
                   disabled={!userValue.empValidate}
-                  onChange={(e) => convertBooleanToEnum(purchaseAuth, e.target.checked)}/>
+                  onChange={(e) => convertBooleanToEnum(productAuth, e.target.checked)}/>
               </span>
             </div>
           </div>

@@ -67,6 +67,12 @@ function RegisterProject() {
   };
 
   const handleAdd = (event) => {
+
+    if(localStorage.getItem('PURCHASE_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     event.preventDefault();
     const today = new Date();
     const year = today.getFullYear();
@@ -83,6 +89,8 @@ function RegisterProject() {
       storehouseEtc: formData.storehouseEtc,
       storehouseStartDate: formattedDate,
       projectDate : new Date(),
+      empId: localStorage.getItem('EMP_ID'),
+       empName: localStorage.getItem('EMP_NAME'),
     };
   
     // Add the new row to the responseData array
@@ -161,6 +169,12 @@ function RegisterProject() {
 
   const handleSave = () => {
 
+
+    if(localStorage.getItem('PURCHASE_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     const storehouseTypeMapping = {
       '반제품': 'HALF',
       '원자재': 'RAW',
@@ -177,6 +191,7 @@ function RegisterProject() {
 
 
     console.log(dataArray); 
+    
     const jsonData = JSON.stringify(dataArray);
     console.log(jsonData);
 
@@ -184,7 +199,7 @@ function RegisterProject() {
   
     // projectName 값을 역매핑하여 변경
     
-
+    
     console.log(JSON.stringify(responseData));
     const requestOptions = {
       method: 'POST',
@@ -205,7 +220,7 @@ function RegisterProject() {
         } else {
           console.log('POST 요청이 실패했습니다.');
           alert('ㅠㅠㅠㅠ');
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch((error) => {
@@ -224,6 +239,12 @@ function RegisterProject() {
   };
 
   const handleDelete = () => {
+    if(localStorage.getItem('PURCHASE_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
+
     if(selectionModel.length<1) {
       alert("삭제할 행이 없습니다.");
       return;
@@ -418,6 +439,7 @@ function RegisterProject() {
            
             </div>
             <div style={{marginBottom:'20px',  display: 'flex', padding:'10px',  justifyContent: 'flex-end'}}>
+   
             <Button color="primary" onClick={handleAdd} variant="contained" type="submit" style={{ marginLeft: '10px', backgroundColor: 'green'  }}>
               행 추가
             </Button>{" "}

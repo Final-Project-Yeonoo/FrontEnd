@@ -36,6 +36,11 @@ const OrderItemDetailTable = () => {
 
     // 수정 버튼
     const handleModifyClick = async () => {
+        
+    if(localStorage.getItem('PURCHASE_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
         const arrayData = selectedRow
         try {
             const response = await fetch('http://localhost:8888/ynfinal/order', {
@@ -58,6 +63,11 @@ const OrderItemDetailTable = () => {
 
     // 삭제
     const handleDeleteClick = async () => {
+        
+    if(localStorage.getItem('PURCHASE_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
         const arrayData = selectedRow.itemOrderCode
         try {
             const response = await fetch('http://localhost:8888/ynfinal/order/' + arrayData, {

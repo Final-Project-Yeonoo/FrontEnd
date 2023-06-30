@@ -15,6 +15,11 @@ function PurchaseItem() {
     const [inputValue, setInputValue] = useState([]);
 
     const handleInputChange = (index, value) => {
+        
+    if(localStorage.getItem('PURCHASE_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
         const newInputValue = [...inputValue];
         newInputValue[index] = value;
         setInputValue(newInputValue);
@@ -29,6 +34,11 @@ function PurchaseItem() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
+        
+    if(localStorage.getItem('PURCHASE_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
         if (inputValue.length === 5 && inputValue.every((value) => value.trim() !== '')) {
             const data = {
                 // itemOrderCode: inputValue[0],

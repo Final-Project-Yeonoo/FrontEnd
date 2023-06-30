@@ -49,20 +49,25 @@ useEffect(() => {
   }, []);
 
   const handlerSaveInfo = async () => {
+    if(localStorage.getItem('USER_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
 
     
     try {
       // 회사 정보를 서버에 전송하여 저장하는 API 호출
       const response = await fetch(API_COM_URL, {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(comValue)
+        body: [JSON.stringify(comValue)]
       });
       if (response.ok) {
         // 저장이 성공
         console.log("회사 정보 저장 완료");
+        alert('저장 성공');
       } else {
         // 저장이 실패
         console.log("회사 정보 저장 실패");

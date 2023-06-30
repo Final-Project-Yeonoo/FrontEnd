@@ -116,6 +116,10 @@ function ManageSalesOrder() {
 
 
     const handleAdd = (event) => {
+      if(localStorage.getItem('SALES_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -140,6 +144,7 @@ function ManageSalesOrder() {
         // Create a new row object with the form values
         const newRow = {
           id: responseData.length + 1, // Generate a unique ID for the new row
+
           estimateDate: rowDate,
           estimateOrderType: formData.estimateOrderType,
           orderDate: rowDate2,
@@ -162,6 +167,10 @@ function ManageSalesOrder() {
 
 
       const handleAdd2 = (event) => {
+        if(localStorage.getItem('SALES_AUTH') === 'N') {
+          alert("권한이 없습니다.");
+          return;
+        }
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -189,6 +198,10 @@ function ManageSalesOrder() {
 
 
       const handleDelete2 = () => {
+        if(localStorage.getItem('SALES_AUTH') === 'N') {
+          alert("권한이 없습니다.");
+          return;
+        }
         if(selectionModel2.length<1) {
           alert("삭제할 행이 없습니다.");
           return;
@@ -365,7 +378,10 @@ function ManageSalesOrder() {
   
 
   const handleSave = () => {
-
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
     
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
@@ -404,7 +420,10 @@ function ManageSalesOrder() {
 
 
   const handleSave2 = () => {
-
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
     
     const data = apiRef2.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
@@ -451,6 +470,11 @@ function ManageSalesOrder() {
   };
 
   const handleDelete = () => {
+
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
     if(selectionModel.length<1) {
       alert("삭제할 행이 없습니다.");
       return;

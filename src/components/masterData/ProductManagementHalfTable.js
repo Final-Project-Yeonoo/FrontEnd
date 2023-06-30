@@ -213,7 +213,7 @@ const ProductManagementHalfTable = () => {
                         {field: 'halfCount', headerName: '수량', width: 150, editable: true},
                         {field: 'halfPrice', headerName: '금액', width: 150, editable: true},
                         // {field: 'storehouseCode', headerName: '창고 번호', width: 150, editable: true},
-                        {field: 'empNo', headerName: '사원 번호', width: 150},
+                        {field: 'empName', headerName: '사원 이름', width: 150},
                         {field: 'halfRegDate', headerName: ' 반제품 등록일', width: 150},
                         {field: 'halfRegUpdate', headerName: ' 반제품 수정일', width: 150},
                         {field: 'halfComment', headerName: '비고', width: 150},

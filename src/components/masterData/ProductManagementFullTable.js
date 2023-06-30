@@ -216,7 +216,7 @@ const ProductManagementFullTable = () => {
                         {field: 'finishedSize', headerName: '규격', width: 150},
                         {field: 'finishedCount', headerName: '수량', width: 150, editable: true},
                         {field: 'finishedPrice', headerName: '금액', width: 150, editable: true},
-                        {field: 'empNo', headerName: '사원 번호', width: 150},
+                        {field: 'empName', headerName: '사원 이름', width: 150},
                         {field: 'finishedRegDate', headerName: '제품 등록일', width: 150},
                         {field: 'finishedRegUpdate', headerName: '제품 수정일', width: 150},
                     ]}

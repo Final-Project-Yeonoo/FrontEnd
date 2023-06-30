@@ -68,6 +68,11 @@ function StoreYougeun() {
   };
 
     const handleAdd = (event) => {
+      if(localStorage.getItem('INFO_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
+  
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -164,6 +169,11 @@ function StoreYougeun() {
   
 
   const handleSave = () => {
+    if(localStorage.getItem('INFO_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
 
     const storehouseTypeMapping = {
       '반제품': 'HALF',
@@ -226,6 +236,11 @@ function StoreYougeun() {
   };
 
   const handleDelete = () => {
+    if(localStorage.getItem('INFO_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     if(selectionModel.length<1) {
       alert("삭제할 행이 없습니다.");
       return;

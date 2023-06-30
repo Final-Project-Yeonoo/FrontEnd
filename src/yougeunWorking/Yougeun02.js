@@ -70,10 +70,19 @@ function RegisterEstimate() {
   };
 
     const orderAdd = () => {
+      if(localStorage.getItem('SALES_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
+  
       console.log('ㅎㅇㅎㅇ');
     }
 
     const handleAdd = (event) => {
+      if(localStorage.getItem('SALES_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -170,7 +179,7 @@ function RegisterEstimate() {
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/estimate");
+          const response = await fetch(BASE + ESTIMATE);
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
@@ -220,7 +229,10 @@ function RegisterEstimate() {
 
   const handleSave = () => {
 
-    
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
 
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
@@ -266,6 +278,11 @@ function RegisterEstimate() {
   };
 
   const handleDelete = () => {
+
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
     if(selectionModel.length<1) {
       alert("삭제할 행이 없습니다.");
       return;

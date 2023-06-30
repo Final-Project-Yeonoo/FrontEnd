@@ -1,5 +1,5 @@
 // 토큰및 로그인 유저 데이터를 브라우저에 저장하는 함수
-export const setLoginUserInfo = ({ token, empNo, empId, empName, userAuth, infoAuth, purchaseAuth, inventoryAuth, empProfile}) => {
+export const setLoginUserInfo = ({ token, empNo, empId, empName, userAuth, infoAuth, purchaseAuth, inventoryAuth, empProfile, productAuth, salesAuth}) => {
     localStorage.setItem('ACCESS_TOKEN', token);
     localStorage.setItem('EMP_NO', empNo);
     localStorage.setItem('EMP_ID', empId);
@@ -8,7 +8,11 @@ export const setLoginUserInfo = ({ token, empNo, empId, empName, userAuth, infoA
     localStorage.setItem('INFO_AUTH', infoAuth);
     localStorage.setItem('PURCHASE_AUTH', purchaseAuth);
     localStorage.setItem('INVENTORY_AUTH', inventoryAuth);
+    localStorage.setItem('PRODUCT_AUTH', productAuth);
+    localStorage.setItem('SALES_AUTH', salesAuth);
     localStorage.setItem('EMP_IMG', empProfile);
+
+  
 };
 
 
@@ -23,9 +27,14 @@ export const getLoginUserInfo = () => {
     infoAuth: localStorage.getItem('INFO_AUTH'),
     purchaseAuth: localStorage.getItem('PURCHASE_AUTH'),
     inventoryAuth: localStorage.getItem('INVENTORY_AUTH'),
+    productAuth: localStorage.getItem('PRODUCT_AUTH'),
+    salesAuth: localStorage.getItem('SALES_AUTH'),
     empProfile: localStorage.getItem('EMP_IMG'),
   };
 };
+
+
+
 
 // 로그인 여부를 확인하는 함수
 // const isLogin = () => {

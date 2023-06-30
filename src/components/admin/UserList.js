@@ -130,7 +130,15 @@ const UserList = () => {
       type: 'boolean',
       width: 110,
       editable: true,
+    },
+    {
+      field: 'productAuth',
+      headerName: '생산메뉴입력권한',
+      type: 'boolean',
+      width: 110,
+      editable: true,
     }
+    
   ];
 
 
@@ -151,8 +159,28 @@ const UserList = () => {
         // Parse the response data as JSON
         const jsonData = await response.json();
         console.log("데이터형식 : ", jsonData );
+        const modifiedData = jsonData.map((item) => {
+          const { deptName, posName, userAuth, infoAuth, purchaseAuth, inventoryAuth, salesAuth, productAuth, ...otherFields } = item;
+        
+   
+        
+          return {
+            ...otherFields,
+            deptName: deptName,
+            posName: posName,
+            userAuth: userAuth === "Y",
+            infoAuth: infoAuth === "Y",
+            purchaseAuth: purchaseAuth === "Y",
+            inventoryAuth: inventoryAuth === "Y",
+            salesAuth: salesAuth === "Y",
+            productAuth: productAuth === "Y",
+            
+          };
+        });
+        
+     
         // Update the component's state with the fetched data
-        setData(jsonData);
+        setData(modifiedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -193,6 +221,7 @@ const UserList = () => {
 
   const [selectedRow, setSelectedRow] = useState(null); // 선택된 row의 정보를 관리합니다.
   const handleRowClick = (params) => {
+    
     // 클릭한 row의 정보를 가져옵니다.
     const selectedRowData = params.row;
     // 필요한 처리를 수행합니다.
@@ -203,6 +232,11 @@ const UserList = () => {
 
  //백으로 정보를 전달
  const handleSaveClick = async () => {
+  if(localStorage.getItem('USER_AUTH') === 'N') {
+    alert("권한이 없습니다.");
+    return;
+  }
+
   // const arrayData = [selectedRow]
   // try {
   //   const response = await fetch(API_USERLIST_URL, {
@@ -245,7 +279,7 @@ const UserList = () => {
 
   try {
     // 1. deptName과 posName 값을 가져옵니다.
-    const { deptName, posName, ...otherFields } = selectedRow;
+    const { deptName, posName, userAuth, infoAuth, purchaseAuth, inventoryAuth, salesAuth,productAuth , ...otherFields } = selectedRow;
 
     // 2. 전체 부서 목록과 직급 목록을 비교하여 코드를 찾습니다.
     const selectedDept = deptData.find((dept) => dept.deptName === deptName);
@@ -256,8 +290,18 @@ const UserList = () => {
       ...otherFields,
       deptCode: selectedDept.deptCode,
       posCode: selectedPos.posCode,
+      userAuth: userAuth === true ? "Y" : "N",
+      infoAuth: infoAuth === true ? "Y" : "N",
+      purchaseAuth: purchaseAuth === true ? "Y" : "N",
+      inventoryAuth: inventoryAuth === true ? "Y" : "N",
+      salesAuth: salesAuth === true ? "Y" : "N",
+      productAuth : productAuth === true ? "Y" : "N",   
     };
 
+    
+    
+
+    console.log('ㅋㅋㅋ');
     const response = await fetch(API_USERLIST_URL, {
       method: 'PATCH',
       headers: {
@@ -265,8 +309,10 @@ const UserList = () => {
       },
       body: JSON.stringify(modifiedRow),
     });
+
    console.log('선택정보 수정확인',modifiedRow);
-    if (!response.ok) {
+   alert('수정'); 
+   if (!response.ok) {
       throw new Error('Failed to save data');
     }
 

@@ -26,6 +26,11 @@ function OrangeInputforRaw() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
+        if(localStorage.getItem('INFO_AUTH') === 'N') {
+            alert("권한이 없습니다.");
+            return;
+          }
+      
         if (inputValue.length === 2 && inputValue.every((value) => value.trim() !== '')) {
             const data = {
                 // rawCode: inputValue[0],
@@ -154,6 +159,11 @@ const ProductManagementRawTable = () => {
     // 수정 버튼
 
     const handleModifyClick = async () => {
+        if(localStorage.getItem('INFO_AUTH') === 'N') {
+            alert("권한이 없습니다.");
+            return;
+          }
+      
         const arrayData = selectedRow
         try {
             const response = await fetch('http://localhost:8888/ynfinal/rawitem', {
@@ -176,6 +186,11 @@ const ProductManagementRawTable = () => {
 
     // 삭제
     const handleDeleteClick = async () => {
+        if(localStorage.getItem('INFO_AUTH') === 'N') {
+            alert("권한이 없습니다.");
+            return;
+          }
+      
         const arrayData = selectedRow.rawCode
         try {
             const response = await fetch('http://localhost:8888/ynfinal/rawitem/' + `${arrayData}`, {
@@ -213,7 +228,7 @@ const ProductManagementRawTable = () => {
                         {field: 'rawCount', headerName: '수량', width: 150, editable: true},
                         {field: 'rawPrice', headerName: '금액', width: 150, editable: true},
                         // {field: 'storehouseCode', headerName: '창고 번호', width: 150, editable: true},
-                        {field: 'empNo', headerName: '사원 번호', width: 150},
+                        {field: 'empName', headerName: '사원 이름', width: 150},
                         {field: 'rawRegDate', headerName: '원자재 등록일', width: 150},
                         {field: 'rawRegUpdate', headerName: '원자재 수정일', width: 150},
                     ]}

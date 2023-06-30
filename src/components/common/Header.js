@@ -23,8 +23,8 @@ function Header() {
 
         <>
             <div id={styles.headerArea}>
-                <Navbar bg="light" expand="lg">
-                    <Container fluid>
+                <Navbar bg="light " expand="lg">
+                    <Container fluid >
                         <Navbar.Brand onClick={() => {navigate('/')}}>
                             <img src="/logo.png" width="270px"
                                  alt="ERP시스템 로고"/>

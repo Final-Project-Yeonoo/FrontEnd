@@ -112,6 +112,11 @@ function RegisterPerformance() {
 
 
     const handleAdd = (event) => {
+      if(localStorage.getItem('PRODUCT_AUTH') === 'N') {
+        alert("권한이 없습니다.");
+        return;
+      }
+  
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -324,7 +329,11 @@ function RegisterPerformance() {
 
   const handleSave = () => {
 
-    
+    if(localStorage.getItem('PRODUCT_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
     
@@ -409,12 +418,17 @@ function RegisterPerformance() {
   };
 
   const handleDelete = () => {
+    if(localStorage.getItem('PRODUCT_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     if(selectionModel.length<1) {
       alert("삭제할 행이 없습니다.");
       return;
     }
-    const orderCodes = selectionModel.map((selectedRow) => selectedRow.orderCode);
-      console.log(orderCodes);
+    const performanceCode = selectionModel.map((selectedRow) => selectedRow.performanceCode);
+      console.log(performanceCode);
     console.log(selectionModel);
     const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
 
@@ -427,7 +441,7 @@ function RegisterPerformance() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderCodes),
+        body: JSON.stringify(performanceCode),
       };
     
       fetch(BASE + PERFORMANCE, requestOptions)

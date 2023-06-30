@@ -32,6 +32,7 @@ const InvenCheck = () => {
                           price: item.rawPrice,
                           regDate: item.rawRegDate,
                           regUpdate: item.rawRegUpdate,
+                          empName : item.empName,
                           type: '원자재' })),
                       ...intermediates.map(item => ({ code: item.halfCode,
                         count: item.halfCount,
@@ -39,6 +40,7 @@ const InvenCheck = () => {
                         price: item.halfPrice,
                         regDate: item.halfRegDate,
                         regUpdate: item.halfRegUpdate,
+                        empName : item.empName,
                         type: '반제품' })),
                       ...finishedProducts.map(item => ({  
                         code: item.finishedCode,
@@ -47,6 +49,7 @@ const InvenCheck = () => {
                         price: item.finishedPrice,
                         regDate: item.finishedRegDate,
                         regUpdate: item.finishedRegUpdate,
+                        empName : item.empName,
                         type: '완제품' }))];
                       setInventoryData(mergedData);
                     }

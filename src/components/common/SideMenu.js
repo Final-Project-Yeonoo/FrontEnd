@@ -27,11 +27,15 @@ function SideMenu({addTab}) {
             <div className={styles.sideArea}>
                 <ListGroup style={{borderRadius: '0'}}>
                     <ListGroup.Item id={styles.profileBox}>
-                        <div id={styles.imgCircle}>
-                            <img src="/userImg.svg" alt=""/>
-                        </div>
-                        <span id={styles.userName}>관리자님</span>
-                        <span id={styles.userId}>admin1234</span>
+                    <div id={styles.imgCircle}>
+                            {localStorage.getItem('EMP_IMG') ? (
+                                <img src={localStorage.getItem('EMP_IMG')} alt="" />
+                            ) : (
+                                <img src="/userImg.svg" alt="" />
+                            )}
+                            </div>
+                        <span id={styles.userName}>{localStorage.getItem('EMP_NAME')}님</span>
+                        <span id={styles.userId}>{localStorage.getItem('EMP_ID')}</span>
                     </ListGroup.Item>
                 </ListGroup>
 

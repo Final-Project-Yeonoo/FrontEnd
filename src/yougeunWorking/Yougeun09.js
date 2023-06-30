@@ -34,8 +34,8 @@ function RegisterDelivery(){
   const [finishedList, setFinishedList] = useState([]);
 
   const handleRowClick = (ids) => {
-    console.log(ids.row.orderCode);
-    setCode(ids.row.orderCode);
+    console.log(ids.row.deliveryCode);
+    setCode(ids.row.deliveryCode);
   
     fetch(BASE + DELIVERY_DETAIL)
       .then((response) => response.json())
@@ -96,6 +96,12 @@ function RegisterDelivery(){
 
 
     const handleAdd = (event) => {
+      
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -132,6 +138,12 @@ function RegisterDelivery(){
 
 
       const handleAdd2 = (event) => {
+        
+        if(localStorage.getItem('SALES_AUTH') === 'N') {
+          alert("권한이 없습니다.");
+          return;
+        }
+
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -159,6 +171,13 @@ function RegisterDelivery(){
 
 
       const handleDelete2 = () => {
+
+        
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
         if(selectionModel2.length<1) {
           alert("삭제할 행이 없습니다.");
           return;
@@ -337,6 +356,12 @@ function RegisterDelivery(){
   
 
   const handleSave = () => {
+    
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
 
     
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
@@ -376,6 +401,12 @@ function RegisterDelivery(){
 
 
   const handleSave2 = () => {
+    
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
 
     
     const data = apiRef2.current?.getRowModels(); // 데이터 가져오기
@@ -423,12 +454,18 @@ function RegisterDelivery(){
   };
 
   const handleDelete = () => {
+    
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     if(selectionModel.length<1) {
       alert("삭제할 행이 없습니다.");
       return;
     }
-    const orderCodes = selectionModel.map((selectedRow) => selectedRow.orderCode);
-      console.log(orderCodes);
+    const deliveryCodes = selectionModel.map((selectedRow) => selectedRow.deliveryCode);
+      console.log(deliveryCodes);
     console.log(selectionModel);
     const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
 
@@ -441,7 +478,7 @@ function RegisterDelivery(){
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderCodes),
+        body: JSON.stringify(deliveryCodes),
       };
     
       fetch(BASE + DELIVERY, requestOptions)
@@ -744,7 +781,7 @@ function RegisterDelivery(){
                 // trCompName: selectedTrComp ? selectedTrComp.trCompName : '',
                 deliveryDetailVat: sum,
                 finishedName : selectedFinished ? selectedFinished.finishedName : '',
-                // orderCode : ,
+                // deliveryCode : ,
               };
             }
             return prevRow;

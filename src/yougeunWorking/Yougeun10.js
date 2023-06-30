@@ -34,8 +34,8 @@ function RegisterReturn() {
   const [finishedList, setFinishedList] = useState([]);
 
   const handleRowClick = (ids) => {
-    console.log(ids.row.orderCode);
-    setCode(ids.row.orderCode);
+    console.log(ids.row.returnedCode);
+    setCode(ids.row.returnedCode);
   
     fetch(BASE + RETURN_DETAIL)
       .then((response) => response.json())
@@ -107,6 +107,12 @@ function RegisterReturn() {
 
 
     const handleAdd = (event) => {
+          
+        if(localStorage.getItem('SALES_AUTH') === 'N') {
+          alert("권한이 없습니다.");
+          return;
+        }
+
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -145,6 +151,12 @@ function RegisterReturn() {
 
 
       const handleAdd2 = (event) => {
+        
+        if(localStorage.getItem('SALES_AUTH') === 'N') {
+          alert("권한이 없습니다.");
+          return;
+        }
+
         event.preventDefault();
         const today = new Date();
         const year = today.getFullYear();
@@ -158,7 +170,7 @@ function RegisterReturn() {
           orderDetailTaxCode : 0.1,
           orderDetailQuantity: 0,
         orderDetailUnitPrice: 0,
-        orderCode : code,
+        returnedCode : code,
           // storehouseStartDate : formattedDate,  
         };
         console.log(responseData2);
@@ -172,12 +184,18 @@ function RegisterReturn() {
 
 
       const handleDelete2 = () => {
+        
+        if(localStorage.getItem('SALES_AUTH') === 'N') {
+          alert("권한이 없습니다.");
+          return;
+        }
+
         if(selectionModel2.length<1) {
           alert("삭제할 행이 없습니다.");
           return;
         }
-        const orderDetailSeq = selectionModel2.map((selectedRow) => selectedRow.orderDetailSeq);
-          console.log(orderDetailSeq);
+        const returnDetailCode = selectionModel2.map((selectedRow) => selectedRow.returnDetailCode);
+          console.log(returnDetailCode);
         console.log(selectionModel2);
         const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
     
@@ -190,10 +208,10 @@ function RegisterReturn() {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(orderDetailSeq),
+            body: JSON.stringify(returnDetailCode),
           };
         
-          fetch(BASE + RETURNED, requestOptions)
+          fetch(BASE + RETURN_DETAIL, requestOptions)
             .then((response) => {
               // 응답 처리
               if (response.ok) {
@@ -350,6 +368,13 @@ function RegisterReturn() {
   const handleSave = () => {
 
     
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
+
+    
     const data = apiRef.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
     
@@ -388,7 +413,12 @@ function RegisterReturn() {
 
   const handleSave2 = () => {
 
-    
+      
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     const data = apiRef2.current?.getRowModels(); // 데이터 가져오기
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
     
@@ -434,12 +464,18 @@ function RegisterReturn() {
   };
 
   const handleDelete = () => {
+    
+    if(localStorage.getItem('SALES_AUTH') === 'N') {
+      alert("권한이 없습니다.");
+      return;
+    }
+
     if(selectionModel.length<1) {
       alert("삭제할 행이 없습니다.");
       return;
     }
-    const orderCodes = selectionModel.map((selectedRow) => selectedRow.orderCode);
-      console.log(orderCodes);
+    const returnedCodes = selectionModel.map((selectedRow) => selectedRow.returnedCode);
+      console.log(returnedCodes);
     console.log(selectionModel);
     const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
 
@@ -452,7 +488,7 @@ function RegisterReturn() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderCodes),
+        body: JSON.stringify(returnedCodes),
       };
     
       fetch(BASE + RETURNED, requestOptions)
@@ -687,7 +723,7 @@ function RegisterReturn() {
                 // trCompName: selectedTrComp ? selectedTrComp.trCompName : '',
                 // orderDetailVat: sum,
                 finishedName : selectedFinished ? selectedFinished.finishedName : '',
-                // orderCode : ,
+                // returnedCode : ,
               };
             }
             return prevRow;

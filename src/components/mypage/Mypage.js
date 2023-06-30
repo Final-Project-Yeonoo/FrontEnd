@@ -7,6 +7,10 @@ import { Checkbox, Divider, Grid } from '@mui/material';
 import ImgUpload from "./ImgUpload";
 import { getLoginUserInfo } from "../../yougeunWorking/login-util";
 import { json } from "react-router-dom";
+import { setLoginUserInfo } from "../../yougeunWorking/login-util";
+
+
+
 
 
 
@@ -85,10 +89,15 @@ function Mypage({ employeeId }) {
     });
     if (res.status === 200) {
       alert('사진 업로드 성공');
+      const json = await res.json();
+      setLoginUserInfo(json);
+      setToken(json.token);
       
     } else {
       alert('서버와의 통신이 원활하지 않습니다.');
     }
+
+    
   };
 
 
