@@ -31,9 +31,9 @@ const LineCharts = () => {
 
   return ( 
     <>
-  <div style={{ width: 1100, textAlign : "center"}}><span>생산실적</span></div>
+  <div style={{ width: '800px', textAlign : "center"}}><span>생산실적</span></div>
   <LineChart
-    width={1100}
+    width={900}
     height={400}
     data={chartData}
     margin={{

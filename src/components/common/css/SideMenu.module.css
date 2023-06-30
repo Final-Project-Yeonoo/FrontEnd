@@ -37,6 +37,13 @@
 }
 
 @media (max-width: 1440px) {
+  #profileBox {
+    border: 1px solid black;
+    width: 220px;
+  }
 
-
+  .sideArea {
+    width: 220px;
+    /*border: 2px solid blue;*/
+  }
 }

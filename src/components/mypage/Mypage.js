@@ -144,7 +144,7 @@ function Mypage({employeeId}) {
                                 <input
                                     id='profile-img'
                                     type='file'
-                                    style={{display: 'none'}}
+                                    style={{display: 'none', backgroundSize:'contain'}}
                                     accept='image/*'
                                     ref={$fileTag}
                                     onChange={showThumbnailHandler}
