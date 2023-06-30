@@ -6,12 +6,9 @@ import ImgUpload from "./ImgUpload";
 import { getLoginUserInfo } from "../../yougeunWorking/login-util";
 import { json } from "react-router-dom";
 import { setLoginUserInfo } from "../../yougeunWorking/login-util";
-
-
-
 import {Form, Row, FormGroup, Label, Input, Col} from 'reactstrap';
 import {Checkbox, Divider, Grid} from '@mui/material';
-import {getLoginUserInfo} from "../../yougeunWorking/login-util";
+
 import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
 import Button from "react-bootstrap/Button";
 
