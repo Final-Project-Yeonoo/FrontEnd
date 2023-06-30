@@ -10,7 +10,11 @@ import {
   GridSelectionModelChangeParams,
 } from "@mui/x-data-grid";
 
-
+import { API_YGBASE_URL as BASE, PROJECT, DELIVERY, DELIVERY_DETAIL, RETURNED,
+  RETURN_DETAIL, PERFORMANCE, JOBORDER, ORDERS_DETAIL, ESTIMATE,
+  ORDERS, STORE, ORDER, DEPARTMENT, FINISHED_ITEM, HALF_ITEM,
+  RAW_ITEM, TR_COMP, EMPLOYEE, COMPANY
+} from '../../yougeunWorking/YougeunConfig';
 
 
 function StoreYougeun() {
@@ -122,7 +126,7 @@ function StoreYougeun() {
       
     const sendGetRequest = async () => {
         try {
-          const response = await fetch("http://localhost:8888/ynfinal/store");
+          const response = await fetch(BASE+STORE);
           const data = await response.json();
           const processedData = Object.values(data).map((item, index) => ({
             id: index + 1, // 1부터 시작하여 증가하는 값으로 id 할당
@@ -208,7 +212,7 @@ function StoreYougeun() {
       body: jsonData,
     };
   
-    fetch('http://localhost:8888/ynfinal/store', requestOptions)
+    fetch(BASE+STORE, requestOptions)
       .then((response) => {
         // 응답 처리
         if (response.ok) {
@@ -261,7 +265,7 @@ function StoreYougeun() {
         body: JSON.stringify(selectionModel),
       };
     
-      fetch('http://localhost:8888/ynfinal/store', requestOptions)
+      fetch(BASE+STORE, requestOptions)
         .then((response) => {
           // 응답 처리
           if (response.ok) {
