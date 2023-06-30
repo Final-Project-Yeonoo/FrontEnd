@@ -25,9 +25,6 @@ $ npm install axios
 # 유근님 제공 표
 $ npm install react-tabulator
 $ @mui/x-data-grid
-
-# 추가 설치 
-$ npm install luxos
 $ npm install @mui/x-data-grid-generator
 $ npm install @mui/x-data-grid-pro
 $ npm install @mui/styled-engine-sc styled-components 
