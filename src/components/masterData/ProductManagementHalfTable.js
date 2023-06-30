@@ -6,9 +6,12 @@ import Form from "react-bootstrap/Form";
 import {Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {API_BASE_URL,HALF} from '../../config/host-cofig';
 
 
 function OrangeInputforHalf() {
+
+    const API_HALF_URL = API_BASE_URL + HALF;
 
     const [inputValue, setInputValue] = useState([]);
     const handleInputChange = (index, value) => {
@@ -36,7 +39,7 @@ function OrangeInputforHalf() {
         // console.log(data);
 
         axios
-            .post('http://localhost:8888/ynfinal/halfitem', data)
+            .post(API_HALF_URL, data)
             .then(response => {
                 console.log(response.data);
             })
@@ -118,6 +121,8 @@ function OrangeInputforHalf() {
 
 
 const ProductManagementHalfTable = () => {
+
+    const API_HALF_URL = API_BASE_URL + HALF;
     const CustomPagination = () => null;
     const [rows, setRows] = useState([]);
 
@@ -125,7 +130,7 @@ const ProductManagementHalfTable = () => {
 
         const fetchGridData = async () => {
             try {
-                const response = await fetch('http://localhost:8888/ynfinal/halfitem');
+                const response = await fetch(API_HALF_URL);
                 const data = await response.json();
 
                 // Generate unique IDs for the rows based on their index
@@ -156,7 +161,7 @@ const ProductManagementHalfTable = () => {
     const handleModifyClick = async () => {
         const arrayData = selectedRow
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/halfitem', {
+            const response = await fetch(API_HALF_URL, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -178,7 +183,7 @@ const ProductManagementHalfTable = () => {
     const handleDeleteClick = async () => {
         const arrayData = selectedRow.halfCode
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/halfitem/' + arrayData, {
+            const response = await fetch(API_HALF_URL+'/' + arrayData, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

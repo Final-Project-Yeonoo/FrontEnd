@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-
+import {API_BASE_URL,IMPORTS} from '../../config/host-cofig';
 const PurchaseItemTable = () => {
+    const API_INPUT_URL = API_BASE_URL +IMPORTS
     const CustomPagination = () => null;
 
 
@@ -10,7 +11,7 @@ const PurchaseItemTable = () => {
 
     const fetchGridData = async () => {
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/inputproduct');
+            const response = await fetch(API_INPUT_URL);
             const data = await response.json();
 
             // Generate unique IDs for the rows based on their index

@@ -90,8 +90,9 @@ function TradingCompany() {
     ];
 
 
-    console.log(companyData);
+    // console.log(companyData);
 
+    // 거래처 명으로 검색
     const handleSearch = () => {
         const filteredCompanies = companyData.filter(company =>
             company.trCompName.includes(searchQuery) // 거래처명을 검색어로 포함하는 데이터를 필터링합니다.
@@ -166,6 +167,7 @@ function TradingCompany() {
                         <input
                             type="text"
                             value={searchQuery}
+                            placeholder='거래처명'
                             style={{height: '50px', marginRight:'5px'}}
                             onChange={e => setSearchQuery(e.target.value)}
                         />
@@ -182,7 +184,7 @@ function TradingCompany() {
                 <div className={styles.container}>
                     <Box sx={{height: 600, width: '100%'}}>
                         <DataGrid
-                            rows={companyData}
+                           rows={filteredData.length > 0 ? filteredData : companyData}
                             columns={columns}
                             // disableRowSelectionOnClick
                             onRowClick={handleRowClick}

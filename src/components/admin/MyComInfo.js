@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./css/MyComInfo.module.css";
 import { Divider } from "@mui/material";
-import { Button } from "reactstrap";
 import {API_BASE_URL, COMPANY} from '../../config/host-cofig';
-import adminUser from './AdminUser';
 import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
 
 const MyComInfo = () => {
 
@@ -28,7 +27,7 @@ const MyComInfo = () => {
     "compPhone"
   ];
 
-  console.log(comValue);
+  // console.log(comValue);
 
   const fetchCompanyInfo = async () => {
     try {
@@ -66,25 +65,29 @@ useEffect(() => {
       });
       if (response.ok) {
         // 저장이 성공
-        console.log("회사 정보 저장 완료");
-        alert('저장 성공');
+        alert("회사 정보 저장 완료");
+        // console.log("회사 정보 저장 완료");
       } else {
         // 저장이 실패
-        console.log("회사 정보 저장 실패");
+        alert("회사 정보 저장 실패");
+        // console.log("회사 정보 저장 실패");
       }
     } catch (error) {
       // 예외 발생
+      alert("예기치 못한 오류가 발생했습니다")
       console.error("회사 정보 저장 중 오류 발생:", error);
     }
   };
-
+  // console.log(comValue);
+  
   const cName = (value, index) => {
     const updatedValue = [...comValue];
     updatedValue[0][classNames[index]] = value;
     setComValue(updatedValue);
+      
   };
 
-  console.log(comValue);
+
 
   const headersName = headers.map(function (header, index) {
     const value = comValue[0][classNames[index]] || ""; // 정보가 없는 경우 빈칸
@@ -115,7 +118,7 @@ useEffect(() => {
       <div className={styles.empListBox}>
         <div className={styles.empListHeaders}>{headersName}</div>
         <div className={styles.buttonContainer}>
-          <Button color="primary" outline onClick={handlerSaveInfo}>
+          <Button variant="primary" onClick={handlerSaveInfo}>
             저장
           </Button>
         </div>

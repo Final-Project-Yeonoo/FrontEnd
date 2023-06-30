@@ -6,9 +6,12 @@ import Form from "react-bootstrap/Form";
 import {Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {API_BASE_URL,FINISHED} from '../../config/host-cofig';
 
 
 function OrangeInputforFull() {
+
+    const API_FIN_URL = API_BASE_URL + FINISHED
 
     const [inputValue, setInputValue] = useState([]);
     const handleInputChange = (index, value) => {
@@ -38,7 +41,7 @@ function OrangeInputforFull() {
             console.log(data);
 
             axios
-                .post('http://localhost:8888/ynfinal/finisheditem', data)
+                .post(API_FIN_URL, data)
                 .then(response => {
                     // const {finishedCode} = response.data;
                     console.log(response.data);
@@ -123,8 +126,12 @@ function OrangeInputforFull() {
 
 
 const ProductManagementFullTable = () => {
+    const API_FIN_URL = API_BASE_URL + FINISHED
+    
     const CustomPagination = () => null;
     const [rows, setRows] = useState([]);
+
+
 
     useEffect(() => {
         fetchGridData();
@@ -132,7 +139,7 @@ const ProductManagementFullTable = () => {
 
     const fetchGridData = async () => {
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/finisheditem');
+            const response = await fetch(API_FIN_URL);
             const data = await response.json();
 
             const rowsWithIds = data.map((row, index) => ({...row, id: index + 1}));
@@ -157,9 +164,10 @@ const ProductManagementFullTable = () => {
 
 // 표 내용 수정시
     const handleModifyClick = async () => {
+
         const arrayData = selectedRow
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/finisheditem', {
+            const response = await fetch(API_FIN_URL, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -181,7 +189,7 @@ const ProductManagementFullTable = () => {
     const handleDeleteClick = async () => {
         const arrayData = selectedRow.finishedCode
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/finisheditem/' + arrayData, {
+            const response = await fetch(API_FIN_URL+'/' + arrayData, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

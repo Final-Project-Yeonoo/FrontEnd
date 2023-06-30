@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import {API_BASE_URL,} from '../../config/host-cofig';
 
 const StoreManagementTable = () => {
     const CustomPagination = () => null;

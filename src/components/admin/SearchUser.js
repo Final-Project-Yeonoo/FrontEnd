@@ -11,7 +11,7 @@ const SearchUser = () => {
 
   const API_USERLIST_URL = API_BASE_URL + FINDALL;
 
-   const CustomPagination = () => null;
+  
   
   const columns = [
   
@@ -72,10 +72,9 @@ const SearchUser = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
-
         // Parse the response data as JSON
         const jsonData = await response.json();
-        console.log("데이터형식 : ", jsonData );
+        // console.log("데이터형식 : ", jsonData );
         // Update the component's state with the fetched data
         setData(jsonData);
       } catch (error) {
@@ -96,11 +95,7 @@ const SearchUser = () => {
           <Nav.Link eventKey="0">사원조회</Nav.Link>
         </Nav.Item>
       </Nav>
-    {/*<div className={styles.contentHeadcontainer}>*/}
-    {/*  <div className={styles.contentHeadName}>*/}
-    {/*    <span>사원조회 </span>*/}
-    {/*  </div>*/}
-    {/*</div>*/}
+
 
 
   

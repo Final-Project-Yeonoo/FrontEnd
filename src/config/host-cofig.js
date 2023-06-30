@@ -5,7 +5,6 @@ let backEndHostName; //백엔드 서버 호스트 이름
 
 
 if(clientHostName === 'localhost') {
-
     backEndHostName = 'http://localhost:8888/';
 }else if(clientHostName === '.com'){
     backEndHostName = 'http://13.124.224.231/';
@@ -28,7 +27,7 @@ export const RAW ='ynfinal/rawitem';
 export const HALF ='ynfinal/halfitem';
 export const FINISHED ='ynfinal/finisheditem';
 export const STORE ='ynfinal/store';
-export const PURCHASE ='ynfinal/itemorder';  // 구매 발주
+export const PURCHASE ='ynfinal/order';  // 구매 발주
 export const IMPORTS ='ynfinal/inputproduct'; // 구매입고
 export const INVENTORY ='ynfinal/stock';
 export const ORDERDETAIL ='ynfinal/orderdetail';  // 구매 발주 상세

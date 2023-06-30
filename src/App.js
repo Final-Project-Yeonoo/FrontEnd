@@ -29,6 +29,7 @@ import RegisterDelivery from './yougeunWorking/Yougeun09';
 import RegisterReturn from './yougeunWorking/Yougeun10';
 import Piechart from './chart/PieChart';
 import Barchart from './chart/BarChart';
+import LineChart from './chart/LineCharts';
 import Message from "./components/common/Message";
 import MyComInfo from "./components/admin/MyComInfo";
 import errorPage from "./components/errorPage/ErrorPage";
@@ -45,16 +46,19 @@ function App() {
                 <Route path="/" element={<DashBoard/>}>
                     <Route path='/' element={
                         <>
-                            <div style={{display: 'flex'}}>
+                        <div style={{margin: 'auto 0'}}>
+                            <div style={{marginBottom: '20px'}}><LineChart/></div>
+                            <div style={{display: 'flex', marginLeft:'80px'}}>
                                 <Barchart/>
                                 <Piechart/>
                             </div>
+                        </div>    
                         </>
                     }/>
                    
                         {/*사용자*/}
                         <Route path="admin/user" element={<AdminUser/>}/>
-                        <Route path="admin/search" element={<SearchUser/>}/>
+                        <Route path="user/search" element={<SearchUser/>}/>
                         <Route path="admin/mycom" element={<MyComInfo />} />
                         <Route path="admin/list" element={<UserList/>}/>
                         {/*기준 정보*/}
@@ -70,16 +74,16 @@ function App() {
                         <Route path="yougeun" element={<Yougeun2/>}/>
                         <Route path="yougeun2" element={<StoreYougeun/>}/>
                        
-                    <Route path="yougeun01" element={<RegisterProject/>}/>
-                    <Route path="yougeun02" element={<RegisterEstimate/>}/>
-                    <Route path="yougeun03" element={<ManageSalesOrder/>}/>
-                    <Route path="yougeun04" element={<CreateWorkOrder/>}/>
-                    <Route path="yougeun05" element={<AnalyzeMaterialRequirement/>}/>
-                    <Route path="yougeun06" element={<PlacePurchaseOrder/>}/>
-                    <Route path="yougeun07" element={<RegisterPurchaseReceipt/>}/>
-                    <Route path="yougeun08" element={<RegisterPerformance/>}/>
-                    <Route path="yougeun09" element={<RegisterDelivery/>}/>
-                    <Route path="yougeun10" element={<RegisterReturn/>}/>
+                    <Route path="register/prj" element={<RegisterProject/>}/>
+                    <Route path="register/est" element={<RegisterEstimate/>}/>
+                    <Route path="sales/order" element={<ManageSalesOrder/>}/>
+                    <Route path="prod/order" element={<CreateWorkOrder/>}/>
+                    <Route path="analyze/require" element={<AnalyzeMaterialRequirement/>}/>
+                    <Route path="place/poder" element={<PlacePurchaseOrder/>}/>
+                    <Route path="register/receipt" element={<RegisterPurchaseReceipt/>}/>
+                    <Route path="register/perf" element={<RegisterPerformance/>}/>
+                    <Route path="register/delivery" element={<RegisterDelivery/>}/>
+                    <Route path="register/back" element={<RegisterReturn/>}/>
                     <Route path="message" element={<Message/>}/>
                     <Route path="mypage" element={<Mypage/>}/>
                 </Route>

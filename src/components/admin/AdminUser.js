@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from '../admin/css/AdminUser.module.css';
 import * as React from 'react';
 import BasicModal from '../common/Modal';
-import { Form, Row,FormGroup,Label,Input,Col } from 'reactstrap';
+import { Form, Row,FormGroup,Label,Input,Col, Alert } from 'reactstrap';
 import { Checkbox, Divider } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Layouts from '../common/TableLayout';
@@ -102,6 +102,7 @@ function AdminUser() {
     }
   ];
 
+  
 // 부서 데이터를 백엔드 API로부터 가져오는 로직
 useEffect(() => {
   const fetchData = async () => {
@@ -138,9 +139,6 @@ useEffect(() => {
 
 
 
-
-
-
   // 검증완료 체크에 대한 상태변수 관리
   const [correct, setCorrect] = useState({
     empName: "", //사용자이름
@@ -150,8 +148,7 @@ useEffect(() => {
     posCode: "", //사용자 직급 코드
     empPhone: "", //사용자 휴대전화
     empExtension: "", //사용자 내선 번호
-    empHireDate: "", //사용자 입사일
-    empValidate: "" //사용자 유효화
+    empHiredDate: "", //사용자 입사일
   });
 
   // 입력칸과 권한설정이 모두 검증에 통과했는지 여부 검사
@@ -180,9 +177,6 @@ useEffect(() => {
   }; 
 
 
-
-  console.log('밖에서 하는 확인! ', posData);
-
   // 저장하기 버튼 클릭 이벤트 핸들러
   const joinButtonClickHandler = async (e) => {
 
@@ -192,11 +186,7 @@ useEffect(() => {
     }
 
     e.preventDefault();
-    // const updatedUserValue = {
-    //   ...userValue,
-    //   empValidate: isChecked
-    // };
-
+  
 
     try{
        // 사용자 정보 서버 전달 요청
@@ -213,18 +203,28 @@ useEffect(() => {
 
       // 성공적으로 등록되었을 때 처리
       if (response.ok) {
-        alert("사용자가 등록되었습니다");
+        // alert("사용자가 등록되었습니다");
+        <Alert color="primary">
+          사용자가 등록되었습니다
+        </Alert>
       } else {
-        alert("등록에 실패했습니다");
+        // alert("등록에 실패했습니다");
+        <Alert color="primary">
+        등록에 실패했습니다
+      </Alert>
       }
     } catch (error) {
-      alert("서버와의 통신이 원활하지 않습니다");
+      // alert("서버와의 통신이 원활하지 않습니다");
+      <Alert color="primary">
+      서버와의 통신이 원활하지 않습니다
+    </Alert>
       console.error(error);
+      console.log('alert가 왜 안뜨지');
    }
-   console.log('addUser 호출 전 로그 찍기', JSON.stringify(userValue));
+  //  console.log('addUser 호출 전 로그 찍기', JSON.stringify(userValue));
 
   };
-
+ 
 
 
 // 부서코드 가져오기(부서이름도 같이 가져올 수 있음)
@@ -235,8 +235,8 @@ useEffect(() => {
    
     closeModal();
   };
-// 값입력 확인 log 
- console.log(userValue);
+// // 값입력 확인 log 
+//  console.log(userValue);
 
  const handlePosCellClick = (row) => {
   console.log('main에서 보는 선택된 행의 값posCode:', row.original.posCode);
@@ -268,12 +268,11 @@ const tfhandle = (name, value) => {
 
   return (
     <>
-        <div className={styles.contentHeadcontainer}>
-          <div className={styles.contentHeadName}>
-            <span>사용자 등록</span>
-          </div>
-        </div>
-
+       <Nav variant="tabs" defaultActiveKey="0">
+                <Nav.Item>
+                    <Nav.Link eventKey="0">사용자 등록</Nav.Link>
+                </Nav.Item>
+            </Nav>
 
 
     {/* 유저정보 등록 */}
@@ -287,6 +286,7 @@ const tfhandle = (name, value) => {
                   <Label for="empName">이름</Label>
                 </div>
                 <Input
+                
                   id="empName"
                   name="empName"
                   placeholder="사용자명"
@@ -426,7 +426,7 @@ const tfhandle = (name, value) => {
               <FormGroup className={styles.formGroup}>
                 <div className={styles.tag}>
                   {" "}
-                  <Label for="empValidate">활성화</Label>
+                  <Label for="empValidate">입력권한 활성</Label>
                 </div>
                 <Switch
                   {...label}    
@@ -638,7 +638,7 @@ const tfhandle = (name, value) => {
       </div>
       {/* 저장버튼 */}
       <div className={styles.buttoncontainer}>
-        <Button variant="success" className={styles.Button} onClick={joinButtonClickHandler}>저장</Button>
+        <Button variant="primary" className={styles.Button} onClick={joinButtonClickHandler}>저장</Button>
       </div>
 
   </>

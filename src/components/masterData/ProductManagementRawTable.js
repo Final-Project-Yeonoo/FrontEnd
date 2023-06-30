@@ -6,8 +6,11 @@ import {Row} from "reactstrap";
 import Col from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import styles from "./css/ProductManagement.module.css";
+import {API_BASE_URL,RAW} from '../../config/host-cofig';
+
 
 function OrangeInputforRaw() {
+    const API_RAW_URL = API_BASE_URL + RAW;
 
     const [inputValue, setInputValue] = useState([]);
     const handleInputChange = (index, value) => {
@@ -40,7 +43,7 @@ function OrangeInputforRaw() {
 
             // console.log(data);
             axios
-                .post('http://localhost:8888/ynfinal/rawitem', data)
+                .post(API_RAW_URL, data)
                 .then(response => {
                     // const {rawCode} = response.data;
                     console.log(response.data);
@@ -127,6 +130,8 @@ function OrangeInputforRaw() {
 
 
 const ProductManagementRawTable = () => {
+
+    const API_RAW_URL = API_BASE_URL + RAW;
     const CustomPagination = () => null;
     const [rows, setRows] = useState([]);
 
@@ -134,7 +139,7 @@ const ProductManagementRawTable = () => {
     useEffect(() => {
         const fetchGridData = async () => {
             try {
-                const response = await fetch('http://localhost:8888/ynfinal/rawitem');
+                const response = await fetch(API_RAW_URL);
                 const data = await response.json();
                 const rowsWithIds = data.map((row, index) => ({...row, id: index + 1}));
                 setRows(rowsWithIds);
@@ -166,7 +171,7 @@ const ProductManagementRawTable = () => {
       
         const arrayData = selectedRow
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/rawitem', {
+            const response = await fetch(API_RAW_URL, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -193,7 +198,7 @@ const ProductManagementRawTable = () => {
       
         const arrayData = selectedRow.rawCode
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/rawitem/' + `${arrayData}`, {
+            const response = await fetch(API_RAW_URL+'/' + `${arrayData}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
