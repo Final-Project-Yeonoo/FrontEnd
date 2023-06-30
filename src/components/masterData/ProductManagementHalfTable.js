@@ -30,10 +30,11 @@ function OrangeInputforHalf() {
 
     // 저장 버튼 선택시
     const handleSubmit = () => {
-        const data = {
+        const data = {  
             // "halfCode": inputValue[0],
             "halfName": inputValue[0],
-            "halfComment": inputValue[1]
+            "halfComment": inputValue[1],
+            empNo : localStorage.getItem('EMP_NO'),
         }
 
         // console.log(data);
@@ -160,6 +161,7 @@ const ProductManagementHalfTable = () => {
     // 수정 버튼
     const handleModifyClick = async () => {
         const arrayData = selectedRow
+        arrayData.empNo = localStorage.getItem('EMP_NO');
         try {
             const response = await fetch(API_HALF_URL, {
                 method: 'PUT',
@@ -169,6 +171,8 @@ const ProductManagementHalfTable = () => {
                 body: JSON.stringify(arrayData),
             });
             console.log('선택정보 수정확인', arrayData);
+            
+                alert('수정완료!');
 
             if (!response.ok) {
                 throw new Error('Failed to save data');

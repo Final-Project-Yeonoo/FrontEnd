@@ -38,7 +38,8 @@ function OrangeInputforRaw() {
             const data = {
                 // rawCode: inputValue[0],
                 rawName: inputValue[0],
-                rawType: inputValue[1]
+                rawType: inputValue[1],
+                empNo : localStorage.getItem('EMP_NO'),
             };
 
             // console.log(data);
@@ -47,7 +48,7 @@ function OrangeInputforRaw() {
                 .then(response => {
                     // const {rawCode} = response.data;
                     console.log(response.data);
-
+                    alert('저장완료')
                 })
                 .catch(error => {
                     console.error('실패함', error);
@@ -169,7 +170,8 @@ const ProductManagementRawTable = () => {
             return;
           }
       
-        const arrayData = selectedRow
+        const arrayData = selectedRow;
+        arrayData.empNo = localStorage.getItem('EMP_NO');
         try {
             const response = await fetch(API_RAW_URL, {
                 method: 'PATCH',
@@ -179,6 +181,7 @@ const ProductManagementRawTable = () => {
                 body: JSON.stringify(arrayData),
             });
             console.log('선택정보 수정확인', arrayData);
+            alert('수정완료!');
 
             if (!response.ok) {
                 throw new Error('Failed to save data');

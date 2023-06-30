@@ -34,12 +34,13 @@ function OrangeInputforFull() {
             const data = {
                 // "finishedCode": inputValue[0],
                 "finishedName": inputValue[0],
-                "finishedSize": inputValue[1]
+                "finishedSize": inputValue[1],
+                empNo : localStorage.getItem('EMP_NO'),
             }
 
 
             console.log(data);
-
+            alert('저장완료')
             axios
                 .post(API_FIN_URL, data)
                 .then(response => {
@@ -166,6 +167,7 @@ const ProductManagementFullTable = () => {
     const handleModifyClick = async () => {
 
         const arrayData = selectedRow
+        arrayData.empNo = localStorage.getItem('EMP_NO');
         try {
             const response = await fetch(API_FIN_URL, {
                 method: 'PATCH',
@@ -175,7 +177,7 @@ const ProductManagementFullTable = () => {
                 body: JSON.stringify(arrayData),
             });
             console.log('선택정보 수정확인', arrayData);
-
+            alert('수정완료!');
             if (!response.ok) {
                 throw new Error('Failed to save data');
             }
