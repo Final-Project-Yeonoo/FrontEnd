@@ -47,8 +47,8 @@ function App() {
                     <Route path='/' element={
                         <>
                         <div style={{margin: 'auto 0'}}>
-                            <div style={{marginBottom: '20px'}}><LineChart /></div>
-                            <div style={{display: 'flex'}}>
+                            <div style={{marginBottom: '20px'}}><LineChart/></div>
+                            <div style={{display: 'flex', marginLeft:'80px'}}>
                                 <Barchart/>
                                 <Piechart/>
                             </div>
