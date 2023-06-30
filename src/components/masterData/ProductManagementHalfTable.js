@@ -43,6 +43,7 @@ function OrangeInputforHalf() {
             .post(API_HALF_URL, data)
             .then(response => {
                 console.log(response.data);
+                alert("저장완료");
             })
             .catch(error => {
                 console.error('실패함', error);
