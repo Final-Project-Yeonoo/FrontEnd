@@ -8,10 +8,10 @@ import Button from "react-bootstrap/Button";
 import {Container} from "react-bootstrap";
 import PurchaseItemTable from "./PurchaseItemTable";
 import axios from "axios";
-
+import {API_BASE_URL,PURCHASE} from '../../config/host-cofig';
 
 function PurchaseItem() {
-
+    const API_ORDER_URL = API_BASE_URL + PURCHASE
     const [inputValue, setInputValue] = useState([]);
 
     const handleInputChange = (index, value) => {
@@ -41,7 +41,7 @@ function PurchaseItem() {
 
             // console.log(data);
             axios
-                .post('http://localhost:8888/ynfinal/order', data)
+                .post(API_ORDER_URL, data)
                 .then(response => {
                     // const {rawCode} = response.data;
                     console.log(response.data);

@@ -14,7 +14,7 @@ function DashBoard() {
     const [tabs, setTabs] = useState([]); // 탭 목록을 관리하는 상태
     const navigate = useNavigate();
     const path = useLocation().pathname; // 현재 경로를 가져옴
-    console.log('path 입니다', path);
+    // console.log('path 입니다', path);
 
 
     // 로그인 여부 확인하기

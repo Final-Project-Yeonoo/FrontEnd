@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Button from "react-bootstrap/Button";
+import {API_BASE_URL,ORDERDETAIL} from '../../config/host-cofig';
 
 const OrderItemDetailTable = () => {
+
+    const API_DETAIL_URL = API_BASE_URL + ORDERDETAIL;
     const CustomPagination = () => null;
     const [rows, setRows] = useState([]);
 
     const fetchGridData = async () => {
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/orderdetail');
+            const response = await fetch(API_DETAIL_URL);
             const data = await response.json();
 
             const rowsWithIds = data.map((row, index) => ({...row, id: index + 1}));
@@ -38,7 +41,7 @@ const OrderItemDetailTable = () => {
     const handleModifyClick = async () => {
         const arrayData = selectedRow
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/order', {
+            const response = await fetch(API_DETAIL_URL, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +63,7 @@ const OrderItemDetailTable = () => {
     const handleDeleteClick = async () => {
         const arrayData = selectedRow.itemOrderCode
         try {
-            const response = await fetch('http://localhost:8888/ynfinal/order/' + arrayData, {
+            const response = await fetch(API_DETAIL_URL+'/' + arrayData, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

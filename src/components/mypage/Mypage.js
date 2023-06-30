@@ -7,11 +7,15 @@ import { Checkbox, Divider, Grid } from '@mui/material';
 import ImgUpload from "./ImgUpload";
 import { getLoginUserInfo } from "../../yougeunWorking/login-util";
 import { json } from "react-router-dom";
+import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
 
 
 
 
 function Mypage({ employeeId }) {
+
+  const API_MY_URL = API_BASE_URL + FINDALL +'mypage'
+
   const [employeeInfo, setEmployeeInfo] = useState({
     empId: "12345",
     empName: "John Doe",
@@ -28,7 +32,7 @@ function Mypage({ employeeId }) {
     // 백엔드에서 사원 정보를 FETCH하는 함수
     const fetchEmployeeInfo = async () => {
       try {
-        const response = await fetch(`http://localhost:8888/ynfinal/employee/mypage/`+ localStorage.getItem('EMP_NO'));
+        const response = await fetch(API_MY_URL+'/'+ localStorage.getItem('EMP_NO'));
        
         const data = await response.json();
         console.log(data);
@@ -46,7 +50,7 @@ function Mypage({ employeeId }) {
     console.log({...employeeInfo});
 
     try {
-      await fetch(`http://localhost:8888/ynfinal/employee/mypage`, {
+      await fetch(API_MY_URL, {
         method: "PATCH",
         body: JSON.stringify({...employeeInfo}),
         headers: {
@@ -78,7 +82,7 @@ function Mypage({ employeeId }) {
     const userFormData = new FormData();
     userFormData.append('profileImg', $fileTag.current.files[0]);
 
-    const res = await fetch('http://localhost:8888/ynfinal/employee/image', {
+    const res = await fetch(API_MY_URL, {
       method: 'POST',
       headers: requestHeader,
       body: userFormData

@@ -86,7 +86,7 @@ const Barchart = () => {
           indexBy="department"
           margin={{ top: 50, right: 100, bottom: 50, left: 60 }}
           padding={0.3}
-          colors={['brown', 'orange']}
+          colors={['orange']}
           colorBy="id"
           theme={{
             labels: {

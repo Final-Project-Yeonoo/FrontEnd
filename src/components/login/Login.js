@@ -3,7 +3,10 @@ import {Container, Form, Button} from 'react-bootstrap';
 import styles from './css/Login.module.css';
 import { setLoginUserInfo } from '../../yougeunWorking/login-util';
 import { Link, useNavigate } from 'react-router-dom';
+import {API_BASE_URL,FINDALL} from '../../config/host-cofig';
 const Login = () => {
+
+    const API_LOGIN_URL = API_BASE_URL + FINDALL +'/signin'
 
     const redirection = useNavigate();
     const [companyCode, setCompanyCode] = useState('');
@@ -33,7 +36,7 @@ const Login = () => {
 
  
 
-    const res = await fetch('http://localhost:8888/ynfinal/employee/signin', {
+    const res = await fetch(API_LOGIN_URL, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({

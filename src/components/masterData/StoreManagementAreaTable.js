@@ -9,6 +9,7 @@ import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme
 
 import {ReactTabulator} from "react-tabulator";
 
+
 // 나머지 코드는 이전과 동일
 let data = [
     {
