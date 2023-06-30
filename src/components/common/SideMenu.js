@@ -17,8 +17,8 @@ function SideMenu({addTab}) {
             setActiveTab(tabId); // 선택한 탭으로 변경
         }
         addTab(tabId, path);// 탭 추가 함수 호출
-        console.log("path는 뭐냐면:", path);
-        console.log("tabId는 뭐냐면:", tabId);
+        // console.log("path는 뭐냐면:", path);
+        // console.log("tabId는 뭐냐면:", tabId);
         navigate(path); // 해당 경로로 이동
     };
 
@@ -70,7 +70,7 @@ function SideMenu({addTab}) {
                         </Accordion.Body>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
-                                            handleAccordionItemClick('/admin/search', '사용자 조회')
+                                            handleAccordionItemClick('/user/search', '사용자 조회')
                                         }}>
                             사용자 조회
                         </Accordion.Body>
@@ -101,7 +101,7 @@ function SideMenu({addTab}) {
                         <Accordion.Header>구매 관리</Accordion.Header>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
-                                            handleAccordionItemClick('/yougeun01', '프로젝트 등록')
+                                            handleAccordionItemClick('/register/prj', '프로젝트 등록')
                                         }}>
                             프로젝트 등록
                         </Accordion.Body>
@@ -122,25 +122,25 @@ function SideMenu({addTab}) {
                         <Accordion.Header>영업 관리</Accordion.Header>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
-                                            handleAccordionItemClick('/yougeun02', "견적서등록")
+                                            handleAccordionItemClick('/register/est', "견적서등록")
                                         }}>
                             견적서 등록
                         </Accordion.Body>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
-                                            handleAccordionItemClick('/yougeun03', " 수주서 관리")
+                                            handleAccordionItemClick('/prod/order', " 수주서 관리")
                                         }}>
                             수주서 관리
                         </Accordion.Body>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
-                                            handleAccordionItemClick('/yougeun09', "납품등록")
+                                            handleAccordionItemClick('/register/delivery', "납품등록")
                                         }}>
                             납품등록
                         </Accordion.Body>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
-                                            handleAccordionItemClick('/yougeun10', "반품등록")
+                                            handleAccordionItemClick('/register/back', "반품등록")
                                         }}>
                             반품등록
                         </Accordion.Body>
@@ -157,13 +157,13 @@ function SideMenu({addTab}) {
                             <Accordion.Header>생산 관리</Accordion.Header>
                             <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                             onClick={() => {
-                                                handleAccordionItemClick('/yougeun04', "작업지시")
+                                                handleAccordionItemClick('/prod/order', "작업지시")
                                             }}>
                                 작업지시
                             </Accordion.Body>
                             <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                             onClick={() => {
-                                                handleAccordionItemClick('/yougeun08', "실적등록")
+                                                handleAccordionItemClick('/register/perf', "실적등록")
                                             }}>
                                 실적등록
                             </Accordion.Body>

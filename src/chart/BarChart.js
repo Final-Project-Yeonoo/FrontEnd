@@ -11,7 +11,7 @@ const Barchart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 백엔드에서 employee 데이터를 받아온다고 가정
+      
         // 백엔드에서 employee 데이터를 받아오는 API 호출
         const response = await fetch(API_USERLIST_URL);
         if (!response.ok) {
@@ -19,13 +19,7 @@ const Barchart = () => {
         }
         const employeeData = await response.json();
         console.log('employeeData:',employeeData);
-        
-        // const employeeData = [
-        //   { deptName: 'Finance', employeeId: '1' },
-        //   { deptName: 'Finance', employeeId: '2' },
-        //   { deptName: 'Human Resources', employeeId: '3' },
-        //   // ... 나머지 employee 데이터
-        // ];
+  
 
         // 부서별로 인원수를 계산하여 chartData 생성
         const deptCounts = {};

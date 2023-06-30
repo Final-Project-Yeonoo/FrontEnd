@@ -196,53 +196,14 @@ const UserList = () => {
     // 클릭한 row의 정보를 가져옵니다.
     const selectedRowData = params.row;
     // 필요한 처리를 수행합니다.
-    console.log("선택된 row의 정보:", selectedRowData);
+    // console.log("선택된 row의 정보:", selectedRowData);
     setSelectedRow(selectedRowData);
   };
 
 
  //백으로 정보를 전달
  const handleSaveClick = async () => {
-  // const arrayData = [selectedRow]
-  // try {
-  //   const response = await fetch(API_USERLIST_URL, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(selectedRow),
-  //   });
-  // try {
-  //   // 1. deptName과 posName 값을 가져옵니다.
-  //   const { deptName, posName, ...otherFields } = selectedRow;
-
-  //   // 2. 전체 부서 목록과 직급 목록을 비교하여 코드를 찾습니다.
  
-
-  //   // 3. 선택된 부서와 직급의 코드 값을 수정합니다.
-  
-
-
-
-  //   const response = await fetch(API_USERLIST_URL, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(modifiedRow),
-  //   });
-  //   console.log('선택정보 수정확인',modifiedRow);
-
-  //   if (!response.ok) {
-  //     throw new Error('Failed to save data');
-  //   }
-
-  //   // Optional: Display a success message or perform any other actions
-  //   console.log('Data saved successfully');
-  // } catch (error) {
-  //   console.error('Error saving data:', error);
-  // }
-
   try {
     // 1. deptName과 posName 값을 가져옵니다.
     const { deptName, posName, ...otherFields } = selectedRow;
@@ -265,7 +226,7 @@ const UserList = () => {
       },
       body: JSON.stringify(modifiedRow),
     });
-   console.log('선택정보 수정확인',modifiedRow);
+  //  console.log('선택정보 수정확인',modifiedRow);
     if (!response.ok) {
       throw new Error('Failed to save data');
     }
@@ -274,17 +235,7 @@ const UserList = () => {
   } catch (error) {
     console.error('Error saving data:', error);
   }
-
-
 };
-
-
- 
-
-
-
-
-
 
 
     return (
@@ -305,8 +256,6 @@ const UserList = () => {
         <DataGrid
           rows={data}
           columns={columns}
-          // checkboxSelection
-          // disableRowSelectionOnClick
           onRowClick={handleRowClick}
           getRowId={(row) => row.empId}
           hideFooter={true}

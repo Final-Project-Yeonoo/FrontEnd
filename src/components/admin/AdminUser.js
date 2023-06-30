@@ -99,6 +99,7 @@ function AdminUser() {
     }
   ];
 
+  
 // 부서 데이터를 백엔드 API로부터 가져오는 로직
 useEffect(() => {
   const fetchData = async () => {
@@ -214,7 +215,7 @@ useEffect(() => {
   //  console.log('addUser 호출 전 로그 찍기', JSON.stringify(userValue));
 
   };
-
+ 
 
 
 // 부서코드 가져오기(부서이름도 같이 가져올 수 있음)
@@ -276,6 +277,7 @@ const tfhandle = (name, value) => {
                   <Label for="empName">이름</Label>
                 </div>
                 <Input
+                
                   id="empName"
                   name="empName"
                   placeholder="사용자명"

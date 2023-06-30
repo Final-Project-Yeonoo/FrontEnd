@@ -12,25 +12,18 @@ import {API_BASE_URL, FINDALL} from '../../config/host-cofig';
 
 
 
+
 function Mypage({ employeeId }) {
 
-  const API_MY_URL = API_BASE_URL + FINDALL +'mypage'
+  const API_MY_URL = API_BASE_URL + FINDALL +'/mypage'
 
-  const [employeeInfo, setEmployeeInfo] = useState({
-    empId: "12345",
-    empName: "John Doe",
-    deptName: "HR",
-    posName: "Manager",
-    empExtension: "123",
-    empPassword: "",
-    empPhone: "010-111-222",
-    empAddress: "서울시 강남구"
-  });
+  const [employeeInfo, setEmployeeInfo] = useState({});
 
 
   useEffect(() => {
     // 백엔드에서 사원 정보를 FETCH하는 함수
     const fetchEmployeeInfo = async () => {
+
       try {
         const response = await fetch(API_MY_URL+'/'+ localStorage.getItem('EMP_NO'));
        
@@ -48,6 +41,18 @@ function Mypage({ employeeId }) {
   const handleMyInfoChange = async () => {
     // console.log(newPassword, newAddr, newPhoneNumber);
     console.log({...employeeInfo});
+ // 비밀번호, 핸드폰번호, 주소 값이 비어 있는지 확인
+ if (
+  employeeInfo.empPassword.trim() === "" ||
+  employeeInfo.empPhone.trim() === "" ||
+  employeeInfo.empAddress.trim() === ""
+) {
+  // 빈칸 값이 있는 경우 모달창이나 경고창을 띄움
+  alert("비밀번호, 핸드폰번호, 주소는 반드시 입력해야 합니다.");
+  return;
+}
+
+
 
     try {
       await fetch(API_MY_URL, {
@@ -57,10 +62,10 @@ function Mypage({ employeeId }) {
           "Content-Type": "application/json"
         }
       });
-      // 비밀번호 변경 성공한 경우, 성공 처리를 진행하세요 (예: 알림 메시지, 리다이렉트 등)
+      alert("변경되었습니다. ")
     } catch (error) {
-      console.error("비밀번호 변경 중에 오류가 발생했습니다:", error);
-      // 오류 처리를 진행하세요 (예: 알림 메시지, 오류 상태 표시 등)
+      console.error("변경 중에 오류가 발생했습니다:", error);
+      alert("정보 변경 중에 오류가 발생했습니다");
     }
   };
 

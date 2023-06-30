@@ -28,7 +28,7 @@ const MyComInfo = () => {
     "compPhone"
   ];
 
-  console.log(comValue);
+  // console.log(comValue);
 
   const fetchCompanyInfo = async () => {
     try {
@@ -62,24 +62,29 @@ useEffect(() => {
       });
       if (response.ok) {
         // 저장이 성공
-        console.log("회사 정보 저장 완료");
+        alert("회사 정보 저장 완료");
+        // console.log("회사 정보 저장 완료");
       } else {
         // 저장이 실패
-        console.log("회사 정보 저장 실패");
+        alert("회사 정보 저장 실패");
+        // console.log("회사 정보 저장 실패");
       }
     } catch (error) {
       // 예외 발생
+      alert("예기치 못한 오류가 발생했습니다")
       console.error("회사 정보 저장 중 오류 발생:", error);
     }
   };
-
+  // console.log(comValue);
+  
   const cName = (value, index) => {
     const updatedValue = [...comValue];
     updatedValue[0][classNames[index]] = value;
     setComValue(updatedValue);
+      
   };
 
-  console.log(comValue);
+
 
   const headersName = headers.map(function (header, index) {
     const value = comValue[0][classNames[index]] || ""; // 정보가 없는 경우 빈칸

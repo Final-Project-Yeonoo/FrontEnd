@@ -36,3 +36,4 @@ $ npm install antd //ant design 설치
 
 npm install react-spinners --force
 npm install @mui/x-date-pickers
+npm install recharts
