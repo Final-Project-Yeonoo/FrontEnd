@@ -10,7 +10,7 @@ let backEndHostName; //백엔드 서버 호스트 이름
    
 // }
 
- backEndHostName = 'http://last3.store/';
+ backEndHostName = 'http://13.124.224.231/';
 
 
 export const API_BASE_URL = backEndHostName;
