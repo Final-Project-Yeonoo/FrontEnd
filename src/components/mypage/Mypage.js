@@ -28,7 +28,7 @@ function Mypage({employeeId}) {
                 const response = await fetch(API_MY_URL + '/' + localStorage.getItem('EMP_NO'));
 
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
                 setEmployeeInfo(data);
             } catch (error) {
                 console.error("사원 정보를 가져오는 중에 오류가 발생했습니다:", error);
@@ -40,7 +40,7 @@ function Mypage({employeeId}) {
 
     const handleMyInfoChange = async () => {
         // console.log(newPassword, newAddr, newPhoneNumber);
-        console.log({...employeeInfo});
+        // console.log({...employeeInfo});
         // 비밀번호, 핸드폰번호, 주소 값이 비어 있는지 확인
         if (
             employeeInfo.empPassword.trim() === "" ||
@@ -76,7 +76,7 @@ function Mypage({employeeId}) {
       const requestHeader = {
         'Authorization': 'Bearer ' + token
        };
-       console.log(token);
+    //    console.log(token);
 
        
        const userFormData = new FormData();

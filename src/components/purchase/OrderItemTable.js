@@ -33,7 +33,7 @@ const OrderItemTable = () => {
 
         const selectedRowData = params.row;
 
-        console.log("선택된 row의 정보:", selectedRowData);
+        // console.log("선택된 row의 정보:", selectedRowData);
 
         setSelectedRow(selectedRowData);
     };
@@ -54,7 +54,7 @@ const OrderItemTable = () => {
                 },
                 body: JSON.stringify(arrayData),
             });
-            console.log('선택정보 수정확인', arrayData);
+            // console.log('선택정보 수정확인', arrayData);
 
             if (!response.ok) {
                 throw new Error('Failed to save data');
@@ -81,7 +81,7 @@ const OrderItemTable = () => {
                 },
                 body: JSON.stringify(arrayData),
             });
-            console.log('선택정보 삭제확인', arrayData);
+            // console.log('선택정보 삭제확인', arrayData);
 
             if (!response.ok) {
                 throw new Error('Failed to save data');
@@ -120,5 +120,4 @@ const OrderItemTable = () => {
     );
 };
 export default OrderItemTable;
-
 

@@ -239,4 +239,3 @@ const ProductManagementFullTable = () => {
     );
 }
 export {OrangeInputforFull, ProductManagementFullTable}
-

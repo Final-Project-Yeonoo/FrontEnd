@@ -139,28 +139,35 @@ useEffect(() => {
 
 
 
-  // // 검증완료 체크에 대한 상태변수 관리
-  // const [correct, setCorrect] = useState({
-  //   empName: "", //사용자이름
-  //   empId: "", //사용자ID
-  //   empPassword: "", //사용자비밀번호
-  //   deptCode: "", //사용자 소속 부서코드
-  //   posCode: "", //사용자 직급 코드
-  //   empPhone: "", //사용자 휴대전화
-  //   empExtension: "", //사용자 내선 번호
-  //   empHiredDate: "", //사용자 입사일
-  // });
+  // 검증완료 체크에 대한 상태변수 관리
+  const [correct, setCorrect] = useState({
+    empName: "", //사용자이름
+    empId: "", //사용자ID
+    empPassword: "", //사용자비밀번호
+    deptCode: "", //사용자 소속 부서코드
+    posCode: "", //사용자 직급 코드
+    empPhone: "", //사용자 휴대전화
+    empExtension: "", //사용자 내선 번호
+    empHiredDate: "", //사용자 입사일
+  });
 
-
+  // 입력칸과 권한설정이 모두 검증에 통과했는지 여부 검사
+  const isValid = () => {
+    for (const key in correct) {
+      const flag = correct[key];
+      if (!flag) return false;
+    }
+    return true;
+  };
 
 
   // 권한 체크박스 상태 변경 시 호출되는 함수
-  // const handlePermissionChange = (name, checked) => {
-  //   setUserValue((prevUserValue) => ({
-  //     ...prevUserValue,
-  //     [name]: checked
-  //   }));
-  // };
+  const handlePermissionChange = (name, checked) => {
+    setUserValue((prevUserValue) => ({
+      ...prevUserValue,
+      [name]: checked
+    }));
+  };
 
   
   const convertBooleanToEnum = (name, value) => {
@@ -177,11 +184,11 @@ useEffect(() => {
       alert("권한이 없습니다.");
       return;
     }
-
     if (!userValue.empName || !userValue.empId || !userValue.empPassword || !userValue.deptCode || !userValue.posCode || !userValue.empPhone || !userValue.empExtension || !userValue.empHiredDate) {
       alert("모든 입력 칸을 채워주세요");
       return;
     }
+
     e.preventDefault();
   
 
@@ -196,27 +203,21 @@ useEffect(() => {
       });
 
       const data = await response.json();
-      console.log(data); // 서버로부터 받은 응답 확인
+      // console.log(data); // 서버로부터 받은 응답 확인
 
       // 성공적으로 등록되었을 때 처리
       if (response.ok) {
-        // alert("사용자가 등록되었습니다");
-        <Alert color="primary">
-          사용자가 등록되었습니다
-        </Alert>
+        alert("사용자가 등록되었습니다");
+    
       } else {
-        // alert("등록에 실패했습니다");
-        <Alert color="primary">
-        등록에 실패했습니다
-      </Alert>
+        alert("등록에 실패했습니다");
+       
       }
     } catch (error) {
-      // alert("서버와의 통신이 원활하지 않습니다");
-      <Alert color="primary">
-      서버와의 통신이 원활하지 않습니다
-    </Alert>
+      alert("서버와의 통신이 원활하지 않습니다");
+    
       console.error(error);
-      console.log('alert가 왜 안뜨지');
+      // console.log('alert가 왜 안뜨지');
    }
   //  console.log('addUser 호출 전 로그 찍기', JSON.stringify(userValue));
 
@@ -236,7 +237,7 @@ useEffect(() => {
 //  console.log(userValue);
 
  const handlePosCellClick = (row) => {
-  console.log('main에서 보는 선택된 행의 값posCode:', row.original.posCode);
+  // console.log('main에서 보는 선택된 행의 값posCode:', row.original.posCode);
   setSelectedPosName(row.original.posName)
   setUserValue({...userValue, posCode: row.original.posCode})
  
@@ -423,7 +424,7 @@ const tfhandle = (name, value) => {
               <FormGroup className={styles.formGroup}>
                 <div className={styles.tag}>
                   {" "}
-                  <Label for="empValidate">활성화</Label>
+                  <Label for="empValidate">입력권한 활성</Label>
                 </div>
                 <Switch
                   {...label}    

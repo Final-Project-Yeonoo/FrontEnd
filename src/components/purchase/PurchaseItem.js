@@ -54,7 +54,7 @@ function PurchaseItem() {
                 .post(API_ORDER_URL, data)
                 .then(response => {
                     // const {rawCode} = response.data;
-                    console.log(response.data);
+                    // console.log(response.data);
 
                 })
                 .catch(error => {

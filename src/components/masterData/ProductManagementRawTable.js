@@ -47,7 +47,7 @@ function OrangeInputforRaw() {
                 .post(API_RAW_URL, data)
                 .then(response => {
                     // const {rawCode} = response.data;
-                    console.log(response.data);
+                    // console.log(response.data);
                     alert('저장완료')
                 })
                 .catch(error => {
@@ -157,7 +157,7 @@ const ProductManagementRawTable = () => {
 
         const selectedRowData = params.row;
 
-        console.log("선택된 row의 정보:", selectedRowData);
+        // console.log("선택된 row의 정보:", selectedRowData);
 
         setSelectedRow(selectedRowData);
     };
@@ -180,7 +180,7 @@ const ProductManagementRawTable = () => {
                 },
                 body: JSON.stringify(arrayData),
             });
-            console.log('선택정보 수정확인', arrayData);
+            // console.log('선택정보 수정확인', arrayData);
             alert('수정완료!');
 
             if (!response.ok) {
@@ -208,7 +208,7 @@ const ProductManagementRawTable = () => {
                 },
                 body: JSON.stringify(arrayData),
             });
-            console.log('선택정보 삭제확인', arrayData);
+            // console.log('선택정보 삭제확인', arrayData);
 
             if (!response.ok) {
                 throw new Error('Failed to save data');
@@ -251,4 +251,3 @@ const ProductManagementRawTable = () => {
 
 
 export {ProductManagementRawTable, OrangeInputforRaw}
-

@@ -54,7 +54,7 @@ function DashBoard() {
     };
 
     // 탭 목록 콘솔 출력
-    console.log(tabs);
+    // console.log(tabs);
 
     return (
         <>

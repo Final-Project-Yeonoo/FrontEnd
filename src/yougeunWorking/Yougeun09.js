@@ -34,7 +34,7 @@ function RegisterDelivery(){
   const [finishedList, setFinishedList] = useState([]);
 
   const handleRowClick = (ids) => {
-    console.log(ids.row.deliveryCode);
+    // console.log(ids.row.deliveryCode);
     setCode(ids.row.deliveryCode);
   
     fetch(BASE + DELIVERY_DETAIL)
@@ -48,7 +48,7 @@ function RegisterDelivery(){
         }));
   
         setResponseData2(processedData);
-        console.log(processedData);
+        // console.log(processedData);
       })
       .catch((error) => {
         console.error('Failed to fetch employee list:', error);
@@ -82,7 +82,7 @@ function RegisterDelivery(){
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = responseData.filter((row) => ids.includes(row.id));
     
-    console.log(selectedRowsData);
+    // console.log(selectedRowsData);
     setSelectionModel(selectedRowsData);
   };
 
@@ -90,7 +90,7 @@ function RegisterDelivery(){
   const onRowsSelectionHandler2 = (ids) => {
     const selectedRowsData2 = responseData2.filter((row) => ids.includes(row.id));
     
-    console.log(selectedRowsData2);
+    // console.log(selectedRowsData2);
     setSelectionModel2(selectedRowsData2);
   };
 
@@ -160,7 +160,7 @@ function RegisterDelivery(){
           deliveryCode : code,
           // storehouseStartDate : formattedDate,  
         };
-        console.log(responseData2);
+        // console.log(responseData2);
         
         // Add the new row to the responseData array
         setResponseData2([...responseData2, newRow]);
@@ -183,8 +183,8 @@ function RegisterDelivery(){
           return;
         }
         const orderDetailSeq = selectionModel2.map((selectedRow) => selectedRow.orderDetailSeq);
-          console.log(orderDetailSeq);
-        console.log(selectionModel2);
+          // console.log(orderDetailSeq);
+        // console.log(selectionModel2);
         const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
     
         
@@ -247,7 +247,7 @@ function RegisterDelivery(){
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setTrCompList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -261,7 +261,7 @@ function RegisterDelivery(){
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setFinishedList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -278,7 +278,7 @@ function RegisterDelivery(){
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setProjectList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -294,7 +294,7 @@ function RegisterDelivery(){
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setEmpList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -316,7 +316,7 @@ function RegisterDelivery(){
             // projectRegDate: new Date(item.projectRegDate),
             // projectUpdateDate: new Date(item.projectUpdateDate),
           }));
-          console.log(processedData); 
+          // console.log(processedData); 
           setResponseData(processedData);
           setOriginalRows(processedData);
         } catch (error) {
@@ -368,9 +368,9 @@ function RegisterDelivery(){
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
     
     const jsonData = JSON.stringify(dataArray);
-    console.log('수정버튼 !!');
-    console.log(JSON.stringify(responseData));
-    console.log(jsonData);
+    // console.log('수정버튼 !!');
+    // console.log(JSON.stringify(responseData));
+    // console.log(jsonData);
 
     const requestOptions = {
       method: 'POST',
@@ -413,9 +413,9 @@ function RegisterDelivery(){
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
     
     const jsonData = JSON.stringify(dataArray);
-    console.log('수정버튼 !!');
-    console.log(JSON.stringify(responseData2));
-    console.log(jsonData);
+    // console.log('수정버튼 !!');
+    // console.log(JSON.stringify(responseData2));
+    // console.log(jsonData);
 
     const requestOptions = {
       method: 'POST',
@@ -448,8 +448,8 @@ function RegisterDelivery(){
     e.preventDefault();
     // 저장 버튼 클릭 시 처리할 로직 작성
    
-    console.log("저장 버튼이 클릭되었습니다.");
-    console.log(formData);
+    // console.log("저장 버튼이 클릭되었습니다.");
+    // console.log(formData);
     // axios 또는 다른 HTTP 클라이언트를 사용하여 서버로 데이터 전송 등의 로직 추가
   };
 
@@ -465,8 +465,8 @@ function RegisterDelivery(){
       return;
     }
     const deliveryCodes = selectionModel.map((selectedRow) => selectedRow.deliveryCode);
-      console.log(deliveryCodes);
-    console.log(selectionModel);
+      // console.log(deliveryCodes);
+    // console.log(selectionModel);
     const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
 
     
@@ -511,7 +511,7 @@ function RegisterDelivery(){
 
   const handleReset = () => {
     // 초기화 버튼 클릭 시 처리할 로직 작성
-    console.log("초기화 버튼이 클릭되었습니다.");
+    // console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
       estimateDate: "",
       deliveryStatus: "",
@@ -789,9 +789,9 @@ function RegisterDelivery(){
           return updatedData;
         });
   
-        console.log(updatedRow.orderDetailUnitPrice);
-        console.log(updatedRow.orderDetailQuantity);
-        console.log(sum);
+        // console.log(updatedRow.orderDetailUnitPrice);
+        // console.log(updatedRow.orderDetailQuantity);
+        // console.log(sum);
       }
       return row;
     });

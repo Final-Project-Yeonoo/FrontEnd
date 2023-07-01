@@ -27,7 +27,7 @@ const Import = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // 모달에서 폼 데이터를 전송해야함
-    console.log(formData);
+    // console.log(formData);
     // 백엔드로 데이터 전송! 
     fetch("/api/import", {
       method: "POST",
