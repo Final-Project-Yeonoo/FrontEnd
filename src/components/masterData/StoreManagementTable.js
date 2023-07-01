@@ -33,6 +33,7 @@
 //         { field: 'storehouseName', headerName: '창고명', width: 150 },
 //         { field: 'storehouseStartDate', headerName: '창고 등록일', width: 150 },
 //         { field: 'storehouseAddr', headerName: '창고 주소', width: 150 },
+//         // { field: 'storehouseAddr', headerName: '창고 주소', width: 150 },
 //         { field: 'empNo', headerName: '사원 번호', width: 150 },
 //         { field: 'comment', headerName: '비고', width: 150 },
 

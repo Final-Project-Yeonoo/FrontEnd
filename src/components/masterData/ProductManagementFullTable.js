@@ -117,7 +117,7 @@ function OrangeInputforFull() {
             </div>
             <div className={styles.navRight}>
                 <Button variant="success" onClick={handleSubmit}>저장</Button>
-                <Button variant="secondary" onClick={handleReset}>초기화</Button>
+                <Button variant="secondary" onClick={handleReset} style={{borderColor:'white'}}>초기화</Button>
             </div>
         </>
     )
@@ -239,4 +239,3 @@ const ProductManagementFullTable = () => {
     );
 }
 export {OrangeInputforFull, ProductManagementFullTable}
-

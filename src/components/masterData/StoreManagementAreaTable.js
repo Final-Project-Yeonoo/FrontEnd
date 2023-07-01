@@ -140,7 +140,7 @@
 
 //                 const response = await fetch('http://localhost:8888/ynfinal/trcomp');
 //                 const data1 = await response.json();
-//                 // console.log('받은 데이터:', data1);
+
 //                 const newData = Object.values(data1); // 받은 데이터를 배열 형태로 변환합니다.
 //                 setData(newData); // 데이터 상태를 업데이트합니다.
 

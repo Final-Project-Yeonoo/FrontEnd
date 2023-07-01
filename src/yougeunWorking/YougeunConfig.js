@@ -3,7 +3,7 @@ const clientHostName = window.location.hostname;
 let backEndHostName; // 백엔드 서버 호스트 이름
 
 // if (clientHostName === 'localhost') {
-//   backEndHostName = 'http://localhost:8888';
+  // backEndHostName = 'http:/np/localhost:8888';
 // } else if (clientHostName === 'vanila.com') {
 //   backEndHostName = 'https://api.vanila.co.kr';
 // }
