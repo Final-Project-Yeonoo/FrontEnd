@@ -21,9 +21,25 @@ function Header() {
         // handleLogout 함수 정의
     const handleLogout = () => {
         localStorage.clear();
+        navigate('/login');
         // 로그아웃 상태로 변경하는 로직 추가
     }
 
+    const handleLogin = () => {
+        navigate('/login');
+    }
+
+    const handleMypage = ()=> {
+        navigate('/mypage');
+    }
+
+    const handleMessage = () => {
+        navigate('/message');
+    }
+
+    const handleHome = () => {
+        navigate('/');
+    }
     return (
 
         <>
@@ -41,23 +57,23 @@ function Header() {
                                 style={{maxHeight: '100px'}}
                                 navbarScroll
                             >
-                                <Nav.Link href="/"  className="col-lg-3">Home</Nav.Link>
-                                <Nav.Link href="/message" className="col-lg-4">Message</Nav.Link>
+                                <Nav.Link onClick={() => handleHome()} className="col-lg-3">Home</Nav.Link>
+                                <Nav.Link onClick={() => handleMessage()} className="col-lg-4">Message</Nav.Link>
                                 <NavDropdown title="Setting" id="navbarScrollingDropdown" className="col-lg-4">
                                     <NavDropdown.Item href="#action3" style={{display:"flex"}}>
                                         <span style={{marginRight:"30px"}} >Dark Mode</span>
                                         <SwitchExample isDarkMode={isDarkMode} setIsDarkMode={handleDarkModeToggle} />
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href='/mypage'>
+                                    <NavDropdown.Item onClick={() => handleMypage()}>
                                         Change Profile
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider/>
                                 </NavDropdown>
                                { isLogin ? 
-                                <Nav.Link href="/login" className="col-lg-4" onClick={() => handleLogout()}>
+                                <Nav.Link  className="col-lg-4" onClick={() => handleLogout()}>
                                     Logout
                                 </Nav.Link> :
-                                <Nav.Link href="/login" className="col-lg-4">
+                                <Nav.Link  className="col-lg-4" onClick={() => handleLogin()}>
                                     Login
                                 </Nav.Link>
                                 }

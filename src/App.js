@@ -35,6 +35,7 @@ import MyComInfo from "./components/admin/MyComInfo";
 import errorPage from "./components/errorPage/ErrorPage";
 import ErrorPage from "./components/errorPage/ErrorPage";
 
+
 function App() {
     return (
         <>
@@ -86,6 +87,7 @@ function App() {
                     <Route path="register/back" element={<RegisterReturn/>}/>
                     <Route path="message" element={<Message/>}/>
                     <Route path="mypage" element={<Mypage/>}/>
+                    
                 </Route>
                 <Route path="*" element={<ErrorPage/>}/>
             </Routes>
