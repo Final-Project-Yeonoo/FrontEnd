@@ -139,35 +139,28 @@ useEffect(() => {
 
 
 
-  // 검증완료 체크에 대한 상태변수 관리
-  const [correct, setCorrect] = useState({
-    empName: "", //사용자이름
-    empId: "", //사용자ID
-    empPassword: "", //사용자비밀번호
-    deptCode: "", //사용자 소속 부서코드
-    posCode: "", //사용자 직급 코드
-    empPhone: "", //사용자 휴대전화
-    empExtension: "", //사용자 내선 번호
-    empHiredDate: "", //사용자 입사일
-  });
+  // // 검증완료 체크에 대한 상태변수 관리
+  // const [correct, setCorrect] = useState({
+  //   empName: "", //사용자이름
+  //   empId: "", //사용자ID
+  //   empPassword: "", //사용자비밀번호
+  //   deptCode: "", //사용자 소속 부서코드
+  //   posCode: "", //사용자 직급 코드
+  //   empPhone: "", //사용자 휴대전화
+  //   empExtension: "", //사용자 내선 번호
+  //   empHiredDate: "", //사용자 입사일
+  // });
 
-  // 입력칸과 권한설정이 모두 검증에 통과했는지 여부 검사
-  const isValid = () => {
-    for (const key in correct) {
-      const flag = correct[key];
-      if (!flag) return false;
-    }
-    return true;
-  };
+
 
 
   // 권한 체크박스 상태 변경 시 호출되는 함수
-  const handlePermissionChange = (name, checked) => {
-    setUserValue((prevUserValue) => ({
-      ...prevUserValue,
-      [name]: checked
-    }));
-  };
+  // const handlePermissionChange = (name, checked) => {
+  //   setUserValue((prevUserValue) => ({
+  //     ...prevUserValue,
+  //     [name]: checked
+  //   }));
+  // };
 
   
   const convertBooleanToEnum = (name, value) => {
@@ -185,6 +178,10 @@ useEffect(() => {
       return;
     }
 
+    if (!userValue.empName || !userValue.empId || !userValue.empPassword || !userValue.deptCode || !userValue.posCode || !userValue.empPhone || !userValue.empExtension || !userValue.empHiredDate) {
+      alert("모든 입력 칸을 채워주세요");
+      return;
+    }
     e.preventDefault();
   
 
@@ -260,9 +257,9 @@ const handleChange = (e) => {
 
 
 const tfhandle = (name, value) => {
-  console.log(name ,':',value);
+  // console.log(name ,':',value);
   setUserValue({...userValue, [name] : value}); 
-  console.log(userValue);
+  // console.log(userValue);
 }
 
 
@@ -426,7 +423,7 @@ const tfhandle = (name, value) => {
               <FormGroup className={styles.formGroup}>
                 <div className={styles.tag}>
                   {" "}
-                  <Label for="empValidate">입력권한 활성</Label>
+                  <Label for="empValidate">활성화</Label>
                 </div>
                 <Switch
                   {...label}    
