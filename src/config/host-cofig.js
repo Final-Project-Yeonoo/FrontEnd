@@ -5,13 +5,13 @@ let backEndHostName; //백엔드 서버 호스트 이름
 
 
 // if(clientHostName === 'localhost') {
-    backEndHostName = 'http://localhost:8888/';
+    // backEndHostName = 'http://localhost:8888/';
 // }else if(clientHostName === ''){
    
 // }
 
 //  backEndHostName = 'http://last3.store/';
-//  backEndHostName = 'http://13.124.224.231/';
+ backEndHostName = 'http://13.124.224.231/';
 
 
 export const API_BASE_URL = backEndHostName;
