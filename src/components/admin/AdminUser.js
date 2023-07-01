@@ -184,6 +184,10 @@ useEffect(() => {
       alert("권한이 없습니다.");
       return;
     }
+    if (!userValue.empName || !userValue.empId || !userValue.empPassword || !userValue.deptCode || !userValue.posCode || !userValue.empPhone || !userValue.empExtension || !userValue.empHiredDate) {
+      alert("모든 입력 칸을 채워주세요");
+      return;
+    }
 
     e.preventDefault();
   
@@ -203,21 +207,15 @@ useEffect(() => {
 
       // 성공적으로 등록되었을 때 처리
       if (response.ok) {
-        // alert("사용자가 등록되었습니다");
-        <Alert color="primary">
-          사용자가 등록되었습니다
-        </Alert>
+        alert("사용자가 등록되었습니다");
+    
       } else {
-        // alert("등록에 실패했습니다");
-        <Alert color="primary">
-        등록에 실패했습니다
-      </Alert>
+        alert("등록에 실패했습니다");
+       
       }
     } catch (error) {
-      // alert("서버와의 통신이 원활하지 않습니다");
-      <Alert color="primary">
-      서버와의 통신이 원활하지 않습니다
-    </Alert>
+      alert("서버와의 통신이 원활하지 않습니다");
+    
       console.error(error);
       // console.log('alert가 왜 안뜨지');
    }
