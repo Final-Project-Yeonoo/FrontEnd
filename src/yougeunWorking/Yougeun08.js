@@ -36,7 +36,7 @@ function RegisterPerformance() {
   const [finishedList, setFinishedList] = useState([]);
 
   const handleRowClick = (ids) => {
-    console.log(ids.row.orderCode);
+    // console.log(ids.row.orderCode);
     setCode(ids.row.orderCode);
   
     fetch(BASE + PERFORMANCE)
@@ -50,7 +50,7 @@ function RegisterPerformance() {
         }));
   
         setResponseData2(processedData);
-        console.log(processedData);
+        // console.log(processedData);
       })
       .catch((error) => {
         console.error('Failed to fetch employee list:', error);
@@ -103,7 +103,7 @@ function RegisterPerformance() {
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = responseData.filter((row) => ids.includes(row.id));
     
-    console.log(selectedRowsData);
+    // console.log(selectedRowsData);
     setSelectionModel(selectedRowsData);
   };
 
@@ -186,7 +186,7 @@ function RegisterPerformance() {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setJobOrderList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -203,7 +203,7 @@ function RegisterPerformance() {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setStoreList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -219,7 +219,7 @@ function RegisterPerformance() {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setTrCompList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -233,7 +233,7 @@ function RegisterPerformance() {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setFinishedList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -250,7 +250,7 @@ function RegisterPerformance() {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setProjectList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -266,7 +266,7 @@ function RegisterPerformance() {
           // 견적담당자 목록을 받아온 후 valueOptions에 설정합니다.
 
           setEmpList(data);
-          console.log(data);
+          // console.log(data);
         })
         .catch((error) => {
           console.error('Failed to fetch employee list:', error);
@@ -287,8 +287,8 @@ function RegisterPerformance() {
             // projectRegDate: new Date(item.projectRegDate),
             // projectUpdateDate: new Date(item.projectUpdateDate),
           }));
-          console.log('ㅎㅇㅎㅇ');
-          console.log(processedData);
+          // console.log('ㅎㅇㅎㅇ');
+          // console.log(processedData);
           setResponseData(processedData);
           setOriginalRows(processedData);
         } catch (error) {
@@ -338,9 +338,9 @@ function RegisterPerformance() {
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
     
     const jsonData = JSON.stringify(dataArray);
-    console.log('수정버튼 !!');
-    console.log(JSON.stringify(responseData));
-    console.log(jsonData);
+    // console.log('수정버튼 !!');
+    // console.log(JSON.stringify(responseData));
+    // console.log(jsonData);
 
     const requestOptions = {
       method: 'POST',
@@ -377,9 +377,9 @@ function RegisterPerformance() {
     const dataArray = Array.from(data.values()); // Map 객체를 배열로 변환
     
     const jsonData = JSON.stringify(dataArray);
-    console.log('수정버튼 !!');
-    console.log(JSON.stringify(responseData2));
-    console.log(jsonData);
+    // console.log('수정버튼 !!');
+    // console.log(JSON.stringify(responseData2));
+    // console.log(jsonData);
 
     const requestOptions = {
       method: 'POST',
@@ -413,7 +413,7 @@ function RegisterPerformance() {
     // 저장 버튼 클릭 시 처리할 로직 작성
    
     console.log("저장 버튼이 클릭되었습니다.");
-    console.log(formData);
+    // console.log(formData);
     // axios 또는 다른 HTTP 클라이언트를 사용하여 서버로 데이터 전송 등의 로직 추가
   };
 
@@ -428,8 +428,8 @@ function RegisterPerformance() {
       return;
     }
     const performanceCode = selectionModel.map((selectedRow) => selectedRow.performanceCode);
-      console.log(performanceCode);
-    console.log(selectionModel);
+      // console.log(performanceCode);
+    // console.log(selectionModel);
     const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
 
     
@@ -474,7 +474,7 @@ function RegisterPerformance() {
 
   const handleReset = () => {
     // 초기화 버튼 클릭 시 처리할 로직 작성
-    console.log("초기화 버튼이 클릭되었습니다.");
+    // console.log("초기화 버튼이 클릭되었습니다.");
     setFormData({
       performanceStartdate: "",
       performanceGoodCnt: "",

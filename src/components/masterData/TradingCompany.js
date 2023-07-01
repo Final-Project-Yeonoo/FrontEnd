@@ -30,7 +30,7 @@ function TradingCompany() {
 
                 // Parse the response data as JSON
                 const jsonData = await response.json();
-                console.log("데이터형식 : ", jsonData);
+                // console.log("데이터형식 : ", jsonData);
                 // Update the component's state with the fetched data
                 setCompanyData(jsonData);
             } catch (error) {
@@ -123,7 +123,7 @@ function TradingCompany() {
         // 클릭한 row의 정보를 가져옵니다.
         const selectedRowData = params.row;
         // 필요한 처리를 수행합니다.
-        console.log("선택된 row의 정보:", selectedRowData);
+        // console.log("선택된 row의 정보:", selectedRowData);
         setSelectedRow(selectedRowData);
     };
 
@@ -133,7 +133,7 @@ function TradingCompany() {
             return;
           }
       
-        console.log('확인', selectedRow);
+        // console.log('확인', selectedRow);
         const ArraySelectedRow = [selectedRow.trCompCode]
         try {
             const response = await fetch(API_TRC_URL, {
@@ -143,7 +143,7 @@ function TradingCompany() {
                 },
                 body: JSON.stringify(ArraySelectedRow),
             });
-            console.log('1111', ArraySelectedRow);
+            // console.log('1111', ArraySelectedRow);
             if (!response.ok) {
                 throw new Error("Failed to save company data");
             }

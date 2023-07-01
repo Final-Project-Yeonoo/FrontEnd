@@ -20,7 +20,7 @@ function OrangeInputforHalf() {
         setInputValue(newInputValue);
     };
 
-    console.log(inputValue)
+    // console.log(inputValue)
 
     // 초기화  버튼 선택시
     const handleReset = () => {
@@ -42,7 +42,7 @@ function OrangeInputforHalf() {
         axios
             .post(API_HALF_URL, data)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 alert("저장완료");
             })
             .catch(error => {
@@ -154,7 +154,7 @@ const ProductManagementHalfTable = () => {
 
         const selectedRowData = params.row;
 
-        console.log("선택된 row의 정보:", selectedRowData);
+        // console.log("선택된 row의 정보:", selectedRowData);
 
         setSelectedRow(selectedRowData);
     };
@@ -171,7 +171,7 @@ const ProductManagementHalfTable = () => {
                 },
                 body: JSON.stringify(arrayData),
             });
-            console.log('선택정보 수정확인', arrayData);
+            // console.log('선택정보 수정확인', arrayData);
             
                 alert('수정완료!');
 
@@ -195,7 +195,7 @@ const ProductManagementHalfTable = () => {
                 },
                 body: JSON.stringify(arrayData),
             });
-            console.log('선택정보 삭제확인', arrayData);
+            // console.log('선택정보 삭제확인', arrayData);
 
             if (!response.ok) {
                 throw new Error('Failed to save data');

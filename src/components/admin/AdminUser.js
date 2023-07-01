@@ -199,7 +199,7 @@ useEffect(() => {
       });
 
       const data = await response.json();
-      console.log(data); // 서버로부터 받은 응답 확인
+      // console.log(data); // 서버로부터 받은 응답 확인
 
       // 성공적으로 등록되었을 때 처리
       if (response.ok) {
@@ -219,7 +219,7 @@ useEffect(() => {
       서버와의 통신이 원활하지 않습니다
     </Alert>
       console.error(error);
-      console.log('alert가 왜 안뜨지');
+      // console.log('alert가 왜 안뜨지');
    }
   //  console.log('addUser 호출 전 로그 찍기', JSON.stringify(userValue));
 
@@ -239,7 +239,7 @@ useEffect(() => {
 //  console.log(userValue);
 
  const handlePosCellClick = (row) => {
-  console.log('main에서 보는 선택된 행의 값posCode:', row.original.posCode);
+  // console.log('main에서 보는 선택된 행의 값posCode:', row.original.posCode);
   setSelectedPosName(row.original.posName)
   setUserValue({...userValue, posCode: row.original.posCode})
  
@@ -260,9 +260,9 @@ const handleChange = (e) => {
 
 
 const tfhandle = (name, value) => {
-  console.log(name ,':',value);
+  // console.log(name ,':',value);
   setUserValue({...userValue, [name] : value}); 
-  console.log(userValue);
+  // console.log(userValue);
 }
 
 

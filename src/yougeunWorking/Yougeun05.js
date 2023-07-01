@@ -25,7 +25,7 @@ function AnalyzeMaterialRequirement() {
 
   const handleCellClick = (params) => {
     // 셀 클릭 이벤트 처리 로직 작성
-    console.log('셀 클릭:', params);
+    // console.log('셀 클릭:', params);
   };
   
 
@@ -63,7 +63,7 @@ function AnalyzeMaterialRequirement() {
     const selectedRowsData = ids.map((id) => responseData.find((row) => row.id === id));
     
   
-    console.log(selectedRowsData);
+    // console.log(selectedRowsData);
      setSelectionModel(selectedRowsData);
     
   };

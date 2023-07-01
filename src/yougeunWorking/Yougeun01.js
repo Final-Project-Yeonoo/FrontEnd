@@ -49,7 +49,7 @@ function RegisterProject() {
     const selectedRowsData = ids.map((id) => responseData.find((row) => row.id === id));
   
   
-    console.log(selectedRowsData);
+    // console.log(selectedRowsData);
      setSelectionModel(selectedRowsData);
     
   };
@@ -132,7 +132,7 @@ function RegisterProject() {
             projectDate: new Date(item.projectDate),
             projectName: storehouseTypeTranslations[item.projectName] || item.projectName,
           }));
-          console.log(processedData);
+          // console.log(processedData);
           setResponseData(processedData);
           setOriginalRows(processedData);
         } catch (error) {
@@ -190,17 +190,17 @@ function RegisterProject() {
     // });
 
 
-    console.log(dataArray); 
+    // console.log(dataArray); 
     
     const jsonData = JSON.stringify(dataArray);
-    console.log(jsonData);
+    // console.log(jsonData);
 
     // if(true) return;
   
     // projectName 값을 역매핑하여 변경
     
     
-    console.log(JSON.stringify(responseData));
+    // console.log(JSON.stringify(responseData));
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -234,7 +234,7 @@ function RegisterProject() {
     // 저장 버튼 클릭 시 처리할 로직 작성
    
     console.log("저장 버튼이 클릭되었습니다.");
-    console.log(formData);
+    // console.log(formData);
     // axios 또는 다른 HTTP 클라이언트를 사용하여 서버로 데이터 전송 등의 로직 추가
   };
 
@@ -250,7 +250,7 @@ function RegisterProject() {
       return;
     }
 
-    console.log(selectionModel);
+    // console.log(selectionModel);
     const shouldDelete = window.confirm('정말로 삭제하시겠습니까?');
 
     

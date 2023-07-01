@@ -23,7 +23,7 @@ function Modal({ onClose, onAddCompany }) {
     const API_STORE_URL = API_BASE_URL + STORE;
   // 새로운 거래처 데이터 생성
     
-    console.log('여긴뭐지',newCompanyData);
+    // console.log('여긴뭐지',newCompanyData);
   
   const handleSave = async () => {
     
@@ -38,13 +38,13 @@ function Modal({ onClose, onAddCompany }) {
         body: JSON.stringify(newCompanyArray),
       });
 
-        console.log('객체 : ',JSON.stringify(newCompanyData));
+        // console.log('객체 : ',JSON.stringify(newCompanyData));
         // console.log('배열? : ',Object.entries(JSON.stringify(newCompanyData)));
       if (!response.ok) {
         throw new Error("Failed to save company data");
       }
 
-      console.log('1111',newCompanyData);
+      // console.log('1111',newCompanyData);
 
 
       // 새로운 거래처 데이터를 추가
@@ -59,7 +59,7 @@ function Modal({ onClose, onAddCompany }) {
     console.error("Error saving company data:", error);
   }
   };
-  console.log('배열?',newCompanyData);
+  // console.log('배열?',newCompanyData);
 
 
   //창고정보 받아오기
@@ -75,11 +75,11 @@ function Modal({ onClose, onAddCompany }) {
 
         // Parse the response data as JSON
         const jsonData = await response.json();
-        console.log("데이터형식 : ", jsonData );
-        console.log("왜 안받아지지 : ", jsonData[0].storehouseName);
+        // console.log("데이터형식 : ", jsonData );
+        // console.log("왜 안받아지지 : ", jsonData[0].storehouseName);
         // Update the component's state with the fetched data
         setStoreData(jsonData);
-        console.log("storeData",storeData);
+        // console.log("storeData",storeData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -98,7 +98,7 @@ function Modal({ onClose, onAddCompany }) {
   const handleChange = (event) => {
     // setStoreData(event.target.value);
     setNewCompanyData({...newCompanyData, storehouseName : event.target.value})
-    console.log(storeData);
+    // console.log(storeData);
   };
 
 

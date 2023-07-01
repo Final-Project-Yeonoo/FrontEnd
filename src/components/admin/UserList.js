@@ -158,7 +158,7 @@ const UserList = () => {
 
         // Parse the response data as JSON
         const jsonData = await response.json();
-        console.log("데이터형식 : ", jsonData );
+        // console.log("데이터형식 : ", jsonData );
         const modifiedData = jsonData.map((item) => {
           const { deptName, posName, userAuth, infoAuth, purchaseAuth, inventoryAuth, salesAuth, productAuth, ...otherFields } = item;
         
@@ -262,7 +262,7 @@ const UserList = () => {
     
     
 
-    console.log('ㅋㅋㅋ');
+    // console.log('ㅋㅋㅋ');
     const response = await fetch(API_USERLIST_URL, {
       method: 'PATCH',
       headers: {
@@ -271,7 +271,7 @@ const UserList = () => {
       body: JSON.stringify(modifiedRow),
     });
 
-   console.log('선택정보 수정확인',modifiedRow);
+  //  console.log('선택정보 수정확인',modifiedRow);
    alert('수정'); 
    if (!response.ok) {
       throw new Error('Failed to save data');

@@ -55,7 +55,7 @@ const InvenCheck = () => {
                     }
                     );
 }, []);
-console.log(inventoryData);
+// console.log(inventoryData);
   
   const columns = [
   
