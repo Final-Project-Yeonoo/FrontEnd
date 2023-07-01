@@ -19,8 +19,8 @@ function DashBoard() {
 
     // 로그인 여부 확인하기
     useEffect(() => {
-       console.log(isLogin());
-        if(!isLogin()) navigate('/login');
+    //    console.log(isLogin());
+    //     if(!isLogin()) navigate('/login');
 
     }, [])
 

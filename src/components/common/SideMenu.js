@@ -38,9 +38,11 @@ function SideMenu({addTab}) {
                         <span id={styles.userId}>{localStorage.getItem('EMP_ID')}</span>
                     </ListGroup.Item>
                 </ListGroup>
-
+             
                 <Accordion defaultActiveKey="0">
+                {localStorage.getItem('USER_AUTH')==="Y" ? 
                     <Accordion.Item eventKey="1" style={{borderRadius: '0'}}>
+
                         <Accordion.Header>사용자 관리</Accordion.Header>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
@@ -64,6 +66,7 @@ function SideMenu({addTab}) {
                             회사정보 입력
                         </Accordion.Body>
                     </Accordion.Item>
+                                    : ''}
                     <Accordion.Item eventKey="2" style={{borderRadius: '0'}}>
                         <Accordion.Header>마이페이지</Accordion.Header>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}

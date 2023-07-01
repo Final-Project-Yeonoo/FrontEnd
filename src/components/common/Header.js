@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import React, {useState} from "react";
 import styles from './css/Header.module.css'
 import {useNavigate} from "react-router-dom";
-
+import { isLogin } from '../../yougeunWorking/login-util';
 function Header() {
 
     let navigate = useNavigate()
@@ -18,6 +18,11 @@ function Header() {
     const handleDarkModeToggle = () => {
         setIsDarkMode(!isDarkMode);
     };
+        // handleLogout 함수 정의
+    const handleLogout = () => {
+        localStorage.clear();
+        // 로그아웃 상태로 변경하는 로직 추가
+    }
 
     return (
 
@@ -48,9 +53,14 @@ function Header() {
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider/>
                                 </NavDropdown>
-                                <Nav.Link href="/login" className="col-lg-4">
+                               { isLogin ? 
+                                <Nav.Link href="/login" className="col-lg-4" onClick={() => handleLogout()}>
                                     Logout
+                                </Nav.Link> :
+                                <Nav.Link href="/login" className="col-lg-4">
+                                    Login
                                 </Nav.Link>
+                                }
                             </Nav>
                             <Form className="d-flex" style={{marginRight: '40px'}}>
                                 <Form.Control

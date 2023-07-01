@@ -7,7 +7,7 @@ let backEndHostName; // 백엔드 서버 호스트 이름
 // } else if (clientHostName === 'vanila.com') {
 //   backEndHostName = 'https://api.vanila.co.kr';
 // }
-backEndHostName ='http://last3.store/';
+backEndHostName ='http://13.124.224.231';
 
 /*
 import { API_YGBASE_URL as PROJECT, DELIVERY, DELIVERY_DETAIL, RETURNED,
