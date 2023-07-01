@@ -424,7 +424,7 @@ const tfhandle = (name, value) => {
               <FormGroup className={styles.formGroup}>
                 <div className={styles.tag}>
                   {" "}
-                  <Label for="empValidate">입력권한 활성</Label>
+                  <Label for="empValidate">활성화</Label>
                 </div>
                 <Switch
                   {...label}    

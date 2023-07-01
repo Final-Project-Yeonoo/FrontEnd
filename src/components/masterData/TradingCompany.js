@@ -171,7 +171,7 @@ function TradingCompany() {
                             style={{height: '50px', marginRight:'5px'}}
                             onChange={e => setSearchQuery(e.target.value)}
                         />
-                        <Button variant="secondary" onClick={handleSearch} style={{width:'150px', height:'50px'}}>검색</Button>
+                        <Button variant="secondary" onClick={handleSearch} style={{width:'150px', height:'50px', borderColor:'white'}}>검색</Button>
                     </div>
                     <div className={styles.clickModal}>
                         <Button variant="success" onClick={toggleModal} className={styles.insertTag}>거래처 입력</Button>

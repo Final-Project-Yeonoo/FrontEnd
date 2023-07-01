@@ -7,7 +7,7 @@
 }
 
 .searchBox {
-    background-color: #FFEEBB;
+    background-color: #687499;
     padding:10px;
     display: flex;
     flex-wrap: wrap;
@@ -26,7 +26,7 @@
     /*padding-left: 30px;*/
     font-weight: 800;
     /*border: 2px solid red;*/
-    background-color: cornflowerblue;
+    background-color: #687499;
 }
 
 
