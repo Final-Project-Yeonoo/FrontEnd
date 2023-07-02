@@ -27,6 +27,7 @@ function Modal({ onClose, onAddCompany }) {
   
   const handleSave = async () => {
     
+
     const newCompanyArray = [newCompanyData];
     try {
       // Send a POST request to the backend API with the new company data
@@ -37,7 +38,7 @@ function Modal({ onClose, onAddCompany }) {
         },
         body: JSON.stringify(newCompanyArray),
       });
-
+      console.log(JSON.stringify(newCompanyArray));
         // console.log('객체 : ',JSON.stringify(newCompanyData));
         // console.log('배열? : ',Object.entries(JSON.stringify(newCompanyData)));
       if (!response.ok) {

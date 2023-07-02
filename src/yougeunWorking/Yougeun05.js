@@ -381,7 +381,7 @@ function AnalyzeMaterialRequirement() {
       },
     {
       field: 'estimatePayment',
-      headerName: '결재조건',
+      headerName: '결제조건',
       sortable: false,
       editable: true,
       type: 'singleSelect',
@@ -546,7 +546,7 @@ function AnalyzeMaterialRequirement() {
             />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-            <div>결재조건</div>
+            <div>결제조건</div>
             <Select
               labelId="estimatePayment-label"
               id="estimatePayment"
