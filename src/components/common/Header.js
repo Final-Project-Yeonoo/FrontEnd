@@ -45,7 +45,7 @@ function Header() {
         <>
             <div id={styles.headerArea}>
                 <Navbar bg="light " expand="lg">
-                    <Container fluid >
+                    <Container fluid  style={{backgroundColor : '#98B4D4', color : '#ffffff'}}>
                         <Navbar.Brand onClick={() => {navigate('/')}}>
                             <img src="/logo.png" width="270px"
                                  alt="ERP시스템 로고"/>
@@ -57,8 +57,8 @@ function Header() {
                                 style={{maxHeight: '100px'}}
                                 navbarScroll
                             >
-                                <Nav.Link onClick={() => handleHome()} className="col-lg-3">Home</Nav.Link>
-                                <Nav.Link onClick={() => handleMessage()} className="col-lg-4">Message</Nav.Link>
+                                <Nav.Link  onClick={() => handleHome()} className="col-lg-3">Home</Nav.Link>
+                                <Nav.Link  onClick={() => handleMessage()} className="col-lg-4">Message</Nav.Link>
                                 <NavDropdown title="Setting" id="navbarScrollingDropdown" className="col-lg-4">
                                     <NavDropdown.Item href="#action3" style={{display:"flex"}}>
                                         <span style={{marginRight:"30px"}} >Dark Mode</span>

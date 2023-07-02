@@ -790,9 +790,9 @@ function CreateWorkOrder(){
 )}
 
 
-    <pre style={{ fontSize: 10 }}>
+    {/* <pre style={{ fontSize: 10 }}>
         {JSON.stringify(selectionModel, null, 4)}
-      </pre>
+      </pre> */}
       {/* 스타일을 적용할 CSS 스타일시트 */}
       <style>{`
         .grayCell {
