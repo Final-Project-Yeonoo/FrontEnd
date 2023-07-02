@@ -18,7 +18,7 @@ function Mypage({employeeId}) {
     const API_MY_URL = API_BASE_URL + FINDALL + '/mypage'
 
     const [employeeInfo, setEmployeeInfo] = useState({});
-
+    const [profileUrl, setProfileUrl] = useState(null);
 
     useEffect(() => {
         // 백엔드에서 사원 정보를 FETCH하는 함수
@@ -28,8 +28,19 @@ function Mypage({employeeId}) {
                 const response = await fetch(API_MY_URL + '/' + localStorage.getItem('EMP_NO'));
 
                 const data = await response.json();
+                if(localStorage.getItem('EMP_IMG') !== 'null'){
+                    console.log(localStorage.getItem('EMP_IMG'));
+                    setProfileUrl(localStorage.getItem('EMP_IMG'));}
+                else {
+                    console.log('ㅂㅇㅂㅇ');
+                    setProfileUrl(false);
+                }
                 // console.log(data);
                 setEmployeeInfo(data);
+
+                console.log(profileUrl);
+                
+
             } catch (error) {
                 console.error("사원 정보를 가져오는 중에 오류가 발생했습니다:", error);
             }
@@ -148,7 +159,7 @@ function Mypage({employeeId}) {
                                      onClick={() => $fileTag.current.click()}>
                                     <img
                                         style={{width: '100%', height: '100%'}}
-                                        src={localStorage.getItem('EMP_IMG') || require('./img/122.png')}
+                                        src={profileUrl || require('./img/122.png')}
                                         alt="profile"
 
                                     />
