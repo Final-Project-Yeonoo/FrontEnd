@@ -596,10 +596,10 @@ function RegisterDelivery(){
         width: 160,
         cellClassName: 'blueCell',
         type: 'singleSelect',
-        valueOptions: trCompList.map((tr) => ({
+        valueOptions: Array.isArray(trCompList) ? trCompList.map((tr) => ({
           value: tr.trCompCode,
           label: tr.trCompCode,
-        })), 
+        })) : [],
       },
       {
         field: 'trCompName',

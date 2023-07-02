@@ -605,7 +605,7 @@ function RegisterReturn() {
         type: 'date',
         width: 160,
       },
-    {
+      {
         field: 'trCompCode',
         headerName: '거래처코드',
         editable: true,
@@ -613,10 +613,10 @@ function RegisterReturn() {
         width: 160,
         cellClassName: 'blueCell',
         type: 'singleSelect',
-        valueOptions: trCompList.map((tr) => ({
+        valueOptions: Array.isArray(trCompList) ? trCompList.map((tr) => ({
           value: tr.trCompCode,
           label: tr.trCompCode,
-        })), 
+        })) : [],
       },
       {
         field: 'trCompName',
