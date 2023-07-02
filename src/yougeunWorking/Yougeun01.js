@@ -108,7 +108,13 @@ function RegisterProject() {
     const [responseData, setResponseData] = useState([]);
 
     useEffect(() => {
-      sendGetRequest();
+
+      setTimeout(() => { 
+        setLoader(false)
+        sendGetRequest();
+      }, 5000);
+
+     
 
     }, []);
   
@@ -139,7 +145,7 @@ function RegisterProject() {
           console.error("Error:", error);
         }
 
-        setLoader(false);
+        
       };
 
 

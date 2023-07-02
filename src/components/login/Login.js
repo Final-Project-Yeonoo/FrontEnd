@@ -45,7 +45,7 @@ const Login = () => {
       })
     });
 
-    if (res.status === 400) { // 가입이 안되어있거나, 비번틀린 경우
+    if (res.status === 400 || res.status === 500) { // 가입이 안되어있거나, 비번틀린 경우
       const text = await res.text(); // 서버에서 온 문자열 읽기
       alert(text);
       return;
