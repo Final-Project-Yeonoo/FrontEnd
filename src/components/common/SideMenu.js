@@ -135,7 +135,7 @@ function SideMenu({addTab}) {
                         </Accordion.Body>
                         <Accordion.Body style={{color: "darkblue", fontSize: "small", textAlign: "center"}}
                                         onClick={() => {
-                                            handleAccordionItemClick('/prod/order', " 수주서 관리")
+                                            handleAccordionItemClick('sales/order', " 수주서 관리")
                                         }}>
                             수주서 관리
                         </Accordion.Body>

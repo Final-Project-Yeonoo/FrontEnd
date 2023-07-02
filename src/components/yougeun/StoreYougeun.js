@@ -273,18 +273,17 @@ function StoreYougeun() {
             console.log('DELETE 요청이 성공했습니다.');
             
             sendGetRequest();
-            window.location.reload();
+          
 
           } else {
             console.log('DELETE 요청이 실패했습니다.');
-            window.location.reload();
+           
 
           }
         })
         .catch((error) => {
           console.error('DELETE 요청 중 오류가 발생했습니다.', error);
-          window.location.reload();
-
+         
         });
     } else {
       console.log('삭제를 취소했습니다.');

@@ -207,17 +207,17 @@ function RegisterDelivery(){
                 console.log('DELETE 요청이 성공했습니다.');
                 
                 sendGetRequest();
-                window.location.reload();
+               
     
               } else {
                 console.log('DELETE 요청이 실패했습니다.');
-                window.location.reload();
+             
     
               }
             })
             .catch((error) => {
               console.error('DELETE 요청 중 오류가 발생했습니다.', error);
-              window.location.reload();
+              
     
             });
         } else {
@@ -387,7 +387,7 @@ function RegisterDelivery(){
           alert('저장이 완료되었습니다.');
           console.log('POST 요청이 성공했습니다.');
           sendGetRequest();
-          window.location.reload();
+        
 
         } else {
           console.log('POST 요청이 실패했습니다.');
@@ -432,7 +432,7 @@ function RegisterDelivery(){
           alert('저장이 완료되었습니다.');
           console.log('POST 요청이 성공했습니다.');
           sendGetRequest();
-          window.location.reload();
+   
 
         } else {
           console.log('POST 요청이 실패했습니다.');
@@ -489,17 +489,17 @@ function RegisterDelivery(){
             console.log('DELETE 요청이 성공했습니다.');
             
             sendGetRequest();
-            window.location.reload();
+         
 
           } else {
             console.log('DELETE 요청이 실패했습니다.');
-            window.location.reload();
+    
 
           }
         })
         .catch((error) => {
           console.error('DELETE 요청 중 오류가 발생했습니다.', error);
-          window.location.reload();
+         
 
         });
     } else {
