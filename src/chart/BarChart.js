@@ -18,7 +18,7 @@ const Barchart = () => {
           throw new Error('Failed to fetch employee data');
         }
         const employeeData = await response.json();
-        console.log('employeeData:',employeeData);
+        // console.log('employeeData:',employeeData);
   
 
         // 부서별로 인원수를 계산하여 chartData 생성
@@ -46,11 +46,11 @@ const Barchart = () => {
     fetchData();
   }, []);
 
-  console.log(chartData);
+  // console.log(chartData);
 
   // Extract department names from chartData
   const deptNames = chartData.map((item) => item.deptName);
-  console.log('deptName:', deptNames);
+  // console.log('deptName:', deptNames);
 
   // Prepare data for the bar chart
   const chartDataForBar = chartData.map((item) => {
@@ -62,11 +62,11 @@ const Barchart = () => {
 
   const handle = {
     barClick: (data) => {
-      console.log(data);
+      // console.log(data);
     },
 
     legendClick: (data) => {
-      console.log(data);
+      // console.log(data);
     },
   };
 

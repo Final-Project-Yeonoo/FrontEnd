@@ -27,7 +27,7 @@ const LineCharts = () => {
           console.error('데이터 로드 중 오류가 발생했습니다:', error);
         });
     }, []);
-    console.log(chartData);
+    // console.log(chartData);
 
   return ( 
     <>

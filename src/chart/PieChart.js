@@ -19,7 +19,7 @@ const Piechart = () => {
     setRawValue(rawTotal);
   });
 
-  console.log(rawValue);
+//   console.log(rawValue);
 const fetchIntermediates = fetch(API_HALF_URL)
   .then(response => response.json())
   .then(data => {
@@ -34,16 +34,16 @@ const fetchFinishedProducts = fetch(API_FINISHED_URL)
     setFinishedValue(finishedTotal);
   });
 
-  console.log(halfValue);
+//   console.log(halfValue);
 
 
     const handle = {
         padClick: (data) => {
-            console.log(data);
+            // console.log(data);
         },
 
         legendClick: (data) => {
-            console.log(data);
+            // console.log(data);
         },
     };
 
