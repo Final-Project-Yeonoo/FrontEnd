@@ -28,7 +28,7 @@ function SideMenu({addTab}) {
                 <ListGroup style={{borderRadius: '0'}}>
                     <ListGroup.Item id={styles.profileBox}>
                     <div id={styles.imgCircle}>
-                            {localStorage.getItem('EMP_IMG') ? (
+                            {localStorage.getItem('EMP_IMG') !== 'null' ? (
                                 <img src={localStorage.getItem('EMP_IMG')} alt="" />
                             ) : (
                                 <img src="/userImg.svg" alt="" />
