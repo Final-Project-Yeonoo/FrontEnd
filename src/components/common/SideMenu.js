@@ -79,7 +79,7 @@ function SideMenu({addTab}) {
                                         onClick={() => {
                                             handleAccordionItemClick('/user/search', '사용자 조회')
                                         }}>
-                            사용자 조회
+                            사원 조회
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="3" style={{borderRadius: '0'}}>
