@@ -56,19 +56,24 @@ function DashBoard() {
     // 탭 목록 콘솔 출력
     // console.log(tabs);
 
+        const [isDarkMode, setIsDarkMode] = useState(false);
+
+        const toggleDarkMode = () => {
+            setIsDarkMode(!isDarkMode);
+        };
+
     return (
         <>
-            <Header/>
+            <Header isDarkMode={isDarkMode} onToggleDarkMode={toggleDarkMode}/>
             <div className={styles.mainStyle}>
-                <SideMenu addTab={addTab} path={path}/>
-                <div className={styles.changeArea}>
+                <SideMenu addTab={addTab} path={path} style={isDarkMode ? { backgroundColor: 'black', color: 'white' } : {}}/>
+                <div className={styles.changeArea} style={isDarkMode ? { backgroundColor: 'black', color: 'white' } : {}}>
                     <div className={styles.topNav}>
-                    {/* <Route path="/" element={<DashBoard/> }> */}
                        
                         <TabBar tabs={tabs} onCloseTab={handleTabClose}/>
                     </div>
                     
-                    <Outlet/>
+                    <Outlet style={isDarkMode ? { backgroundColor: 'black', color: 'white' } : {}}/>
                
         
                 </div>

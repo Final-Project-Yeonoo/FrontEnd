@@ -7,30 +7,35 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import React, {useState} from "react";
 import styles from './css/Header.module.css'
 import {useNavigate} from "react-router-dom";
-import { isLogin } from '../../yougeunWorking/login-util';
+import {isLogin} from '../../yougeunWorking/login-util';
+
 function Header() {
 
     let navigate = useNavigate()
 
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const darkModeClass = isDarkMode ? 'dark-mode' : '';
 
-    const handleDarkModeToggle = () => {
+    const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
     };
-        // handleLogout 함수 정의
+
     const handleLogout = () => {
         localStorage.clear();
         // 로그아웃 상태로 변경하는 로직 추가
     }
 
+    const headerClass = isDarkMode ? styles['dark-mode'] : '';
+    console.log(styles);
+
     return (
 
         <>
             <div id={styles.headerArea}>
-                <Navbar bg="light " expand="lg">
-                    <Container fluid >
-                        <Navbar.Brand onClick={() => {navigate('/')}}>
+                <Navbar className={headerClass} bg={isDarkMode ? 'dark' : 'light'} expand="lg">
+                    <Container fluid>
+                        <Navbar.Brand onClick={() => {
+                            navigate('/')
+                        }}>
                             <img src="/logo.png" width="270px"
                                  alt="ERP시스템 로고"/>
                         </Navbar.Brand>
@@ -41,25 +46,31 @@ function Header() {
                                 style={{maxHeight: '100px'}}
                                 navbarScroll
                             >
-                                <Nav.Link href="/"  className="col-lg-3">Home</Nav.Link>
-                                <Nav.Link href="/message" className="col-lg-4">Message</Nav.Link>
-                                <NavDropdown title="Setting" id="navbarScrollingDropdown" className="col-lg-4">
-                                    <NavDropdown.Item href="#action3" style={{display:"flex"}}>
-                                        <span style={{marginRight:"30px"}} >Dark Mode</span>
-                                        <SwitchExample isDarkMode={isDarkMode} setIsDarkMode={handleDarkModeToggle} />
+                                <Nav.Link href="/" className="col-lg-3" style={{color: 'white'}}>Home</Nav.Link>
+                                <Nav.Link href="/message" className="col-lg-4"
+                                          style={{color: 'white'}}>Message</Nav.Link>
+                                <NavDropdown title={
+                                    <span style={{color: '#ffffff'}} className=" my-auto">Setting</span>
+                                }
+
+                                             id="navbarScrollingDropdown" className="col-lg-4">
+                                    <NavDropdown.Item href="#action3" style={{display: "flex"}}>
+                                        <span style={{marginRight: "30px"}}>Dark Mode</span>
+                                        <SwitchExample onClick={toggleDarkMode} isDarkMode={isDarkMode}/>
                                     </NavDropdown.Item>
                                     <NavDropdown.Item href='/mypage'>
                                         Change Profile
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider/>
                                 </NavDropdown>
-                               { isLogin ? 
-                                <Nav.Link href="/login" className="col-lg-4" onClick={() => handleLogout()}>
-                                    Logout
-                                </Nav.Link> :
-                                <Nav.Link href="/login" className="col-lg-4">
-                                    Login
-                                </Nav.Link>
+                                {isLogin ?
+                                    <Nav.Link href="/login" className="col-lg-4" onClick={() => handleLogout()}
+                                              style={{color: 'white'}}>
+                                        Logout
+                                    </Nav.Link> :
+                                    <Nav.Link href="/login" className="col-lg-4">
+                                        Login
+                                    </Nav.Link>
                                 }
                             </Nav>
                             <Form className="d-flex" style={{marginRight: '40px'}}>
@@ -79,13 +90,14 @@ function Header() {
     );
 }
 
-function SwitchExample() {
+function SwitchExample({onClick, isDarkMode}) {
     return (
         <Form>
             <Form.Check
                 type="switch"
                 id="custom-switch"
-                // label="Check this switch"
+                checked={isDarkMode}
+                onChange={onClick}
             />
         </Form>
     );

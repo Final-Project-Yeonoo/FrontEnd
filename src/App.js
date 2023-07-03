@@ -32,15 +32,12 @@ import Barchart from './chart/BarChart';
 import LineChart from './chart/LineCharts';
 import Message from "./components/common/Message";
 import MyComInfo from "./components/admin/MyComInfo";
-import errorPage from "./components/errorPage/ErrorPage";
 import ErrorPage from "./components/errorPage/ErrorPage";
 
 function App() {
     return (
         <>
-            
-            {/* 여기에서는 DASHBOARD만 렌더링 해주면 됩니디.  */}
-            {/* <DashBoard /> */}
+
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/" element={<DashBoard/>}>

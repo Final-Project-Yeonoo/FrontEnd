@@ -9,17 +9,7 @@ body {
     
 }
 
-/* Dark mode styles */
 .dark-mode {
-    background-color: #1f1f1f;
-    color: #ffffff;
-}
-
-.dark-mode .navbar {
-    background-color: #1f1f1f;
-    color: #ffffff;
-}
-
-.dark-mode .navbar .nav-link {
-    color: #ffffff;
+    background-color: black;
+    color: white !important;
 }
