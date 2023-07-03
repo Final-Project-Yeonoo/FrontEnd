@@ -13,18 +13,22 @@
 }
 
 .profileImgcontainer {
+    
+
     flex: 1;
     justify-content: center;
 
 }
 
 .profileImg {
-
+    
     width: 50%;
     height: 55%;
     margin: 0 auto;
     margin-top: 10%;
     border: 1px solid #000;
+    
+
 }
 
 .profileImg > span {
