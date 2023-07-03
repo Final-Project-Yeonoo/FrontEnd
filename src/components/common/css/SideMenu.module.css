@@ -14,7 +14,7 @@
   border-radius: 60%;
   overflow: hidden;
   margin: 20px;
-  padding: 3px;
+  /* padding: 3px; */
 }
 #imgCircle img {
   width: 110%;
