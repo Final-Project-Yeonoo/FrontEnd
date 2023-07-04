@@ -1,0 +1,60 @@
+/* 버튼 영역 */
+.buttonsArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /*border: 2px solid black;*/
+}
+
+/*오렌지 박스 표 */
+.searchBox {
+    background-color: #687499;
+    padding:20px;
+}
+
+/*박스 내부 input 감싸는 박스 */
+.searchSection{
+    /*border: 2px solid red;*/
+    display: flex;
+    width: 100%;
+}
+
+.divideSection {
+    /*border: 2px solid blue;*/
+    width: 50%;
+}
+
+.afterEachRow{
+    margin-bottom: 10px;
+}
+
+/*박스 내부 input 감싸는 박스 */
+.shortInput {
+    margin-right: 10px;
+    width: 150px;
+}
+
+.longInput {
+    width: 300px;
+}
+
+/*표 두개 구분선 */
+.divStyle {
+    padding-left: 30px;
+    font-weight: 800;
+    /*border: 2px solid red;*/
+    background-color: cornflowerblue;
+}
+
+.sendPurchaseButton {
+    border-color: black;
+    background:darkgrey;
+    width: 100%;
+    margin-bottom:20px;
+    letter-spacing: 10px;
+    font-weight:bold;
+}
+
+.sendPurchaseButton:hover {
+    /*background:green;*/
+}

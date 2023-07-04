@@ -1,0 +1,26 @@
+#headerArea {
+    /* border: 1px solid black; */
+}
+
+body {
+    background-color: white;
+    color: #000000; 
+
+    
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+.dark-mode .navbar {
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+.dark-mode .navbar .nav-link {
+    color: #ffffff;
+}
+

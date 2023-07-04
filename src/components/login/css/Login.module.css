@@ -1,0 +1,41 @@
+
+/* 배경 이미지 */
+.backGround {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../public/loginBuilding.jpg') no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+/*로고 박스*/
+.imgContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+
+.imgSize{
+  width: 150px;
+  height: 100px;
+}
+
+/*Form을 감싸는 박스*/
+.loginBox {
+  margin-top: 100px;
+  border-radius: 20px;
+  padding: 30px;
+  background-color: #d3e5ef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  /*border: 2px solid green;*/
+}
+.loginBox > * {
+  /*border: 2px solid orange;*/
+}
+
+

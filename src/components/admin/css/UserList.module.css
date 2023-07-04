@@ -1,0 +1,81 @@
+.container{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.contentTitleBox{
+    width: 100%;
+    height: 10%;
+}
+.contentTItle {
+    width: 30%;
+    height: 10%;
+    border: 1px solid green;
+    font-size: 20px;
+}
+.searchBox{
+    width: 100%;
+    height: 10%;
+    border: 1px solid blue;
+
+}
+.searchContentsButton {
+    display: flex;
+    background: aqua;
+    height: 100%;
+}
+
+.empListBox {
+    margin-top: 50px;
+    width: 100%;
+    height: 70%;
+}
+
+.empListHeaders {
+    width: 100%;
+    height: 10%;
+    justify-content: center;
+    display: flex;
+    border: 1px solid yellow;
+}
+
+.empListHead {
+    width: 10%;
+    height: fit-content;
+    text-align: center;
+    border: 1px solid green;
+}
+.empListHead:last-child {
+    width: 30%;
+
+}
+.contentHeadContainer {
+    display: flex;
+    justify-content: space-between;
+    
+}
+.inputcontainer {
+    height: 30px;
+    width: 100%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: flex;
+}
+.inputTag {
+    margin-right: 5px;
+}
+.selectTag {
+    margin-right: 5px;
+}
+.Button{
+    font-size: 5px;
+}
+.contentHeadName {
+    font-size: 25px;
+  }
+  /* 수정버튼 위치 만드는 css */
+  .buttonContainer {
+    text-align: right;
+    margin-bottom: 10px;
+  }

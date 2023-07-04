@@ -1,0 +1,56 @@
+.container {
+    width: 100%;
+  }
+
+  .wrapper {
+    display: flex;
+  
+    margin: 30px;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid red; */
+  }
+  .empListHead {
+    text-align: center;
+    width: 20%;
+    height: 10%;
+  }
+  .contentTitle {
+     font-size: 25px;
+  }
+  input {
+    margin-left: 10%;
+  }
+
+.empListBox {
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 20px;
+  background-color: #98B4D4;
+  font-weight: 700;
+}
+
+.empListHeaders {
+  display: block;
+
+  height: 100%;
+  width: 100%;
+  /*border: 1px solid red;*/
+  /*background-color: orange;*/
+  padding:20px;
+}
+
+.empListHeaders >* {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  .buttonContainer {
+    /*margin-bottom: 20px;*/
+    text-align: center;
+    /*background-color: green;*/
+    padding: 20px;
+  }

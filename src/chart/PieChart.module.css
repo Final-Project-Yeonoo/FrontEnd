@@ -1,0 +1,11 @@
+.piechartHead {
+    width: fit-content;
+    margin: 10px auto;
+    font-size: 20px;
+    /*border: 1px solid #000;*/
+}
+.piechartContainer {
+    width: 500px;
+    height: 500px;
+    border: 1px solid lightgray;
+}

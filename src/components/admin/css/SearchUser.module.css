@@ -1,0 +1,50 @@
+.container{
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+.contentTitleBox{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+.contentTitle {
+  width: 30%;
+  height: 50%;
+  border: 1px solid green;
+  font-size: 20px;
+  text-align: left;
+  
+  
+}
+.searchBox{
+  width: 50%;
+  height: fit-content;
+  border: 1px solid blue;
+  
+  
+}
+.searchContentsButton {
+  display: flex;
+  justify-content: right;
+  /* background: aqua; */
+  height: fit-content;
+}
+.contentHeadName {
+  font-size: 25px;
+}
+
+.orangeBoxContainer {
+  display: flex;
+  justify-content: space-between;
+  /*border: 2px solid red;*/
+  height: 70px;
+  padding:10px;
+  background: #687499;
+  margin-bottom: 20px;
+}
+.insertTag {
+  margin-right: 10px;
+}

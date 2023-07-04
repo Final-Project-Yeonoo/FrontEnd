@@ -1,0 +1,14 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+ 
+  
+  .parent-container {
+    overflow: scroll;
+        width: 76vw;
+        overflow: auto;
+        height: 80vh;
+        white-space: nowrap;
+    
+  }
+

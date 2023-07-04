@@ -1,0 +1,53 @@
+/*side 15%이니 보이는 창의 영역은 85% */
+.sideArea {
+  width: 15%;
+  /*border: 2px solid blue;*/
+}
+
+#profileBox {
+  /* border: 1px solid black; */
+}
+
+#imgCircle {
+  border: 1px solid darkgray;
+  height: 220px;
+  border-radius: 60%;
+  overflow: hidden;
+  margin: 20px;
+  /* padding: 3px; */
+}
+#imgCircle img {
+  width: 110%;
+  height: 110%;
+}
+
+#userName, #userId {
+  text-align: center;
+  display: block;
+  /*border: 1px solid black;*/
+  margin: 5px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #000;
+}
+
+@media (max-width: 1440px) {
+  #profileBox {
+    border: 1px solid black;
+    width: 220px;
+  }
+
+  .sideArea {
+    width: 220px;
+    /*border: 2px solid blue;*/
+  }
+}
