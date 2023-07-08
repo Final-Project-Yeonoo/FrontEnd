@@ -11,6 +11,10 @@
 
 - 생산 관리를 사내에서 공유 및 웹 기반 시스템을 이용하여 어디서든지 조회와 관리로 운영의 효율성 증진
 
+### 시스템 정의서(메뉴별 구현)
+ ![image](https://github.com/Final-Project-Yeonoo/FrontEnd/assets/126743165/9010d49e-6dc8-4452-ba21-bc429d85febb)
+
+
 ## 개발환경 및 사용언어 등
 
 ![image](https://github.com/Final-Project-Yeonoo/FrontEnd/assets/126743165/9af9ae2e-d19f-4e31-b368-1344ef94eb5d)
