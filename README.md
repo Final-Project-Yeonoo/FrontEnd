@@ -1,4 +1,4 @@
-# HI-ERP [바로보기🚀](last3.store)
+# HI-ERP [바로보기🚀](https://last3.store)
 - 여누솔루션과 기업협업 프로젝트로 만든 생산물류ERP, HI-ERP(프로젝트 대상 수상)
 
 ![image](https://github.com/Final-Project-Yeonoo/FrontEnd/assets/126743165/21bacf67-a057-430a-892e-4f78257c041c)
